@@ -1,0 +1,221 @@
+{
+  "castTime" : {
+    "dayPillar" : "丙申",
+    "gregorian" : "2024年6月1日 10时",
+    "hourPillar" : "癸巳",
+    "monthPillar" : "己巳",
+    "voidBranches" : [
+      "辰",
+      "巳"
+    ],
+    "yearPillar" : "甲辰"
+  },
+  "category" : "考学",
+  "changed" : {
+    "code" : 44,
+    "lines" : [
+      {
+        "branch" : "辰",
+        "element" : "土",
+        "isResponse" : false,
+        "isVoid" : true,
+        "isWorld" : true,
+        "moving" : false,
+        "position" : 1,
+        "sixRelative" : "兄弟",
+        "stem" : "丙",
+        "strength" : "相",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "午",
+        "element" : "火",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 2,
+        "sixRelative" : "父母",
+        "stem" : "丙",
+        "strength" : "旺",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "申",
+        "element" : "金",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 3,
+        "sixRelative" : "子孙",
+        "stem" : "丙",
+        "strength" : "死",
+        "yinYang" : "阳"
+      },
+      {
+        "branch" : "酉",
+        "element" : "金",
+        "isResponse" : true,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 4,
+        "sixRelative" : "子孙",
+        "stem" : "己",
+        "strength" : "死",
+        "yinYang" : "阳"
+      },
+      {
+        "branch" : "未",
+        "element" : "土",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 5,
+        "sixRelative" : "兄弟",
+        "stem" : "己",
+        "strength" : "相",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "巳",
+        "element" : "火",
+        "isResponse" : false,
+        "isVoid" : true,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 6,
+        "sixRelative" : "父母",
+        "stem" : "己",
+        "strength" : "旺",
+        "yinYang" : "阳"
+      }
+    ],
+    "lowerTrigram" : "艮",
+    "name" : "火山旅",
+    "palace" : "离宫",
+    "palaceElement" : "火",
+    "responsePosition" : 4,
+    "upperTrigram" : "离",
+    "worldPosition" : 1
+  },
+  "method" : "铜钱",
+  "movingPositions" : [
+    1,
+    4
+  ],
+  "primary" : {
+    "code" : 37,
+    "lines" : [
+      {
+        "branch" : "卯",
+        "element" : "木",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : true,
+        "moving" : true,
+        "position" : 1,
+        "sixGod" : "朱雀",
+        "sixRelative" : "官鬼",
+        "stem" : "己",
+        "strength" : "休",
+        "value" : "老阳",
+        "yinYang" : "阳"
+      },
+      {
+        "branch" : "丑",
+        "element" : "土",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 2,
+        "sixGod" : "勾陈",
+        "sixRelative" : "兄弟",
+        "stem" : "己",
+        "strength" : "相",
+        "value" : "少阴",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "亥",
+        "element" : "水",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 3,
+        "sixGod" : "螣蛇",
+        "sixRelative" : "妻财",
+        "stem" : "己",
+        "strength" : "囚",
+        "value" : "少阳",
+        "yinYang" : "阳"
+      },
+      {
+        "branch" : "戌",
+        "element" : "土",
+        "isResponse" : true,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : true,
+        "position" : 4,
+        "sixGod" : "白虎",
+        "sixRelative" : "兄弟",
+        "stem" : "丙",
+        "strength" : "相",
+        "value" : "老阴",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "子",
+        "element" : "水",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 5,
+        "sixGod" : "玄武",
+        "sixRelative" : "妻财",
+        "stem" : "丙",
+        "strength" : "囚",
+        "value" : "少阴",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "寅",
+        "element" : "木",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 6,
+        "sixGod" : "青龙",
+        "sixRelative" : "官鬼",
+        "stem" : "丙",
+        "strength" : "休",
+        "value" : "少阳",
+        "yinYang" : "阳"
+      }
+    ],
+    "lowerTrigram" : "离",
+    "name" : "山火贲",
+    "palace" : "艮宫",
+    "palaceElement" : "土",
+    "responsePosition" : 4,
+    "upperTrigram" : "艮",
+    "worldPosition" : 1
+  },
+  "question" : "今年考学能否顺利？",
+  "useGod" : {
+    "category" : "考学",
+    "positions" : [
+
+    ],
+    "rationale" : "考学以父母（文书）为用神，兼看官鬼功名。",
+    "relative" : "父母"
+  },
+  "version" : "1.0.0"
+}

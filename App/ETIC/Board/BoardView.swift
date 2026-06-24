@@ -34,7 +34,7 @@ struct BoardView: View {
                         UseGodView(useGod: useGod)
                             .modifier(RevealStep(index: 6, active: animateReveal, revealed: revealed))
                     }
-                    interpretationPlaceholder.modifier(RevealStep(index: 7, active: animateReveal, revealed: revealed))
+                    interpretationEntry.modifier(RevealStep(index: 7, active: animateReveal, revealed: revealed))
                     disclaimer.modifier(RevealStep(index: 8, active: animateReveal, revealed: revealed))
                 }
                 .padding(20)
@@ -118,25 +118,25 @@ struct BoardView: View {
             .foregroundStyle(InkTheme.inkSoft)
     }
 
-    private var interpretationPlaceholder: some View {
+    private var interpretationEntry: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("解读")
                 .font(InkTheme.serifTitle(17))
                 .foregroundStyle(InkTheme.ink)
-            Text("大模型解读将在 M4 接入：把这份盘面发给「资深六爻解卦师」，给出断语并支持多轮追问。")
+            Text("把这份盘面交给「资深六爻解卦师」，给出断语并支持多轮追问。盘面已算定，解读不会改动卦象。")
                 .font(InkTheme.serifBody(14))
                 .foregroundStyle(InkTheme.inkSoft)
-            Button {
+            NavigationLink {
+                InterpretationView(board: board)
             } label: {
                 Text("请大师解读")
                     .font(InkTheme.serifBody(15))
-                    .foregroundStyle(InkTheme.inkSoft)
+                    .foregroundStyle(InkTheme.cinnabar)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
                     .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(InkTheme.inkSoft.opacity(0.4), lineWidth: 1))
+                        .stroke(InkTheme.cinnabar.opacity(0.5), lineWidth: 1))
             }
-            .disabled(true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
