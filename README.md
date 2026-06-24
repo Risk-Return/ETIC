@@ -1,3 +1,7 @@
 # ETIC
 
-Based on Chinese I Ching divination — an iOS app.
+基于中国易经 / 八卦 / 六爻的 iOS 占卜应用。
+
+**核心设计原则:** 起卦、排盘、取象、生克旺衰等**确定性术数计算**全部由预设工具(本地纯函数引擎 + 结构化知识库)完成;**自然语言解读与多轮对话**由大模型(LLM)完成。LLM 只解读、不计算。
+
+详见设计文档:[`docs/DESIGN.md`](docs/DESIGN.md)。
