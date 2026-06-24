@@ -4,6 +4,7 @@ import DivinationEngine
 /// 起卦页：选择方法、输入问题与事项类别，起卦后进入排盘页。
 struct CastingView: View {
     @StateObject private var model = CastingViewModel()
+    @State private var showSettings = false
 
     var body: some View {
         ZStack {
@@ -52,8 +53,17 @@ struct CastingView: View {
         }
         .navigationTitle("起卦")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button { showSettings = true } label: {
+                    Image(systemName: "slider.horizontal.3")
+                }
+                .tint(InkTheme.ink)
+            }
+        }
+        .sheet(isPresented: $showSettings) { RitualSettingsView() }
         .navigationDestination(item: $model.board) { board in
-            BoardView(board: board)
+            RitualView(board: board)
         }
     }
 
