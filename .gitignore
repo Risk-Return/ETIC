@@ -1,0 +1,20 @@
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+xcuserdata/
+DerivedData/
+*.xcuserstate
+
+# macOS
+.DS_Store
+
+# Python (fixture tooling)
+__pycache__/
+*.pyc
+.venv/
