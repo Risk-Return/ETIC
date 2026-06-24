@@ -1,0 +1,31 @@
+name: ETIC
+options:
+  bundleIdPrefix: ai.etic
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+packages:
+  DivinationEngine:
+    path: ../Packages/DivinationEngine
+targets:
+  ETIC:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - ETIC
+    dependencies:
+      - package: DivinationEngine
+        product: DivinationEngine
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ai.etic.app
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: 易卦
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SWIFT_VERSION: "5.9"
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
