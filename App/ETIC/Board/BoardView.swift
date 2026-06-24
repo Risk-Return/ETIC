@@ -1,12 +1,14 @@
 import SwiftUI
 import DivinationEngine
 
-/// 排盘页（静态）：展示本卦/变卦六爻、干支、五行、六亲、六神、世应、动爻、旬空、旺衰。
-/// 动画在 M3 接入；LLM 解读在 M4 接入（此处先留入口）。
+/// 排盘页：展示本卦/变卦六爻、干支、五行、六亲、六神、世应、动爻、旬空、旺衰。
+/// `animateReveal` 为 true 时各信息块逐项淡入上浮（M3 信息浮现阶段）；LLM 解读在 M4 接入。
 struct BoardView: View {
     let board: DivinationBoard
+    var animateReveal: Bool = false
 
     @State private var showChanged = false
+    @State private var revealed = false
 
     private var hasChanged: Bool { board.changed != nil }
 
@@ -19,23 +21,31 @@ struct BoardView: View {
             InkTheme.paper.ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    questionHeader
-                    hexagramTitle
-                    if hasChanged { primaryChangedToggle }
-                    boardTable
-                    legend
+                    questionHeader.modifier(RevealStep(index: 0, active: animateReveal, revealed: revealed))
+                    hexagramTitle.modifier(RevealStep(index: 1, active: animateReveal, revealed: revealed))
+                    if hasChanged {
+                        primaryChangedToggle.modifier(RevealStep(index: 2, active: animateReveal, revealed: revealed))
+                    }
+                    boardTable.modifier(RevealStep(index: 3, active: animateReveal, revealed: revealed))
+                    legend.modifier(RevealStep(index: 4, active: animateReveal, revealed: revealed))
                     FourPillarsView(castTime: board.castTime)
+                        .modifier(RevealStep(index: 5, active: animateReveal, revealed: revealed))
                     if let useGod = board.useGod {
                         UseGodView(useGod: useGod)
+                            .modifier(RevealStep(index: 6, active: animateReveal, revealed: revealed))
                     }
-                    interpretationPlaceholder
-                    disclaimer
+                    interpretationPlaceholder.modifier(RevealStep(index: 7, active: animateReveal, revealed: revealed))
+                    disclaimer.modifier(RevealStep(index: 8, active: animateReveal, revealed: revealed))
                 }
                 .padding(20)
             }
         }
         .navigationTitle("排盘")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            guard animateReveal, !revealed else { revealed = true; return }
+            revealed = true
+        }
     }
 
     @ViewBuilder
@@ -137,6 +147,20 @@ struct BoardView: View {
         Text("传统文化娱乐参考，非科学预测。")
             .font(.caption2)
             .foregroundStyle(InkTheme.inkSoft)
+    }
+}
+
+/// 信息块逐项淡入上浮（带 stagger 延迟）。`active` 为 false 时不改变布局。
+private struct RevealStep: ViewModifier {
+    let index: Int
+    let active: Bool
+    let revealed: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .opacity(active ? (revealed ? 1 : 0) : 1)
+            .offset(y: active ? (revealed ? 0 : 14) : 0)
+            .animation(.easeOut(duration: 0.45).delay(Double(index) * 0.1), value: revealed)
     }
 }
 
