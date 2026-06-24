@@ -1,7 +1,8 @@
-# ETIC iOS App（M2：起卦 + 静态排盘）
+# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读）
 
-SwiftUI 客户端。消费 `DivinationEngine` 冻结的 `DivinationBoard` 契约渲染盘面。
-本阶段仅静态渲染：**无动画（M3）**、**无 LLM 解读（M4，仅留入口）**。
+SwiftUI 客户端。消费 `DivinationEngine` 冻结的 `DivinationBoard` 契约渲染盘面，
+并把盘面交给后端解读代理（见 `../Backend`）做流式解读与多轮追问。
+客户端**不持有 LLM key、不直连模型**，一律走后端。
 
 ## 本地构建（需 macOS + Xcode 15+）
 
@@ -25,15 +26,31 @@ App/ETIC
 ├─ Casting/
 │  ├─ CastingViewModel.swift   起卦页状态
 │  └─ CastingView.swift        方法/问题/类别/时间 + 起卦按钮
-└─ Board/
-   ├─ BoardView.swift          排盘页：标题、本卦/变卦切换、盘面表、四柱、用神、解读入口
-   ├─ BoardRowView.swift       单行：六神·六亲·干支·爻象·世应/旬空·旺衰
-   ├─ YaoSymbolView.swift      爻象笔画（阳整笔/阴断笔 + ○× 动爻标记）
-   ├─ FourPillarsView.swift    年月日时四柱 + 旬空
-   ├─ UseGodView.swift         用神建议
-   └─ PreviewData.swift        SwiftUI 预览用确定性样例盘
+├─ Board/
+│  ├─ BoardView.swift          排盘页：标题、本卦/变卦切换、盘面表、四柱、用神、解读入口
+│  ├─ BoardRowView.swift       单行：六神·六亲·干支·爻象·世应/旬空·旺衰
+│  ├─ YaoSymbolView.swift      爻象笔画（阳整笔/阴断笔 + ○× 动爻标记）
+│  ├─ FourPillarsView.swift    年月日时四柱 + 旬空
+│  ├─ UseGodView.swift         用神建议
+│  └─ PreviewData.swift        SwiftUI 预览用确定性样例盘
+├─ Services/LLMService.swift   盘面 → 后端 /v1/interpret、/v1/chat（SSE 流式解析）
+└─ Interpret/
+   ├─ InterpretationViewModel.swift  解读对话状态机（首轮 + 多轮，携带同一盘面）
+   └─ InterpretationView.swift       流式打字气泡 + 追问输入框
 ```
+
+## 解读后端（M4）
+
+解读页需要后端代理在线提供 LLM。先启动后端（默认 mock，无需真实 key）：
+
+```bash
+cd ../Backend && pip install -r requirements.txt && uvicorn app.main:app --port 8000
+```
+
+客户端默认连 `http://localhost:8000`（模拟器可直连；`project.yml` 已开 `NSAllowsLocalNetworking`）。
+真机或线上环境可在 Info.plist 配 `ETIC_BACKEND_BASE_URL` 覆盖。
 
 ## 黄金路径
 
-选方法 → 写问题 → 选类别 → 选时间 → 起卦 → 进入排盘页查看完整盘面（含动爻时可切换本卦/变卦）。
+选方法 → 写问题 → 选类别 → 选时间 → 起卦 →（动画）→ 排盘页 → 「请大师解读」→
+流式断语 → 输入框追问 → 多轮回复（同一盘面，不重新起卦）。

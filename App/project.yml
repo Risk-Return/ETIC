@@ -17,14 +17,23 @@ targets:
     dependencies:
       - package: DivinationEngine
         product: DivinationEngine
+    info:
+      path: ETIC/Info.plist
+      properties:
+        CFBundleDisplayName: 易卦
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        # 开发期允许访问本地后端（http://localhost）；上线改为 HTTPS 后移除。
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+        # 摇一摇起卦需读取设备运动数据（M3）。
+        NSMotionUsageDescription: 用于摇一摇起卦的运动检测。
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: ai.etic.app
-        GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_CFBundleDisplayName: 易卦
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
-        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         TARGETED_DEVICE_FAMILY: "1,2"
         SWIFT_VERSION: "5.9"
         MARKETING_VERSION: "0.1.0"
