@@ -46,3 +46,21 @@ def test_chat_messages_carry_board_and_history(board_json):
     assert msgs[1]["role"] == "system"
     assert "不得重新起卦" in msgs[1]["content"]
     assert msgs[-1] == history[-1]
+
+
+def test_interpret_messages_inject_grounding(board_json):
+    board = DivinationBoard.model_validate(board_json)
+    grounding = "【经文参考】（仅供引用，不得改动盘面）\n- 《山火贲》卦辞：亨。"
+    msgs = build_interpret_messages(board, grounding)
+    assert "经文参考" in msgs[-1]["content"]
+    assert "《山火贲》卦辞" in msgs[-1]["content"]
+    # 不传 grounding 时不应出现经文段落。
+    plain = build_interpret_messages(board)
+    assert "经文参考" not in plain[-1]["content"]
+
+
+def test_chat_messages_inject_grounding(board_json):
+    board = DivinationBoard.model_validate(board_json)
+    grounding = "【经文参考】\n- 《火山旅》卦辞：小亨，旅贞吉。"
+    msgs = build_chat_messages(board, [{"role": "user", "content": "问"}], grounding)
+    assert "经文参考" in msgs[1]["content"]
