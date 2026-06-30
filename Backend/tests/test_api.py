@@ -12,6 +12,7 @@ from app.main import app
 def force_mock(monkeypatch):
     get_settings.cache_clear()
     monkeypatch.setenv("ETIC_MOCK_LLM", "true")
+    monkeypatch.setenv("ETIC_RAG_ENABLED", "false")
     yield
     get_settings.cache_clear()
 
@@ -46,6 +47,9 @@ async def test_healthz(client):
     body = resp.json()
     assert body["status"] == "ok"
     assert body["mock"] is True
+    # RAG 默认关闭；mock 模式下 embeddings 也走 mock。
+    assert body["rag"] is False
+    assert body["embeddings"] == "mock"
 
 
 @pytest.mark.asyncio

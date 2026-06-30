@@ -1,0 +1,23 @@
+# 本地开发用 Postgres + pgvector（M5 RAG 向量库）。
+# 启动：docker compose up -d
+# 灌库：python scripts/ingest.py
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: etic-pg
+    environment:
+      POSTGRES_USER: etic
+      POSTGRES_PASSWORD: etic
+      POSTGRES_DB: etic
+    ports:
+      - "5432:5432"
+    volumes:
+      - etic_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U etic"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  etic_pg_data:

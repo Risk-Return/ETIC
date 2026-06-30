@@ -13,6 +13,7 @@ from .config import Settings, get_settings
 from .llm import LLMError, stream_completion
 from .models import ChatRequest, InterpretRequest
 from .prompt import build_chat_messages, build_interpret_messages
+from .rag.retrieval import render_grounding, retrieve_grounding
 
 app = FastAPI(title="ETIC 解读后端", version="0.1.0")
 
@@ -24,6 +25,10 @@ async def healthz() -> dict:
         "status": "ok",
         "mock": settings.use_mock,
         "model": settings.llm_model if not settings.use_mock else "mock",
+        "rag": settings.rag_enabled,
+        "embeddings": (
+            "mock" if settings.use_mock_embeddings else settings.embed_model
+        ),
     }
 
 
@@ -48,12 +53,18 @@ def _sse_response(settings: Settings, messages: list[dict]) -> StreamingResponse
     )
 
 
+async def _grounding_text(settings: Settings, board) -> str | None:
+    docs = await retrieve_grounding(settings, board)
+    return render_grounding(docs) if docs else None
+
+
 @app.post("/v1/interpret")
 async def interpret(req: InterpretRequest) -> StreamingResponse:
     """首轮解读：基于盘面给整体断语（SSE 流式）。"""
 
     settings = get_settings()
-    messages = build_interpret_messages(req.board)
+    grounding = await _grounding_text(settings, req.board)
+    messages = build_interpret_messages(req.board, grounding)
     return _sse_response(settings, messages)
 
 
@@ -68,5 +79,6 @@ async def chat(req: ChatRequest) -> StreamingResponse:
         raise HTTPException(status_code=422, detail="最后一条消息必须是用户提问")
 
     history = [m.model_dump() for m in req.messages[-settings.max_history_messages:]]
-    messages = build_chat_messages(req.board, history)
+    grounding = await _grounding_text(settings, req.board)
+    messages = build_chat_messages(req.board, history, grounding)
     return _sse_response(settings, messages)

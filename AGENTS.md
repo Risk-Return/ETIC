@@ -51,9 +51,13 @@ ETIC/
 │   ├── Interpret/                 # M4 LLM 解读对话页（流式气泡 + 多轮追问）
 │   ├── Services/                  # DivinationService（引擎桥接）、LLMService（后端 SSE）
 │   └── Theme/                     # 水墨主题
-├── Backend/                       # ③ LLM 解读代理（FastAPI，Python 3.12）
+├── Backend/                       # ③ LLM 解读代理 + RAG（FastAPI，Python 3.12）
 │   ├── app/                       # config / models / prompt / llm / main
-│   └── tests/                     # pytest（含引擎真实排盘生成的 board.json fixture）
+│   │   └── rag/                   # M5：周易经文语料 + embeddings + pgvector + 检索
+│   │       └── data/zhouyi.json   # 公有领域周易经文（64卦卦辞+384爻辞）
+│   ├── scripts/                   # build_corpus.py（生成语料）、ingest.py（灌库）
+│   ├── docker-compose.yml         # 本地 Postgres + pgvector
+│   └── tests/                     # pytest（含引擎真实排盘生成的 board.json fixture；RAG 集成测试无库时 skip）
 └── scripts/gen_fixtures.py        # 用 sxtwl 离线生成节气表与历法基准（开发工具）
 ```
 
@@ -92,10 +96,11 @@ open ETIC.xcodeproj   # iOS 16+ 模拟器/真机
 cd Backend
 python3 -m venv .venv && . .venv/bin/activate
 pip install -r requirements-dev.txt
-pytest                                   # 9 用例：prompt 组装 + SSE 接口
+pytest                                   # prompt 组装 + SSE 接口 + RAG（语料/embeddings/检索）
 uvicorn app.main:app --port 8000         # 本地起服务；无 key 时自动 mock，无需真实 key
+# RAG（M5）：docker compose up -d 起 pgvector → python scripts/ingest.py 灌库 → 设 ETIC_RAG_ENABLED=true
 ```
-接口：`POST /v1/interpret`（首轮解读）、`POST /v1/chat`（多轮追问）均 SSE 流式（`data:{"delta":...}` → `[DONE]`）；`GET /healthz` 健康检查。详见 `Backend/README.md`。
+接口：`POST /v1/interpret`（首轮解读）、`POST /v1/chat`（多轮追问）均 SSE 流式（`data:{"delta":...}` → `[DONE]`）；`GET /healthz` 健康检查。开启 RAG 后解读前检索周易经文 grounding。详见 `Backend/README.md`。
 
 ---
 
@@ -107,7 +112,7 @@ uvicorn app.main:app --port 8000         # 本地起服务；无 key 时自动 m
 - **术数规则改动**：须附经典卦例或权威出处，并补充/更新引擎测试。
 - **密钥安全**：LLM key 等机密**只经后端、走 `.env`（参考 `Backend/.env.example`），绝不写入前端代码或提交进 git**。`Backend/.env` 已在 `.gitignore`。
 - **注释/风格**：跟随既有代码风格，倾向简洁；中文文案与枚举值需与现有代码核对一致。
-- **里程碑**：当前已完成 M0–M4（引擎 / 起卦排盘 UI / 动画 / LLM 解读）。M5（历史记录与收藏、RAG 卦爻辞 grounding）等见 `docs/DESIGN.md` 开发计划。
+- **里程碑**：当前已完成 M0–M5（引擎 / 起卦排盘 UI / 动画 / LLM 解读 / 多轮追问 + RAG 周易经文 grounding）。M6（历史记录 / 账号 / 计费 / 合规）等见 `docs/DESIGN.md` 开发计划。
 
 ---
 
