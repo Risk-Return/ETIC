@@ -1,4 +1,6 @@
-# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读 + M5 经文参考）
+# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读 + M5 经文参考 + M6 历史/收藏）
+
+> 最低系统 **iOS 17**（M6 本地历史/收藏使用 SwiftData）。
 
 SwiftUI 客户端。消费 `DivinationEngine` 冻结的 `DivinationBoard` 契约渲染盘面，
 并把盘面交给后端解读代理（见 `../Backend`）做流式解读与多轮追问。
@@ -12,7 +14,7 @@ SwiftUI 客户端。消费 `DivinationEngine` 冻结的 `DivinationBoard` 契约
 brew install xcodegen          # 若未安装
 cd App
 xcodegen generate              # 由 project.yml 生成 ETIC.xcodeproj
-open ETIC.xcodeproj            # 选 iOS 16+ 模拟器运行
+open ETIC.xcodeproj            # 选 iOS 17+ 模拟器运行
 ```
 
 ## 结构
@@ -34,10 +36,21 @@ App/ETIC
 │  ├─ UseGodView.swift         用神建议
 │  └─ PreviewData.swift        SwiftUI 预览用确定性样例盘
 ├─ Services/LLMService.swift   盘面 → 后端 /v1/interpret、/v1/chat（SSE 流式解析）+ /v1/grounding（经文检索）
-└─ Interpret/
-   ├─ InterpretationViewModel.swift  解读对话状态机（首轮 + 多轮，携带同一盘面）+ 拉取经文参考
-   └─ InterpretationView.swift       流式打字气泡 + 追问输入框 + 「经文参考」折叠卡片
+├─ Interpret/
+│  ├─ InterpretationViewModel.swift  解读对话状态机（首轮 + 多轮，携带同一盘面）+ 拉取经文参考
+│  └─ InterpretationView.swift       流式打字气泡 + 追问输入框 + 「经文参考」折叠卡片
+└─ History/                         M6 本地历史/收藏（SwiftData，iOS 17+）
+   ├─ DivinationRecord.swift        @Model 卦例记录（盘面快照 + 解读对话，内容派生稳定主键）
+   ├─ HistoryStore.swift            读写封装：起卦登记、解读回写、收藏、删除
+   ├─ HistoryListView.swift         列表：时间倒序 + 收藏/事项筛选 + 滑动删除
+   └─ HistoryDetailView.swift       详情：盘面快照 + 解读记录 + 继续追问
 ```
+
+## 历史 / 收藏（M6）
+
+起卦即在本地登记一条卦例（SwiftData），解读产生的对话自动回写同一条（按盘面内容派生的稳定主键去重）。
+起卦页左上角「时钟」入口进入历史列表，可按收藏 / 事项类别筛选、滑动删除；详情页可回看盘面与解读、继续追问。
+数据仅存本地设备，不上云。
 
 ## 解读后端（M4）
 
