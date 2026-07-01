@@ -81,3 +81,27 @@ class ChatRequest(BaseModel):
 
     board: DivinationBoard
     messages: list[ChatMessage] = Field(default_factory=list)
+
+
+class GroundingRequest(BaseModel):
+    """经文检索：仅盘面（供客户端展示「经文参考」，与解读流分离）。"""
+
+    board: DivinationBoard
+
+
+class GroundingItem(BaseModel):
+    """一条可展示的经文片段。与 rag.corpus.Document 对齐，供 iOS 渲染卡片。"""
+
+    ref: str                        # 出处，如「《山火贲》卦辞」
+    hexagramName: str               # 引擎卦名
+    hexagramShort: str              # 通行短卦名
+    docType: str                    # judgment | line | tuan
+    linePosition: Optional[int] = None  # docType=line 时为 1..6
+    content: str
+
+
+class GroundingResponse(BaseModel):
+    """经文检索结果。rag 关闭或库不可达时 items 为空（优雅退化）。"""
+
+    enabled: bool = False
+    items: list[GroundingItem] = Field(default_factory=list)

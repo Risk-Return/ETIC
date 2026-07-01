@@ -1,4 +1,4 @@
-# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读）
+# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读 + M5 经文参考）
 
 SwiftUI 客户端。消费 `DivinationEngine` 冻结的 `DivinationBoard` 契约渲染盘面，
 并把盘面交给后端解读代理（见 `../Backend`）做流式解读与多轮追问。
@@ -33,10 +33,10 @@ App/ETIC
 │  ├─ FourPillarsView.swift    年月日时四柱 + 旬空
 │  ├─ UseGodView.swift         用神建议
 │  └─ PreviewData.swift        SwiftUI 预览用确定性样例盘
-├─ Services/LLMService.swift   盘面 → 后端 /v1/interpret、/v1/chat（SSE 流式解析）
+├─ Services/LLMService.swift   盘面 → 后端 /v1/interpret、/v1/chat（SSE 流式解析）+ /v1/grounding（经文检索）
 └─ Interpret/
-   ├─ InterpretationViewModel.swift  解读对话状态机（首轮 + 多轮，携带同一盘面）
-   └─ InterpretationView.swift       流式打字气泡 + 追问输入框
+   ├─ InterpretationViewModel.swift  解读对话状态机（首轮 + 多轮，携带同一盘面）+ 拉取经文参考
+   └─ InterpretationView.swift       流式打字气泡 + 追问输入框 + 「经文参考」折叠卡片
 ```
 
 ## 解读后端（M4）
@@ -54,3 +54,7 @@ cd ../Backend && pip install -r requirements.txt && uvicorn app.main:app --port 
 
 选方法 → 写问题 → 选类别 → 选时间 → 起卦 →（动画）→ 排盘页 → 「请大师解读」→
 流式断语 → 输入框追问 → 多轮回复（同一盘面，不重新起卦）。
+
+后端开启 RAG（`ETIC_RAG_ENABLED=true` 并已灌库，见 `../Backend`）时，解读页顶部展示
+「经文参考」折叠卡片（本卦卦辞 / 动爻爻辞 / 变卦卦辞原文）；后端未开 RAG 或不可达时
+静默留空，不影响解读。

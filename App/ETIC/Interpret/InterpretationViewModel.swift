@@ -22,8 +22,12 @@ final class InterpretationViewModel: ObservableObject {
     @Published var draft: String = ""
     @Published var errorMessage: String?
 
+    /// 后端检索到的经文（本卦卦辞 / 动爻爻辞 / 变卦卦辞 …），供页面展示「经文参考」。
+    @Published private(set) var grounding: [LLMService.GroundingItem] = []
+
     private let service: LLMService
     private var streamTask: Task<Void, Never>?
+    private var groundingLoaded = false
 
     init(board: DivinationBoard, service: LLMService = LLMService()) {
         self.board = board
@@ -36,9 +40,21 @@ final class InterpretationViewModel: ObservableObject {
 
     /// 首轮解读：进入页面时调用一次。
     func startIfNeeded() {
+        loadGroundingIfNeeded()
         guard turns.isEmpty, !isStreaming else { return }
         let master = appendMaster()
         run(stream: service.interpret(board: board), into: master.id)
+    }
+
+    /// 拉取经文参考（一次性，与解读流分离）。失败或后端未开 RAG 时静默留空，不打扰解读。
+    private func loadGroundingIfNeeded() {
+        guard !groundingLoaded else { return }
+        groundingLoaded = true
+        Task { [weak self] in
+            guard let self else { return }
+            let items = (try? await self.service.grounding(board: self.board))?.items ?? []
+            self.grounding = items
+        }
     }
 
     /// 多轮追问：发送输入框内容。

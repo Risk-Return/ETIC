@@ -50,12 +50,46 @@ struct LLMService {
         return stream(path: "/v1/chat", body: body)
     }
 
+    /// 经文检索：盘面 → 本卦/动爻/变卦相关周易经文（供展示「经文参考」）。
+    ///
+    /// 与解读流分离，一次性返回；后端关闭 RAG 或库不可达时返回空列表（不影响解读）。
+    func grounding(board: DivinationBoard) async throws -> GroundingResult {
+        var request = URLRequest(url: baseURL.appendingPathComponent("/v1/grounding"))
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(InterpretBody(board: board))
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        if let http = response as? HTTPURLResponse, http.statusCode >= 400 {
+            throw ServiceError.http(http.statusCode)
+        }
+        return try JSONDecoder().decode(GroundingResult.self, from: data)
+    }
+
     // MARK: - Wire types
 
     struct ChatMessage: Codable, Hashable {
         enum Role: String, Codable { case user, assistant }
         let role: Role
         let content: String
+    }
+
+    /// 一条可展示的经文片段，对齐后端 `GroundingItem`。
+    struct GroundingItem: Decodable, Hashable, Identifiable {
+        let ref: String             // 出处，如「《山火贲》卦辞」
+        let hexagramName: String
+        let hexagramShort: String
+        let docType: String         // judgment | line | tuan
+        let linePosition: Int?
+        let content: String
+
+        var id: String { ref + content }
+    }
+
+    /// 经文检索结果，对齐后端 `GroundingResponse`。
+    struct GroundingResult: Decodable {
+        let enabled: Bool
+        let items: [GroundingItem]
     }
 
     private struct InterpretBody: Encodable {

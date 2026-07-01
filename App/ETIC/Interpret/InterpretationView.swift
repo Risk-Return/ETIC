@@ -30,6 +30,9 @@ struct InterpretationView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 16) {
+                    if !model.grounding.isEmpty {
+                        GroundingSection(items: model.grounding)
+                    }
                     ForEach(model.turns) { turn in
                         TurnBubble(turn: turn, streaming: isStreamingTail(turn))
                             .id(turn.id)
@@ -94,6 +97,75 @@ struct InterpretationView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
         .background(InkTheme.paper)
+    }
+}
+
+/// 「经文参考」区：展示后端按本卦/动爻/变卦检索到的周易原文，可折叠。
+///
+/// 只读展示，不参与断卦；断卦仍以盘面世应/用神为准（见 DESIGN §4.2、AGENTS §1）。
+private struct GroundingSection: View {
+    let items: [LLMService.GroundingItem]
+    @State private var expanded = true
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { expanded.toggle() }
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "book.closed")
+                        .font(.system(size: 13))
+                    Text("经文参考")
+                        .font(InkTheme.serifTitle(15))
+                    Text("\(items.count)")
+                        .font(.caption2)
+                        .foregroundStyle(InkTheme.inkSoft)
+                    Spacer()
+                    Image(systemName: expanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 12))
+                        .foregroundStyle(InkTheme.inkSoft)
+                }
+                .foregroundStyle(InkTheme.ink)
+            }
+            .buttonStyle(.plain)
+
+            if expanded {
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(items) { item in
+                        GroundingCard(item: item)
+                    }
+                    Text("经文仅供参考，断卦以盘面世应 / 用神为准。")
+                        .font(.caption2)
+                        .foregroundStyle(InkTheme.inkSoft)
+                        .padding(.top, 2)
+                }
+            }
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: 14)
+            .stroke(InkTheme.cinnabar.opacity(0.25), lineWidth: 1))
+    }
+}
+
+/// 单条经文卡片：出处标签 + 原文。
+private struct GroundingCard: View {
+    let item: LLMService.GroundingItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(item.ref)
+                .font(.caption)
+                .foregroundStyle(InkTheme.cinnabar)
+            Text(item.content)
+                .font(InkTheme.serifBody(15))
+                .foregroundStyle(InkTheme.ink)
+                .textSelection(.enabled)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(10)
+        .background(InkTheme.paper, in: RoundedRectangle(cornerRadius: 10))
     }
 }
 

@@ -39,6 +39,19 @@ uvicorn app.main:app --reload --port 8000
 ```
 约束：`messages` 非空且最后一条须为 `user`。
 
+### `POST /v1/grounding` — 经文检索（非流式，供客户端展示「经文参考」）
+请求体 `{ "board": { /* 同上 */ } }`，返回按本卦/动爻/变卦检索到的周易原文：
+```json
+{
+  "enabled": true,
+  "items": [
+    { "ref": "《山火贲》卦辞", "hexagramName": "山火贲", "hexagramShort": "贲",
+      "docType": "judgment", "linePosition": null, "content": "《山火贲》卦辞：亨。小利有所往。" }
+  ]
+}
+```
+与解读流分离，便于客户端单独渲染引用原文；`ETIC_RAG_ENABLED=false` 或库不可达时 `enabled=false`、`items=[]`（优雅退化，不影响解读）。
+
 ### 示例
 ```bash
 curl -N -X POST localhost:8000/v1/interpret \
