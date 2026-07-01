@@ -44,11 +44,12 @@ ETIC/
 │   │   ├── Casting/               # 起卦：铜钱/数字/时间/随机（随机源可注入以复现）
 │   │   └── Engine/                # 盘面数据契约 Board.swift + 排盘九步流水线
 │   └── Tests/                     # 静态表快照 + 经典卦例端到端 + 历法基准 + 概率分布
-├── App/ETIC/                      # ② iOS 客户端（SwiftUI，iOS 16+）
+├── App/ETIC/                      # ② iOS 客户端（SwiftUI，iOS 17+）
 │   ├── Casting/                   # 起卦页（方法/问题/事项/时间）
 │   ├── Ritual/                    # M3 占卜动画（罗盘/铜钱/水墨成卦/摇一摇/触觉/设置）
 │   ├── Board/                     # 排盘可视化（卦名/盘面表/四柱旬空/用神）
-│   ├── Interpret/                 # M4 LLM 解读对话页（流式气泡 + 多轮追问）
+│   ├── Interpret/                 # M4 LLM 解读对话页（流式气泡 + 多轮追问 + 经文参考）
+│   ├── History/                   # M6 本地历史/收藏（SwiftData 持久化卡例与对话）
 │   ├── Services/                  # DivinationService（引擎桥接）、LLMService（后端 SSE）
 │   └── Theme/                     # 水墨主题
 ├── Backend/                       # ③ LLM 解读代理 + RAG（FastAPI，Python 3.12）
@@ -87,7 +88,7 @@ GitHub Actions（`swift:5.10` 容器）在每次 push / PR 上自动执行 `swif
 ```bash
 cd App
 xcodegen generate
-open ETIC.xcodeproj   # iOS 16+ 模拟器/真机
+open ETIC.xcodeproj   # iOS 17+ 模拟器/真机（M6 起用 SwiftData，最低 iOS 17）
 ```
 摇一摇与触觉反馈仅真机可测。手动测试清单见 `docs/TESTING-M2-M3.md`。
 
@@ -112,7 +113,7 @@ uvicorn app.main:app --port 8000         # 本地起服务；无 key 时自动 m
 - **术数规则改动**：须附经典卦例或权威出处，并补充/更新引擎测试。
 - **密钥安全**：LLM key 等机密**只经后端、走 `.env`（参考 `Backend/.env.example`），绝不写入前端代码或提交进 git**。`Backend/.env` 已在 `.gitignore`。
 - **注释/风格**：跟随既有代码风格，倾向简洁；中文文案与枚举值需与现有代码核对一致。
-- **里程碑**：当前已完成 M0–M5（引擎 / 起卦排盘 UI / 动画 / LLM 解读 / 多轮追问 + RAG 周易经文 grounding）。M6（历史记录 / 账号 / 计费 / 合规）等见 `docs/DESIGN.md` 开发计划。
+- **里程碑**：已完成 M0–M5（引擎 / 起卦排盘 UI / 动画 / LLM 解读 / 多轮追问 + RAG 周易经文 grounding）。M6（历史 / 账号 / 计费 / 合规）进行中：已完成**本地历史/收藏**（SwiftData，iOS 17+）；账号 / StoreKit 计费 / 内容审核 / 卦象百科待做。详见 `docs/DESIGN.md` 开发计划。
 
 ---
 

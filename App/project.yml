@@ -2,7 +2,7 @@ name: ETIC
 options:
   bundleIdPrefix: ai.etic
   deploymentTarget:
-    iOS: "16.0"
+    iOS: "17.0"
   createIntermediateGroups: true
 packages:
   DivinationEngine:
@@ -11,7 +11,7 @@ targets:
   ETIC:
     type: application
     platform: iOS
-    deploymentTarget: "16.0"
+    deploymentTarget: "17.0"
     sources:
       - ETIC
     dependencies:

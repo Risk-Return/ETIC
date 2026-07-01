@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 import DivinationEngine
 
 /// 起卦页：选择方法、输入问题与事项类别，起卦后进入排盘页。
 struct CastingView: View {
+    @Environment(\.modelContext) private var context
     @StateObject private var model = CastingViewModel()
     @State private var showSettings = false
 
@@ -54,6 +56,12 @@ struct CastingView: View {
         .navigationTitle("起卦")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                NavigationLink { HistoryListView() } label: {
+                    Image(systemName: "clock.arrow.circlepath")
+                }
+                .tint(InkTheme.ink)
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { showSettings = true } label: {
                     Image(systemName: "slider.horizontal.3")
@@ -64,6 +72,9 @@ struct CastingView: View {
         .sheet(isPresented: $showSettings) { RitualSettingsView() }
         .navigationDestination(item: $model.board) { board in
             RitualView(board: board)
+        }
+        .onChange(of: model.board) { _, newBoard in
+            if let newBoard { HistoryStore.recordCast(context, board: newBoard) }
         }
     }
 
