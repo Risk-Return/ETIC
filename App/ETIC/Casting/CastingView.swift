@@ -62,6 +62,12 @@ struct CastingView: View {
                 }
                 .tint(InkTheme.ink)
             }
+            ToolbarItem(placement: .navigationBarLeading) {
+                NavigationLink { EncyclopediaListView() } label: {
+                    Image(systemName: "book")
+                }
+                .tint(InkTheme.ink)
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { showSettings = true } label: {
                     Image(systemName: "slider.horizontal.3")

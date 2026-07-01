@@ -50,6 +50,7 @@ ETIC/
 │   ├── Board/                     # 排盘可视化（卦名/盘面表/四柱旬空/用神）
 │   ├── Interpret/                 # M4 LLM 解读对话页（流式气泡 + 多轮追问 + 经文参考）
 │   ├── History/                   # M6 本地历史/收藏（SwiftData 持久化卡例与对话）
+│   ├── Encyclopedia/              # 卦象百科：64 卦经文浏览（内置周易 JSON，离线只读）
 │   ├── Services/                  # DivinationService（引擎桥接）、LLMService（后端 SSE）
 │   └── Theme/                     # 水墨主题
 ├── Backend/                       # ③ LLM 解读代理 + RAG（FastAPI，Python 3.12）
