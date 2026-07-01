@@ -11,7 +11,13 @@ from fastapi.responses import StreamingResponse
 
 from .config import Settings, get_settings
 from .llm import LLMError, stream_completion
-from .models import ChatRequest, InterpretRequest
+from .models import (
+    ChatRequest,
+    GroundingItem,
+    GroundingRequest,
+    GroundingResponse,
+    InterpretRequest,
+)
 from .prompt import build_chat_messages, build_interpret_messages
 from .rag.retrieval import render_grounding, retrieve_grounding
 
@@ -66,6 +72,29 @@ async def interpret(req: InterpretRequest) -> StreamingResponse:
     grounding = await _grounding_text(settings, req.board)
     messages = build_interpret_messages(req.board, grounding)
     return _sse_response(settings, messages)
+
+
+@app.post("/v1/grounding")
+async def grounding(req: GroundingRequest) -> GroundingResponse:
+    """经文检索：按盘面返回本卦/动爻/变卦相关经文，供客户端展示「经文参考」。
+
+    与解读流（/v1/interpret、/v1/chat）分离；rag 关闭或库不可达时返回空列表。
+    """
+
+    settings = get_settings()
+    docs = await retrieve_grounding(settings, req.board)
+    items = [
+        GroundingItem(
+            ref=d.ref,
+            hexagramName=d.hexagram_name,
+            hexagramShort=d.hexagram_short,
+            docType=d.doc_type,
+            linePosition=d.line_position,
+            content=d.content,
+        )
+        for d in docs
+    ]
+    return GroundingResponse(enabled=settings.rag_enabled, items=items)
 
 
 @app.post("/v1/chat")
