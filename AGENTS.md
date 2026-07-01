@@ -48,7 +48,8 @@ ETIC/
 │   ├── Casting/                   # 起卦页（方法/问题/事项/时间）
 │   ├── Ritual/                    # M3 占卜动画（罗盘/铜钱/水墨成卦/摇一摇/触觉/设置）
 │   ├── Board/                     # 排盘可视化（卦名/盘面表/四柱旬空/用神）
-│   ├── Interpret/                 # M4 LLM 解读对话页（流式气泡 + 多轮追问）
+│   ├── Interpret/                 # M4 LLM 解读对话页（流式气泡 + 多轮追问 + 经文参考）
+│   ├── Encyclopedia/              # 卦象百科：64 卦经文浏览（内置周易 JSON，离线只读）
 │   ├── Services/                  # DivinationService（引擎桥接）、LLMService（后端 SSE）
 │   └── Theme/                     # 水墨主题
 ├── Backend/                       # ③ LLM 解读代理 + RAG（FastAPI，Python 3.12）

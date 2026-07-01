@@ -1,4 +1,4 @@
-# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读 + M5 经文参考）
+# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读 + M5 经文参考 + 卦象百科）
 
 SwiftUI 客户端。消费 `DivinationEngine` 冻结的 `DivinationBoard` 契约渲染盘面，
 并把盘面交给后端解读代理（见 `../Backend`）做流式解读与多轮追问。
@@ -34,9 +34,14 @@ App/ETIC
 │  ├─ UseGodView.swift         用神建议
 │  └─ PreviewData.swift        SwiftUI 预览用确定性样例盘
 ├─ Services/LLMService.swift   盘面 → 后端 /v1/interpret、/v1/chat（SSE 流式解析）+ /v1/grounding（经文检索）
-└─ Interpret/
-   ├─ InterpretationViewModel.swift  解读对话状态机（首轮 + 多轮，携带同一盘面）+ 拉取经文参考
-   └─ InterpretationView.swift       流式打字气泡 + 追问输入框 + 「经文参考」折叠卡片
+├─ Interpret/
+│  ├─ InterpretationViewModel.swift  解读对话状态机（首轮 + 多轮，携带同一盘面）+ 拉取经文参考
+│  └─ InterpretationView.swift       流式打字气泡 + 追问输入框 + 「经文参考」折叠卡片
+└─ Encyclopedia/                     卦象百科（离线只读，起卦页左上角「书」入口）
+   ├─ Data/zhouyi.json               内置公有领域周易经文（64卦卦辞 + 384爻辞 + 彖辞）
+   ├─ HexagramLore.swift             百科条目模型 + 加载/搜索（EncyclopediaStore）
+   ├─ EncyclopediaListView.swift     64 卦网格 + 按卦名/卦辞搜索
+   └─ EncyclopediaDetailView.swift   卦辞 / 彖辞 / 六爻辞（初→上）
 ```
 
 ## 解读后端（M4）
