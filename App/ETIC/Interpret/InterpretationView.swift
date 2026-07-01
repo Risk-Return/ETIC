@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 import DivinationEngine
 
 /// 解读对话页：首轮流式断语 + 多轮追问。盘面只读传入，不重新起卦。
 struct InterpretationView: View {
+    @Environment(\.modelContext) private var context
     @StateObject private var model: InterpretationViewModel
 
     init(board: DivinationBoard) {
@@ -23,7 +25,19 @@ struct InterpretationView: View {
         .navigationTitle("大师解读")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { model.startIfNeeded() }
-        .onDisappear { model.cancel() }
+        .onDisappear { model.cancel(); persist() }
+        .onChange(of: model.isStreaming) { _, streaming in
+            if !streaming { persist() }
+        }
+    }
+
+    /// 把当前对话回写到历史记录（同盘去重，见 `HistoryStore`）。
+    private func persist() {
+        let turns = model.turns
+            .filter { !$0.text.isEmpty }
+            .map { StoredTurn(role: $0.role == .user ? .user : .master, text: $0.text) }
+        guard !turns.isEmpty else { return }
+        HistoryStore.saveConversation(context, board: model.board, turns: turns)
     }
 
     private var conversation: some View {
@@ -230,4 +244,5 @@ private struct ThinkingIndicator: View {
     NavigationStack {
         InterpretationView(board: PreviewData.board)
     }
+    .modelContainer(for: DivinationRecord.self, inMemory: true)
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct ETICApp: App {
@@ -12,5 +13,6 @@ struct ETICApp: App {
             .tint(InkTheme.cinnabar)
             .environmentObject(settings)
         }
+        .modelContainer(for: DivinationRecord.self)
     }
 }
