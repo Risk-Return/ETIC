@@ -3,161 +3,161 @@ import Foundation
 /// Central localization namespace. All user-facing strings route through here.
 enum L10n {
     enum Nav {
-        static var cast = String(localized: "nav.cast")
-        static var board = String(localized: "nav.board")
-        static var interpret = String(localized: "nav.interpret")
-        static var history = String(localized: "nav.history")
-        static var record = String(localized: "nav.record")
-        static var settings = String(localized: "nav.settings")
+        static var cast: String { LocalizationStore.string("nav.cast") }
+        static var board: String { LocalizationStore.string("nav.board") }
+        static var interpret: String { LocalizationStore.string("nav.interpret") }
+        static var history: String { LocalizationStore.string("nav.history") }
+        static var record: String { LocalizationStore.string("nav.record") }
+        static var settings: String { LocalizationStore.string("nav.settings") }
     }
 
     enum Brand {
-        static var appName = String(localized: "brand.appName")
-        static var tagline = String(localized: "brand.tagline")
+        static var appName: String { LocalizationStore.string("brand.appName") }
+        static var tagline: String { LocalizationStore.string("brand.tagline") }
     }
 
     enum Casting {
-        static var questionSection = String(localized: "casting.questionSection")
-        static var questionPlaceholder = String(localized: "casting.questionPlaceholder")
-        static var categorySection = String(localized: "casting.categorySection")
-        static var methodSection = String(localized: "casting.methodSection")
-        static var timeSection = String(localized: "casting.timeSection")
-        static var castButton = String(localized: "casting.castButton")
-        static var disclaimer = String(localized: "casting.disclaimer")
-        static var hintCoins = String(localized: "casting.hint.coins")
-        static var hintNumber = String(localized: "casting.hint.number")
-        static var hintTime = String(localized: "casting.hint.time")
-        static var hintRandom = String(localized: "casting.hint.random")
-        static var upperNum = String(localized: "casting.upperNum")
-        static var lowerNum = String(localized: "casting.lowerNum")
+        static var questionSection: String { LocalizationStore.string("casting.questionSection") }
+        static var questionPlaceholder: String { LocalizationStore.string("casting.questionPlaceholder") }
+        static var categorySection: String { LocalizationStore.string("casting.categorySection") }
+        static var methodSection: String { LocalizationStore.string("casting.methodSection") }
+        static var timeSection: String { LocalizationStore.string("casting.timeSection") }
+        static var castButton: String { LocalizationStore.string("casting.castButton") }
+        static var disclaimer: String { LocalizationStore.string("casting.disclaimer") }
+        static var hintCoins: String { LocalizationStore.string("casting.hint.coins") }
+        static var hintNumber: String { LocalizationStore.string("casting.hint.number") }
+        static var hintTime: String { LocalizationStore.string("casting.hint.time") }
+        static var hintRandom: String { LocalizationStore.string("casting.hint.random") }
+        static var upperNum: String { LocalizationStore.string("casting.upperNum") }
+        static var lowerNum: String { LocalizationStore.string("casting.lowerNum") }
     }
 
     enum Method {
-        static var coins = String(localized: "casting.method.coins")
-        static var number = String(localized: "casting.method.number")
-        static var time = String(localized: "casting.method.time")
-        static var random = String(localized: "casting.method.random")
-        static var manual = String(localized: "casting.method.manual")
+        static var coins: String { LocalizationStore.string("casting.method.coins") }
+        static var number: String { LocalizationStore.string("casting.method.number") }
+        static var time: String { LocalizationStore.string("casting.method.time") }
+        static var random: String { LocalizationStore.string("casting.method.random") }
+        static var manual: String { LocalizationStore.string("casting.method.manual") }
     }
 
     enum Category {
-        static var career = String(localized: "category.career")
-        static var wealth = String(localized: "category.wealth")
-        static var marriage = String(localized: "category.marriage")
-        static var health = String(localized: "category.health")
-        static var study = String(localized: "category.study")
-        static var lawsuit = String(localized: "category.lawsuit")
-        static var travel = String(localized: "category.travel")
-        static var lost = String(localized: "category.lost")
-        static var general = String(localized: "category.general")
+        static var career: String { LocalizationStore.string("category.career") }
+        static var wealth: String { LocalizationStore.string("category.wealth") }
+        static var marriage: String { LocalizationStore.string("category.marriage") }
+        static var health: String { LocalizationStore.string("category.health") }
+        static var study: String { LocalizationStore.string("category.study") }
+        static var lawsuit: String { LocalizationStore.string("category.lawsuit") }
+        static var travel: String { LocalizationStore.string("category.travel") }
+        static var lost: String { LocalizationStore.string("category.lost") }
+        static var general: String { LocalizationStore.string("category.general") }
     }
 
     enum Location {
-        static var section = String(localized: "location.section")
-        static var notSet = String(localized: "location.notSet")
-        static var choose = String(localized: "location.choose")
-        static var hint = String(localized: "location.hint")
-        static var pickerTitle = String(localized: "location.pickerTitle")
-        static var search = String(localized: "location.search")
-        static var useDeviceTime = String(localized: "location.useDeviceTime")
-        static var customSection = String(localized: "location.customSection")
-        static var customPlaceholder = String(localized: "location.customPlaceholder")
-        static var apply = String(localized: "location.apply")
-        static var done = String(localized: "location.done")
-        static var customLabel = String(localized: "location.customLabel")
+        static var section: String { LocalizationStore.string("location.section") }
+        static var notSet: String { LocalizationStore.string("location.notSet") }
+        static var choose: String { LocalizationStore.string("location.choose") }
+        static var hint: String { LocalizationStore.string("location.hint") }
+        static var pickerTitle: String { LocalizationStore.string("location.pickerTitle") }
+        static var search: String { LocalizationStore.string("location.search") }
+        static var useDeviceTime: String { LocalizationStore.string("location.useDeviceTime") }
+        static var customSection: String { LocalizationStore.string("location.customSection") }
+        static var customPlaceholder: String { LocalizationStore.string("location.customPlaceholder") }
+        static var apply: String { LocalizationStore.string("location.apply") }
+        static var done: String { LocalizationStore.string("location.done") }
+        static var customLabel: String { LocalizationStore.string("location.customLabel") }
     }
 
     enum Board {
-        static var question = String(localized: "board.question")
-        static var primary = String(localized: "board.primary")
-        static var changed = String(localized: "board.changed")
-        static var interpretation = String(localized: "board.interpretation")
-        static var interpretationDesc = String(localized: "board.interpretationDesc")
-        static var requestReading = String(localized: "board.requestReading")
-        static var disclaimer = String(localized: "board.disclaimer")
-        static var legend = String(localized: "board.legend")
-        static var useGodTitle = String(localized: "board.useGodTitle")
-        static var useGodHidden = String(localized: "board.useGodHidden")
-        static var useGodPositionPrefix = String(localized: "board.useGodPositionPrefix")
-        static var voidPrefix = String(localized: "board.voidPrefix")
-        static var yearPillar = String(localized: "board.yearPillar")
-        static var monthPillar = String(localized: "board.monthPillar")
-        static var dayPillar = String(localized: "board.dayPillar")
-        static var hourPillar = String(localized: "board.hourPillar")
-        static var upperTrigramSuffix = String(localized: "board.upperTrigramSuffix")
-        static var lowerTrigramSuffix = String(localized: "board.lowerTrigramSuffix")
-        static var methodSuffix = String(localized: "board.methodSuffix")
-        static var world = String(localized: "board.world")
-        static var response = String(localized: "board.response")
-        static var void = String(localized: "board.void")
+        static var question: String { LocalizationStore.string("board.question") }
+        static var primary: String { LocalizationStore.string("board.primary") }
+        static var changed: String { LocalizationStore.string("board.changed") }
+        static var interpretation: String { LocalizationStore.string("board.interpretation") }
+        static var interpretationDesc: String { LocalizationStore.string("board.interpretationDesc") }
+        static var requestReading: String { LocalizationStore.string("board.requestReading") }
+        static var disclaimer: String { LocalizationStore.string("board.disclaimer") }
+        static var legend: String { LocalizationStore.string("board.legend") }
+        static var useGodTitle: String { LocalizationStore.string("board.useGodTitle") }
+        static var useGodHidden: String { LocalizationStore.string("board.useGodHidden") }
+        static var useGodPositionPrefix: String { LocalizationStore.string("board.useGodPositionPrefix") }
+        static var voidPrefix: String { LocalizationStore.string("board.voidPrefix") }
+        static var yearPillar: String { LocalizationStore.string("board.yearPillar") }
+        static var monthPillar: String { LocalizationStore.string("board.monthPillar") }
+        static var dayPillar: String { LocalizationStore.string("board.dayPillar") }
+        static var hourPillar: String { LocalizationStore.string("board.hourPillar") }
+        static var upperTrigramSuffix: String { LocalizationStore.string("board.upperTrigramSuffix") }
+        static var lowerTrigramSuffix: String { LocalizationStore.string("board.lowerTrigramSuffix") }
+        static var methodSuffix: String { LocalizationStore.string("board.methodSuffix") }
+        static var world: String { LocalizationStore.string("board.world") }
+        static var response: String { LocalizationStore.string("board.response") }
+        static var void: String { LocalizationStore.string("board.void") }
     }
 
     enum Ritual {
-        static var preparePrompt = String(localized: "ritual.preparePrompt")
-        static var beginCasting = String(localized: "ritual.beginCasting")
-        static var casting = String(localized: "ritual.casting")
-        static var transformingTitle = String(localized: "ritual.transformingTitle")
-        static var formingPlaceholder = String(localized: "ritual.formingPlaceholder")
-        static var allLinesDone = String(localized: "ritual.allLinesDone")
-        static var shakePrompt = String(localized: "ritual.shakePrompt")
-        static var tapPrompt = String(localized: "ritual.tapPrompt")
-        static var skipAnimation = String(localized: "ritual.skipAnimation")
-        static var coinBack = String(localized: "ritual.coinBack")
-        static var coinChar = String(localized: "ritual.coinChar")
+        static var preparePrompt: String { LocalizationStore.string("ritual.preparePrompt") }
+        static var beginCasting: String { LocalizationStore.string("ritual.beginCasting") }
+        static var casting: String { LocalizationStore.string("ritual.casting") }
+        static var transformingTitle: String { LocalizationStore.string("ritual.transformingTitle") }
+        static var formingPlaceholder: String { LocalizationStore.string("ritual.formingPlaceholder") }
+        static var allLinesDone: String { LocalizationStore.string("ritual.allLinesDone") }
+        static var shakePrompt: String { LocalizationStore.string("ritual.shakePrompt") }
+        static var tapPrompt: String { LocalizationStore.string("ritual.tapPrompt") }
+        static var skipAnimation: String { LocalizationStore.string("ritual.skipAnimation") }
+        static var coinBack: String { LocalizationStore.string("ritual.coinBack") }
+        static var coinChar: String { LocalizationStore.string("ritual.coinChar") }
     }
 
     enum Settings {
-        static var animationSection = String(localized: "settings.animationSection")
-        static var skipAnimation = String(localized: "settings.skipAnimation")
-        static var reduceMotionNotice = String(localized: "settings.reduceMotionNotice")
-        static var shakeSection = String(localized: "settings.shakeSection")
-        static var shakeToToss = String(localized: "settings.shakeToToss")
-        static var haptics = String(localized: "settings.haptics")
-        static var note = String(localized: "settings.note")
-        static var done = String(localized: "settings.done")
-        static var languageSection = String(localized: "settings.languageSection")
-        static var languageLabel = String(localized: "settings.languageLabel")
+        static var animationSection: String { LocalizationStore.string("settings.animationSection") }
+        static var skipAnimation: String { LocalizationStore.string("settings.skipAnimation") }
+        static var reduceMotionNotice: String { LocalizationStore.string("settings.reduceMotionNotice") }
+        static var shakeSection: String { LocalizationStore.string("settings.shakeSection") }
+        static var shakeToToss: String { LocalizationStore.string("settings.shakeToToss") }
+        static var haptics: String { LocalizationStore.string("settings.haptics") }
+        static var note: String { LocalizationStore.string("settings.note") }
+        static var done: String { LocalizationStore.string("settings.done") }
+        static var languageSection: String { LocalizationStore.string("settings.languageSection") }
+        static var languageLabel: String { LocalizationStore.string("settings.languageLabel") }
     }
 
     enum Encyclopedia {
-        static var title = String(localized: "encyclopedia.title")
-        static var searchPrompt = String(localized: "encyclopedia.searchPrompt")
-        static var missingData = String(localized: "encyclopedia.missingData")
-        static var judgmentTitle = String(localized: "encyclopedia.judgmentTitle")
-        static var tuanTitle = String(localized: "encyclopedia.tuanTitle")
-        static var linesTitle = String(localized: "encyclopedia.linesTitle")
-        static var disclaimer = String(localized: "encyclopedia.disclaimer")
+        static var title: String { LocalizationStore.string("encyclopedia.title") }
+        static var searchPrompt: String { LocalizationStore.string("encyclopedia.searchPrompt") }
+        static var missingData: String { LocalizationStore.string("encyclopedia.missingData") }
+        static var judgmentTitle: String { LocalizationStore.string("encyclopedia.judgmentTitle") }
+        static var tuanTitle: String { LocalizationStore.string("encyclopedia.tuanTitle") }
+        static var linesTitle: String { LocalizationStore.string("encyclopedia.linesTitle") }
+        static var disclaimer: String { LocalizationStore.string("encyclopedia.disclaimer") }
     }
 
     enum Interpret {
-        static var placeholder = String(localized: "interpret.placeholder")
-        static var masterLabel = String(localized: "interpret.masterLabel")
-        static var thinking = String(localized: "interpret.thinking")
-        static var scriptureTitle = String(localized: "interpret.scriptureTitle")
-        static var scriptureDisclaimer = String(localized: "interpret.scriptureDisclaimer")
+        static var placeholder: String { LocalizationStore.string("interpret.placeholder") }
+        static var masterLabel: String { LocalizationStore.string("interpret.masterLabel") }
+        static var thinking: String { LocalizationStore.string("interpret.thinking") }
+        static var scriptureTitle: String { LocalizationStore.string("interpret.scriptureTitle") }
+        static var scriptureDisclaimer: String { LocalizationStore.string("interpret.scriptureDisclaimer") }
     }
 
     enum History {
-        static var emptyTitle = String(localized: "history.emptyTitle")
-        static var emptyDesc = String(localized: "history.emptyDesc")
-        static var noQuestion = String(localized: "history.noQuestion")
-        static var noTranscript = String(localized: "history.noTranscript")
-        static var corruptBoard = String(localized: "history.corruptBoard")
-        static var transcriptTitle = String(localized: "history.transcriptTitle")
-        static var viewBoard = String(localized: "history.viewBoard")
-        static var requestReadingFallback = String(localized: "history.requestReadingFallback")
-        static var continueAsk = String(localized: "history.continueAsk")
-        static var favoritesFilter = String(localized: "history.favoritesFilter")
-        static var allFilter = String(localized: "history.allFilter")
-        static var favorite = String(localized: "history.favorite")
-        static var unfavorite = String(localized: "history.unfavorite")
-        static var delete = String(localized: "history.delete")
+        static var emptyTitle: String { LocalizationStore.string("history.emptyTitle") }
+        static var emptyDesc: String { LocalizationStore.string("history.emptyDesc") }
+        static var noQuestion: String { LocalizationStore.string("history.noQuestion") }
+        static var noTranscript: String { LocalizationStore.string("history.noTranscript") }
+        static var corruptBoard: String { LocalizationStore.string("history.corruptBoard") }
+        static var transcriptTitle: String { LocalizationStore.string("history.transcriptTitle") }
+        static var viewBoard: String { LocalizationStore.string("history.viewBoard") }
+        static var requestReadingFallback: String { LocalizationStore.string("history.requestReadingFallback") }
+        static var continueAsk: String { LocalizationStore.string("history.continueAsk") }
+        static var favoritesFilter: String { LocalizationStore.string("history.favoritesFilter") }
+        static var allFilter: String { LocalizationStore.string("history.allFilter") }
+        static var favorite: String { LocalizationStore.string("history.favorite") }
+        static var unfavorite: String { LocalizationStore.string("history.unfavorite") }
+        static var delete: String { LocalizationStore.string("history.delete") }
     }
 
     enum Error {
-        static var invalidNumbers = String(localized: "error.invalidNumbers")
-        static var calendarOutOfRange = String(localized: "error.calendarOutOfRange")
-        static var badURL = String(localized: "error.badURL")
-        static var httpError = String(localized: "error.httpError")
+        static var invalidNumbers: String { LocalizationStore.string("error.invalidNumbers") }
+        static var calendarOutOfRange: String { LocalizationStore.string("error.calendarOutOfRange") }
+        static var badURL: String { LocalizationStore.string("error.badURL") }
+        static var httpError: String { LocalizationStore.string("error.httpError") }
     }
 }

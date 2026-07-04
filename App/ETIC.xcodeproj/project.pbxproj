@@ -27,6 +27,7 @@
 		78BF2191CF047A6643444D13 /* UseGodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99875F0074F4F5853558FE0 /* UseGodView.swift */; };
 		7D3AF20776FDFE60AFC7A096 /* DivinationEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 49D3A140F99B2C2293B9BFD4 /* DivinationEngine */; };
 		89FF11D4786750297810A686 /* YaoSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A569E43E0EC99B6856F1FBC /* YaoSymbolView.swift */; };
+		8B4A35FB4CACD9A69AD6E0EC /* LocalizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F6D0DDEB38C05E627F04F6 /* LocalizationStore.swift */; };
 		8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 669ACA4E40E4606941F99F23 /* Localizable.xcstrings */; };
 		96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D91A1EFE8FA78AB0FD6E8 /* RitualSettings.swift */; };
 		9A7FEA294E3EAF79FD10AFEB /* WorldCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CD523BE4C5AAB6DB03308C /* WorldCity.swift */; };
@@ -102,6 +103,7 @@
 		DA315C6426ABE9AC135AF106 /* ETICTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ETICTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB75B11A5056A0F461D9F577 /* DivinationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationRecord.swift; sourceTree = "<group>"; };
 		E46D91A1EFE8FA78AB0FD6E8 /* RitualSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualSettings.swift; sourceTree = "<group>"; };
+		E4F6D0DDEB38C05E627F04F6 /* LocalizationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationStore.swift; sourceTree = "<group>"; };
 		E529319AE69908767DC454B4 /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
 		E8840B4BF1EEA2AA6D67D063 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
 		EC0DCA89909AF044A8F2380B /* InterpretationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpretationView.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				71A272BDFA54713EE7D60BD1 /* L10n.swift */,
 				669ACA4E40E4606941F99F23 /* Localizable.xcstrings */,
+				E4F6D0DDEB38C05E627F04F6 /* LocalizationStore.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				328B7681472F8C046416FEB5 /* L10n.swift in Sources */,
 				1CE34E2A98F9819FD2AA2656 /* LLMService.swift in Sources */,
 				DAD866D9F992305F9EB90E54 /* LanguageManager.swift in Sources */,
+				8B4A35FB4CACD9A69AD6E0EC /* LocalizationStore.swift in Sources */,
 				D885659F081A98BA8E9B4498 /* LocationPickerView.swift in Sources */,
 				3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */,
 				96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */,

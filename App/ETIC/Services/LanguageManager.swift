@@ -17,17 +17,9 @@ enum AppLanguage: String, CaseIterable {
 final class LanguageManager: ObservableObject {
     @AppStorage("app.language") var languageCode: String = AppLanguage.en.rawValue
 
-    init() {
-        applyAppleLanguages()
-    }
-
     var selectedLanguage: AppLanguage {
         get { AppLanguage(rawValue: languageCode) ?? .en }
-        set {
-            guard selectedLanguage != newValue else { return }
-            languageCode = newValue.rawValue
-            applyAppleLanguages()
-        }
+        set { languageCode = newValue.rawValue }
     }
 
     var locale: Locale { selectedLanguage.locale }
@@ -37,9 +29,5 @@ final class LanguageManager: ObservableObject {
             get: { [weak self] in self?.selectedLanguage ?? .en },
             set: { [weak self] in self?.selectedLanguage = $0 }
         )
-    }
-
-    private func applyAppleLanguages() {
-        UserDefaults.standard.set([languageCode], forKey: "AppleLanguages")
     }
 }
