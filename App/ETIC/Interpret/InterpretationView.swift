@@ -4,6 +4,7 @@ import DivinationEngine
 
 /// 解读对话页：首轮流式断语 + 多轮追问。盘面只读传入，不重新起卦。
 struct InterpretationView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     @Environment(\.modelContext) private var context
     @StateObject private var model: InterpretationViewModel
 

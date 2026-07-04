@@ -3,6 +3,7 @@ import SwiftUI
 /// Sheet for choosing a casting longitude — pick a major world city or enter a
 /// custom longitude. Drives true-solar-time correction in the engine.
 struct LocationPickerView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     @ObservedObject var model: CastingViewModel
     @Environment(\.dismiss) private var dismiss
 

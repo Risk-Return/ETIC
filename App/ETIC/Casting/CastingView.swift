@@ -3,6 +3,7 @@ import SwiftData
 import DivinationEngine
 
 struct CastingView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     @Environment(\.modelContext) private var context
     @StateObject private var model = CastingViewModel()
     @State private var showSettings = false

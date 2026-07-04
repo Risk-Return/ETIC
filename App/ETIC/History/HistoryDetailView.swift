@@ -4,6 +4,7 @@ import DivinationEngine
 
 /// 历史卦例详情：盘面快照 + 已保存的解读对话；可继续追问（回写同一记录）。
 struct HistoryDetailView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     @Environment(\.modelContext) private var context
     @Bindable var record: DivinationRecord
 

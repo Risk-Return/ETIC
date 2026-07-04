@@ -3,6 +3,7 @@ import DivinationEngine
 
 /// 占卜动画容器：罗盘入场 → 摇卦 → 成卦 → 动爻变卦 → 盘面。引擎已算好，仅"演出"。
 struct RitualView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     let board: DivinationBoard
 
     @StateObject private var model: RitualViewModel

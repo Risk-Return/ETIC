@@ -4,6 +4,7 @@ import DivinationEngine
 /// 排盘页：展示本卦/变卦六爻、干支、五行、六亲、六神、世应、动爻、旬空、旺衰。
 /// `animateReveal` 为 true 时各信息块逐项淡入上浮（M3 信息浮现阶段）；LLM 解读在 M4 接入。
 struct BoardView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     let board: DivinationBoard
     var animateReveal: Bool = false
 

@@ -2,6 +2,7 @@ import SwiftUI
 
 /// 三枚铜钱。`coins` 中 1=背面、0=字面；`tossing` 时翻滚抖动。
 struct CoinRowView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     let coins: [Int]
     let tossing: Bool
 

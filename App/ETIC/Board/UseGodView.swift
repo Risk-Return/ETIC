@@ -3,6 +3,7 @@ import DivinationEngine
 
 /// 用神建议（引擎按占问类别给出，UI 仅展示）。
 struct UseGodView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     let useGod: UseGodSuggestion
 
     var body: some View {

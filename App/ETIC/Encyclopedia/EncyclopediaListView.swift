@@ -2,6 +2,7 @@ import SwiftUI
 
 /// 卦象百科列表：64 卦网格，支持按卦名 / 卦辞搜索。纯浏览，离线。
 struct EncyclopediaListView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     @State private var query = ""
 
     private var results: [HexagramLore] { EncyclopediaStore.search(query) }

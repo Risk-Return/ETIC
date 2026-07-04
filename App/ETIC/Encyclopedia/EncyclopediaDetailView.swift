@@ -2,6 +2,7 @@ import SwiftUI
 
 /// 卦象百科详情：卦名 + 卦辞 + 彖辞 + 六爻辞（初→上）。经文只读展示。
 struct EncyclopediaDetailView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     let lore: HexagramLore
 
     var body: some View {

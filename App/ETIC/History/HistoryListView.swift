@@ -4,6 +4,7 @@ import DivinationEngine
 
 /// 历史卦例列表：按时间倒序，支持收藏筛选、按事项类别筛选、滑动删除。
 struct HistoryListView: View {
+    @AppStorage("app.language") private var _language: String = AppLanguage.en.rawValue
     @Environment(\.modelContext) private var context
     @Query(sort: \DivinationRecord.createdAt, order: .reverse)
     private var records: [DivinationRecord]
