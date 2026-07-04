@@ -7,16 +7,6 @@ public enum CastMethod: String, Codable, Sendable {
     case time = "时间"
     case random = "随机"
     case manual = "手动"
-
-    public var displayName: String {
-        switch self {
-        case .coins: return String(localized: "casting.method.coins")
-        case .number: return String(localized: "casting.method.number")
-        case .time: return String(localized: "casting.method.time")
-        case .random: return String(localized: "casting.method.random")
-        case .manual: return String(localized: "casting.method.manual")
-        }
-    }
 }
 
 /// 起卦结果：六爻老少阴阳（自下而上，index 0 = 初爻）。

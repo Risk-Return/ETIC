@@ -11,20 +11,6 @@ public enum QuestionCategory: String, Codable, CaseIterable, Sendable {
     case travel = "出行"
     case lost = "失物"
     case general = "综合"
-
-    public var displayName: String {
-        switch self {
-        case .career: return String(localized: "category.career")
-        case .wealth: return String(localized: "category.wealth")
-        case .marriage: return String(localized: "category.marriage")
-        case .health: return String(localized: "category.health")
-        case .study: return String(localized: "category.study")
-        case .lawsuit: return String(localized: "category.lawsuit")
-        case .travel: return String(localized: "category.travel")
-        case .lost: return String(localized: "category.lost")
-        case .general: return String(localized: "category.general")
-        }
-    }
 }
 
 /// 起卦时间信息。
