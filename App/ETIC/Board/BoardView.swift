@@ -91,6 +91,7 @@ struct BoardView: View {
             Text(L10n.Board.changed).tag(true)
         }
         .pickerStyle(.segmented)
+        .id("boardToggle-\(_language)")
     }
 
     private var boardTable: some View {

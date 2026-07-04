@@ -140,6 +140,7 @@ struct CastingView: View {
             }
         }
         .pickerStyle(.segmented)
+        .id("methodPicker-\(_language)")
     }
 
     @ViewBuilder
