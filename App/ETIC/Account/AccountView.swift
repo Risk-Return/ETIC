@@ -9,7 +9,6 @@ import StoreKit
 struct AccountView: View {
     @StateObject private var auth = AuthService.shared
     @StateObject private var store = StoreKitService.shared
-    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -21,11 +20,9 @@ struct AccountView: View {
                         subscriptionSection(status)
                         topUpSection(status)
                         signOutButton
-                    } else if auth.isAuthenticated {
+                    } else {
                         ProgressView()
                             .padding(.top, 40)
-                    } else {
-                        notSignedInSection
                     }
                 }
                 .padding(20)
@@ -34,10 +31,8 @@ struct AccountView: View {
         .navigationTitle(L10n.Account.title)
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            if auth.isAuthenticated {
-                await auth.refreshAccountStatus()
-                await store.loadProducts()
-            }
+            await auth.refreshAccountStatus()
+            await store.loadProducts()
         }
     }
 
@@ -274,33 +269,6 @@ struct AccountView: View {
             Spacer()
         }
         .padding(.vertical, 20)
-    }
-
-    // MARK: - Not signed in
-
-    private var notSignedInSection: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "person.crop.circle")
-                .font(.system(size: 48))
-                .foregroundStyle(InkTheme.inkSoft)
-
-            Text(L10n.Account.notSignedInDesc)
-                .font(InkTheme.serifBody(15))
-                .foregroundStyle(InkTheme.inkSoft)
-                .multilineTextAlignment(.center)
-
-            NavigationLink {
-                LoginView()
-            } label: {
-                Text(L10n.Account.signIn)
-                    .font(InkTheme.serifBody(16))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 32)
-                    .padding(.vertical, 12)
-                    .background(InkTheme.cinnabar, in: RoundedRectangle(cornerRadius: 12))
-            }
-        }
-        .padding(.top, 40)
     }
 
     // MARK: - Sign out

@@ -3,10 +3,10 @@ import AuthenticationServices
 
 /// 登录页：Sign in with Apple。
 ///
-/// 仅支持 Apple Sign In。登录成功后自动 dismiss，上层页面刷新账号状态。
+/// 作为根视图展示，登录成功后 AuthService.isAuthenticated 变 true，
+/// ETICApp 自动切换到 MainTabView。
 struct LoginView: View {
     @StateObject private var auth = AuthService.shared
-    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -57,16 +57,9 @@ struct LoginView: View {
                 Spacer().frame(height: 32)
             }
         }
-        .navigationTitle(L10n.Account.loginNavTitle)
-        .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: auth.isAuthenticated) { _, isAuth in
-            if isAuth { dismiss() }
-        }
     }
 }
 
 #Preview {
-    NavigationStack {
-        LoginView()
-    }
+    LoginView()
 }

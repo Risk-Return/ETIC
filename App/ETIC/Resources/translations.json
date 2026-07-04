@@ -23,6 +23,10 @@
     "en": "Settings",
     "zh-Hans": "设置"
   },
+  "nav.account": {
+    "en": "Account",
+    "zh-Hans": "账号"
+  },
   "brand.appName": {
     "en": "易卦",
     "zh-Hans": "易卦"

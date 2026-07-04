@@ -22,6 +22,7 @@
 		4205D2D1DDBDD14B0411A32B /* translations.json in Resources */ = {isa = PBXBuildFile; fileRef = 5573ED399C3188C2B5702AF6 /* translations.json */; };
 		44699162E3704CB267706008 /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C20211DE2BA73872DB382 /* HistoryStore.swift */; };
 		4EF26D628DA0DB53A92A6D08 /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E529319AE69908767DC454B4 /* CoinRowView.swift */; };
+		5017E9A1B981C460F6FD1BA5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAF8F763E74A60466A4C2BD /* MainTabView.swift */; };
 		5DE003C5848861D763F4CC98 /* HistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592A59F0FDCFA0EC3C4E1A2 /* HistoryListView.swift */; };
 		6A92E68EFF9CFE47E9EDBE79 /* RitualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068F2BF0F0FF4754655FA8D /* RitualView.swift */; };
 		703355CB82AC00886AE6076D /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11159E32375477C167A667AB /* AccountView.swift */; };
@@ -97,6 +98,7 @@
 		7152423D04295CECCC8E1C21 /* CastingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingViewModel.swift; sourceTree = "<group>"; };
 		71A272BDFA54713EE7D60BD1 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		74B70E3CBAAF870FF70F69DB /* InterpretationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpretationViewModel.swift; sourceTree = "<group>"; };
+		7FAF8F763E74A60466A4C2BD /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		8CE5E69965263482EA70B260 /* zhouyi.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = zhouyi.json; sourceTree = "<group>"; };
 		8E9BFB77D77B2A95B6CF473E /* HistoryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStoreTests.swift; sourceTree = "<group>"; };
 		8ECA501D72380C057AC80FD0 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				2C9F0503F57BEC4B5B06D892 /* ETIC.entitlements */,
 				F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */,
 				4F4C02A35E23F55AC8B03423 /* Info.plist */,
+				7FAF8F763E74A60466A4C2BD /* MainTabView.swift */,
 				BCCD3DD6856C607105F2B9D7 /* Account */,
 				79BE2D2AF74DAC6851DD105D /* Board */,
 				F355DC772880EBC72806B33E /* Casting */,
@@ -457,6 +460,7 @@
 				8B4A35FB4CACD9A69AD6E0EC /* LocalizationStore.swift in Sources */,
 				D885659F081A98BA8E9B4498 /* LocationPickerView.swift in Sources */,
 				ED1DC172CC900ACDC4D0A8D8 /* LoginView.swift in Sources */,
+				5017E9A1B981C460F6FD1BA5 /* MainTabView.swift in Sources */,
 				3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */,
 				96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */,
 				9C51C21DBADF4DF9A011A8B1 /* RitualSettingsView.swift in Sources */,

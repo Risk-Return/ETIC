@@ -36,13 +36,6 @@ struct RitualSettingsView: View {
                     Toggle(L10n.Settings.shakeToToss, isOn: $settings.shakeToToss)
                     Toggle(L10n.Settings.haptics, isOn: $settings.haptics)
                 }
-                Section(L10n.Account.title) {
-                    NavigationLink {
-                        AccountView()
-                    } label: {
-                        Label(L10n.Account.title, systemImage: "person.crop.circle")
-                    }
-                }
                 Section {
                     Text(L10n.Settings.note)
                         .font(.footnote)

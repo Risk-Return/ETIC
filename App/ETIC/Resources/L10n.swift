@@ -9,6 +9,7 @@ enum L10n {
         static var history: String { LocalizationStore.string("nav.history") }
         static var record: String { LocalizationStore.string("nav.record") }
         static var settings: String { LocalizationStore.string("nav.settings") }
+        static var account: String { LocalizationStore.string("nav.account") }
     }
 
     enum Brand {
