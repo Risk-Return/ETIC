@@ -224,10 +224,9 @@ private struct MarkdownText: View {
     private var displayText: String { text + (streaming ? "▍" : "") }
 
     var body: some View {
-        if let attributed = try? AttributedString(
-            markdown: displayText,
-            options: AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
-        ) {
+        if streaming {
+            Text(displayText)
+        } else if let attributed = try? AttributedString(markdown: displayText) {
             Text(attributed)
         } else {
             Text(displayText)

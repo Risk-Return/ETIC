@@ -26,12 +26,14 @@ final class InterpretationViewModel: ObservableObject {
     @Published private(set) var grounding: [LLMService.GroundingItem] = []
 
     private let service: LLMService
+    private let language: String
     private var streamTask: Task<Void, Never>?
     private var groundingLoaded = false
 
     init(board: DivinationBoard, service: LLMService = LLMService()) {
         self.board = board
         self.service = service
+        self.language = UserDefaults.standard.string(forKey: "app.language") ?? "en"
     }
 
     var canSend: Bool {
@@ -43,7 +45,7 @@ final class InterpretationViewModel: ObservableObject {
         loadGroundingIfNeeded()
         guard turns.isEmpty, !isStreaming else { return }
         let master = appendMaster()
-        run(stream: service.interpret(board: board), into: master.id)
+        run(stream: service.interpret(board: board, language: language), into: master.id)
     }
 
     /// 拉取经文参考（一次性，与解读流分离）。失败或后端未开 RAG 时静默留空，不打扰解读。
@@ -66,7 +68,7 @@ final class InterpretationViewModel: ObservableObject {
 
         let history = buildHistory()
         let master = appendMaster()
-        run(stream: service.chat(board: board, messages: history), into: master.id)
+        run(stream: service.chat(board: board, messages: history, language: language), into: master.id)
     }
 
     func cancel() {

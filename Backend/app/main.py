@@ -70,7 +70,7 @@ async def interpret(req: InterpretRequest) -> StreamingResponse:
 
     settings = get_settings()
     grounding = await _grounding_text(settings, req.board)
-    messages = build_interpret_messages(req.board, grounding)
+    messages = build_interpret_messages(req.board, grounding, language=req.language)
     return _sse_response(settings, messages)
 
 
@@ -109,5 +109,5 @@ async def chat(req: ChatRequest) -> StreamingResponse:
 
     history = [m.model_dump() for m in req.messages[-settings.max_history_messages:]]
     grounding = await _grounding_text(settings, req.board)
-    messages = build_chat_messages(req.board, history, grounding)
+    messages = build_chat_messages(req.board, history, grounding, language=req.language)
     return _sse_response(settings, messages)
