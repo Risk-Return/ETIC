@@ -10,9 +10,9 @@ struct EncyclopediaDetailView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     header
-                    section("卦辞", text: lore.judgment)
+                    section(L10n.Encyclopedia.judgmentTitle, text: lore.judgment)
                     if let tuan = lore.tuan, !tuan.isEmpty {
-                        section("彖辞", text: tuan)
+                        section(L10n.Encyclopedia.tuanTitle, text: tuan)
                     }
                     linesSection
                     disclaimer
@@ -51,7 +51,7 @@ struct EncyclopediaDetailView: View {
 
     private var linesSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("爻辞")
+            Text(L10n.Encyclopedia.linesTitle)
                 .font(InkTheme.serifTitle(17))
                 .foregroundStyle(InkTheme.cinnabar)
             ForEach(lore.orderedLines, id: \.position) { line in
@@ -82,7 +82,7 @@ struct EncyclopediaDetailView: View {
     }
 
     private var disclaimer: some View {
-        Text("经文为公有领域《周易》原文，仅供查阅参考。")
+        Text(L10n.Encyclopedia.disclaimer)
             .font(.caption2)
             .foregroundStyle(InkTheme.inkSoft)
     }

@@ -5,10 +5,25 @@ struct RitualSettingsView: View {
     @EnvironmentObject private var settings: RitualSettings
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage("app.language") private var storedLanguage = AppLanguage.en.rawValue
+
+    private var languageSelection: Binding<AppLanguage> {
+        Binding<AppLanguage>(
+            get: { AppLanguage(rawValue: storedLanguage) ?? .en },
+            set: { storedLanguage = $0.rawValue }
+        )
+    }
 
     var body: some View {
         NavigationStack {
             Form {
+                Section(L10n.Settings.languageSection) {
+                    Picker(L10n.Settings.languageLabel, selection: languageSelection) {
+                        ForEach(AppLanguage.allCases, id: \.self) { lang in
+                            Text(lang.displayName).tag(lang)
+                        }
+                    }
+                }
                 Section(L10n.Settings.animationSection) {
                     Toggle(L10n.Settings.skipAnimation, isOn: $settings.skipAnimation)
                     if systemReduceMotion {

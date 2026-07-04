@@ -46,6 +46,7 @@
 		D5BF3364A2DAB38092525C4E /* zhouyi.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CE5E69965263482EA70B260 /* zhouyi.json */; };
 		D6F4274DC4C5F6EBE1480796 /* DivinationEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 2B041FAE79185B09B25FDB67 /* DivinationEngine */; };
 		D885659F081A98BA8E9B4498 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA501D72380C057AC80FD0 /* LocationPickerView.swift */; };
+		DAD866D9F992305F9EB90E54 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AC398045A35658CDB20D9 /* LanguageManager.swift */; };
 		E7E420294930D0293AD3FF66 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E03031EE142AA464472DCD /* BoardView.swift */; };
 		EA89DA2D7EDBE325EC1488FC /* InkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B85AF4ADB3277575C284D79 /* InkTheme.swift */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		018603C64D25C09AB0985D53 /* EncyclopediaListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncyclopediaListView.swift; sourceTree = "<group>"; };
+		024AC398045A35658CDB20D9 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		04F26FE1CE0107B99FC159C1 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		10992A4A7E047260F66790AA /* LLMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMService.swift; sourceTree = "<group>"; };
 		1592A59F0FDCFA0EC3C4E1A2 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				1FC93B17EB7F94DF221C160D /* DivinationService.swift */,
+				024AC398045A35658CDB20D9 /* LanguageManager.swift */,
 				10992A4A7E047260F66790AA /* LLMService.swift */,
 			);
 			path = Services;
@@ -347,6 +350,7 @@
 			knownRegions = (
 				Base,
 				en,
+				"zh-Hans",
 			);
 			mainGroup = E76E39D3D42765ECC7A0BEEE;
 			minimizedProjectReferenceProxies = 1;
@@ -415,6 +419,7 @@
 				4151BA7C0DE71930E6421FA3 /* InterpretationViewModel.swift in Sources */,
 				328B7681472F8C046416FEB5 /* L10n.swift in Sources */,
 				1CE34E2A98F9819FD2AA2656 /* LLMService.swift in Sources */,
+				DAD866D9F992305F9EB90E54 /* LanguageManager.swift in Sources */,
 				D885659F081A98BA8E9B4498 /* LocationPickerView.swift in Sources */,
 				3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */,
 				96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */,

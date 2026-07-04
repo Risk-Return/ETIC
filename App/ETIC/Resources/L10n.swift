@@ -115,6 +115,18 @@ enum L10n {
         static let haptics = String(localized: "settings.haptics")
         static let note = String(localized: "settings.note")
         static let done = String(localized: "settings.done")
+        static let languageSection = String(localized: "settings.languageSection")
+        static let languageLabel = String(localized: "settings.languageLabel")
+    }
+
+    enum Encyclopedia {
+        static let title = String(localized: "encyclopedia.title")
+        static let searchPrompt = String(localized: "encyclopedia.searchPrompt")
+        static let missingData = String(localized: "encyclopedia.missingData")
+        static let judgmentTitle = String(localized: "encyclopedia.judgmentTitle")
+        static let tuanTitle = String(localized: "encyclopedia.tuanTitle")
+        static let linesTitle = String(localized: "encyclopedia.linesTitle")
+        static let disclaimer = String(localized: "encyclopedia.disclaimer")
     }
 
     enum Interpret {

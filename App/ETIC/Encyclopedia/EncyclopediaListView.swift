@@ -12,7 +12,7 @@ struct EncyclopediaListView: View {
         ZStack {
             InkTheme.paper.ignoresSafeArea()
             if EncyclopediaStore.all.isEmpty {
-                Text("百科数据缺失，请检查随包资源。")
+                Text(L10n.Encyclopedia.missingData)
                     .font(InkTheme.serifBody(15))
                     .foregroundStyle(InkTheme.cinnabar)
                     .padding()
@@ -30,9 +30,9 @@ struct EncyclopediaListView: View {
                 }
             }
         }
-        .navigationTitle("卦象百科")
+        .navigationTitle(L10n.Encyclopedia.title)
         .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $query, prompt: "搜卦名或卦辞")
+        .searchable(text: $query, prompt: L10n.Encyclopedia.searchPrompt)
     }
 
     private func cell(_ lore: HexagramLore) -> some View {

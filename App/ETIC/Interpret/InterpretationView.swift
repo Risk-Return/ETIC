@@ -199,7 +199,7 @@ private struct TurnBubble: View {
                         .font(.caption2)
                         .foregroundStyle(InkTheme.inkSoft)
                 }
-                Text(turn.text + (streaming ? "▍" : ""))
+                MarkdownText(text: turn.text, streaming: streaming)
                     .font(InkTheme.serifBody(16))
                     .foregroundStyle(InkTheme.ink)
                     .textSelection(.enabled)
@@ -211,6 +211,25 @@ private struct TurnBubble: View {
                 in: RoundedRectangle(cornerRadius: 14)
             )
             if !isUser { Spacer(minLength: 40) }
+        }
+    }
+}
+
+/// 支持 Markdown 渲染的文本组件。
+private struct MarkdownText: View {
+    let text: String
+    let streaming: Bool
+
+    private var displayText: String { text + (streaming ? "▍" : "") }
+
+    var body: some View {
+        if let attributed = try? AttributedString(
+            markdown: displayText,
+            options: AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        ) {
+            Text(attributed)
+        } else {
+            Text(displayText)
         }
     }
 }
