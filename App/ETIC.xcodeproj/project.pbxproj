@@ -10,9 +10,11 @@
 		038BFA0889364118901CCD32 /* BoardRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D700D9C8EA0E360D64561F /* BoardRowView.swift */; };
 		058FD104A125149A74D0EA33 /* DivinationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC93B17EB7F94DF221C160D /* DivinationService.swift */; };
 		0CF87D86F3BA052708945066 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67191570BEDEE77AFB4055A7 /* HistoryDetailView.swift */; };
+		1C455A1D84FDED9C3644CFDD /* EngineDisplayNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCC6FABF02692F573A7BCC /* EngineDisplayNames.swift */; };
 		1CE34E2A98F9819FD2AA2656 /* LLMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10992A4A7E047260F66790AA /* LLMService.swift */; };
 		30611D9581AE3CCEF58F2932 /* HistoryStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BFB77D77B2A95B6CF473E /* HistoryStoreTests.swift */; };
 		328B7681472F8C046416FEB5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A272BDFA54713EE7D60BD1 /* L10n.swift */; };
+		3645ABF0DE0F47C951CC1ACD /* HexagramLore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE08418CDAA7E4D8786E54A /* HexagramLore.swift */; };
 		3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F26FE1CE0107B99FC159C1 /* PreviewData.swift */; };
 		3E088E0D6BFD34612D6F7FE1 /* AnimatedYaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F103E824DE8192D5D83526 /* AnimatedYaoView.swift */; };
 		4151BA7C0DE71930E6421FA3 /* InterpretationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B70E3CBAAF870FF70F69DB /* InterpretationViewModel.swift */; };
@@ -27,18 +29,23 @@
 		89FF11D4786750297810A686 /* YaoSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A569E43E0EC99B6856F1FBC /* YaoSymbolView.swift */; };
 		8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 669ACA4E40E4606941F99F23 /* Localizable.xcstrings */; };
 		96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D91A1EFE8FA78AB0FD6E8 /* RitualSettings.swift */; };
+		9A7FEA294E3EAF79FD10AFEB /* WorldCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CD523BE4C5AAB6DB03308C /* WorldCity.swift */; };
 		9C51C21DBADF4DF9A011A8B1 /* RitualSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */; };
 		9D56B2780EF9F30BB97D7D93 /* DivinationRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */; };
 		A203FF3391CD0933B0B5BC4D /* CastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27DBA099213EE9E914A03A7 /* CastingView.swift */; };
 		AF402923D6AD97C36A95302E /* DivinationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB75B11A5056A0F461D9F577 /* DivinationRecord.swift */; };
 		B3B7D9C16F625ABBAD0FA333 /* ETICApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */; };
 		B7E5DF13608E2C440BEFF2AE /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8840B4BF1EEA2AA6D67D063 /* CompassView.swift */; };
+		BDC6FD5AB52B48DC02B2D0FE /* EncyclopediaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018603C64D25C09AB0985D53 /* EncyclopediaListView.swift */; };
 		C0FF02FB415B1321533762D7 /* DivinationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2559F53C05D75EBC8510C6FC /* DivinationServiceTests.swift */; };
 		C2D36E1ABC420616E798FE78 /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334AE05301780E621C23879 /* ShakeDetector.swift */; };
 		C2DA1AC3D29DBEB61FB45C1F /* FourPillarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290C5313FB92BDEE9F6379E /* FourPillarsView.swift */; };
 		CC4993D9E3FDAF60D01636E7 /* InterpretationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0DCA89909AF044A8F2380B /* InterpretationView.swift */; };
 		D54006187F83D880BF62EB95 /* CastingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152423D04295CECCC8E1C21 /* CastingViewModel.swift */; };
+		D59D4D18E4E7001D7D9F1686 /* EncyclopediaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AA3FD0B442ED2CE66039B /* EncyclopediaDetailView.swift */; };
+		D5BF3364A2DAB38092525C4E /* zhouyi.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CE5E69965263482EA70B260 /* zhouyi.json */; };
 		D6F4274DC4C5F6EBE1480796 /* DivinationEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 2B041FAE79185B09B25FDB67 /* DivinationEngine */; };
+		D885659F081A98BA8E9B4498 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA501D72380C057AC80FD0 /* LocationPickerView.swift */; };
 		E7E420294930D0293AD3FF66 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E03031EE142AA464472DCD /* BoardView.swift */; };
 		EA89DA2D7EDBE325EC1488FC /* InkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B85AF4ADB3277575C284D79 /* InkTheme.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		018603C64D25C09AB0985D53 /* EncyclopediaListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncyclopediaListView.swift; sourceTree = "<group>"; };
 		04F26FE1CE0107B99FC159C1 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		10992A4A7E047260F66790AA /* LLMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMService.swift; sourceTree = "<group>"; };
 		1592A59F0FDCFA0EC3C4E1A2 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
@@ -63,23 +71,29 @@
 		2E7C20211DE2BA73872DB382 /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
 		4255642E77E3E3385E56CF53 /* ETIC.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ETIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4334AE05301780E621C23879 /* ShakeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetector.swift; sourceTree = "<group>"; };
+		45CD523BE4C5AAB6DB03308C /* WorldCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCity.swift; sourceTree = "<group>"; };
 		4B18DA0C3B2265ADE90F3044 /* RitualViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualViewModel.swift; sourceTree = "<group>"; };
 		4F4C02A35E23F55AC8B03423 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualSettingsView.swift; sourceTree = "<group>"; };
 		5B85AF4ADB3277575C284D79 /* InkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkTheme.swift; sourceTree = "<group>"; };
+		615AA3FD0B442ED2CE66039B /* EncyclopediaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncyclopediaDetailView.swift; sourceTree = "<group>"; };
 		61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationRecordTests.swift; sourceTree = "<group>"; };
 		669ACA4E40E4606941F99F23 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		67191570BEDEE77AFB4055A7 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
+		6DFCC6FABF02692F573A7BCC /* EngineDisplayNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineDisplayNames.swift; sourceTree = "<group>"; };
 		7152423D04295CECCC8E1C21 /* CastingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingViewModel.swift; sourceTree = "<group>"; };
 		71A272BDFA54713EE7D60BD1 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		74B70E3CBAAF870FF70F69DB /* InterpretationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpretationViewModel.swift; sourceTree = "<group>"; };
+		8CE5E69965263482EA70B260 /* zhouyi.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = zhouyi.json; sourceTree = "<group>"; };
 		8E9BFB77D77B2A95B6CF473E /* HistoryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStoreTests.swift; sourceTree = "<group>"; };
+		8ECA501D72380C057AC80FD0 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
 		9290C5313FB92BDEE9F6379E /* FourPillarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourPillarsView.swift; sourceTree = "<group>"; };
 		9A569E43E0EC99B6856F1FBC /* YaoSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaoSymbolView.swift; sourceTree = "<group>"; };
 		B3E03031EE142AA464472DCD /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		B3F103E824DE8192D5D83526 /* AnimatedYaoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedYaoView.swift; sourceTree = "<group>"; };
 		B6A1D70E969B9CC8C484149D /* HapticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsEngine.swift; sourceTree = "<group>"; };
 		B8D700D9C8EA0E360D64561F /* BoardRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardRowView.swift; sourceTree = "<group>"; };
+		BFE08418CDAA7E4D8786E54A /* HexagramLore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagramLore.swift; sourceTree = "<group>"; };
 		D27DBA099213EE9E914A03A7 /* CastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingView.swift; sourceTree = "<group>"; };
 		D99875F0074F4F5853558FE0 /* UseGodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseGodView.swift; sourceTree = "<group>"; };
 		DA01B20A13A40A81EA8637CE /* DivinationEngine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DivinationEngine; path = ../Packages/DivinationEngine; sourceTree = SOURCE_ROOT; };
@@ -121,6 +135,14 @@
 				2E7C20211DE2BA73872DB382 /* HistoryStore.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		20C3E1295C0C1BFBB7D2E66E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CE5E69965263482EA70B260 /* zhouyi.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		2E12D61F830BCC3CE0F90C17 /* Ritual */ = {
@@ -189,6 +211,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		82B551D2718297BA494E5296 /* Encyclopedia */ = {
+			isa = PBXGroup;
+			children = (
+				615AA3FD0B442ED2CE66039B /* EncyclopediaDetailView.swift */,
+				018603C64D25C09AB0985D53 /* EncyclopediaListView.swift */,
+				BFE08418CDAA7E4D8786E54A /* HexagramLore.swift */,
+				20C3E1295C0C1BFBB7D2E66E /* Data */,
+			);
+			path = Encyclopedia;
+			sourceTree = "<group>";
+		};
 		A1A274A3F88278A3AE69942C /* ETIC */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +229,7 @@
 				4F4C02A35E23F55AC8B03423 /* Info.plist */,
 				79BE2D2AF74DAC6851DD105D /* Board */,
 				F355DC772880EBC72806B33E /* Casting */,
+				82B551D2718297BA494E5296 /* Encyclopedia */,
 				13AB5DC98057235E0C1CDF0B /* History */,
 				3D71EA1B9EE52220DB748D83 /* Interpret */,
 				7DD9F8857B326F328C4DDA1F /* Resources */,
@@ -246,6 +280,9 @@
 			children = (
 				D27DBA099213EE9E914A03A7 /* CastingView.swift */,
 				7152423D04295CECCC8E1C21 /* CastingViewModel.swift */,
+				6DFCC6FABF02692F573A7BCC /* EngineDisplayNames.swift */,
+				8ECA501D72380C057AC80FD0 /* LocationPickerView.swift */,
+				45CD523BE4C5AAB6DB03308C /* WorldCity.swift */,
 			);
 			path = Casting;
 			sourceTree = "<group>";
@@ -333,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */,
+				D5BF3364A2DAB38092525C4E /* zhouyi.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,8 +401,12 @@
 				AF402923D6AD97C36A95302E /* DivinationRecord.swift in Sources */,
 				058FD104A125149A74D0EA33 /* DivinationService.swift in Sources */,
 				B3B7D9C16F625ABBAD0FA333 /* ETICApp.swift in Sources */,
+				D59D4D18E4E7001D7D9F1686 /* EncyclopediaDetailView.swift in Sources */,
+				BDC6FD5AB52B48DC02B2D0FE /* EncyclopediaListView.swift in Sources */,
+				1C455A1D84FDED9C3644CFDD /* EngineDisplayNames.swift in Sources */,
 				C2DA1AC3D29DBEB61FB45C1F /* FourPillarsView.swift in Sources */,
 				70FC75F7E3FDCF3875928E8D /* HapticsEngine.swift in Sources */,
+				3645ABF0DE0F47C951CC1ACD /* HexagramLore.swift in Sources */,
 				0CF87D86F3BA052708945066 /* HistoryDetailView.swift in Sources */,
 				5DE003C5848861D763F4CC98 /* HistoryListView.swift in Sources */,
 				44699162E3704CB267706008 /* HistoryStore.swift in Sources */,
@@ -373,6 +415,7 @@
 				4151BA7C0DE71930E6421FA3 /* InterpretationViewModel.swift in Sources */,
 				328B7681472F8C046416FEB5 /* L10n.swift in Sources */,
 				1CE34E2A98F9819FD2AA2656 /* LLMService.swift in Sources */,
+				D885659F081A98BA8E9B4498 /* LocationPickerView.swift in Sources */,
 				3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */,
 				96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */,
 				9C51C21DBADF4DF9A011A8B1 /* RitualSettingsView.swift in Sources */,
@@ -380,6 +423,7 @@
 				724EBB8C6D104242BFF75CC0 /* RitualViewModel.swift in Sources */,
 				C2D36E1ABC420616E798FE78 /* ShakeDetector.swift in Sources */,
 				78BF2191CF047A6643444D13 /* UseGodView.swift in Sources */,
+				9A7FEA294E3EAF79FD10AFEB /* WorldCity.swift in Sources */,
 				89FF11D4786750297810A686 /* YaoSymbolView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
