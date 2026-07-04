@@ -1,0 +1,482 @@
+{
+  "nav.cast": {
+    "en": "Cast",
+    "zh-Hans": "起卦"
+  },
+  "nav.board": {
+    "en": "Hexagram",
+    "zh-Hans": "卦象"
+  },
+  "nav.interpret": {
+    "en": "Reading",
+    "zh-Hans": "解读"
+  },
+  "nav.history": {
+    "en": "History",
+    "zh-Hans": "历史"
+  },
+  "nav.record": {
+    "en": "Record",
+    "zh-Hans": "记录"
+  },
+  "nav.settings": {
+    "en": "Settings",
+    "zh-Hans": "设置"
+  },
+  "brand.appName": {
+    "en": "易卦",
+    "zh-Hans": "易卦"
+  },
+  "brand.tagline": {
+    "en": "Quiet your mind, focus on your question, then cast.",
+    "zh-Hans": "静心凝神，专注于您的问题，然后开始起卦。"
+  },
+  "casting.questionSection": {
+    "en": "Your Question",
+    "zh-Hans": "您的问题"
+  },
+  "casting.questionPlaceholder": {
+    "en": "What would you like to ask?",
+    "zh-Hans": "您想问什么？"
+  },
+  "casting.categorySection": {
+    "en": "Category",
+    "zh-Hans": "事项类别"
+  },
+  "casting.methodSection": {
+    "en": "Casting Method",
+    "zh-Hans": "起卦方法"
+  },
+  "casting.timeSection": {
+    "en": "Time",
+    "zh-Hans": "时间"
+  },
+  "casting.castButton": {
+    "en": "Cast",
+    "zh-Hans": "起卦"
+  },
+  "casting.disclaimer": {
+    "en": "For cultural entertainment only. Not scientific prediction. Do not use for medical, legal, or financial decisions.",
+    "zh-Hans": "仅供文化娱乐，非科学预测。请勿用于医疗、法律或财务决策。"
+  },
+  "casting.hint.coins": {
+    "en": "Shake your phone or tap the button — three coins settle six times, building the hexagram from bottom to top.",
+    "zh-Hans": "摇动手机或点击按钮 — 三枚铜钱抛掷六次，从下往上逐爻排定。"
+  },
+  "casting.hint.number": {
+    "en": "Plum Blossom method: take innate trigram from the upper and lower numbers; their sum determines the moving line.",
+    "zh-Hans": "梅花易数：取上数字为外卦，下数字为内卦，两数之和定动爻。"
+  },
+  "casting.hint.time": {
+    "en": "Plum Blossom time method: cast using the selected date's ganzhi and solar date.",
+    "zh-Hans": "梅花易数时卦：按所选日期的干支及阳历日数起卦。"
+  },
+  "casting.hint.random": {
+    "en": "The system simulates a coin toss randomly for a quick experience.",
+    "zh-Hans": "系统随机模拟铜钱起卦，快速体验。"
+  },
+  "casting.upperNum": {
+    "en": "Upper",
+    "zh-Hans": "上数"
+  },
+  "casting.lowerNum": {
+    "en": "Lower",
+    "zh-Hans": "下数"
+  },
+  "board.question": {
+    "en": "Asked",
+    "zh-Hans": "所问"
+  },
+  "board.primary": {
+    "en": "Primary",
+    "zh-Hans": "本卦"
+  },
+  "board.changed": {
+    "en": "Changed",
+    "zh-Hans": "变卦"
+  },
+  "board.interpretation": {
+    "en": "Interpretation",
+    "zh-Hans": "解读"
+  },
+  "board.interpretationDesc": {
+    "en": "Submit this hexagram to a veteran Liuyao diviner for a detailed reading with multi-turn follow-up. The chart is fixed — the reading does not alter it.",
+    "zh-Hans": "将此卦呈递资深六爻师傅进行详细解读，支持多轮追问。盘面不变 — 解读不会改动卦象。"
+  },
+  "board.requestReading": {
+    "en": "Request Reading",
+    "zh-Hans": "请求解读"
+  },
+  "board.disclaimer": {
+    "en": "For cultural entertainment only. Not scientific prediction.",
+    "zh-Hans": "仅供文化娱乐，非科学预测。"
+  },
+  "board.legend": {
+    "en": "○ Old Yang (moving)   × Old Yin (moving)   Self/Other mark the subject   Void marks the empty branch   Flourishing/Waning/Ideal/Confined/Dead indicates monthly strength",
+    "zh-Hans": "○ 老阳（动爻）  × 老阴（动爻）  世/应标注主客  旬空标注空亡地支  旺/衰/相/囚/死表示月建旺衰"
+  },
+  "board.useGodTitle": {
+    "en": "Use God",
+    "zh-Hans": "用神"
+  },
+  "board.useGodHidden": {
+    "en": "Use God not found in primary hexagram (hidden line; seek elsewhere). Use as a reading hint.",
+    "zh-Hans": "本卦中未找到用神（伏藏；宜另寻）。请作为解读参考。"
+  },
+  "board.useGodPositionPrefix": {
+    "en": "Use God line positions: ",
+    "zh-Hans": "用神爻位："
+  },
+  "board.voidPrefix": {
+    "en": "Void: ",
+    "zh-Hans": "旬空："
+  },
+  "board.yearPillar": {
+    "en": "Yr",
+    "zh-Hans": "年"
+  },
+  "board.monthPillar": {
+    "en": "Mo",
+    "zh-Hans": "月"
+  },
+  "board.dayPillar": {
+    "en": "Day",
+    "zh-Hans": "日"
+  },
+  "board.hourPillar": {
+    "en": "Hr",
+    "zh-Hans": "时"
+  },
+  "board.upperTrigramSuffix": {
+    "en": " upper",
+    "zh-Hans": "上卦"
+  },
+  "board.lowerTrigramSuffix": {
+    "en": " lower",
+    "zh-Hans": "下卦"
+  },
+  "board.methodSuffix": {
+    "en": " cast",
+    "zh-Hans": "起卦"
+  },
+  "board.world": {
+    "en": "S",
+    "zh-Hans": "世"
+  },
+  "board.response": {
+    "en": "O",
+    "zh-Hans": "应"
+  },
+  "board.void": {
+    "en": "V",
+    "zh-Hans": "空"
+  },
+  "ritual.preparePrompt": {
+    "en": "Quiet your mind and focus on your question",
+    "zh-Hans": "静心凝神，专注于您的问题"
+  },
+  "ritual.beginCasting": {
+    "en": "Begin Casting",
+    "zh-Hans": "开始起卦"
+  },
+  "ritual.casting": {
+    "en": "Cast (%d/6)",
+    "zh-Hans": "起卦中（%d/6）"
+  },
+  "ritual.transformingTitle": {
+    "en": "Moving Lines",
+    "zh-Hans": "动爻变换"
+  },
+  "ritual.formingPlaceholder": {
+    "en": "Forming…",
+    "zh-Hans": "成卦中…"
+  },
+  "ritual.allLinesDone": {
+    "en": "All six lines cast",
+    "zh-Hans": "六爻排定"
+  },
+  "ritual.shakePrompt": {
+    "en": "Shake your phone, or tap the button below to cast",
+    "zh-Hans": "摇动手机，或点击下方按钮起卦"
+  },
+  "ritual.tapPrompt": {
+    "en": "Tap the button below to cast",
+    "zh-Hans": "点击下方按钮起卦"
+  },
+  "ritual.skipAnimation": {
+    "en": "Skip",
+    "zh-Hans": "跳过"
+  },
+  "ritual.coinBack": {
+    "en": "H",
+    "zh-Hans": "背"
+  },
+  "ritual.coinChar": {
+    "en": "T",
+    "zh-Hans": "字"
+  },
+  "settings.animationSection": {
+    "en": "Animation",
+    "zh-Hans": "动画"
+  },
+  "settings.skipAnimation": {
+    "en": "Skip Divination Animation",
+    "zh-Hans": "跳过起卦动画"
+  },
+  "settings.reduceMotionNotice": {
+    "en": "Reduce Motion is enabled. Animation will be downgraded.",
+    "zh-Hans": "系统「减弱动态效果」已开启，动画已降级。"
+  },
+  "settings.shakeSection": {
+    "en": "Shake Casting",
+    "zh-Hans": "摇一摇起卦"
+  },
+  "settings.shakeToToss": {
+    "en": "Shake to Cast",
+    "zh-Hans": "摇一摇起卦"
+  },
+  "settings.haptics": {
+    "en": "Haptic Feedback",
+    "zh-Hans": "触觉反馈"
+  },
+  "settings.note": {
+    "en": "Animation is purely performative — the hexagram is always deterministically computed by the local engine.",
+    "zh-Hans": "动画为表演性质 — 卦象始终由本地引擎确定性计算。"
+  },
+  "settings.done": {
+    "en": "Done",
+    "zh-Hans": "完成"
+  },
+  "interpret.placeholder": {
+    "en": "Ask a follow-up question...",
+    "zh-Hans": "追问…"
+  },
+  "interpret.masterLabel": {
+    "en": "Diviner",
+    "zh-Hans": "师傅"
+  },
+  "interpret.thinking": {
+    "en": "Contemplating…",
+    "zh-Hans": "凝神推演…"
+  },
+  "interpret.scriptureTitle": {
+    "en": "Scripture Reference",
+    "zh-Hans": "经文参考"
+  },
+  "interpret.scriptureDisclaimer": {
+    "en": "Scripture is for reference only. The reading is based on the hexagram's Self/Other and Use God.",
+    "zh-Hans": "经文仅供参考。断卦以盘面世应/用神为准。"
+  },
+  "history.emptyTitle": {
+    "en": "No Records Yet",
+    "zh-Hans": "暂无记录"
+  },
+  "history.emptyDesc": {
+    "en": "Each cast is recorded here automatically. You can bookmark, review, and continue asking.",
+    "zh-Hans": "每次起卦会自动记录在此。您可以收藏、回顾与继续询问。"
+  },
+  "history.noQuestion": {
+    "en": "(No question recorded)",
+    "zh-Hans": "（未记录问题）"
+  },
+  "history.noTranscript": {
+    "en": "No reading transcript yet.",
+    "zh-Hans": "暂无解读记录。"
+  },
+  "history.corruptBoard": {
+    "en": "Hexagram data is corrupted and cannot be displayed.",
+    "zh-Hans": "卦象数据损坏，无法显示。"
+  },
+  "history.transcriptTitle": {
+    "en": "Reading Transcript",
+    "zh-Hans": "解读记录"
+  },
+  "history.viewBoard": {
+    "en": "View Full Hexagram",
+    "zh-Hans": "查看完整卦象"
+  },
+  "history.requestReadingFallback": {
+    "en": "Request Reading",
+    "zh-Hans": "请求解读"
+  },
+  "history.continueAsk": {
+    "en": "Continue Asking",
+    "zh-Hans": "继续询问"
+  },
+  "history.favoritesFilter": {
+    "en": "Favorites",
+    "zh-Hans": "收藏"
+  },
+  "history.allFilter": {
+    "en": "All",
+    "zh-Hans": "全部"
+  },
+  "history.favorite": {
+    "en": "Favorite",
+    "zh-Hans": "收藏"
+  },
+  "history.unfavorite": {
+    "en": "Unfavorite",
+    "zh-Hans": "取消收藏"
+  },
+  "history.delete": {
+    "en": "Delete",
+    "zh-Hans": "删除"
+  },
+  "error.invalidNumbers": {
+    "en": "Numbers must be positive integers.",
+    "zh-Hans": "数字必须为正整数。"
+  },
+  "error.calendarOutOfRange": {
+    "en": "Date is outside the supported range (1900–2100).",
+    "zh-Hans": "日期超出支持范围（1900–2100）。"
+  },
+  "error.badURL": {
+    "en": "Invalid backend address.",
+    "zh-Hans": "后端地址无效。"
+  },
+  "error.httpError": {
+    "en": "Backend returned an error (HTTP %d).",
+    "zh-Hans": "后端返回错误（HTTP %d）。"
+  },
+  "category.career": {
+    "en": "Career",
+    "zh-Hans": "事业"
+  },
+  "category.wealth": {
+    "en": "Wealth",
+    "zh-Hans": "财运"
+  },
+  "category.marriage": {
+    "en": "Marriage",
+    "zh-Hans": "婚姻"
+  },
+  "category.health": {
+    "en": "Health",
+    "zh-Hans": "健康"
+  },
+  "category.study": {
+    "en": "Study",
+    "zh-Hans": "学业"
+  },
+  "category.lawsuit": {
+    "en": "Lawsuit",
+    "zh-Hans": "官非"
+  },
+  "category.travel": {
+    "en": "Travel",
+    "zh-Hans": "出行"
+  },
+  "category.lost": {
+    "en": "Lost Item",
+    "zh-Hans": "失物"
+  },
+  "category.general": {
+    "en": "General",
+    "zh-Hans": "综合"
+  },
+  "casting.method.coins": {
+    "en": "Coins",
+    "zh-Hans": "铜钱"
+  },
+  "casting.method.number": {
+    "en": "Number",
+    "zh-Hans": "数字"
+  },
+  "casting.method.time": {
+    "en": "Time",
+    "zh-Hans": "时间"
+  },
+  "casting.method.random": {
+    "en": "Random",
+    "zh-Hans": "随机"
+  },
+  "casting.method.manual": {
+    "en": "Manual",
+    "zh-Hans": "手动"
+  },
+  "location.section": {
+    "en": "Location (True Solar Time)",
+    "zh-Hans": "地点（真太阳时）"
+  },
+  "location.notSet": {
+    "en": "Device time — no correction",
+    "zh-Hans": "设备时间 — 未校正"
+  },
+  "location.choose": {
+    "en": "Choose city or longitude",
+    "zh-Hans": "选择城市或输入经度"
+  },
+  "location.hint": {
+    "en": "True solar time shifts the divination hour to your local sun position by longitude. Optional — leave off to use your device's local time.",
+    "zh-Hans": "真太阳时按经度将起卦时辰校正为当地太阳位置。可选 — 留空则使用设备本地时间。"
+  },
+  "location.pickerTitle": {
+    "en": "Casting Location",
+    "zh-Hans": "起卦地点"
+  },
+  "location.search": {
+    "en": "Search city or region",
+    "zh-Hans": "搜索城市或地区"
+  },
+  "location.useDeviceTime": {
+    "en": "Use device time (no correction)",
+    "zh-Hans": "使用设备时间（不校正）"
+  },
+  "location.customSection": {
+    "en": "Custom longitude",
+    "zh-Hans": "自定义经度"
+  },
+  "location.customPlaceholder": {
+    "en": "e.g. 116.4  (East +, West −)",
+    "zh-Hans": "例：116.4（东经正，西经负）"
+  },
+  "location.apply": {
+    "en": "Apply",
+    "zh-Hans": "应用"
+  },
+  "location.done": {
+    "en": "Done",
+    "zh-Hans": "完成"
+  },
+  "location.customLabel": {
+    "en": "Custom longitude",
+    "zh-Hans": "自定义经度"
+  },
+  "settings.languageSection": {
+    "en": "Language",
+    "zh-Hans": "语言"
+  },
+  "settings.languageLabel": {
+    "en": "Interface Language",
+    "zh-Hans": "界面语言"
+  },
+  "encyclopedia.title": {
+    "en": "I Ching Encyclopedia",
+    "zh-Hans": "卦象百科"
+  },
+  "encyclopedia.searchPrompt": {
+    "en": "Search hexagram or judgment",
+    "zh-Hans": "搜卦名或卦辞"
+  },
+  "encyclopedia.missingData": {
+    "en": "Encyclopedia data missing. Please check bundled resources.",
+    "zh-Hans": "百科数据缺失，请检查随包资源。"
+  },
+  "encyclopedia.judgmentTitle": {
+    "en": "Judgment",
+    "zh-Hans": "卦辞"
+  },
+  "encyclopedia.tuanTitle": {
+    "en": "Tuan Commentary",
+    "zh-Hans": "彖辞"
+  },
+  "encyclopedia.linesTitle": {
+    "en": "Line Statements",
+    "zh-Hans": "爻辞"
+  },
+  "encyclopedia.disclaimer": {
+    "en": "Scripture from the public domain Zhouyi, for reference only.",
+    "zh-Hans": "经文为公有领域《周易》原文，仅供查阅参考。"
+  }
+}

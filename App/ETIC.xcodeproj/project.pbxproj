@@ -18,6 +18,7 @@
 		3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F26FE1CE0107B99FC159C1 /* PreviewData.swift */; };
 		3E088E0D6BFD34612D6F7FE1 /* AnimatedYaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F103E824DE8192D5D83526 /* AnimatedYaoView.swift */; };
 		4151BA7C0DE71930E6421FA3 /* InterpretationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B70E3CBAAF870FF70F69DB /* InterpretationViewModel.swift */; };
+		4205D2D1DDBDD14B0411A32B /* translations.json in Resources */ = {isa = PBXBuildFile; fileRef = 5573ED399C3188C2B5702AF6 /* translations.json */; };
 		44699162E3704CB267706008 /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C20211DE2BA73872DB382 /* HistoryStore.swift */; };
 		4EF26D628DA0DB53A92A6D08 /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E529319AE69908767DC454B4 /* CoinRowView.swift */; };
 		5DE003C5848861D763F4CC98 /* HistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592A59F0FDCFA0EC3C4E1A2 /* HistoryListView.swift */; };
@@ -77,6 +78,7 @@
 		45CD523BE4C5AAB6DB03308C /* WorldCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCity.swift; sourceTree = "<group>"; };
 		4B18DA0C3B2265ADE90F3044 /* RitualViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualViewModel.swift; sourceTree = "<group>"; };
 		4F4C02A35E23F55AC8B03423 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5573ED399C3188C2B5702AF6 /* translations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = translations.json; sourceTree = "<group>"; };
 		57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualSettingsView.swift; sourceTree = "<group>"; };
 		5B85AF4ADB3277575C284D79 /* InkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkTheme.swift; sourceTree = "<group>"; };
 		615AA3FD0B442ED2CE66039B /* EncyclopediaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncyclopediaDetailView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				71A272BDFA54713EE7D60BD1 /* L10n.swift */,
 				669ACA4E40E4606941F99F23 /* Localizable.xcstrings */,
 				E4F6D0DDEB38C05E627F04F6 /* LocalizationStore.swift */,
+				5573ED399C3188C2B5702AF6 /* translations.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */,
+				4205D2D1DDBDD14B0411A32B /* translations.json in Resources */,
 				D5BF3364A2DAB38092525C4E /* zhouyi.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

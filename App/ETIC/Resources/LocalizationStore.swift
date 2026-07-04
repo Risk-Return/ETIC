@@ -2,18 +2,10 @@ import Foundation
 
 struct LocalizationStore {
     private static let store: [String: [String: String]] = {
-        guard let url = Bundle.main.url(forResource: "Localizable", withExtension: "xcstrings"),
+        guard let url = Bundle.main.url(forResource: "translations", withExtension: "json"),
               let data = try? Data(contentsOf: url),
-              let json = try? JSONDecoder().decode(XCStringsRoot.self, from: data) else {
+              let result = try? JSONDecoder().decode([String: [String: String]].self, from: data) else {
             return [:]
-        }
-        var result: [String: [String: String]] = [:]
-        for (key, entry) in json.strings {
-            var perLocale: [String: String] = [:]
-            for (locale, loc) in entry.localizations {
-                perLocale[locale] = loc.stringUnit.value
-            }
-            result[key] = perLocale
         }
         return result
     }()
@@ -29,22 +21,4 @@ struct LocalizationStore {
         }
         return store[key]?["en"] ?? key
     }
-}
-
-// MARK: - JSON models for xcstrings structure
-
-private struct XCStringsRoot: Decodable {
-    let strings: [String: XCStringsEntry]
-}
-
-private struct XCStringsEntry: Decodable {
-    let localizations: [String: XCStringsLocalization]
-}
-
-private struct XCStringsLocalization: Decodable {
-    let stringUnit: XCStringsUnit
-}
-
-private struct XCStringsUnit: Decodable {
-    let value: String
 }
