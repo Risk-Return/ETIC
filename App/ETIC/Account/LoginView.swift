@@ -54,6 +54,18 @@ struct LoginView: View {
                         .multilineTextAlignment(.center)
                 }
 
+                #if DEBUG
+                Button {
+                    Task { await auth.testLogin() }
+                } label: {
+                    Text("Test Login (Dev)")
+                        .font(InkTheme.serifBody(14))
+                        .foregroundStyle(InkTheme.inkSoft)
+                        .underline()
+                }
+                .padding(.top, 8)
+                #endif
+
                 Spacer().frame(height: 32)
             }
         }

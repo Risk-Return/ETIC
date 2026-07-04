@@ -131,6 +131,41 @@ final class AuthService: ObservableObject {
         }
     }
 
+    // MARK: - Test login (dev mode only)
+
+    /// Test login: calls POST /v1/auth/test on the backend.
+    /// Only works when backend has ETIC_DEV_MODE=true.
+    func testLogin() async {
+        errorMessage = nil
+        do {
+            var request = URLRequest(url: baseURL.appendingPathComponent("/v1/auth/test"))
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            let (responseData, response) = try await URLSession.shared.data(for: request)
+            guard let http = response as? HTTPURLResponse else {
+                errorMessage = "No response from server."
+                return
+            }
+            if http.statusCode == 403 {
+                errorMessage = "Test login is disabled. Set ETIC_DEV_MODE=true on the backend."
+                return
+            }
+            guard http.statusCode == 200 else {
+                errorMessage = "Test login failed (HTTP \(http.statusCode))."
+                return
+            }
+
+            let authResponse = try JSONDecoder().decode(AuthResponse.self, from: responseData)
+            sessionToken = authResponse.sessionToken
+            accountStatus = authResponse.account
+            isAuthenticated = true
+            saveSessionToken(authResponse.sessionToken)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
     // MARK: - Sign out
 
     func signOut() {

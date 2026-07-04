@@ -50,6 +50,8 @@ class Settings(BaseSettings):
     max_questions_per_reading: int = 3
     # 计费系统是否启用（关闭时 interpret/chat 不鉴权、不扣费，兼容旧流程）。
     billing_enabled: bool = False
+    # 开发模式：启用测试登录端点（POST /v1/auth/test），跳过 Apple 验签。
+    dev_mode: bool = False
 
     # StoreKit 商品 ID（需与 App Store Connect 中配置一致）。
     subscription_product_id: str = "ai.etic.app.subscription.monthly"

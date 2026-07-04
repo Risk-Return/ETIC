@@ -85,6 +85,30 @@ async def apple_sign_in(
     return AuthResponse(sessionToken=session_token, account=account)
 
 
+@router.post("/auth/test", response_model=AuthResponse)
+async def test_sign_in(
+    settings: Settings = Depends(get_settings),
+) -> AuthResponse:
+    """开发模式测试登录：跳过 Apple 验签，直接创建/检索测试用户。
+
+    仅在 ETIC_DEV_MODE=true 时可用，生产环境返回 403。
+    """
+
+    if not settings.dev_mode:
+        raise HTTPException(status_code=403, detail="Test login is disabled")
+
+    _ensure_db(settings)
+    test_apple_sub = "test-user-local-dev"
+    user_id, created = get_or_create_user_from_apple(
+        settings, test_apple_sub, "test@etic.local", "Test User"
+    )
+    session_token = issue_session_jwt(user_id, settings)
+    account = _account_status(settings, user_id)
+
+    logger.info("Test Sign In | user=%s created=%s", user_id, created)
+    return AuthResponse(sessionToken=session_token, account=account)
+
+
 @router.get("/account/me", response_model=AccountStatus)
 async def get_my_account(
     user_id: uuid.UUID = Depends(require_user_id),
