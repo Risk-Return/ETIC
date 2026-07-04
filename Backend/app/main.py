@@ -10,6 +10,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 
 from .config import Settings, get_settings
+from .iap import router as iap_router
 from .llm import LLMError, stream_completion
 from .models import (
     ChatRequest,
@@ -22,6 +23,7 @@ from .prompt import build_chat_messages, build_interpret_messages
 from .rag.retrieval import render_grounding, retrieve_grounding
 
 app = FastAPI(title="ETIC 解读后端", version="0.1.0")
+app.include_router(iap_router)
 
 
 @app.get("/healthz")
