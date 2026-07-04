@@ -3,22 +3,15 @@ import SwiftUI
 /// 动画与体感设置。
 struct RitualSettingsView: View {
     @EnvironmentObject private var settings: RitualSettings
+    @EnvironmentObject private var language: LanguageManager
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
-    @AppStorage("app.language") private var storedLanguage = AppLanguage.en.rawValue
-
-    private var languageSelection: Binding<AppLanguage> {
-        Binding<AppLanguage>(
-            get: { AppLanguage(rawValue: storedLanguage) ?? .en },
-            set: { storedLanguage = $0.rawValue }
-        )
-    }
 
     var body: some View {
         NavigationStack {
             Form {
                 Section(L10n.Settings.languageSection) {
-                    Picker(L10n.Settings.languageLabel, selection: languageSelection) {
+                    Picker(L10n.Settings.languageLabel, selection: language.languageBinding) {
                         ForEach(AppLanguage.allCases, id: \.self) { lang in
                             Text(lang.displayName).tag(lang)
                         }
