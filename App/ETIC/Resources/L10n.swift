@@ -32,6 +32,26 @@ enum L10n {
         static let lowerNum = String(localized: "casting.lowerNum")
     }
 
+    enum Method {
+        static let coins = String(localized: "casting.method.coins")
+        static let number = String(localized: "casting.method.number")
+        static let time = String(localized: "casting.method.time")
+        static let random = String(localized: "casting.method.random")
+        static let manual = String(localized: "casting.method.manual")
+    }
+
+    enum Category {
+        static let career = String(localized: "category.career")
+        static let wealth = String(localized: "category.wealth")
+        static let marriage = String(localized: "category.marriage")
+        static let health = String(localized: "category.health")
+        static let study = String(localized: "category.study")
+        static let lawsuit = String(localized: "category.lawsuit")
+        static let travel = String(localized: "category.travel")
+        static let lost = String(localized: "category.lost")
+        static let general = String(localized: "category.general")
+    }
+
     enum Location {
         static let section = String(localized: "location.section")
         static let notSet = String(localized: "location.notSet")
