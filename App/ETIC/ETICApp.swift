@@ -5,6 +5,7 @@ import SwiftData
 struct ETICApp: App {
     @StateObject private var settings = RitualSettings()
     @StateObject private var language = LanguageManager()
+    @AppStorage("app.language") private var appLanguage = AppLanguage.en.rawValue
 
     var body: some Scene {
         WindowGroup {
