@@ -17,7 +17,7 @@ final class AuthService: ObservableObject {
     @Published private(set) var accountStatus: AccountStatus?
     @Published var errorMessage: String?
 
-    private let baseURL: URL
+    let baseURL: URL
     private let keychainKey = "etic.session_token"
 
     init(baseURL: URL? = nil) {

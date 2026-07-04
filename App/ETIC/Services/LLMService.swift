@@ -61,7 +61,7 @@ struct LLMService {
         var request = URLRequest(url: baseURL.appendingPathComponent("/v1/grounding"))
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let header = AuthService.shared.authHeader {
+        if let header = await AuthService.shared.authHeader {
             request.setValue(header, forHTTPHeaderField: "Authorization")
         }
         request.httpBody = try JSONEncoder().encode(InterpretBody(board: board))
@@ -123,7 +123,7 @@ struct LLMService {
                     request.httpMethod = "POST"
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                     request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
-                    if let header = AuthService.shared.authHeader {
+                    if let header = await AuthService.shared.authHeader {
                         request.setValue(header, forHTTPHeaderField: "Authorization")
                     }
                     request.httpBody = try JSONEncoder().encode(body)
