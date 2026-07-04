@@ -47,4 +47,50 @@ final class CalendarTests: XCTestCase {
         XCTAssertThrowsError(try GanzhiCalendar.fourPillars(year: 1899, month: 6, day: 1, hour: 12))
         XCTAssertThrowsError(try GanzhiCalendar.fourPillars(year: 2101, month: 6, day: 1, hour: 12))
     }
+
+    // MARK: - 真太阳时校正
+
+    private let shanghai = TimeZone(identifier: "Asia/Shanghai")!
+
+    /// 同一日期、相差 1° 经度的两次校正应恰好相差 4 分钟（时差方程相消，只剩经度分量）。
+    func testTrueSolarTimeLongitudeIsFourMinutesPerDegree() {
+        let date = Date(timeIntervalSince1970: 1_700_000_000)
+        let a = GanzhiCalendar.trueSolarTime(date, longitude: 116.0, timeZone: shanghai)
+        let b = GanzhiCalendar.trueSolarTime(date, longitude: 117.0, timeZone: shanghai)
+        XCTAssertEqual(b.timeIntervalSince(a), 240.0, accuracy: 0.001)
+    }
+
+    /// 位于时区标准经线上时，校正量仅为时差方程（|EoT| < 20 分钟）。
+    func testTrueSolarTimeAtStandardMeridianIsEquationOfTimeOnly() {
+        let date = Date(timeIntervalSince1970: 1_700_000_000) // 东八区标准经线 120°E
+        let corrected = GanzhiCalendar.trueSolarTime(date, longitude: 120.0, timeZone: shanghai)
+        XCTAssertLessThan(abs(corrected.timeIntervalSince(date)), 20 * 60)
+    }
+
+    /// 真太阳时校正可能把时柱推到相邻时辰（此处偏西经度使视太阳时更早）。
+    func testTrueSolarTimeCanShiftHourPillar() throws {
+        // 民用时正好落在午时（11:00–13:00）起始附近，偏西经度校正后应回退到巳时。
+        var comps = DateComponents()
+        comps.year = 2026; comps.month = 6; comps.day = 24
+        comps.hour = 11; comps.minute = 5
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = shanghai
+        let date = cal.date(from: comps)!
+
+        let civil = try GanzhiCalendar.fourPillars(date: date, timeZone: shanghai)
+        XCTAssertEqual(civil.hour.branch, .wu, "民用时应为午时")
+
+        // 经度 90°E 远偏西于 120°E 标准经线：校正 (90-120)*4 = -120 分钟。
+        let solar = try GanzhiCalendar.fourPillars(date: date, timeZone: shanghai, longitude: 90.0)
+        XCTAssertEqual(solar.hour.branch, .si, "偏西校正后应回退到巳时")
+    }
+
+    /// 便捷重载与手动校正一致。
+    func testFourPillarsLongitudeOverloadMatchesManualCorrection() throws {
+        let date = Date(timeIntervalSince1970: 1_700_000_000)
+        let manual = GanzhiCalendar.trueSolarTime(date, longitude: 116.4, timeZone: shanghai)
+        let viaOverload = try GanzhiCalendar.fourPillars(date: date, timeZone: shanghai, longitude: 116.4)
+        let viaManual = try GanzhiCalendar.fourPillars(date: manual, timeZone: shanghai)
+        XCTAssertEqual(viaOverload, viaManual)
+    }
 }

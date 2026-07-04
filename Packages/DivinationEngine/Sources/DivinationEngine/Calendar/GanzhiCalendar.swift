@@ -83,4 +83,36 @@ public enum GanzhiCalendar {
         let c = cal.dateComponents([.year, .month, .day, .hour], from: date)
         return try fourPillars(year: c.year!, month: c.month!, day: c.day!, hour: c.hour!)
     }
+
+    /// 真太阳时校正后的时刻。
+    ///
+    /// 六爻/命理讲究「真太阳时」——行政时区只是粗略划分，实际应按当地**经度**修正到
+    /// 当地视太阳时。校正量 = 经度时差（每偏离时区标准经线 1° 即 4 分钟）+ 时差方程
+    /// （equation of time，随日期变化的太阳视位置修正）。
+    ///
+    /// - Parameters:
+    ///   - date: 用户所选公历时刻（民用时）。
+    ///   - longitude: 起卦地点经度，东经为正、西经为负（-180...180）。
+    ///   - timeZone: 该时刻对应的行政时区（用于取标准经线）。
+    /// - Returns: 校正到真太阳时后的等效时刻，可直接传入 `fourPillars(date:timeZone:)`。
+    public static func trueSolarTime(_ date: Date, longitude: Double, timeZone: TimeZone) -> Date {
+        // 时区标准经线（度）：以该时刻的 UTC 偏移换算，东正西负。
+        let standardMeridian = Double(timeZone.secondsFromGMT(for: date)) / 3600.0 * 15.0
+        // 经度时差：每 1° = 4 分钟。
+        let longitudeMinutes = (longitude - standardMeridian) * 4.0
+
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = timeZone
+        let dayOfYear = cal.ordinality(of: .day, in: .year, for: date) ?? 1
+        // 时差方程近似式（分钟），随年内日序变化。
+        let b = 2.0 * Double.pi * Double(dayOfYear - 81) / 364.0
+        let equationOfTime = 9.87 * sin(2.0 * b) - 7.53 * cos(b) - 1.5 * sin(b)
+
+        return date.addingTimeInterval((longitudeMinutes + equationOfTime) * 60.0)
+    }
+
+    /// 便捷：先做真太阳时校正（按经度），再换算四柱。
+    public static func fourPillars(date: Date, timeZone: TimeZone, longitude: Double) throws -> FourPillars {
+        try fourPillars(date: trueSolarTime(date, longitude: longitude, timeZone: timeZone), timeZone: timeZone)
+    }
 }

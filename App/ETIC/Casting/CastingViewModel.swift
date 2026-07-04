@@ -11,8 +11,28 @@ final class CastingViewModel: ObservableObject {
     @Published var upperNumber: String = ""
     @Published var lowerNumber: String = ""
 
+    /// 真太阳时校正所用经度（东正西负）。nil = 不校正，直接用设备时区民用时。
+    @Published var longitude: Double?
+    /// 经度来源的展示名（城市名或「Custom」）。
+    @Published var locationName: String?
+
     @Published var board: DivinationBoard?
     @Published var errorMessage: String?
+
+    func selectCity(_ city: WorldCity) {
+        longitude = city.longitude
+        locationName = "\(city.name), \(city.region)"
+    }
+
+    func setCustomLongitude(_ value: Double) {
+        longitude = value
+        locationName = nil
+    }
+
+    func clearLocation() {
+        longitude = nil
+        locationName = nil
+    }
 
     /// M2 起卦方法范围（手动起卦留到后续）。
     let methods: [CastMethod] = [.coins, .number, .time, .random]
@@ -26,7 +46,8 @@ final class CastingViewModel: ObservableObject {
             date: date,
             upperNumber: Int(upperNumber) ?? 0,
             lowerNumber: Int(lowerNumber) ?? 0,
-            coinBacks: randomCoinBacks()
+            coinBacks: randomCoinBacks(),
+            longitude: longitude
         )
         do {
             board = try DivinationService.makeBoard(input)
