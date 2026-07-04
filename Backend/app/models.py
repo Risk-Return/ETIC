@@ -71,18 +71,16 @@ class ChatMessage(BaseModel):
 
 
 class InterpretRequest(BaseModel):
-    """首轮解读：盘面 + 语言偏好。"""
+    """首轮解读：仅盘面（+ 盘面里自带的问题/类别）。"""
 
     board: DivinationBoard
-    language: str = "en"
 
 
 class ChatRequest(BaseModel):
-    """多轮追问：同一盘面上下文 + 历史对话 + 语言偏好。"""
+    """多轮追问：同一盘面上下文 + 历史对话。"""
 
     board: DivinationBoard
     messages: list[ChatMessage] = Field(default_factory=list)
-    language: str = "en"
 
 
 class GroundingRequest(BaseModel):

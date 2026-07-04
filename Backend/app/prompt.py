@@ -107,16 +107,10 @@ def render_board(board: DivinationBoard) -> str:
     return "\n".join(parts)
 
 
-def _language_instruction(language: str) -> str:
-    if language == "zh-Hans":
-        return "回复时请使用中文。"
-    return "You must respond entirely in English. Do not mix languages. All section titles, explanations, and advice must be in English."
-
-
 def build_interpret_messages(
-    board: DivinationBoard, grounding: str | None = None, language: str = "en"
+    board: DivinationBoard, grounding: str | None = None
 ) -> list[dict]:
-    """首轮解读的消息序列（可选附经文参考 grounding + 语言偏好）。"""
+    """首轮解读的消息序列（可选附经文参考 grounding）。"""
 
     board_text = render_board(board)
     if grounding:
@@ -125,31 +119,25 @@ def build_interpret_messages(
         "以下是已排好的六爻盘面，请据此给出解读：\n\n"
         f"{board_text}\n\n请按规定结构给出首轮断语。"
     )
-    messages: list[dict] = [
+    return [
         {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": user_prompt},
     ]
-    if language != "zh-Hans":
-        messages.append({"role": "system", "content": _language_instruction(language)})
-    messages.append({"role": "user", "content": user_prompt})
-    return messages
 
 
 def build_chat_messages(
-    board: DivinationBoard, history: list[dict], grounding: str | None = None, language: str = "en"
+    board: DivinationBoard, history: list[dict], grounding: str | None = None
 ) -> list[dict]:
-    """多轮追问：system + 盘面（作为 system 上下文，可选附经文参考）+ 历史对话 + 语言偏好。"""
+    """多轮追问：system + 盘面（作为 system 上下文，可选附经文参考）+ 历史对话。"""
 
     board_text = render_board(board)
     if grounding:
         board_text = board_text + "\n\n" + grounding
-    messages: list[dict] = [
+    return [
         {"role": "system", "content": SYSTEM_PROMPT},
         {
             "role": "system",
             "content": "本次对话固定基于以下盘面（不得重新起卦或换卦）：\n\n" + board_text,
         },
+        *history,
     ]
-    if language != "zh-Hans":
-        messages.append({"role": "system", "content": _language_instruction(language)})
-    messages.extend(history)
-    return messages

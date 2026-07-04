@@ -39,14 +39,14 @@ struct LLMService {
     }
 
     /// 首轮解读：盘面 → 流式断语。
-    func interpret(board: DivinationBoard, language: String = "en") -> AsyncThrowingStream<String, Error> {
-        let body = InterpretBody(board: board, language: language)
+    func interpret(board: DivinationBoard) -> AsyncThrowingStream<String, Error> {
+        let body = InterpretBody(board: board)
         return stream(path: "/v1/interpret", body: body)
     }
 
     /// 多轮追问：盘面 + 历史对话 → 流式回复。
-    func chat(board: DivinationBoard, messages: [ChatMessage], language: String = "en") -> AsyncThrowingStream<String, Error> {
-        let body = ChatBody(board: board, messages: messages, language: language)
+    func chat(board: DivinationBoard, messages: [ChatMessage]) -> AsyncThrowingStream<String, Error> {
+        let body = ChatBody(board: board, messages: messages)
         return stream(path: "/v1/chat", body: body)
     }
 
@@ -57,7 +57,7 @@ struct LLMService {
         var request = URLRequest(url: baseURL.appendingPathComponent("/v1/grounding"))
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONEncoder().encode(InterpretBody(board: board, language: "en"))
+        request.httpBody = try JSONEncoder().encode(InterpretBody(board: board))
 
         let (data, response) = try await URLSession.shared.data(for: request)
         if let http = response as? HTTPURLResponse, http.statusCode >= 400 {
@@ -94,13 +94,11 @@ struct LLMService {
 
     private struct InterpretBody: Encodable {
         let board: DivinationBoard
-        let language: String
     }
 
     private struct ChatBody: Encodable {
         let board: DivinationBoard
         let messages: [ChatMessage]
-        let language: String
     }
 
     private struct SSEPayload: Decodable {

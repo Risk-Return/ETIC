@@ -40,12 +40,28 @@ final class InterpretationViewModel: ObservableObject {
         !isStreaming && !draft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
+    private var languagePrefix: String {
+        language == "zh-Hans" ? "" : "[Instructions: Please respond entirely in English. All section titles, analysis, and advice must be in English.] "
+    }
+
+    /// Creates a copy of the board with language instruction prepended to the question.
+    /// Does not alter the original board — the prefix is only injected for the LLM request.
+    private func boardForLLM() -> DivinationBoard {
+        guard !languagePrefix.isEmpty, let q = board.question, !q.isEmpty else { return board }
+        guard let data = try? JSONEncoder().encode(board),
+              var dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return board }
+        dict["question"] = languagePrefix + q
+        guard let newData = try? JSONSerialization.data(withJSONObject: dict),
+              let modified = try? JSONDecoder().decode(DivinationBoard.self, from: newData) else { return board }
+        return modified
+    }
+
     /// 首轮解读：进入页面时调用一次。
     func startIfNeeded() {
         loadGroundingIfNeeded()
         guard turns.isEmpty, !isStreaming else { return }
         let master = appendMaster()
-        run(stream: service.interpret(board: board, language: language), into: master.id)
+        run(stream: service.interpret(board: boardForLLM()), into: master.id)
     }
 
     /// 拉取经文参考（一次性，与解读流分离）。失败或后端未开 RAG 时静默留空，不打扰解读。
@@ -68,7 +84,7 @@ final class InterpretationViewModel: ObservableObject {
 
         let history = buildHistory()
         let master = appendMaster()
-        run(stream: service.chat(board: board, messages: history, language: language), into: master.id)
+        run(stream: service.chat(board: board, messages: history), into: master.id)
     }
 
     func cancel() {
@@ -86,8 +102,9 @@ final class InterpretationViewModel: ObservableObject {
     }
 
     /// 把已完成的对话整理为后端所需的消息历史（不含正在生成的占位条）。
+    /// 最后一条用户消息前注入语言指令（仅 non-zh-Hans 时），后端无需感知语言。
     private func buildHistory() -> [LLMService.ChatMessage] {
-        turns.compactMap { turn in
+        var messages = turns.compactMap { turn in
             switch turn.role {
             case .user:
                 return LLMService.ChatMessage(role: .user, content: turn.text)
@@ -96,6 +113,10 @@ final class InterpretationViewModel: ObservableObject {
                 return LLMService.ChatMessage(role: .assistant, content: turn.text)
             }
         }
+        if !languagePrefix.isEmpty, let idx = messages.lastIndex(where: { $0.role == .user }) {
+            messages[idx] = LLMService.ChatMessage(role: .user, content: languagePrefix + messages[idx].content)
+        }
+        return messages
     }
 
     private func run(stream: AsyncThrowingStream<String, Error>, into id: UUID) {
