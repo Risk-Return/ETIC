@@ -1,4 +1,4 @@
-# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读 + M5 经文参考 + M6 历史/收藏）
+# ETIC iOS App（M2 排盘 + M3 动画 + M4 LLM 解读 + M5 经文参考 + M6 历史/收藏 + 卦象百科）
 
 > 最低系统 **iOS 17**（M6 本地历史/收藏使用 SwiftData）。
 
@@ -39,11 +39,16 @@ App/ETIC
 ├─ Interpret/
 │  ├─ InterpretationViewModel.swift  解读对话状态机（首轮 + 多轮，携带同一盘面）+ 拉取经文参考
 │  └─ InterpretationView.swift       流式打字气泡 + 追问输入框 + 「经文参考」折叠卡片
-└─ History/                         M6 本地历史/收藏（SwiftData，iOS 17+）
-   ├─ DivinationRecord.swift        @Model 卦例记录（盘面快照 + 解读对话，内容派生稳定主键）
-   ├─ HistoryStore.swift            读写封装：起卦登记、解读回写、收藏、删除
-   ├─ HistoryListView.swift         列表：时间倒序 + 收藏/事项筛选 + 滑动删除
-   └─ HistoryDetailView.swift       详情：盘面快照 + 解读记录 + 继续追问
+├─ History/                         M6 本地历史/收藏（SwiftData，iOS 17+）
+│  ├─ DivinationRecord.swift        @Model 卦例记录（盘面快照 + 解读对话，内容派生稳定主键）
+│  ├─ HistoryStore.swift            读写封装：起卦登记、解读回写、收藏、删除
+│  ├─ HistoryListView.swift         列表：时间倒序 + 收藏/事项筛选 + 滑动删除
+│  └─ HistoryDetailView.swift       详情：盘面快照 + 解读记录 + 继续追问
+└─ Encyclopedia/                     卦象百科（离线只读，起卦页左上角「书」入口）
+   ├─ Data/zhouyi.json               内置公有领域周易经文（64卦卦辞 + 384爻辞 + 彖辞）
+   ├─ HexagramLore.swift             百科条目模型 + 加载/搜索（EncyclopediaStore）
+   ├─ EncyclopediaListView.swift     64 卦网格 + 按卦名/卦辞搜索
+   └─ EncyclopediaDetailView.swift   卦辞 / 彖辞 / 六爻辞（初→上）
 ```
 
 ## 历史 / 收藏（M6）
