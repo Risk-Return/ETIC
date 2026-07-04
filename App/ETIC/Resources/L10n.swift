@@ -159,5 +159,29 @@ enum L10n {
         static var calendarOutOfRange: String { LocalizationStore.string("error.calendarOutOfRange") }
         static var badURL: String { LocalizationStore.string("error.badURL") }
         static var httpError: String { LocalizationStore.string("error.httpError") }
+        static var insufficientCredits: String { LocalizationStore.string("error.insufficientCredits") }
+        static var questionLimit: String { LocalizationStore.string("error.questionLimit") }
+    }
+
+    enum Account {
+        static var title: String { LocalizationStore.string("account.title") }
+        static var loginTitle: String { LocalizationStore.string("account.loginTitle") }
+        static var loginDesc: String { LocalizationStore.string("account.loginDesc") }
+        static var loginNavTitle: String { LocalizationStore.string("account.loginNavTitle") }
+        static var signIn: String { LocalizationStore.string("account.signIn") }
+        static var signOut: String { LocalizationStore.string("account.signOut") }
+        static var notSignedInDesc: String { LocalizationStore.string("account.notSignedInDesc") }
+        static var creditsTitle: String { LocalizationStore.string("account.creditsTitle") }
+        static var freeCredits: String { LocalizationStore.string("account.freeCredits") }
+        static var paidCredits: String { LocalizationStore.string("account.paidCredits") }
+        static var subscriptionTitle: String { LocalizationStore.string("account.subscriptionTitle") }
+        static var subscriptionDesc: String { LocalizationStore.string("account.subscriptionDesc") }
+        static var subscribed: String { LocalizationStore.string("account.subscribed") }
+        static var expiresAt: String { LocalizationStore.string("account.expiresAt") }
+        static var subscribe: String { LocalizationStore.string("account.subscribe") }
+        static var topUpTitle: String { LocalizationStore.string("account.topUpTitle") }
+        static var topUpDesc: String { LocalizationStore.string("account.topUpDesc") }
+        static var buy: String { LocalizationStore.string("account.buy") }
+        static var readings: String { LocalizationStore.string("account.readings") }
     }
 }

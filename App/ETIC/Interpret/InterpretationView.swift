@@ -17,7 +17,9 @@ struct InterpretationView: View {
             InkTheme.paper.ignoresSafeArea()
             VStack(spacing: 0) {
                 conversation
-                if let error = model.errorMessage {
+                if model.needsAccount || model.needsCredits || model.questionLimitReached {
+                    accountPromptBar
+                } else if let error = model.errorMessage {
                     errorBar(error)
                 }
                 composer
@@ -88,6 +90,35 @@ struct InterpretationView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(10)
             .background(InkTheme.cinnabar)
+    }
+
+    /// 额度不足/需登录/追问上限提示条，带跳转按钮。
+    private var accountPromptBar: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "exclamationmark.circle.fill")
+                .foregroundStyle(.white)
+            Text(model.errorMessage ?? "")
+                .font(InkTheme.serifBody(13))
+                .foregroundStyle(.white)
+                .lineLimit(2)
+            Spacer()
+            NavigationLink {
+                if model.needsAccount {
+                    LoginView()
+                } else {
+                    AccountView()
+                }
+            } label: {
+                Text(model.needsAccount ? L10n.Account.signIn : L10n.Account.title)
+                    .font(InkTheme.serifBody(13))
+                    .foregroundStyle(InkTheme.cinnabar)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(.white, in: RoundedRectangle(cornerRadius: 8))
+            }
+        }
+        .padding(10)
+        .background(InkTheme.cinnabar)
     }
 
     private var composer: some View {

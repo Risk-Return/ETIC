@@ -11,12 +11,16 @@ struct LLMService {
         case badURL
         case http(Int)
         case upstream(String)
+        case insufficientCredits
+        case questionLimit
 
         var errorDescription: String? {
             switch self {
             case .badURL: return L10n.Error.badURL
             case .http(let code): return L10n.Error.httpError.replacingOccurrences(of: "%d", with: "\(code)")
             case .upstream(let message): return message
+            case .insufficientCredits: return L10n.Error.insufficientCredits
+            case .questionLimit: return L10n.Error.questionLimit
             }
         }
     }
@@ -57,6 +61,9 @@ struct LLMService {
         var request = URLRequest(url: baseURL.appendingPathComponent("/v1/grounding"))
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let header = AuthService.shared.authHeader {
+            request.setValue(header, forHTTPHeaderField: "Authorization")
+        }
         request.httpBody = try JSONEncoder().encode(InterpretBody(board: board))
 
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -116,10 +123,19 @@ struct LLMService {
                     request.httpMethod = "POST"
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                     request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
+                    if let header = AuthService.shared.authHeader {
+                        request.setValue(header, forHTTPHeaderField: "Authorization")
+                    }
                     request.httpBody = try JSONEncoder().encode(body)
 
                     let (bytes, response) = try await URLSession.shared.bytes(for: request)
                     if let http = response as? HTTPURLResponse, http.statusCode >= 400 {
+                        if http.statusCode == 402 {
+                            throw ServiceError.insufficientCredits
+                        }
+                        if http.statusCode == 429 {
+                            throw ServiceError.questionLimit
+                        }
                         throw ServiceError.http(http.statusCode)
                     }
 

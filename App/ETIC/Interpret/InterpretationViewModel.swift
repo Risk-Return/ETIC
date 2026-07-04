@@ -21,6 +21,9 @@ final class InterpretationViewModel: ObservableObject {
     @Published private(set) var isStreaming = false
     @Published var draft: String = ""
     @Published var errorMessage: String?
+    @Published var needsAccount = false
+    @Published var needsCredits = false
+    @Published var questionLimitReached = false
 
     /// 后端检索到的经文（本卦卦辞 / 动爻爻辞 / 变卦卦辞 …），供页面展示「经文参考」。
     @Published private(set) var grounding: [LLMService.GroundingItem] = []
@@ -140,7 +143,23 @@ final class InterpretationViewModel: ObservableObject {
     }
 
     private func handle(error: Error, masterID: UUID) {
-        errorMessage = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
+        if let serviceError = error as? LLMService.ServiceError {
+            switch serviceError {
+            case .insufficientCredits:
+                needsCredits = true
+                errorMessage = serviceError.errorDescription
+            case .questionLimit:
+                questionLimitReached = true
+                errorMessage = serviceError.errorDescription
+            case .http(401):
+                needsAccount = true
+                errorMessage = serviceError.errorDescription
+            default:
+                errorMessage = serviceError.errorDescription
+            }
+        } else {
+            errorMessage = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
+        }
         // 若占位条仍为空，移除它以免留下空气泡。
         if let idx = turns.firstIndex(where: { $0.id == masterID }), turns[idx].text.isEmpty {
             turns.remove(at: idx)

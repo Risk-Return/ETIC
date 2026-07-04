@@ -37,6 +37,10 @@ targets:
         ITSAppUsesNonExemptEncryption: false
         # 摇一摇起卦需读取设备运动数据（M3）。
         NSMotionUsageDescription: Used to detect shake motion for casting hexagrams.
+    entitlements:
+      path: ETIC/ETIC.entitlements
+      properties:
+        com.apple.developer.applesignin: ['Default']
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: ai.etic.app
@@ -45,6 +49,7 @@ targets:
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
         ENABLE_TESTABILITY: "YES"
+        CODE_SIGN_ENTITLEMENTS: ETIC/ETIC.entitlements
   ETICTests:
     type: bundle.unit-test
     platform: iOS

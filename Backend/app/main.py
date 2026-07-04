@@ -1,14 +1,21 @@
 """ETIC 解读后端：六爻盘面 → LLM 流式解读 + 多轮追问。
 
 排盘引擎在端上离线运行；本服务只负责"解读"，隐藏 LLM key。
+M6 起增加账号 & 计费：Sign in with Apple、额度扣减、追问限制。
 """
 
 import json
-from typing import AsyncIterator
+import uuid
+from typing import AsyncIterator, Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 
+from .account import (
+    check_and_deduct_reading_credit,
+    check_and_increment_question,
+)
+from .auth import get_current_user_id, require_user_id
 from .config import Settings, get_settings
 from .iap import router as iap_router
 from .llm import LLMError, stream_completion
@@ -22,8 +29,12 @@ from .models import (
 from .prompt import build_chat_messages, build_interpret_messages
 from .rag.retrieval import render_grounding, retrieve_grounding
 
-app = FastAPI(title="ETIC 解读后端", version="0.1.0")
+# Account & billing router
+from .account import router as account_router
+
+app = FastAPI(title="ETIC 解读后端", version="0.2.0")
 app.include_router(iap_router)
+app.include_router(account_router)
 
 
 @app.get("/healthz")
@@ -37,6 +48,7 @@ async def healthz() -> dict:
         "embeddings": (
             "mock" if settings.use_mock_embeddings else settings.embed_model
         ),
+        "billing": settings.billing_enabled,
     }
 
 
@@ -67,10 +79,24 @@ async def _grounding_text(settings: Settings, board) -> str | None:
 
 
 @app.post("/v1/interpret")
-async def interpret(req: InterpretRequest) -> StreamingResponse:
-    """首轮解读：基于盘面给整体断语（SSE 流式）。"""
+async def interpret(
+    req: InterpretRequest,
+    user_id: Optional[uuid.UUID] = Depends(get_current_user_id),
+    settings: Settings = Depends(get_settings),
+) -> StreamingResponse:
+    """首轮解读：基于盘面给整体断语（SSE 流式）。
 
-    settings = get_settings()
+    billing_enabled 时需鉴权并扣减额度；关闭时兼容旧流程（不鉴权）。
+    """
+
+    if settings.billing_enabled:
+        if user_id is None:
+            raise HTTPException(status_code=401, detail="Authentication required")
+        board_dict = req.board.model_dump()
+        error = check_and_deduct_reading_credit(settings, user_id, board_dict)
+        if error:
+            raise HTTPException(status_code=402, detail=error)
+
     grounding = await _grounding_text(settings, req.board)
     messages = build_interpret_messages(req.board, grounding)
     return _sse_response(settings, messages)
@@ -100,14 +126,28 @@ async def grounding(req: GroundingRequest) -> GroundingResponse:
 
 
 @app.post("/v1/chat")
-async def chat(req: ChatRequest) -> StreamingResponse:
-    """多轮追问：同一盘面上下文中延展（SSE 流式）。"""
+async def chat(
+    req: ChatRequest,
+    user_id: Optional[uuid.UUID] = Depends(get_current_user_id),
+    settings: Settings = Depends(get_settings),
+) -> StreamingResponse:
+    """多轮追问：同一盘面上下文中延展（SSE 流式）。
 
-    settings = get_settings()
+    billing_enabled 时需鉴权并检查追问次数限制；关闭时兼容旧流程。
+    """
+
     if not req.messages:
         raise HTTPException(status_code=422, detail="messages 不能为空")
     if req.messages[-1].role != "user":
         raise HTTPException(status_code=422, detail="最后一条消息必须是用户提问")
+
+    if settings.billing_enabled:
+        if user_id is None:
+            raise HTTPException(status_code=401, detail="Authentication required")
+        board_dict = req.board.model_dump()
+        error = check_and_increment_question(settings, user_id, board_dict)
+        if error:
+            raise HTTPException(status_code=429, detail=error)
 
     history = [m.model_dump() for m in req.messages[-settings.max_history_messages:]]
     grounding = await _grounding_text(settings, req.board)

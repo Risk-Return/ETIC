@@ -478,5 +478,89 @@
   "encyclopedia.disclaimer": {
     "en": "Scripture from the public domain Zhouyi, for reference only.",
     "zh-Hans": "经文为公有领域《周易》原文，仅供查阅参考。"
+  },
+  "error.insufficientCredits": {
+    "en": "Insufficient credits. Please subscribe or top up to request a reading.",
+    "zh-Hans": "额度不足，请订阅或充值后请求解读。"
+  },
+  "error.questionLimit": {
+    "en": "Question limit reached for this reading. Start a new reading to continue.",
+    "zh-Hans": "本次解读追问次数已达上限，请新起一卦继续。"
+  },
+  "account.title": {
+    "en": "Account",
+    "zh-Hans": "账号"
+  },
+  "account.loginTitle": {
+    "en": "Sign In",
+    "zh-Hans": "登录"
+  },
+  "account.loginDesc": {
+    "en": "Sign in with your Apple ID to request readings and manage your subscription.",
+    "zh-Hans": "使用 Apple ID 登录以请求解读和管理订阅。"
+  },
+  "account.loginNavTitle": {
+    "en": "Sign In",
+    "zh-Hans": "登录"
+  },
+  "account.signIn": {
+    "en": "Sign In",
+    "zh-Hans": "登录"
+  },
+  "account.signOut": {
+    "en": "Sign Out",
+    "zh-Hans": "退出登录"
+  },
+  "account.notSignedInDesc": {
+    "en": "Sign in to access readings, credits, and subscription.",
+    "zh-Hans": "登录后可使用解读、额度与订阅功能。"
+  },
+  "account.creditsTitle": {
+    "en": "Credits",
+    "zh-Hans": "额度"
+  },
+  "account.freeCredits": {
+    "en": "Free (monthly)",
+    "zh-Hans": "免费（每月）"
+  },
+  "account.paidCredits": {
+    "en": "Purchased",
+    "zh-Hans": "已购"
+  },
+  "account.subscriptionTitle": {
+    "en": "Subscription",
+    "zh-Hans": "订阅"
+  },
+  "account.subscriptionDesc": {
+    "en": "Monthly subscription includes unlimited readings.",
+    "zh-Hans": "月度订阅，畅享无限解读。"
+  },
+  "account.subscribed": {
+    "en": "Subscribed",
+    "zh-Hans": "已订阅"
+  },
+  "account.expiresAt": {
+    "en": "Expires",
+    "zh-Hans": "到期"
+  },
+  "account.subscribe": {
+    "en": "Subscribe",
+    "zh-Hans": "订阅"
+  },
+  "account.topUpTitle": {
+    "en": "Top Up",
+    "zh-Hans": "充值"
+  },
+  "account.topUpDesc": {
+    "en": "Purchase additional reading credits.",
+    "zh-Hans": "购买额外解读额度。"
+  },
+  "account.buy": {
+    "en": "Buy",
+    "zh-Hans": "购买"
+  },
+  "account.readings": {
+    "en": "Readings",
+    "zh-Hans": "次解读"
   }
 }

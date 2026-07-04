@@ -37,6 +37,40 @@ class Settings(BaseSettings):
     rag_top_k: int = 4
     rag_include_tuan: bool = False
 
+    # ---- 账号 & 计费（M6）----
+    # Apple Sign In 验签：identity token 的 audience 为 bundle ID。
+    apple_bundle_id: str = "ai.etic.app"
+    # 后端签发会话 JWT 的密钥（随机长字符串，切勿泄露）。
+    jwt_secret: str = "change-me-in-production"
+    # 会话 JWT 有效期（天）。
+    jwt_expire_days: int = 30
+    # 每月免费解读次数。
+    free_monthly_credits: int = 3
+    # 每次解读最多追问次数。
+    max_questions_per_reading: int = 3
+    # 计费系统是否启用（关闭时 interpret/chat 不鉴权、不扣费，兼容旧流程）。
+    billing_enabled: bool = False
+
+    # StoreKit 商品 ID（需与 App Store Connect 中配置一致）。
+    subscription_product_id: str = "ai.etic.app.subscription.monthly"
+    # 充值商品 ID → 额度数映射，格式 "product_id:credits,..."
+    topup_products: str = (
+        "ai.etic.app.credits.5:5,"
+        "ai.etic.app.credits.10:10,"
+        "ai.etic.app.credits.25:25"
+    )
+
+    @property
+    def topup_product_map(self) -> dict[str, int]:
+        result: dict[str, int] = {}
+        for pair in self.topup_products.split(","):
+            pair = pair.strip()
+            if ":" not in pair:
+                continue
+            pid, credits = pair.rsplit(":", 1)
+            result[pid.strip()] = int(credits)
+        return result
+
     @property
     def use_mock(self) -> bool:
         return self.mock_llm or not self.llm_api_key
