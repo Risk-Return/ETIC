@@ -23,11 +23,4 @@ final class LanguageManager: ObservableObject {
     }
 
     var locale: Locale { selectedLanguage.locale }
-
-    var languageBinding: Binding<AppLanguage> {
-        Binding<AppLanguage>(
-            get: { [weak self] in self?.selectedLanguage ?? .en },
-            set: { [weak self] in self?.selectedLanguage = $0 }
-        )
-    }
 }
