@@ -6,6 +6,7 @@ struct CastingView: View {
     @Environment(\.modelContext) private var context
     @StateObject private var model = CastingViewModel()
     @State private var showSettings = false
+    @State private var showLocationPicker = false
 
     var body: some View {
         ZStack {
@@ -39,6 +40,11 @@ struct CastingView: View {
                             .tint(InkTheme.cinnabar)
                     }
 
+                    section(L10n.Location.section) {
+                        locationRow
+                        hint(L10n.Location.hint)
+                    }
+
                     castButton
 
                     if let message = model.errorMessage {
@@ -69,6 +75,7 @@ struct CastingView: View {
             }
         }
         .sheet(isPresented: $showSettings) { RitualSettingsView() }
+        .sheet(isPresented: $showLocationPicker) { LocationPickerView(model: model) }
         .navigationDestination(item: $model.board) { board in
             RitualView(board: board)
         }
@@ -164,6 +171,32 @@ struct CastingView: View {
         Text(text)
             .font(.footnote)
             .foregroundStyle(InkTheme.inkSoft)
+    }
+
+    private var locationRow: some View {
+        Button { showLocationPicker = true } label: {
+            HStack {
+                Image(systemName: "location")
+                    .foregroundStyle(InkTheme.inkSoft)
+                Text(locationLabel)
+                    .font(InkTheme.serifBody(16))
+                    .foregroundStyle(model.longitude == nil ? InkTheme.inkSoft : InkTheme.ink)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(InkTheme.inkSoft)
+            }
+            .padding(12)
+            .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 10))
+        }
+    }
+
+    private var locationLabel: String {
+        guard let lon = model.longitude else { return L10n.Location.notSet }
+        let hemisphere = lon >= 0 ? "E" : "W"
+        let coord = String(format: "%.1f°%@", abs(lon), hemisphere)
+        if let name = model.locationName { return "\(name) · \(coord)" }
+        return "\(L10n.Location.customLabel) · \(coord)"
     }
 
     private var castButton: some View {

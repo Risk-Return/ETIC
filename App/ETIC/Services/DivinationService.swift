@@ -30,17 +30,27 @@ enum DivinationService {
         var lowerNumber: Int
         /// 手动 / 铜钱：六次摇卦的「背数」(0...3)，index 0 = 初爻。
         var coinBacks: [Int]
+        /// 起卦地点经度（东经为正、西经为负）。非 nil 时按真太阳时校正干支时刻。
+        var longitude: Double?
     }
 
     static func makeBoard(_ input: Input, timeZone: TimeZone = .current) throws -> DivinationBoard {
+        // 有经度则先做真太阳时校正，再据校正后的时刻排四柱与时间起卦。
+        let effectiveDate: Date
+        if let longitude = input.longitude {
+            effectiveDate = GanzhiCalendar.trueSolarTime(input.date, longitude: longitude, timeZone: timeZone)
+        } else {
+            effectiveDate = input.date
+        }
+
         let pillars: GanzhiCalendar.FourPillars
         do {
-            pillars = try GanzhiCalendar.fourPillars(date: input.date, timeZone: timeZone)
+            pillars = try GanzhiCalendar.fourPillars(date: effectiveDate, timeZone: timeZone)
         } catch {
             throw ServiceError.calendarOutOfRange
         }
 
-        let comps = calendarComponents(input.date, timeZone: timeZone)
+        let comps = calendarComponents(effectiveDate, timeZone: timeZone)
         let cast: CastResult
         switch input.method {
         case .coins, .manual:

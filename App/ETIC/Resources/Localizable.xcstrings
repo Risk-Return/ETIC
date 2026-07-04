@@ -1,105 +1,1227 @@
 {
   "sourceLanguage": "en",
   "strings": {
-    "nav.cast": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Cast" } } } },
-    "nav.board": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Hexagram" } } } },
-    "nav.interpret": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Reading" } } } },
-    "nav.history": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "History" } } } },
-    "nav.record": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Record" } } } },
-    "nav.settings": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Settings" } } } },
-    "brand.appName": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "易卦" } } } },
-    "brand.tagline": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Quiet your mind, focus on your question, then cast." } } } },
-    "casting.questionSection": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Your Question" } } } },
-    "casting.questionPlaceholder": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "What would you like to ask?" } } } },
-    "casting.categorySection": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Category" } } } },
-    "casting.methodSection": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Casting Method" } } } },
-    "casting.timeSection": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Time" } } } },
-    "casting.castButton": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Cast" } } } },
-    "casting.disclaimer": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "For cultural entertainment only. Not scientific prediction. Do not use for medical, legal, or financial decisions." } } } },
-    "casting.hint.coins": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Shake your phone or tap the button — three coins settle six times, building the hexagram from bottom to top." } } } },
-    "casting.hint.number": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Plum Blossom method: take innate trigram from the upper and lower numbers; their sum determines the moving line." } } } },
-    "casting.hint.time": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Plum Blossom time method: cast using the selected date's ganzhi and solar date." } } } },
-    "casting.hint.random": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "The system simulates a coin toss randomly for a quick experience." } } } },
-    "casting.upperNum": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Upper" } } } },
-    "casting.lowerNum": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Lower" } } } },
-    "board.question": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Asked" } } } },
-    "board.primary": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Primary" } } } },
-    "board.changed": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Changed" } } } },
-    "board.interpretation": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Interpretation" } } } },
-    "board.interpretationDesc": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Submit this hexagram to a veteran Liuyao diviner for a detailed reading with multi-turn follow-up. The chart is fixed — the reading does not alter it." } } } },
-    "board.requestReading": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Request Reading" } } } },
-    "board.disclaimer": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "For cultural entertainment only. Not scientific prediction." } } } },
-    "board.legend": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "○ Old Yang (moving)   × Old Yin (moving)   Self/Other mark the subject   Void marks the empty branch   Flourishing/Waning/Ideal/Confined/Dead indicates monthly strength" } } } },
-    "board.useGodTitle": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Use God" } } } },
-    "board.useGodHidden": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Use God not found in primary hexagram (hidden line; seek elsewhere). Use as a reading hint." } } } },
-    "board.useGodPositionPrefix": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Use God line positions: " } } } },
-    "board.voidPrefix": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Void: " } } } },
-    "board.yearPillar": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Yr" } } } },
-    "board.monthPillar": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Mo" } } } },
-    "board.dayPillar": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Day" } } } },
-    "board.hourPillar": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Hr" } } } },
-    "board.upperTrigramSuffix": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": " upper" } } } },
-    "board.lowerTrigramSuffix": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": " lower" } } } },
-    "board.methodSuffix": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": " cast" } } } },
-    "board.world": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "S" } } } },
-    "board.response": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "O" } } } },
-    "board.void": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "V" } } } },
-    "ritual.preparePrompt": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Quiet your mind and focus on your question" } } } },
-    "ritual.beginCasting": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Begin Casting" } } } },
-    "ritual.casting": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Cast (%d/6)" } } } },
-    "ritual.transformingTitle": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Moving Lines" } } } },
-    "ritual.formingPlaceholder": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Forming…" } } } },
-    "ritual.allLinesDone": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "All six lines cast" } } } },
-    "ritual.shakePrompt": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Shake your phone, or tap the button below to cast" } } } },
-    "ritual.tapPrompt": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Tap the button below to cast" } } } },
-    "ritual.skipAnimation": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Skip" } } } },
-    "ritual.coinBack": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "H" } } } },
-    "ritual.coinChar": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "T" } } } },
-    "settings.animationSection": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Animation" } } } },
-    "settings.skipAnimation": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Skip Divination Animation" } } } },
-    "settings.reduceMotionNotice": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Reduce Motion is enabled. Animation will be downgraded." } } } },
-    "settings.shakeSection": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Shake Casting" } } } },
-    "settings.shakeToToss": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Shake to Cast" } } } },
-    "settings.haptics": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Haptic Feedback" } } } },
-    "settings.note": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Animation is purely performative — the hexagram is always deterministically computed by the local engine." } } } },
-    "settings.done": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Done" } } } },
-    "interpret.placeholder": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Ask a follow-up question..." } } } },
-    "interpret.masterLabel": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Diviner" } } } },
-    "interpret.thinking": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Contemplating…" } } } },
-    "interpret.scriptureTitle": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Scripture Reference" } } } },
-    "interpret.scriptureDisclaimer": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Scripture is for reference only. The reading is based on the hexagram's Self/Other and Use God." } } } },
-    "history.emptyTitle": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "No Records Yet" } } } },
-    "history.emptyDesc": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Each cast is recorded here automatically. You can bookmark, review, and continue asking." } } } },
-    "history.noQuestion": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "(No question recorded)" } } } },
-    "history.noTranscript": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "No reading transcript yet." } } } },
-    "history.corruptBoard": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Hexagram data is corrupted and cannot be displayed." } } } },
-    "history.transcriptTitle": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Reading Transcript" } } } },
-    "history.viewBoard": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "View Full Hexagram" } } } },
-    "history.requestReadingFallback": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Request Reading" } } } },
-    "history.continueAsk": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Continue Asking" } } } },
-    "history.favoritesFilter": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Favorites" } } } },
-    "history.allFilter": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "All" } } } },
-    "history.favorite": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Favorite" } } } },
-    "history.unfavorite": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Unfavorite" } } } },
-    "history.delete": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Delete" } } } },
-    "error.invalidNumbers": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Numbers must be positive integers." } } } },
-    "error.calendarOutOfRange": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Date is outside the supported range (1900–2100)." } } } },
-    "error.badURL": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Invalid backend address." } } } },
-    "error.httpError": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Backend returned an error (HTTP %d)." } } } },
-    "category.career": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Career" } } } },
-    "category.wealth": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Wealth" } } } },
-    "category.marriage": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Marriage" } } } },
-    "category.health": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Health" } } } },
-    "category.study": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Study" } } } },
-    "category.lawsuit": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Lawsuit" } } } },
-    "category.travel": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Travel" } } } },
-    "category.lost": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Lost Item" } } } },
-    "category.general": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "General" } } } },
-    "casting.method.coins": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Coins" } } } },
-    "casting.method.number": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Number" } } } },
-    "casting.method.time": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Time" } } } },
-    "casting.method.random": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Random" } } } },
-    "casting.method.manual": { "extractionState": "manual", "localizations": { "en": { "stringUnit": { "state": "translated", "value": "Manual" } } } }
+    "nav.cast": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cast"
+          }
+        }
+      }
+    },
+    "nav.board": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hexagram"
+          }
+        }
+      }
+    },
+    "nav.interpret": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading"
+          }
+        }
+      }
+    },
+    "nav.history": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History"
+          }
+        }
+      }
+    },
+    "nav.record": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
+          }
+        }
+      }
+    },
+    "nav.settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        }
+      }
+    },
+    "brand.appName": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "易卦"
+          }
+        }
+      }
+    },
+    "brand.tagline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quiet your mind, focus on your question, then cast."
+          }
+        }
+      }
+    },
+    "casting.questionSection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Question"
+          }
+        }
+      }
+    },
+    "casting.questionPlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What would you like to ask?"
+          }
+        }
+      }
+    },
+    "casting.categorySection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Category"
+          }
+        }
+      }
+    },
+    "casting.methodSection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casting Method"
+          }
+        }
+      }
+    },
+    "casting.timeSection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time"
+          }
+        }
+      }
+    },
+    "casting.castButton": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cast"
+          }
+        }
+      }
+    },
+    "casting.disclaimer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For cultural entertainment only. Not scientific prediction. Do not use for medical, legal, or financial decisions."
+          }
+        }
+      }
+    },
+    "casting.hint.coins": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shake your phone or tap the button — three coins settle six times, building the hexagram from bottom to top."
+          }
+        }
+      }
+    },
+    "casting.hint.number": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plum Blossom method: take innate trigram from the upper and lower numbers; their sum determines the moving line."
+          }
+        }
+      }
+    },
+    "casting.hint.time": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plum Blossom time method: cast using the selected date's ganzhi and solar date."
+          }
+        }
+      }
+    },
+    "casting.hint.random": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The system simulates a coin toss randomly for a quick experience."
+          }
+        }
+      }
+    },
+    "casting.upperNum": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upper"
+          }
+        }
+      }
+    },
+    "casting.lowerNum": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lower"
+          }
+        }
+      }
+    },
+    "board.question": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asked"
+          }
+        }
+      }
+    },
+    "board.primary": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primary"
+          }
+        }
+      }
+    },
+    "board.changed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changed"
+          }
+        }
+      }
+    },
+    "board.interpretation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interpretation"
+          }
+        }
+      }
+    },
+    "board.interpretationDesc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Submit this hexagram to a veteran Liuyao diviner for a detailed reading with multi-turn follow-up. The chart is fixed — the reading does not alter it."
+          }
+        }
+      }
+    },
+    "board.requestReading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Request Reading"
+          }
+        }
+      }
+    },
+    "board.disclaimer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For cultural entertainment only. Not scientific prediction."
+          }
+        }
+      }
+    },
+    "board.legend": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "○ Old Yang (moving)   × Old Yin (moving)   Self/Other mark the subject   Void marks the empty branch   Flourishing/Waning/Ideal/Confined/Dead indicates monthly strength"
+          }
+        }
+      }
+    },
+    "board.useGodTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use God"
+          }
+        }
+      }
+    },
+    "board.useGodHidden": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use God not found in primary hexagram (hidden line; seek elsewhere). Use as a reading hint."
+          }
+        }
+      }
+    },
+    "board.useGodPositionPrefix": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use God line positions: "
+          }
+        }
+      }
+    },
+    "board.voidPrefix": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Void: "
+          }
+        }
+      }
+    },
+    "board.yearPillar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yr"
+          }
+        }
+      }
+    },
+    "board.monthPillar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mo"
+          }
+        }
+      }
+    },
+    "board.dayPillar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day"
+          }
+        }
+      }
+    },
+    "board.hourPillar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hr"
+          }
+        }
+      }
+    },
+    "board.upperTrigramSuffix": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " upper"
+          }
+        }
+      }
+    },
+    "board.lowerTrigramSuffix": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " lower"
+          }
+        }
+      }
+    },
+    "board.methodSuffix": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " cast"
+          }
+        }
+      }
+    },
+    "board.world": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S"
+          }
+        }
+      }
+    },
+    "board.response": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O"
+          }
+        }
+      }
+    },
+    "board.void": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V"
+          }
+        }
+      }
+    },
+    "ritual.preparePrompt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quiet your mind and focus on your question"
+          }
+        }
+      }
+    },
+    "ritual.beginCasting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Begin Casting"
+          }
+        }
+      }
+    },
+    "ritual.casting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cast (%d/6)"
+          }
+        }
+      }
+    },
+    "ritual.transformingTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moving Lines"
+          }
+        }
+      }
+    },
+    "ritual.formingPlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forming…"
+          }
+        }
+      }
+    },
+    "ritual.allLinesDone": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All six lines cast"
+          }
+        }
+      }
+    },
+    "ritual.shakePrompt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shake your phone, or tap the button below to cast"
+          }
+        }
+      }
+    },
+    "ritual.tapPrompt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap the button below to cast"
+          }
+        }
+      }
+    },
+    "ritual.skipAnimation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip"
+          }
+        }
+      }
+    },
+    "ritual.coinBack": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "H"
+          }
+        }
+      }
+    },
+    "ritual.coinChar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T"
+          }
+        }
+      }
+    },
+    "settings.animationSection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animation"
+          }
+        }
+      }
+    },
+    "settings.skipAnimation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip Divination Animation"
+          }
+        }
+      }
+    },
+    "settings.reduceMotionNotice": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reduce Motion is enabled. Animation will be downgraded."
+          }
+        }
+      }
+    },
+    "settings.shakeSection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shake Casting"
+          }
+        }
+      }
+    },
+    "settings.shakeToToss": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shake to Cast"
+          }
+        }
+      }
+    },
+    "settings.haptics": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haptic Feedback"
+          }
+        }
+      }
+    },
+    "settings.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animation is purely performative — the hexagram is always deterministically computed by the local engine."
+          }
+        }
+      }
+    },
+    "settings.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "interpret.placeholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask a follow-up question..."
+          }
+        }
+      }
+    },
+    "interpret.masterLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diviner"
+          }
+        }
+      }
+    },
+    "interpret.thinking": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contemplating…"
+          }
+        }
+      }
+    },
+    "interpret.scriptureTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scripture Reference"
+          }
+        }
+      }
+    },
+    "interpret.scriptureDisclaimer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scripture is for reference only. The reading is based on the hexagram's Self/Other and Use God."
+          }
+        }
+      }
+    },
+    "history.emptyTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Records Yet"
+          }
+        }
+      }
+    },
+    "history.emptyDesc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each cast is recorded here automatically. You can bookmark, review, and continue asking."
+          }
+        }
+      }
+    },
+    "history.noQuestion": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(No question recorded)"
+          }
+        }
+      }
+    },
+    "history.noTranscript": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No reading transcript yet."
+          }
+        }
+      }
+    },
+    "history.corruptBoard": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hexagram data is corrupted and cannot be displayed."
+          }
+        }
+      }
+    },
+    "history.transcriptTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading Transcript"
+          }
+        }
+      }
+    },
+    "history.viewBoard": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View Full Hexagram"
+          }
+        }
+      }
+    },
+    "history.requestReadingFallback": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Request Reading"
+          }
+        }
+      }
+    },
+    "history.continueAsk": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue Asking"
+          }
+        }
+      }
+    },
+    "history.favoritesFilter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorites"
+          }
+        }
+      }
+    },
+    "history.allFilter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        }
+      }
+    },
+    "history.favorite": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorite"
+          }
+        }
+      }
+    },
+    "history.unfavorite": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unfavorite"
+          }
+        }
+      }
+    },
+    "history.delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "error.invalidNumbers": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Numbers must be positive integers."
+          }
+        }
+      }
+    },
+    "error.calendarOutOfRange": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date is outside the supported range (1900–2100)."
+          }
+        }
+      }
+    },
+    "error.badURL": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invalid backend address."
+          }
+        }
+      }
+    },
+    "error.httpError": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backend returned an error (HTTP %d)."
+          }
+        }
+      }
+    },
+    "category.career": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Career"
+          }
+        }
+      }
+    },
+    "category.wealth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wealth"
+          }
+        }
+      }
+    },
+    "category.marriage": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marriage"
+          }
+        }
+      }
+    },
+    "category.health": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Health"
+          }
+        }
+      }
+    },
+    "category.study": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Study"
+          }
+        }
+      }
+    },
+    "category.lawsuit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lawsuit"
+          }
+        }
+      }
+    },
+    "category.travel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Travel"
+          }
+        }
+      }
+    },
+    "category.lost": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lost Item"
+          }
+        }
+      }
+    },
+    "category.general": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        }
+      }
+    },
+    "casting.method.coins": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coins"
+          }
+        }
+      }
+    },
+    "casting.method.number": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Number"
+          }
+        }
+      }
+    },
+    "casting.method.time": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time"
+          }
+        }
+      }
+    },
+    "casting.method.random": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Random"
+          }
+        }
+      }
+    },
+    "casting.method.manual": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manual"
+          }
+        }
+      }
+    },
+    "location.section": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Location (True Solar Time)"
+          }
+        }
+      }
+    },
+    "location.notSet": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Device time — no correction"
+          }
+        }
+      }
+    },
+    "location.choose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose city or longitude"
+          }
+        }
+      }
+    },
+    "location.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True solar time shifts the divination hour to your local sun position by longitude. Optional — leave off to use your device's local time."
+          }
+        }
+      }
+    },
+    "location.pickerTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casting Location"
+          }
+        }
+      }
+    },
+    "location.search": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search city or region"
+          }
+        }
+      }
+    },
+    "location.useDeviceTime": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use device time (no correction)"
+          }
+        }
+      }
+    },
+    "location.customSection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom longitude"
+          }
+        }
+      }
+    },
+    "location.customPlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. 116.4  (East +, West −)"
+          }
+        }
+      }
+    },
+    "location.apply": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apply"
+          }
+        }
+      }
+    },
+    "location.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "location.customLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom longitude"
+          }
+        }
+      }
+    }
   },
   "version": "1.0"
 }

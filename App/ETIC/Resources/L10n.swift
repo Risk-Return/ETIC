@@ -32,6 +32,21 @@ enum L10n {
         static let lowerNum = String(localized: "casting.lowerNum")
     }
 
+    enum Location {
+        static let section = String(localized: "location.section")
+        static let notSet = String(localized: "location.notSet")
+        static let choose = String(localized: "location.choose")
+        static let hint = String(localized: "location.hint")
+        static let pickerTitle = String(localized: "location.pickerTitle")
+        static let search = String(localized: "location.search")
+        static let useDeviceTime = String(localized: "location.useDeviceTime")
+        static let customSection = String(localized: "location.customSection")
+        static let customPlaceholder = String(localized: "location.customPlaceholder")
+        static let apply = String(localized: "location.apply")
+        static let done = String(localized: "location.done")
+        static let customLabel = String(localized: "location.customLabel")
+    }
+
     enum Board {
         static let question = String(localized: "board.question")
         static let primary = String(localized: "board.primary")
