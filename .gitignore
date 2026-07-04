@@ -7,6 +7,8 @@ Package.resolved
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
+*.xcworkspace/*
+!*.xcworkspace/xcshareddata/
 xcuserdata/
 DerivedData/
 *.xcuserstate
