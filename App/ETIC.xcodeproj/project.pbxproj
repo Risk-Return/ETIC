@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		038BFA0889364118901CCD32 /* BoardRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D700D9C8EA0E360D64561F /* BoardRowView.swift */; };
+		058FD104A125149A74D0EA33 /* DivinationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC93B17EB7F94DF221C160D /* DivinationService.swift */; };
+		0CF87D86F3BA052708945066 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67191570BEDEE77AFB4055A7 /* HistoryDetailView.swift */; };
+		1CE34E2A98F9819FD2AA2656 /* LLMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10992A4A7E047260F66790AA /* LLMService.swift */; };
+		30611D9581AE3CCEF58F2932 /* HistoryStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BFB77D77B2A95B6CF473E /* HistoryStoreTests.swift */; };
+		328B7681472F8C046416FEB5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A272BDFA54713EE7D60BD1 /* L10n.swift */; };
+		3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F26FE1CE0107B99FC159C1 /* PreviewData.swift */; };
+		3E088E0D6BFD34612D6F7FE1 /* AnimatedYaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F103E824DE8192D5D83526 /* AnimatedYaoView.swift */; };
+		4151BA7C0DE71930E6421FA3 /* InterpretationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B70E3CBAAF870FF70F69DB /* InterpretationViewModel.swift */; };
+		44699162E3704CB267706008 /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C20211DE2BA73872DB382 /* HistoryStore.swift */; };
+		4EF26D628DA0DB53A92A6D08 /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E529319AE69908767DC454B4 /* CoinRowView.swift */; };
+		5DE003C5848861D763F4CC98 /* HistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592A59F0FDCFA0EC3C4E1A2 /* HistoryListView.swift */; };
+		6A92E68EFF9CFE47E9EDBE79 /* RitualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068F2BF0F0FF4754655FA8D /* RitualView.swift */; };
+		70FC75F7E3FDCF3875928E8D /* HapticsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1D70E969B9CC8C484149D /* HapticsEngine.swift */; };
+		724EBB8C6D104242BFF75CC0 /* RitualViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B18DA0C3B2265ADE90F3044 /* RitualViewModel.swift */; };
+		78BF2191CF047A6643444D13 /* UseGodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99875F0074F4F5853558FE0 /* UseGodView.swift */; };
+		7D3AF20776FDFE60AFC7A096 /* DivinationEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 49D3A140F99B2C2293B9BFD4 /* DivinationEngine */; };
+		89FF11D4786750297810A686 /* YaoSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A569E43E0EC99B6856F1FBC /* YaoSymbolView.swift */; };
+		8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 669ACA4E40E4606941F99F23 /* Localizable.xcstrings */; };
+		96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D91A1EFE8FA78AB0FD6E8 /* RitualSettings.swift */; };
+		9C51C21DBADF4DF9A011A8B1 /* RitualSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */; };
+		9D56B2780EF9F30BB97D7D93 /* DivinationRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */; };
+		A203FF3391CD0933B0B5BC4D /* CastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27DBA099213EE9E914A03A7 /* CastingView.swift */; };
+		AF402923D6AD97C36A95302E /* DivinationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB75B11A5056A0F461D9F577 /* DivinationRecord.swift */; };
+		B3B7D9C16F625ABBAD0FA333 /* ETICApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */; };
+		B7E5DF13608E2C440BEFF2AE /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8840B4BF1EEA2AA6D67D063 /* CompassView.swift */; };
+		C0FF02FB415B1321533762D7 /* DivinationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2559F53C05D75EBC8510C6FC /* DivinationServiceTests.swift */; };
+		C2D36E1ABC420616E798FE78 /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334AE05301780E621C23879 /* ShakeDetector.swift */; };
+		C2DA1AC3D29DBEB61FB45C1F /* FourPillarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290C5313FB92BDEE9F6379E /* FourPillarsView.swift */; };
+		CC4993D9E3FDAF60D01636E7 /* InterpretationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0DCA89909AF044A8F2380B /* InterpretationView.swift */; };
+		D54006187F83D880BF62EB95 /* CastingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152423D04295CECCC8E1C21 /* CastingViewModel.swift */; };
+		D6F4274DC4C5F6EBE1480796 /* DivinationEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 2B041FAE79185B09B25FDB67 /* DivinationEngine */; };
+		E7E420294930D0293AD3FF66 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E03031EE142AA464472DCD /* BoardView.swift */; };
+		EA89DA2D7EDBE325EC1488FC /* InkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B85AF4ADB3277575C284D79 /* InkTheme.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6802AF25B2116F15A809EF96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EF430043E55E68B7D330A9F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C1AE3DF2F80062C3A784A7DD;
+			remoteInfo = ETIC;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		04F26FE1CE0107B99FC159C1 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		10992A4A7E047260F66790AA /* LLMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMService.swift; sourceTree = "<group>"; };
+		1592A59F0FDCFA0EC3C4E1A2 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
+		1FC93B17EB7F94DF221C160D /* DivinationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationService.swift; sourceTree = "<group>"; };
+		2068F2BF0F0FF4754655FA8D /* RitualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualView.swift; sourceTree = "<group>"; };
+		2559F53C05D75EBC8510C6FC /* DivinationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationServiceTests.swift; sourceTree = "<group>"; };
+		2E7C20211DE2BA73872DB382 /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
+		4255642E77E3E3385E56CF53 /* ETIC.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ETIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4334AE05301780E621C23879 /* ShakeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetector.swift; sourceTree = "<group>"; };
+		4B18DA0C3B2265ADE90F3044 /* RitualViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualViewModel.swift; sourceTree = "<group>"; };
+		4F4C02A35E23F55AC8B03423 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualSettingsView.swift; sourceTree = "<group>"; };
+		5B85AF4ADB3277575C284D79 /* InkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkTheme.swift; sourceTree = "<group>"; };
+		61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationRecordTests.swift; sourceTree = "<group>"; };
+		669ACA4E40E4606941F99F23 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		67191570BEDEE77AFB4055A7 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
+		7152423D04295CECCC8E1C21 /* CastingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingViewModel.swift; sourceTree = "<group>"; };
+		71A272BDFA54713EE7D60BD1 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
+		74B70E3CBAAF870FF70F69DB /* InterpretationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpretationViewModel.swift; sourceTree = "<group>"; };
+		8E9BFB77D77B2A95B6CF473E /* HistoryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStoreTests.swift; sourceTree = "<group>"; };
+		9290C5313FB92BDEE9F6379E /* FourPillarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourPillarsView.swift; sourceTree = "<group>"; };
+		9A569E43E0EC99B6856F1FBC /* YaoSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaoSymbolView.swift; sourceTree = "<group>"; };
+		B3E03031EE142AA464472DCD /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		B3F103E824DE8192D5D83526 /* AnimatedYaoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedYaoView.swift; sourceTree = "<group>"; };
+		B6A1D70E969B9CC8C484149D /* HapticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsEngine.swift; sourceTree = "<group>"; };
+		B8D700D9C8EA0E360D64561F /* BoardRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardRowView.swift; sourceTree = "<group>"; };
+		D27DBA099213EE9E914A03A7 /* CastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingView.swift; sourceTree = "<group>"; };
+		D99875F0074F4F5853558FE0 /* UseGodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseGodView.swift; sourceTree = "<group>"; };
+		DA01B20A13A40A81EA8637CE /* DivinationEngine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DivinationEngine; path = ../Packages/DivinationEngine; sourceTree = SOURCE_ROOT; };
+		DA315C6426ABE9AC135AF106 /* ETICTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ETICTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB75B11A5056A0F461D9F577 /* DivinationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationRecord.swift; sourceTree = "<group>"; };
+		E46D91A1EFE8FA78AB0FD6E8 /* RitualSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualSettings.swift; sourceTree = "<group>"; };
+		E529319AE69908767DC454B4 /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
+		E8840B4BF1EEA2AA6D67D063 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
+		EC0DCA89909AF044A8F2380B /* InterpretationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpretationView.swift; sourceTree = "<group>"; };
+		F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETICApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		44F46FCB1C27B0029F222413 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6F4274DC4C5F6EBE1480796 /* DivinationEngine in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D23B77084318CE0E0F28EF4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D3AF20776FDFE60AFC7A096 /* DivinationEngine in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		13AB5DC98057235E0C1CDF0B /* History */ = {
+			isa = PBXGroup;
+			children = (
+				DB75B11A5056A0F461D9F577 /* DivinationRecord.swift */,
+				67191570BEDEE77AFB4055A7 /* HistoryDetailView.swift */,
+				1592A59F0FDCFA0EC3C4E1A2 /* HistoryListView.swift */,
+				2E7C20211DE2BA73872DB382 /* HistoryStore.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		2E12D61F830BCC3CE0F90C17 /* Ritual */ = {
+			isa = PBXGroup;
+			children = (
+				B3F103E824DE8192D5D83526 /* AnimatedYaoView.swift */,
+				E529319AE69908767DC454B4 /* CoinRowView.swift */,
+				E8840B4BF1EEA2AA6D67D063 /* CompassView.swift */,
+				B6A1D70E969B9CC8C484149D /* HapticsEngine.swift */,
+				E46D91A1EFE8FA78AB0FD6E8 /* RitualSettings.swift */,
+				57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */,
+				2068F2BF0F0FF4754655FA8D /* RitualView.swift */,
+				4B18DA0C3B2265ADE90F3044 /* RitualViewModel.swift */,
+				4334AE05301780E621C23879 /* ShakeDetector.swift */,
+			);
+			path = Ritual;
+			sourceTree = "<group>";
+		};
+		3D71EA1B9EE52220DB748D83 /* Interpret */ = {
+			isa = PBXGroup;
+			children = (
+				EC0DCA89909AF044A8F2380B /* InterpretationView.swift */,
+				74B70E3CBAAF870FF70F69DB /* InterpretationViewModel.swift */,
+			);
+			path = Interpret;
+			sourceTree = "<group>";
+		};
+		5292BEBDEA6F97D1196E7F30 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1FC93B17EB7F94DF221C160D /* DivinationService.swift */,
+				10992A4A7E047260F66790AA /* LLMService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		79BE2D2AF74DAC6851DD105D /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				B8D700D9C8EA0E360D64561F /* BoardRowView.swift */,
+				B3E03031EE142AA464472DCD /* BoardView.swift */,
+				9290C5313FB92BDEE9F6379E /* FourPillarsView.swift */,
+				04F26FE1CE0107B99FC159C1 /* PreviewData.swift */,
+				D99875F0074F4F5853558FE0 /* UseGodView.swift */,
+				9A569E43E0EC99B6856F1FBC /* YaoSymbolView.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		7B5C15841FB6FABB6E89EFD1 /* ETICTests */ = {
+			isa = PBXGroup;
+			children = (
+				61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */,
+				2559F53C05D75EBC8510C6FC /* DivinationServiceTests.swift */,
+				8E9BFB77D77B2A95B6CF473E /* HistoryStoreTests.swift */,
+			);
+			path = ETICTests;
+			sourceTree = "<group>";
+		};
+		7DD9F8857B326F328C4DDA1F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				71A272BDFA54713EE7D60BD1 /* L10n.swift */,
+				669ACA4E40E4606941F99F23 /* Localizable.xcstrings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A1A274A3F88278A3AE69942C /* ETIC */ = {
+			isa = PBXGroup;
+			children = (
+				F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */,
+				4F4C02A35E23F55AC8B03423 /* Info.plist */,
+				79BE2D2AF74DAC6851DD105D /* Board */,
+				F355DC772880EBC72806B33E /* Casting */,
+				13AB5DC98057235E0C1CDF0B /* History */,
+				3D71EA1B9EE52220DB748D83 /* Interpret */,
+				7DD9F8857B326F328C4DDA1F /* Resources */,
+				2E12D61F830BCC3CE0F90C17 /* Ritual */,
+				5292BEBDEA6F97D1196E7F30 /* Services */,
+				E8F2E747A7F69D33F039B01C /* Theme */,
+			);
+			path = ETIC;
+			sourceTree = "<group>";
+		};
+		DFAEC09AF5894780D19EEB65 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				DA01B20A13A40A81EA8637CE /* DivinationEngine */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		E76E39D3D42765ECC7A0BEEE = {
+			isa = PBXGroup;
+			children = (
+				A1A274A3F88278A3AE69942C /* ETIC */,
+				7B5C15841FB6FABB6E89EFD1 /* ETICTests */,
+				DFAEC09AF5894780D19EEB65 /* Packages */,
+				EE0B5235D6F950807595FA15 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E8F2E747A7F69D33F039B01C /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				5B85AF4ADB3277575C284D79 /* InkTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		EE0B5235D6F950807595FA15 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4255642E77E3E3385E56CF53 /* ETIC.app */,
+				DA315C6426ABE9AC135AF106 /* ETICTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F355DC772880EBC72806B33E /* Casting */ = {
+			isa = PBXGroup;
+			children = (
+				D27DBA099213EE9E914A03A7 /* CastingView.swift */,
+				7152423D04295CECCC8E1C21 /* CastingViewModel.swift */,
+			);
+			path = Casting;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1FD58D5A4329C5D6CEF055FC /* ETICTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF12D14108E956DC3D08E4C5 /* Build configuration list for PBXNativeTarget "ETICTests" */;
+			buildPhases = (
+				9668A1483A19DE8654B178F7 /* Sources */,
+				D23B77084318CE0E0F28EF4C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2BC96F858D5932845DCFE62 /* PBXTargetDependency */,
+			);
+			name = ETICTests;
+			packageProductDependencies = (
+				49D3A140F99B2C2293B9BFD4 /* DivinationEngine */,
+			);
+			productName = ETICTests;
+			productReference = DA315C6426ABE9AC135AF106 /* ETICTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C1AE3DF2F80062C3A784A7DD /* ETIC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9D0CDF29ED607F009F636C2 /* Build configuration list for PBXNativeTarget "ETIC" */;
+			buildPhases = (
+				F262B025D6E23C5DCC6F25BF /* Sources */,
+				D0132E70C0046D86CE679104 /* Resources */,
+				44F46FCB1C27B0029F222413 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ETIC;
+			packageProductDependencies = (
+				2B041FAE79185B09B25FDB67 /* DivinationEngine */,
+			);
+			productName = ETIC;
+			productReference = 4255642E77E3E3385E56CF53 /* ETIC.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3EF430043E55E68B7D330A9F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 69BBC4F357161AF1A7692CBC /* Build configuration list for PBXProject "ETIC" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = E76E39D3D42765ECC7A0BEEE;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8228243200F66ED5F953E43D /* XCLocalSwiftPackageReference "../Packages/DivinationEngine" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EE0B5235D6F950807595FA15 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C1AE3DF2F80062C3A784A7DD /* ETIC */,
+				1FD58D5A4329C5D6CEF055FC /* ETICTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D0132E70C0046D86CE679104 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9668A1483A19DE8654B178F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D56B2780EF9F30BB97D7D93 /* DivinationRecordTests.swift in Sources */,
+				C0FF02FB415B1321533762D7 /* DivinationServiceTests.swift in Sources */,
+				30611D9581AE3CCEF58F2932 /* HistoryStoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F262B025D6E23C5DCC6F25BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E088E0D6BFD34612D6F7FE1 /* AnimatedYaoView.swift in Sources */,
+				038BFA0889364118901CCD32 /* BoardRowView.swift in Sources */,
+				E7E420294930D0293AD3FF66 /* BoardView.swift in Sources */,
+				A203FF3391CD0933B0B5BC4D /* CastingView.swift in Sources */,
+				D54006187F83D880BF62EB95 /* CastingViewModel.swift in Sources */,
+				4EF26D628DA0DB53A92A6D08 /* CoinRowView.swift in Sources */,
+				B7E5DF13608E2C440BEFF2AE /* CompassView.swift in Sources */,
+				AF402923D6AD97C36A95302E /* DivinationRecord.swift in Sources */,
+				058FD104A125149A74D0EA33 /* DivinationService.swift in Sources */,
+				B3B7D9C16F625ABBAD0FA333 /* ETICApp.swift in Sources */,
+				C2DA1AC3D29DBEB61FB45C1F /* FourPillarsView.swift in Sources */,
+				70FC75F7E3FDCF3875928E8D /* HapticsEngine.swift in Sources */,
+				0CF87D86F3BA052708945066 /* HistoryDetailView.swift in Sources */,
+				5DE003C5848861D763F4CC98 /* HistoryListView.swift in Sources */,
+				44699162E3704CB267706008 /* HistoryStore.swift in Sources */,
+				EA89DA2D7EDBE325EC1488FC /* InkTheme.swift in Sources */,
+				CC4993D9E3FDAF60D01636E7 /* InterpretationView.swift in Sources */,
+				4151BA7C0DE71930E6421FA3 /* InterpretationViewModel.swift in Sources */,
+				328B7681472F8C046416FEB5 /* L10n.swift in Sources */,
+				1CE34E2A98F9819FD2AA2656 /* LLMService.swift in Sources */,
+				3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */,
+				96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */,
+				9C51C21DBADF4DF9A011A8B1 /* RitualSettingsView.swift in Sources */,
+				6A92E68EFF9CFE47E9EDBE79 /* RitualView.swift in Sources */,
+				724EBB8C6D104242BFF75CC0 /* RitualViewModel.swift in Sources */,
+				C2D36E1ABC420616E798FE78 /* ShakeDetector.swift in Sources */,
+				78BF2191CF047A6643444D13 /* UseGodView.swift in Sources */,
+				89FF11D4786750297810A686 /* YaoSymbolView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2BC96F858D5932845DCFE62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C1AE3DF2F80062C3A784A7DD /* ETIC */;
+			targetProxy = 6802AF25B2116F15A809EF96 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		20F7F7EBCEEB9049A5570F5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = ETIC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ai.etic.app;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		26F08BAF318D63FAC71646C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ai.etic.app.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ETIC.app/ETIC";
+			};
+			name = Debug;
+		};
+		2F0E8FD8A683C04159D78078 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		8E3D36C622310A02A74885DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		B97596DD7BD1AC0B418B5430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = ETIC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ai.etic.app;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D0B818909029CEC76ACB9556 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ai.etic.app.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ETIC.app/ETIC";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69BBC4F357161AF1A7692CBC /* Build configuration list for PBXProject "ETIC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F0E8FD8A683C04159D78078 /* Debug */,
+				8E3D36C622310A02A74885DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B9D0CDF29ED607F009F636C2 /* Build configuration list for PBXNativeTarget "ETIC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B97596DD7BD1AC0B418B5430 /* Debug */,
+				20F7F7EBCEEB9049A5570F5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BF12D14108E956DC3D08E4C5 /* Build configuration list for PBXNativeTarget "ETICTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26F08BAF318D63FAC71646C0 /* Debug */,
+				D0B818909029CEC76ACB9556 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		8228243200F66ED5F953E43D /* XCLocalSwiftPackageReference "../Packages/DivinationEngine" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/DivinationEngine;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2B041FAE79185B09B25FDB67 /* DivinationEngine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DivinationEngine;
+		};
+		49D3A140F99B2C2293B9BFD4 /* DivinationEngine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DivinationEngine;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3EF430043E55E68B7D330A9F /* Project object */;
+}

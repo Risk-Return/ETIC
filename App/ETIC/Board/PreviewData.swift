@@ -11,8 +11,8 @@ enum PreviewData {
         return LiuyaoEngine.cast(
             cast,
             pillars: pillars,
-            gregorianDescription: "2024年3月21日 10:00",
-            question: "近期事业发展如何？",
+        gregorianDescription: "Mar 21, 2024 10:00",
+        question: "How is my career development recently?",
             category: .career
         )
     }()

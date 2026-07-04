@@ -41,16 +41,16 @@ struct HistoryListView: View {
                 }
             }
         }
-        .navigationTitle("历史")
+        .navigationTitle(L10n.Nav.history)
         .navigationBarTitleDisplayMode(.inline)
     }
 
     private var filterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                chip("收藏", selected: favoritesOnly) { favoritesOnly.toggle() }
+                chip(L10n.History.favoritesFilter, selected: favoritesOnly) { favoritesOnly.toggle() }
                 Divider().frame(height: 18)
-                chip("全部", selected: category == nil) { category = nil }
+                chip(L10n.History.allFilter, selected: category == nil) { category = nil }
                 ForEach(categories, id: \.self) { cat in
                     chip(cat, selected: category == cat) {
                         category = (category == cat) ? nil : cat
@@ -89,7 +89,7 @@ struct HistoryListView: View {
                     Button {
                         HistoryStore.toggleFavorite(context, record)
                     } label: {
-                        Label(record.isFavorite ? "取消收藏" : "收藏",
+                        Label(record.isFavorite ? L10n.History.unfavorite : L10n.History.favorite,
                               systemImage: record.isFavorite ? "star.slash" : "star")
                     }
                     .tint(InkTheme.cinnabar)
@@ -97,7 +97,7 @@ struct HistoryListView: View {
                 .swipeActions(edge: .trailing) {
                     Button(role: .destructive) {
                         HistoryStore.delete(context, record)
-                    } label: { Label("删除", systemImage: "trash") }
+                    } label: { Label(L10n.History.delete, systemImage: "trash") }
                 }
             }
         }
@@ -110,10 +110,10 @@ struct HistoryListView: View {
             Image(systemName: "clock.arrow.circlepath")
                 .font(.system(size: 40))
                 .foregroundStyle(InkTheme.inkSoft)
-            Text("还没有卦例")
+            Text(L10n.History.emptyTitle)
                 .font(InkTheme.serifTitle(18))
                 .foregroundStyle(InkTheme.ink)
-            Text("起卦后会自动记录在此，可收藏、回看与继续追问。")
+            Text(L10n.History.emptyDesc)
                 .font(InkTheme.serifBody(14))
                 .foregroundStyle(InkTheme.inkSoft)
                 .multilineTextAlignment(.center)
@@ -139,7 +139,7 @@ private struct HistoryRow: View {
                         .font(InkTheme.serifTitle(17))
                         .foregroundStyle(InkTheme.ink)
                 }
-                Text(record.question.isEmpty ? "（未记录所问）" : record.question)
+                Text(record.question.isEmpty ? L10n.History.noQuestion : record.question)
                     .font(InkTheme.serifBody(14))
                     .foregroundStyle(InkTheme.inkSoft)
                     .lineLimit(1)
@@ -161,8 +161,8 @@ private struct HistoryRow: View {
 
     private static func dateText(_ date: Date) -> String {
         let f = DateFormatter()
-        f.locale = Locale(identifier: "zh_CN")
-        f.dateFormat = "yyyy年M月d日 HH:mm"
+        f.dateStyle = .medium
+        f.timeStyle = .short
         return f.string(from: date)
     }
 }

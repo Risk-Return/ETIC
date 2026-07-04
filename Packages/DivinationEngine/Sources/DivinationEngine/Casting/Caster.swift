@@ -2,11 +2,21 @@ import Foundation
 
 /// 起卦方式。
 public enum CastMethod: String, Codable, Sendable {
-    case coins = "铜钱"     // 三枚铜钱摇六次
-    case number = "报数"    // 数字起卦（梅花）
-    case time = "时间"      // 时间起卦（梅花）
-    case random = "随机"    // 伪随机模拟摇卦
-    case manual = "手动"    // 直接给定六爻
+    case coins = "铜钱"
+    case number = "报数"
+    case time = "时间"
+    case random = "随机"
+    case manual = "手动"
+
+    public var displayName: String {
+        switch self {
+        case .coins: return String(localized: "casting.method.coins")
+        case .number: return String(localized: "casting.method.number")
+        case .time: return String(localized: "casting.method.time")
+        case .random: return String(localized: "casting.method.random")
+        case .manual: return String(localized: "casting.method.manual")
+        }
+    }
 }
 
 /// 起卦结果：六爻老少阴阳（自下而上，index 0 = 初爻）。

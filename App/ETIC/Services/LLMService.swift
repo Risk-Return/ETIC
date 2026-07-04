@@ -14,8 +14,8 @@ struct LLMService {
 
         var errorDescription: String? {
             switch self {
-            case .badURL: return "后端地址无效。"
-            case .http(let code): return "后端返回错误（HTTP \(code)）。"
+            case .badURL: return L10n.Error.badURL
+            case .http(let code): return L10n.Error.httpError.replacingOccurrences(of: "%d", with: "\(code)")
             case .upstream(let message): return message
             }
         }

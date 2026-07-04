@@ -39,7 +39,7 @@ struct RitualView: View {
                 skipButton
             }
         }
-        .navigationTitle(model.stage == .board ? "排盘" : "起卦")
+        .navigationTitle(model.stage == .board ? L10n.Nav.board : L10n.Nav.cast)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             model.onAppear(reduceMotion: systemReduceMotion || settings.skipAnimation)
@@ -61,7 +61,7 @@ struct RitualView: View {
             Spacer()
             CompassView(rotating: true)
                 .frame(width: 240, height: 240)
-            Text("静心默念所问之事")
+            Text(L10n.Ritual.preparePrompt)
                 .font(InkTheme.serifTitle(20))
                 .foregroundStyle(InkTheme.ink)
             if let q = board.question, !q.isEmpty {
@@ -69,7 +69,7 @@ struct RitualView: View {
             }
             Spacer()
             Button(action: model.beginShaking) {
-                Text("开始摇卦")
+                Text(L10n.Ritual.beginCasting)
                     .font(InkTheme.serifTitle(18))
                     .foregroundStyle(InkTheme.card)
                     .frame(maxWidth: .infinity)
@@ -91,7 +91,7 @@ struct RitualView: View {
             formingStack
             Spacer()
             Button(action: model.toss) {
-                Text(model.allThrown ? "成卦中…" : "摇卦（\(model.revealed)/6）")
+                Text(model.allThrown ? L10n.Ritual.formingPlaceholder : "\(L10n.Ritual.casting)".replacingOccurrences(of: "%d", with: "\(model.revealed)"))
                     .font(InkTheme.serifTitle(18))
                     .foregroundStyle(InkTheme.card)
                     .frame(maxWidth: .infinity)
@@ -108,7 +108,7 @@ struct RitualView: View {
     private func formingStage(transforming: Bool) -> some View {
         VStack(spacing: 24) {
             Spacer()
-            Text("动爻变卦")
+            Text(L10n.Ritual.transformingTitle)
                 .font(InkTheme.serifTitle(20))
                 .foregroundStyle(InkTheme.cinnabar)
             formingStack
@@ -142,7 +142,7 @@ struct RitualView: View {
             HStack {
                 Spacer()
                 Button(action: model.skip) {
-                    Text("跳过动画")
+                    Text(L10n.Ritual.skipAnimation)
                         .font(.footnote)
                         .foregroundStyle(InkTheme.inkSoft)
                         .padding(.horizontal, 12)
@@ -157,9 +157,9 @@ struct RitualView: View {
     }
 
     private var shakePrompt: String {
-        if model.allThrown { return "六爻已成" }
-        if shake.isAvailable && settings.shakeToToss { return "摇一摇手机，或点下方按钮摇卦" }
-        return "点下方按钮摇卦"
+        if model.allThrown { return L10n.Ritual.allLinesDone }
+        if shake.isAvailable && settings.shakeToToss { return L10n.Ritual.shakePrompt }
+        return L10n.Ritual.tapPrompt
     }
 
     private func movingMark(_ line: LineView) -> String? {

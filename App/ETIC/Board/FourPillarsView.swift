@@ -13,13 +13,13 @@ struct FourPillarsView: View {
                     .foregroundStyle(InkTheme.inkSoft)
             }
             HStack(spacing: 10) {
-                pillar("年", castTime.yearPillar)
-                pillar("月", castTime.monthPillar)
-                pillar("日", castTime.dayPillar)
-                pillar("时", castTime.hourPillar)
+                pillar(L10n.Board.yearPillar, castTime.yearPillar)
+                pillar(L10n.Board.monthPillar, castTime.monthPillar)
+                pillar(L10n.Board.dayPillar, castTime.dayPillar)
+                pillar(L10n.Board.hourPillar, castTime.hourPillar)
             }
             if !castTime.voidBranches.isEmpty {
-                Text("旬空：" + castTime.voidBranches.joined(separator: "、"))
+                Text(L10n.Board.voidPrefix + castTime.voidBranches.joined(separator: ", "))
                     .font(.footnote)
                     .foregroundStyle(InkTheme.inkSoft)
             }

@@ -32,7 +32,7 @@ private struct CoinView: View {
                 .fill(InkTheme.paper)
                 .frame(width: size * 0.26, height: size * 0.26)
                 .overlay(RoundedRectangle(cornerRadius: 2).stroke(InkTheme.ink.opacity(0.7), lineWidth: 1.5))
-            Text(isBack ? "背" : "字")
+            Text(isBack ? L10n.Ritual.coinBack : L10n.Ritual.coinChar)
                 .font(.system(size: 13, weight: .bold, design: .serif))
                 .foregroundStyle(isBack ? InkTheme.card : InkTheme.ink)
                 .offset(y: size * 0.26)

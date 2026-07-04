@@ -2,7 +2,6 @@ import SwiftUI
 import SwiftData
 import DivinationEngine
 
-/// 起卦页：选择方法、输入问题与事项类别，起卦后进入排盘页。
 struct CastingView: View {
     @Environment(\.modelContext) private var context
     @StateObject private var model = CastingViewModel()
@@ -16,24 +15,24 @@ struct CastingView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     header
 
-                    section("所问何事") {
-                        TextField("默念并写下你要占问的事…", text: $model.question, axis: .vertical)
+                    section(L10n.Casting.questionSection) {
+                        TextField(L10n.Casting.questionPlaceholder, text: $model.question, axis: .vertical)
                             .lineLimit(2...4)
                             .font(InkTheme.serifBody(17))
                             .padding(12)
                             .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 10))
                     }
 
-                    section("事项类别") {
+                    section(L10n.Casting.categorySection) {
                         categoryGrid
                     }
 
-                    section("起卦方法") {
+                    section(L10n.Casting.methodSection) {
                         methodPicker
                         methodDetail
                     }
 
-                    section("起卦时间") {
+                    section(L10n.Casting.timeSection) {
                         DatePicker("", selection: $model.date)
                             .datePickerStyle(.compact)
                             .labelsHidden()
@@ -53,7 +52,7 @@ struct CastingView: View {
                 .padding(20)
             }
         }
-        .navigationTitle("起卦")
+        .navigationTitle(L10n.Nav.cast)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -80,10 +79,10 @@ struct CastingView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("易卦")
+            Text(L10n.Brand.appName)
                 .font(InkTheme.serifTitle(34))
                 .foregroundStyle(InkTheme.ink)
-            Text("静心默念所问之事，而后起卦")
+            Text(L10n.Brand.tagline)
                 .font(InkTheme.serifBody(15))
                 .foregroundStyle(InkTheme.inkSoft)
         }
@@ -104,7 +103,7 @@ struct CastingView: View {
         return LazyVGrid(columns: columns, alignment: .leading, spacing: 10) {
             ForEach(QuestionCategory.allCases, id: \.self) { cat in
                 let selected = model.category == cat
-                Text(cat.rawValue)
+                Text(cat.displayName)
                     .font(InkTheme.serifBody(15))
                     .foregroundStyle(selected ? InkTheme.card : InkTheme.ink)
                     .padding(.vertical, 8)
@@ -121,9 +120,9 @@ struct CastingView: View {
     }
 
     private var methodPicker: some View {
-        Picker("起卦方法", selection: $model.method) {
+        Picker(L10n.Casting.methodSection, selection: $model.method) {
             ForEach(model.methods, id: \.self) { m in
-                Text(m.rawValue).tag(m)
+                Text(m.displayName).tag(m)
             }
         }
         .pickerStyle(.segmented)
@@ -133,17 +132,17 @@ struct CastingView: View {
     private var methodDetail: some View {
         switch model.method {
         case .coins:
-            hint("摇一摇手机，三枚铜钱落定六次，自下而上成卦。（M3 接入摇一摇与触觉）")
+            hint(L10n.Casting.hintCoins)
         case .number:
             HStack(spacing: 12) {
-                numberField("上数", text: $model.upperNumber)
-                numberField("下数", text: $model.lowerNumber)
+                numberField(L10n.Casting.upperNum, text: $model.upperNumber)
+                numberField(L10n.Casting.lowerNum, text: $model.lowerNumber)
             }
-            hint("梅花易数：上下数取先天八卦，和数定动爻。")
+            hint(L10n.Casting.hintNumber)
         case .time:
-            hint("以所选时间的干支与月日起卦（梅花时间起卦）。")
+            hint(L10n.Casting.hintTime)
         case .random:
-            hint("由系统随机模拟摇卦，便于快速体验。")
+            hint(L10n.Casting.hintRandom)
         default:
             EmptyView()
         }
@@ -169,7 +168,7 @@ struct CastingView: View {
 
     private var castButton: some View {
         Button(action: model.cast) {
-            Text("起　卦")
+            Text(L10n.Casting.castButton)
                 .font(InkTheme.serifTitle(20))
                 .foregroundStyle(InkTheme.card)
                 .frame(maxWidth: .infinity)
@@ -180,7 +179,7 @@ struct CastingView: View {
     }
 
     private var disclaimer: some View {
-        Text("传统文化娱乐参考，非科学预测。请勿据此做医疗、法律、财务等重大决策。")
+        Text(L10n.Casting.disclaimer)
             .font(.caption2)
             .foregroundStyle(InkTheme.inkSoft)
             .padding(.top, 8)

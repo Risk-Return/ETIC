@@ -17,11 +17,11 @@ struct HistoryDetailView: View {
                     header
                     if let board {
                         NavigationLink { BoardView(board: board) } label: {
-                            entryLabel("查看完整盘面", systemImage: "square.grid.3x3")
+                            entryLabel(L10n.History.viewBoard, systemImage: "square.grid.3x3")
                         }
                         transcript(board: board)
                     } else {
-                        Text("盘面数据已损坏，无法展示。")
+                        Text(L10n.History.corruptBoard)
                             .font(InkTheme.serifBody(14))
                             .foregroundStyle(InkTheme.cinnabar)
                     }
@@ -29,7 +29,7 @@ struct HistoryDetailView: View {
                 .padding(20)
             }
         }
-        .navigationTitle("卦例")
+        .navigationTitle(L10n.Nav.record)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -57,7 +57,7 @@ struct HistoryDetailView: View {
                 if !record.categoryRaw.isEmpty {
                     Text(record.categoryRaw).font(.caption).foregroundStyle(InkTheme.azure)
                 }
-                Text("\(record.method)起卦").font(.caption).foregroundStyle(InkTheme.inkSoft)
+                Text("\(record.method)\(L10n.Board.methodSuffix)").font(.caption).foregroundStyle(InkTheme.inkSoft)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -67,11 +67,11 @@ struct HistoryDetailView: View {
     private func transcript(board: DivinationBoard) -> some View {
         let turns = record.turns
         VStack(alignment: .leading, spacing: 10) {
-            Text("解读记录")
+            Text(L10n.History.transcriptTitle)
                 .font(InkTheme.serifTitle(17))
                 .foregroundStyle(InkTheme.ink)
             if turns.isEmpty {
-                Text("尚无解读记录。")
+                Text(L10n.History.noTranscript)
                     .font(InkTheme.serifBody(14))
                     .foregroundStyle(InkTheme.inkSoft)
             } else {
@@ -80,7 +80,7 @@ struct HistoryDetailView: View {
                 }
             }
             NavigationLink { InterpretationView(board: board) } label: {
-                entryLabel(turns.isEmpty ? "请大师解读" : "继续追问", systemImage: "bubble.left.and.text.bubble.right")
+                entryLabel(turns.isEmpty ? L10n.History.requestReadingFallback : L10n.History.continueAsk, systemImage: "bubble.left.and.text.bubble.right")
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -91,7 +91,7 @@ struct HistoryDetailView: View {
         return HStack {
             if isUser { Spacer(minLength: 40) }
             VStack(alignment: .leading, spacing: 4) {
-                Text(isUser ? "问" : "解卦师")
+                Text(isUser ? "Q" : L10n.Interpret.masterLabel)
                     .font(.caption2)
                     .foregroundStyle(InkTheme.inkSoft)
                 Text(turn.text)

@@ -45,7 +45,8 @@ struct CompassView: View {
 
     private func drawTrigramLine(_ ctx: GraphicsContext, center: CGPoint, angle: Double, radius: CGFloat, isYang: Bool, span: Double) {
         func point(_ a: Double) -> CGPoint {
-            CGPoint(x: center.x + cos(a) * radius, y: center.y + sin(a) * radius)
+            let ra = CGFloat(a)
+            return CGPoint(x: center.x + cos(ra) * radius, y: center.y + sin(ra) * radius)
         }
         let color = GraphicsContext.Shading.color(InkTheme.ink.opacity(0.6))
         if isYang {

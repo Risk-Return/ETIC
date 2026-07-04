@@ -49,9 +49,9 @@ struct BoardRowView: View {
 
     private var markers: some View {
         HStack(spacing: 4) {
-            if line.isWorld { badge("世", InkTheme.cinnabar) }
-            if line.isResponse { badge("应", InkTheme.azure) }
-            if line.isVoid { badge("空", InkTheme.inkSoft) }
+            if line.isWorld { badge(L10n.Board.world, InkTheme.cinnabar) }
+            if line.isResponse { badge(L10n.Board.response, InkTheme.azure) }
+            if line.isVoid { badge(L10n.Board.void, InkTheme.inkSoft) }
         }
         .frame(width: 64, alignment: .trailing)
     }

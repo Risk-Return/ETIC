@@ -22,7 +22,7 @@ struct InterpretationView: View {
                 composer
             }
         }
-        .navigationTitle("大师解读")
+        .navigationTitle(L10n.Nav.interpret)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { model.startIfNeeded() }
         .onDisappear { model.cancel(); persist() }
@@ -91,7 +91,7 @@ struct InterpretationView: View {
 
     private var composer: some View {
         HStack(spacing: 10) {
-            TextField("就此卦追问…", text: $model.draft, axis: .vertical)
+            TextField(L10n.Interpret.placeholder, text: $model.draft, axis: .vertical)
                 .font(InkTheme.serifBody(15))
                 .lineLimit(1...4)
                 .padding(10)
@@ -129,7 +129,7 @@ private struct GroundingSection: View {
                 HStack(spacing: 6) {
                     Image(systemName: "book.closed")
                         .font(.system(size: 13))
-                    Text("经文参考")
+                    Text(L10n.Interpret.scriptureTitle)
                         .font(InkTheme.serifTitle(15))
                     Text("\(items.count)")
                         .font(.caption2)
@@ -148,7 +148,7 @@ private struct GroundingSection: View {
                     ForEach(items) { item in
                         GroundingCard(item: item)
                     }
-                    Text("经文仅供参考，断卦以盘面世应 / 用神为准。")
+                    Text(L10n.Interpret.scriptureDisclaimer)
                         .font(.caption2)
                         .foregroundStyle(InkTheme.inkSoft)
                         .padding(.top, 2)
@@ -195,7 +195,7 @@ private struct TurnBubble: View {
             if isUser { Spacer(minLength: 40) }
             VStack(alignment: .leading, spacing: 4) {
                 if !isUser {
-                    Text("解卦师")
+                    Text(L10n.Interpret.masterLabel)
                         .font(.caption2)
                         .foregroundStyle(InkTheme.inkSoft)
                 }
@@ -231,7 +231,7 @@ private struct ThinkingIndicator: View {
                         value: phase
                     )
             }
-            Text("凝神推演…")
+            Text(L10n.Interpret.thinking)
                 .font(InkTheme.serifBody(14))
                 .foregroundStyle(InkTheme.inkSoft)
         }

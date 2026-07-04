@@ -40,7 +40,7 @@ struct BoardView: View {
                 .padding(20)
             }
         }
-        .navigationTitle("排盘")
+        .navigationTitle(L10n.Nav.board)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             guard animateReveal, !revealed else { revealed = true; return }
@@ -52,7 +52,7 @@ struct BoardView: View {
     private var questionHeader: some View {
         if let question = board.question, !question.isEmpty {
             VStack(alignment: .leading, spacing: 4) {
-                Text("所问")
+                Text(L10n.Board.question)
                     .font(.caption)
                     .foregroundStyle(InkTheme.inkSoft)
                 Text(question)
@@ -77,7 +77,7 @@ struct BoardView: View {
                         .foregroundStyle(InkTheme.inkSoft)
                 }
             }
-            Text("\(displayed.palace) · \(displayed.palaceElement)　\(displayed.upperTrigram)上\(displayed.lowerTrigram)下　\(board.method)起卦")
+            Text("\(displayed.palace) · \(displayed.palaceElement)  \(displayed.upperTrigram)\(L10n.Board.upperTrigramSuffix)\(displayed.lowerTrigram)\(L10n.Board.lowerTrigramSuffix)  \(board.method)\(L10n.Board.methodSuffix)")
                 .font(InkTheme.serifBody(14))
                 .foregroundStyle(InkTheme.inkSoft)
         }
@@ -86,8 +86,8 @@ struct BoardView: View {
 
     private var primaryChangedToggle: some View {
         Picker("", selection: $showChanged) {
-            Text("本卦").tag(false)
-            Text("变卦").tag(true)
+            Text(L10n.Board.primary).tag(false)
+            Text(L10n.Board.changed).tag(true)
         }
         .pickerStyle(.segmented)
     }
@@ -113,23 +113,23 @@ struct BoardView: View {
     }
 
     private var legend: some View {
-        Text("○ 老阳动　× 老阴动　世/应 为卦之主客　空 为旬空　旺相休囚死 为月令旺衰")
+        Text(L10n.Board.legend)
             .font(.caption2)
             .foregroundStyle(InkTheme.inkSoft)
     }
 
     private var interpretationEntry: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("解读")
+            Text(L10n.Board.interpretation)
                 .font(InkTheme.serifTitle(17))
                 .foregroundStyle(InkTheme.ink)
-            Text("把这份盘面交给「资深六爻解卦师」，给出断语并支持多轮追问。盘面已算定，解读不会改动卦象。")
+            Text(L10n.Board.interpretationDesc)
                 .font(InkTheme.serifBody(14))
                 .foregroundStyle(InkTheme.inkSoft)
             NavigationLink {
                 InterpretationView(board: board)
             } label: {
-                Text("请大师解读")
+                Text(L10n.Board.requestReading)
                     .font(InkTheme.serifBody(15))
                     .foregroundStyle(InkTheme.cinnabar)
                     .frame(maxWidth: .infinity)
@@ -144,7 +144,7 @@ struct BoardView: View {
     }
 
     private var disclaimer: some View {
-        Text("传统文化娱乐参考，非科学预测。")
+        Text(L10n.Board.disclaimer)
             .font(.caption2)
             .foregroundStyle(InkTheme.inkSoft)
     }

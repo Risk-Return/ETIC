@@ -1,6 +1,7 @@
 name: ETIC
 options:
   bundleIdPrefix: ai.etic
+  defaultLocalization: en
   deploymentTarget:
     iOS: "17.0"
   createIntermediateGroups: true
@@ -21,6 +22,7 @@ targets:
       path: ETIC/Info.plist
       properties:
         CFBundleDisplayName: 易卦
+        CFBundleDevelopmentRegion: en
         UILaunchScreen: {}
         UIApplicationSceneManifest:
           UIApplicationSupportsMultipleScenes: false
@@ -30,7 +32,7 @@ targets:
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
         # 摇一摇起卦需读取设备运动数据（M3）。
-        NSMotionUsageDescription: 用于摇一摇起卦的运动检测。
+        NSMotionUsageDescription: Used to detect shake motion for casting hexagrams.
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: ai.etic.app
@@ -38,3 +40,20 @@ targets:
         SWIFT_VERSION: "5.9"
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
+        ENABLE_TESTABILITY: "YES"
+  ETICTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - ETICTests
+    dependencies:
+      - target: ETIC
+      - package: DivinationEngine
+        product: DivinationEngine
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: "YES"
+        PRODUCT_BUNDLE_IDENTIFIER: ai.etic.app.tests
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SWIFT_VERSION: "5.9"

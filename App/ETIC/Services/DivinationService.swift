@@ -13,8 +13,8 @@ enum DivinationService {
 
         var errorDescription: String? {
             switch self {
-            case .invalidNumbers: return "报数需为正整数。"
-            case .calendarOutOfRange: return "日期超出支持范围（1900–2100）。"
+            case .invalidNumbers: return L10n.Error.invalidNumbers
+            case .calendarOutOfRange: return L10n.Error.calendarOutOfRange
             }
         }
     }
@@ -75,8 +75,8 @@ enum DivinationService {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .gregorian)
         formatter.timeZone = timeZone
-        formatter.locale = Locale(identifier: "zh_CN")
-        formatter.dateFormat = "yyyy年M月d日 HH:mm"
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "MMM d, yyyy HH:mm"
         return formatter.string(from: date)
     }
 }
