@@ -26,11 +26,16 @@ class Document:
 
     @property
     def ref(self) -> str:
-        if self.doc_type == "judgment":
-            return f"《{self.hexagram_name}》卦辞"
-        if self.doc_type == "tuan":
-            return f"《{self.hexagram_name}》彖传"
-        return f"《{self.hexagram_name}》{_POSITION_NAMES[self.line_position - 1]}爻"
+        name = self.hexagram_name.decode() if isinstance(self.hexagram_name, bytes) else self.hexagram_name
+        doc = self.doc_type.decode() if isinstance(self.doc_type, bytes) else self.doc_type
+        if doc == "judgment":
+            return f"《{name}》卦辞"
+        if doc == "tuan":
+            return f"《{name}》彖传"
+        if self.line_position is not None:
+            pos = int(self.line_position) - 1
+            return f"《{name}》{_POSITION_NAMES[pos]}爻"
+        return f"《{name}》{doc}"
 
 
 @lru_cache

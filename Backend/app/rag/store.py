@@ -97,9 +97,19 @@ def ingest(
         return int(cur.fetchone()[0])
 
 
+def _decode(v):
+    return v.decode() if isinstance(v, bytes) else v
+
+
 def _row_to_doc(row: tuple) -> Document:
     name, short, doc_type, pos, content = row
-    return Document(name, short, doc_type, pos, content)
+    return Document(_decode(name), _decode(short), _decode(doc_type), pos, _decode(content))
+
+
+def _exclude_key(row: tuple) -> tuple:
+    name = _decode(row[0])
+    doc_type = _decode(row[2])
+    return (name, doc_type, row[3])
 
 
 def fetch_exact(
@@ -124,7 +134,7 @@ def fetch_exact(
                     (name, doc_type, pos),
                 )
             for row in cur.fetchall():
-                key = (row[0], row[2], row[3])
+                key = _exclude_key(row)
                 if key not in seen:
                     seen.add(key)
                     out.append(_row_to_doc(row))
@@ -149,8 +159,7 @@ def search(
     exclude_set = set(exclude)
     out: list[tuple[Document, float]] = []
     for row in rows:
-        key = (row[0], row[2], row[3])
-        if key in exclude_set:
+        if _exclude_key(row) in exclude_set:
             continue
         out.append((_row_to_doc(row[:5]), float(row[5])))
         if len(out) >= top_k:

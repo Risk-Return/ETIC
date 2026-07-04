@@ -31,6 +31,8 @@ targets:
         # 开发期允许访问本地后端（http://localhost）；上线改为 HTTPS 后移除。
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
+        # 后端解读服务地址（可经此键覆盖 LLMService 的编译期默认值）。
+        ETIC_BACKEND_BASE_URL: https://deepwitai.cn/app/etic
         # 摇一摇起卦需读取设备运动数据（M3）。
         NSMotionUsageDescription: Used to detect shake motion for casting hexagrams.
     settings:

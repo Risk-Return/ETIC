@@ -34,6 +34,9 @@ def _mock_embed_one(text: str, dim: int) -> list[float]:
     return [v / norm for v in vec]
 
 
+_EMBED_BATCH_SIZE = 10
+
+
 async def _embed_openai_compatible(
     settings: Settings, texts: Sequence[str]
 ) -> list[list[float]]:
@@ -42,17 +45,21 @@ async def _embed_openai_compatible(
         "Authorization": f"Bearer {settings.effective_embed_api_key}",
         "Content-Type": "application/json",
     }
-    payload = {"model": settings.embed_model, "input": list(texts)}
+    all_vectors: list[list[float]] = []
     async with httpx.AsyncClient(timeout=settings.llm_timeout_seconds) as client:
-        resp = await client.post(url, json=payload, headers=headers)
-        if resp.status_code >= 400:
-            raise EmbeddingError(
-                f"上游 embeddings {resp.status_code}: {resp.text[:500]}"
-            )
-        data = resp.json().get("data") or []
-        if len(data) != len(texts):
-            raise EmbeddingError("embeddings 返回条数与输入不一致")
-        return [item["embedding"] for item in data]
+        for i in range(0, len(texts), _EMBED_BATCH_SIZE):
+            batch = texts[i : i + _EMBED_BATCH_SIZE]
+            payload = {"model": settings.embed_model, "input": list(batch)}
+            resp = await client.post(url, json=payload, headers=headers)
+            if resp.status_code >= 400:
+                raise EmbeddingError(
+                    f"上游 embeddings {resp.status_code}: {resp.text[:500]}"
+                )
+            data = resp.json().get("data") or []
+            if len(data) != len(batch):
+                raise EmbeddingError("embeddings 返回条数与输入不一致")
+            all_vectors.extend(item["embedding"] for item in data)
+    return all_vectors
 
 
 async def embed_texts(

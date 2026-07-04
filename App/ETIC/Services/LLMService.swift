@@ -34,7 +34,7 @@ struct LLMService {
         {
             self.baseURL = url
         } else {
-            self.baseURL = URL(string: "http://localhost:8000")!
+            self.baseURL = URL(string: "https://deepwitai.cn/app/etic")!
         }
     }
 
