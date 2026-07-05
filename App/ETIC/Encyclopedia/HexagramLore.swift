@@ -11,6 +11,13 @@ struct HexagramLore: Decodable, Identifiable, Hashable {
     let lines: [String: String] // 爻辞，键为「1」…「6」（初→上）
     let tuan: String?           // 彖辞（可空）
 
+    /// 周易通行卦序（1-64），由加载时注入，不参与 JSON 解码。
+    var index: Int = 0
+
+    enum CodingKeys: String, CodingKey {
+        case name, short, judgment, lines, tuan
+    }
+
     var id: String { name }
 
     /// 六爻辞，按初→上排序。
@@ -33,7 +40,11 @@ enum EncyclopediaStore {
               let items = try? JSONDecoder().decode([HexagramLore].self, from: data) else {
             return []
         }
-        return items
+        return items.enumerated().map { i, item in
+            var copy = item
+            copy.index = i + 1
+            return copy
+        }
     }
 
     /// 按卦名 / 短名 / 卦辞关键字过滤。
@@ -43,5 +54,12 @@ enum EncyclopediaStore {
         return all.filter {
             $0.name.contains(q) || $0.short.contains(q) || $0.judgment.contains(q)
         }
+    }
+
+    /// 根据卦序获取通俗解读，支持 i18n。未录入的卦返回 nil。
+    static func explanation(for index: Int) -> String? {
+        let key = "hexagram.explanation.\(index)"
+        let text = LocalizationStore.string(key)
+        return text == key ? nil : text
     }
 }

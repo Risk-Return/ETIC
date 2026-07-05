@@ -11,6 +11,9 @@ struct EncyclopediaDetailView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     header
+                    if let explanation = EncyclopediaStore.explanation(for: lore.index) {
+                        explanationSection(explanation)
+                    }
                     section(L10n.Encyclopedia.judgmentTitle, text: lore.judgment)
                     if let tuan = lore.tuan, !tuan.isEmpty {
                         section(L10n.Encyclopedia.tuanTitle, text: tuan)
@@ -48,6 +51,27 @@ struct EncyclopediaDetailView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
         .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    private func explanationSection(_ text: String) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(L10n.Encyclopedia.explanationTitle)
+                .font(InkTheme.serifTitle(17))
+                .foregroundStyle(InkTheme.azure)
+            Text(text)
+                .font(InkTheme.serifBody(16))
+                .foregroundStyle(InkTheme.ink)
+                .textSelection(.enabled)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(14)
+        .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 12))
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(InkTheme.azure.opacity(0.4))
+                .frame(width: 4)
+        }
     }
 
     private var linesSection: some View {

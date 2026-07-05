@@ -128,6 +128,7 @@ enum L10n {
         static var tuanTitle: String { LocalizationStore.string("encyclopedia.tuanTitle") }
         static var linesTitle: String { LocalizationStore.string("encyclopedia.linesTitle") }
         static var disclaimer: String { LocalizationStore.string("encyclopedia.disclaimer") }
+        static var explanationTitle: String { LocalizationStore.string("encyclopedia.explanationTitle") }
     }
 
     enum Interpret {

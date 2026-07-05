@@ -618,5 +618,265 @@
   "account.viewPlans": {
     "en": "View Plans & Buy",
     "zh-Hans": "查看套餐与购买"
+  },
+  "encyclopedia.explanationTitle": {
+    "en": "Understanding",
+    "zh-Hans": "通俗解读"
+  },
+  "hexagram.explanation.1": {
+    "en": "乾(Qian) represents pure creative energy — the power of Heaven itself. It symbolizes initiative, leadership, strength, and unwavering principle. In daily life, this hexagram encourages you to take the first step boldly, to act with integrity and persistence. Like a dragon soaring through the clouds, timing is everything: know when to advance and when to pause. The essence is self-motivated action grounded in moral clarity.",
+    "zh-Hans": "乾卦象征纯粹的创造之力，如天道运行，刚健不息。它代表进取、领导、自强与坚守正道。在日常生活中，此卦鼓励你把握时机、勇敢迈出第一步，以正直和持久的努力去开创局面。如龙行云中，关键在于审时度势，该进则进，该止则止。核心精神是基于道义自觉的积极行动。"
+  },
+  "hexagram.explanation.2": {
+    "en": "履(Lü) represents proper conduct — treading the right path with careful steps. It symbolizes etiquette, role-awareness, and the courage to proceed despite danger (the tiger). The hexagram advises knowing your place, respecting boundaries, and acting with courtesy and caution in social and professional situations.",
+    "zh-Hans": "履卦代表依礼而行、谨慎迈步。它象征礼仪、角色意识与履险如夷的勇气（伴虎而行）。此卦提醒人在社交与职场中要明白自身位置、尊重界限、以礼相待、步步为营。"
+  },
+  "hexagram.explanation.3": {
+    "en": "同人(Tong Ren) represents fellowship and community — people united by shared ideals. It symbolizes the power of gathering like-minded individuals for a common purpose. The hexagram emphasizes that true community is based on openness and shared values, not exclusivity or clan interest.",
+    "zh-Hans": "同人卦代表志同道合之人团结一心。它象征因共同理想而凝聚的力量。此卦强调真正的社群基于开放与共同价值，而非排外或门户之见。"
+  },
+  "hexagram.explanation.4": {
+    "en": "无妄(Wu Wang) represents innocence and authenticity — acting without guile or ulterior motive. It symbolizes the purity of intention that comes from being true to one's nature. The hexagram advises sincerity and spontaneity over calculation. Unexpected misfortune may still come, but the innocent heart remains at peace.",
+    "zh-Hans": "无妄卦代表真诚与自然——不怀机心、不造假。它象征出自本性的纯粹动机。此卦教人诚实自发、不事算计。无妄之灾亦可能降临，但内心坦荡者始终安宁。"
+  },
+  "hexagram.explanation.5": {
+    "en": "姤(Gou) represents encounter and meeting — particularly the unexpected encounter that can change everything. It symbolizes fateful meetings, both fortunate and dangerous. The hexagram advises awareness when encountering new forces or people: not every encounter is benign, but every encounter carries a lesson.",
+    "zh-Hans": "姤卦代表邂逅与相遇——尤其是那些可能改变一切的意外相遇。它象征命运的邂逅，或吉或凶。此卦提醒：面对新的力量或人物时保持清醒，并非每次相遇都是善缘，但每次相遇都带来启示。"
+  },
+  "hexagram.explanation.6": {
+    "en": "讼(Song) represents conflict and dispute. It arises when communication breaks down and interests clash. The hexagram warns against prolonged litigation and advises seeking resolution through compromise or a fair third party. The best victory is one where conflict is avoided altogether by addressing issues early.",
+    "zh-Hans": "讼卦代表冲突与争辩，源于沟通不畅与利益相争。此卦告诫人们不要陷入无休止的争讼，应寻求妥协或公正裁断。最好的胜利是在冲突发生之前就化解分歧。"
+  },
+  "hexagram.explanation.7": {
+    "en": "遯(Dun) represents strategic retreat — not cowardice, but the wisdom of withdrawing when the time is unfavorable. It symbolizes knowing when to step back, preserve your strength, and wait for better conditions. The small person clings; the wise person knows when to let go. Retreat can be the most powerful advance.",
+    "zh-Hans": "遯卦代表退避——不是怯懦，而是审时度势的智慧。它象征知何时后退、保存实力、静待时机。小人执著不放，智者知所进退。有时退一步恰是最有力的前进。"
+  },
+  "hexagram.explanation.8": {
+    "en": "否(Pi) represents stagnation and blockage — when Heaven and Earth do not interact. It symbolizes a period of disconnection, misunderstanding, and obstruction. During such times, the wise person withdraws, conserves energy, and maintains inner integrity rather than forcing progress. This too shall pass.",
+    "zh-Hans": "否卦代表闭塞不通、天地不交。它象征沟通隔绝、误解重重、行事受阻的时期。此时智者选择退守、积蓄能量、守住内心正道，而非强行推进。否极终将泰来。"
+  },
+  "hexagram.explanation.9": {
+    "en": "夬(Guai) represents breakthrough and decisive resolution — the moment when long-building tension finally breaks. It symbolizes confronting a persistent problem or person with firmness and clarity. The hexagram advises making the break cleanly and openly, without sneakiness. A decisive separation clears space for new growth.",
+    "zh-Hans": "夬卦代表决断与突破——长久积累的张力终于突破的那一刻。它象征正面、坚定而清晰地对峙一个顽固的人或事。此卦劝人光明磊落地决裂，不耍手段。一次明确的断舍，为新生腾出空间。"
+  },
+  "hexagram.explanation.10": {
+    "en": "兑(Dui) represents joy and openness — the lake that reflects and receives, the smile that connects people. It symbolizes pleasure, communication, and the mutual encouragement found in good company. The hexagram reminds that genuine joy is shared, not solitary. Speak with sincerity and listen with an open heart; joy multiplies when exchanged.",
+    "zh-Hans": "兑卦代表喜悦与开放——如湖之映照与接纳，如笑容联结人心。它象征快乐、沟通与同道相欢。此卦提醒：真正的喜悦是分享而非独享。以真诚说话、以开放之心倾听，喜悦在交流中加倍。"
+  },
+  "hexagram.explanation.11": {
+    "en": "革(Ge) represents revolution and transformation — the shedding of old skin. It symbolizes radical change that comes when the old order can no longer hold. The hexagram stresses that successful change requires the right timing, broad support, and clear vision. Revolution without wisdom leads to chaos; with wisdom, to renewal.",
+    "zh-Hans": "革卦代表变革与蜕变——如蛇蜕皮，旧貌换新颜。它象征旧秩序难以为继时的彻底改造。此卦强调：成功的变革需要恰当的天时、广泛的支持和清晰的远见。变革无智则乱，有智则兴。"
+  },
+  "hexagram.explanation.12": {
+    "en": "随(Sui) represents following and adaptability — going with the flow rather than resisting. It symbolizes knowing when to lead and when to follow, when to act and when to yield. The hexagram advises flexibility: adapt to changing circumstances while keeping your core values intact. Wise following is not weakness but strategic alignment.",
+    "zh-Hans": "随卦代表随顺与适应，顺势而行而非逆势抗拒。它象征知何时领先、何时跟从，何时行动、何时退让。此卦强调灵活应变，顺势调整而不失本心。明智的跟随不是软弱，而是策略性的顺势而为。"
+  },
+  "hexagram.explanation.13": {
+    "en": "大过(Da Guo) represents great excess and crisis — when a beam is too heavy for its supports. It symbolizes situations of extreme imbalance that require extraordinary measures. In times of great pressure, conventional solutions fail. The hexagram counsels bold, unconventional action, but grounded in integrity. Crisis reveals character.",
+    "zh-Hans": "大过卦代表过度的危机——栋梁弯曲，不堪重负。它象征极端失衡、需要非常手段的时刻。重压之下，寻常解法失效。此卦劝人果敢行动，出奇制胜，但须以正固本。危机见真性。"
+  },
+  "hexagram.explanation.14": {
+    "en": "困(Kun) represents oppression and exhaustion — when you are surrounded by difficulties with no apparent way out. It symbolizes burnout, depletion, and feeling trapped. The hexagram teaches that in times of extreme hardship, words carry little weight; what matters is maintaining inner resolve. Adversity reveals the depth of one's character.",
+    "zh-Hans": "困卦代表困顿与枯竭——四面楚歌、似乎无路可走。它象征倦怠、耗尽与被围困之感。此卦教人：极端困境中言语无力，唯内心的坚守是真。困厄见人品之深浅。"
+  },
+  "hexagram.explanation.15": {
+    "en": "咸(Xian) represents influence and attraction — the magnetic pull between two beings. It symbolizes courtship, partnership, and the subtle power of sincere feeling to move others. The hexagram describes how influence works: not through force, but through genuine openness and responsiveness. True connection happens when hearts resonate.",
+    "zh-Hans": "咸卦代表感应与吸引——两个生命之间的磁场。它象征恋爱、合作与真诚情感打动人心的力量。此卦揭示影响之道：不是靠强力，而是靠真诚的开放与回应。心灵的共鸣才是真正的连接。"
+  },
+  "hexagram.explanation.16": {
+    "en": "萃(Cui) represents gathering together — people, resources, or energy converging at a focal point. It symbolizes community assembly, collective purpose, and the strength found in numbers. The hexagram emphasizes the importance of a strong center (a shared goal or leader) to hold the gathering together. Unity amplifies power.",
+    "zh-Hans": "萃卦代表聚集——人、资源或能量的汇聚。它象征社群集结、共同目标与群策群力。此卦强调一个强有力的中心（或目标、或领袖）来凝聚众人。团结使力量倍增。"
+  },
+  "hexagram.explanation.17": {
+    "en": "大有(Da You) represents great abundance — a time of plentiful harvest and widespread blessings. It symbolizes wealth, both material and spiritual, that is generously shared. The hexagram cautions that great possession calls for great responsibility: use abundance to benefit others, not just oneself.",
+    "zh-Hans": "大有卦代表丰盛富足，收获满满的时期。它象征物质与精神的双重富有，且乐于分享。此卦提醒：大有的背后是大责任——用丰盛去惠及他人，而非独享。"
+  },
+  "hexagram.explanation.18": {
+    "en": "睽(Kui) represents opposition and estrangement — when people who should be close grow apart. It symbolizes misunderstanding, divergence of views, and the tension of difference. Yet within opposition lies the potential for creative synthesis. The hexagram suggests that small commonalities can bridge large divides when approached with gentleness.",
+    "zh-Hans": "睽卦代表乖离与隔阂——本应亲近之人渐行渐远。它象征误解、分歧与差异带来的张力。然而乖离之中亦有和合之机。此卦提示：以柔克刚，从小处求同，可化大异为大同。"
+  },
+  "hexagram.explanation.19": {
+    "en": "离(Li) represents clarity and illumination — fire that lights up the darkness. It symbolizes intelligence, perception, and the power of understanding. Just as fire depends on fuel to burn, clarity depends on being grounded in truth. The hexagram advises cultivating wisdom and letting your inner light guide and inspire others.",
+    "zh-Hans": "离卦代表光明与洞见——火照亮黑暗。它象征智慧、觉察力与明辨的力量。如火依附于薪，智慧依附于真实。此卦劝人培养内在光明，以智慧和洞见照亮自己、温暖他人。"
+  },
+  "hexagram.explanation.20": {
+    "en": "噬嗑(Shi He) represents biting through obstacles — decisive action to remove what blocks the way. It symbolizes the use of law, discipline, or firm resolution to cut through confusion and restore order. Sometimes gentle approaches fail; this hexagram says it is time to bite down and break through decisively.",
+    "zh-Hans": "噬嗑卦代表啃硬骨头、清除障碍。它象征以法律、纪律或坚定决心来破除混乱、恢复秩序。当怀柔之策失效时，此卦表明：是时候咬紧牙关果断突破了。"
+  },
+  "hexagram.explanation.21": {
+    "en": "鼎(Ding) represents the cauldron — a sacred vessel for cooking offerings to Heaven. It symbolizes transformation through refinement, the creation of value, and the establishment of a new order. Like a cauldron that cooks raw ingredients into nourishing food, this hexagram is about turning ideas and resources into something meaningful and lasting.",
+    "zh-Hans": "鼎卦代表鼎器——烹食以祭天的神圣容器。它象征火候锤炼、化生为熟、新秩序的建立。如同鼎将生料烹为美食，此卦讲的是将想法和资源转化为有意义、持久的成果。"
+  },
+  "hexagram.explanation.22": {
+    "en": "未济(Wei Ji) represents before completion — the final hexagram, reminding us that the work is never truly finished. It symbolizes the perpetual state of becoming, the journey that always continues. Far from being discouraging, this hexagram is hopeful: every ending opens into a new beginning. Life is an ongoing process of crossing from incompleteness toward completion.",
+    "zh-Hans": "未济卦代表事未成——六十四卦之末，提醒我们万事永无止境。它象征永恒的「正在成为」状态，旅程永续。此卦非但不令人气馁，反而充满希望：每一个终点都通向新的起点。人生就是一个从未完成走向完成的持续过程。"
+  },
+  "hexagram.explanation.23": {
+    "en": "旅(Lü) represents the wanderer and the traveler — being a stranger in unfamiliar territory. It symbolizes transitions, displacement, and the journey through unknown terrain. The hexagram advises that when you are in foreign circumstances, be adaptable, humble, and careful. A traveler moves lightly, makes no permanent enemies, and learns from every encounter.",
+    "zh-Hans": "旅卦代表行旅之人——身在异乡为异客。它象征过渡期、流离与穿行未知之地。此卦劝人：身处陌生境地时，要适应、低调、谨慎。旅人行装轻简，不树敌，从每一次相遇中学习。"
+  },
+  "hexagram.explanation.24": {
+    "en": "晋(Jin) represents progress and advancement — steady forward movement like the rising sun. It symbolizes career growth, recognition, and the gradual unfolding of potential. The hexagram encourages persistent effort: each day brings you closer to your goal. True progress is not a leap but a steady climb illuminated by clarity.",
+    "zh-Hans": "晋卦代表进步与前进——如旭日冉冉升起。它象征事业成长、获得认可与潜力的逐步展现。此卦鼓励持续精进：日日寸进，终至目标。真正的进步不是一跃而起，而是步步登高的清明之旅。"
+  },
+  "hexagram.explanation.25": {
+    "en": "大壮(Da Zhuang) represents great strength and power — the peak of vigorous energy. It symbolizes a time when your force is at its maximum, like a ram with powerful horns. The hexagram warns that great power must be tempered with restraint; unchecked strength becomes destructive. Use power wisely and ethically.",
+    "zh-Hans": "大壮卦代表强盛的力量——精力达于顶峰的时刻。如公羊角力，它象征力量充沛的时期。此卦警戒：力大须以克制为配，不加约束的力量终将自伤。用力量需智慧与正道。"
+  },
+  "hexagram.explanation.26": {
+    "en": "归妹(Gui Mei) represents the marrying maiden — a relationship where one enters with unequal standing. It symbolizes situations where you join a new environment without full status or control. The hexagram advises handling such circumstances with grace and humility: your worth is not defined by your position, but by the quality you bring.",
+    "zh-Hans": "归妹卦代表少女出嫁——以不对等身份进入一段关系。它象征身处新环境而缺乏地位与主导权的处境。此卦劝人以从容和谦逊应对：你的价值不由处境决定，而是你所带来的品质。"
+  },
+  "hexagram.explanation.27": {
+    "en": "丰(Feng) represents abundance and fullness — the peak of flourishing when everything is at its height. It symbolizes prosperity, celebration, and the richness of life in full bloom. The hexagram reminds that peaks are temporary, like noon that soon becomes afternoon. Enjoy abundance fully while it lasts, but prepare wisely for the natural turn.",
+    "zh-Hans": "丰卦代表丰盛与盈满——万物鼎盛，达于巅峰。它象征繁荣、欢庆与生命怒放的富足期。此卦提醒：盛极必衰，如日中则昃。充分享受丰盛之时，也智慧地为自然转折做好准备。"
+  },
+  "hexagram.explanation.28": {
+    "en": "震(Zhen) represents shock and arousal — the thunder that startles, awakens, and shakes things loose. It symbolizes sudden events that disrupt the status quo and test your composure. The hexagram teaches that after the initial shock, examine the situation calmly and learn from it. Let life's jolts deepen your wisdom, not shatter your calm.",
+    "zh-Hans": "震卦代表震动与惊醒——雷霆乍起，震动四方。它象征打破平静的突发事件，考验你的定力。此卦教人：初震之后需冷静审视、从中学取教训。让生活的震荡加深智慧，而非击碎平静。"
+  },
+  "hexagram.explanation.29": {
+    "en": "恒(Heng) represents endurance and constancy — the long-term commitment that outlasts changing circumstances. It symbolizes marriage, sustained effort, and the value of sticking with principles through thick and thin. The hexagram reminds that lasting success comes not from dramatic bursts but from steady, unwavering dedication.",
+    "zh-Hans": "恒卦代表恒久与坚守——历经变化而不改的长久承诺。它象征婚姻、持续努力与始终如一的价值观。此卦提醒：长久的成功不源于一时冲刺，而源于稳定不变的付出与坚持。"
+  },
+  "hexagram.explanation.30": {
+    "en": "解(Xie) represents deliverance and release — tension dissolving, obstacles clearing, and freedom returning. After a period of obstruction, relief finally arrives. The hexagram advises acting swiftly once the way is open, resolving remaining issues, and not dwelling on past difficulties. Forgiveness and letting go complete the liberation.",
+    "zh-Hans": "解卦代表解脱与释放——张力消散、障碍清除、自由回归。历经阻塞之后，转机终于到来。此卦劝人趁势而为，速解余困，不纠结过往。宽恕与放下，方成真正的解脱。"
+  },
+  "hexagram.explanation.31": {
+    "en": "小过(Xiao Guo) represents small excess — minor overcorrections and deviations that are manageable. It symbolizes situations where going slightly beyond the norm is appropriate: being a little too humble at a funeral, a little too frugal in hard times. The hexagram advises that small adjustments, not grand changes, are what the current situation calls for.",
+    "zh-Hans": "小过卦代表稍微过度——小范围内的矫正与偏离，仍可控制。它象征略超常规反而恰当的场合：丧礼中稍过哀戚，困境中稍过节俭。此卦提醒：当下所需的是小调整而非大变革。"
+  },
+  "hexagram.explanation.32": {
+    "en": "豫(Yu) represents enthusiasm and joy — the energy that moves people to action. It symbolizes the power of music, celebration, and shared excitement to motivate and inspire. The hexagram advises channeling enthusiasm constructively: prepare thoroughly so that when momentum comes, you can ride it skillfully.",
+    "zh-Hans": "豫卦代表愉悦与振奋，驱动人们行动的能量。如音乐激荡人心，它象征庆典与共同热情所带来的动力和灵感。此卦提醒将热情投向建设性方向：充分准备，顺势而为。"
+  },
+  "hexagram.explanation.33": {
+    "en": "小畜(Xiao Xu) represents small accumulation — gradual progress through restraint and careful management. Like a farmer storing grain bit by bit, it symbolizes the power of small consistent efforts. The gentle wind restrains the clouds before the rain: patience and moderation allow small gains to build into substantial results.",
+    "zh-Hans": "小畜卦代表小步积累，以节制与经营实现渐进。如农夫一点一点储存粮食，它象征持续点滴努力的力量。风行天上而未雨，正是提醒人：耐心与适度能让小成果汇成大局。"
+  },
+  "hexagram.explanation.34": {
+    "en": "中孚(Zhong Fu) represents inner truth and sincerity — integrity that reaches even the simplest creatures. It symbolizes the power of genuine honesty to inspire trust and move others without manipulation. The hexagram emphasizes that true communication comes from the heart. When your inner truth is clear, your outer actions naturally align, and people respond with trust.",
+    "zh-Hans": "中孚卦代表内心的诚信——连最纯朴的生命也能感受到的正直。它象征真诚的力量，无需操纵便能赢得信任、打动人心。此卦强调：真正的沟通发自内心。内心澄明，言行自然一致，人们回以信任。"
+  },
+  "hexagram.explanation.35": {
+    "en": "家人(Jia Ren) represents the family and household — the foundational unit of society and the heart of personal life. It symbolizes the roles, responsibilities, and bonds that sustain a home. The hexagram emphasizes that order in the family comes from mutual respect, clear roles, and genuine care. A harmonious home radiates outward to the world.",
+    "zh-Hans": "家人卦代表家庭——社会之基，人心之归。它象征维系家庭的角色、责任与纽带。此卦强调：齐家之道在于互相尊重、角色分明、真诚关爱。家道正，则天下定矣。"
+  },
+  "hexagram.explanation.36": {
+    "en": "益(Yi) represents increase and benefit — the natural counterpart to decrease. It symbolizes growth, generosity, and the abundance that comes when those above give to those below. The hexagram encourages sharing your gains, investing in others, and recognizing that true increase enriches everyone involved.",
+    "zh-Hans": "益卦代表增益与利益——损之对应。它象征成长、慷慨与上施于下带来的丰盈。此卦鼓励分享所得、投资于人，认识到真正的增益惠及所有参与者。"
+  },
+  "hexagram.explanation.37": {
+    "en": "巽(Xun) represents gentleness and penetration — the wind that enters everywhere without force. It symbolizes subtle influence, adaptability, and the quiet persistence that achieves what brute strength cannot. The hexagram counsels leading through persuasion and gentle persistence rather than commands. Softness overcomes hardness over time.",
+    "zh-Hans": "巽卦代表柔顺与渗透——风无孔不入，却不用强力。它象征潜移默化的影响力、适应力与以柔克刚的坚持。此卦劝人以劝导和温柔的恒心去引领，而非以命令。柔能克刚，水滴石穿。"
+  },
+  "hexagram.explanation.38": {
+    "en": "涣(Huan) represents dispersion and dissolution — the breaking up of what was once consolidated. Like ice melting into flowing water, it symbolizes the release of frozen situations, the loosening of rigid structures, and emotional catharsis. The hexagram suggests using this dispersing energy constructively: dissolve what is hardened, reconnect what has been separated.",
+    "zh-Hans": "涣卦代表涣散与消解——原已固结之物的释放。如冰化为流水，它象征僵局的松动、刻板结构的打破与情感的宣泄。此卦提示：善用这股涣散之力，化解僵化，重联分散。"
+  },
+  "hexagram.explanation.39": {
+    "en": "渐(Jian) represents gradual development — slow, steady, natural progression like a tree growing ring by ring. It symbolizes courtship, career advancement, and any process that cannot be rushed. The hexagram counsels patience and trust in organic growth: do the right things consistently, and the results will unfold in their own time.",
+    "zh-Hans": "渐卦代表渐进——如树木年轮般缓慢而稳健的成长。它象征恋爱、事业与一切急不得的过程。此卦劝人耐心信守：坚持做对的事，成果自会按其时节逐渐呈现。"
+  },
+  "hexagram.explanation.40": {
+    "en": "观(Guan) represents contemplation and observation — stepping back to see the big picture. It symbolizes the power of careful watching, whether observing others as a model or examining oneself. Before acting, one must first understand. The hexagram encourages cultivating perceptive awareness and learning from what you observe.",
+    "zh-Hans": "观卦代表观察与内省，退后一步看清全局。它象征仔细观察的力量，既可观人以为模范，亦可自省以明得失。先理解，再行动。此卦鼓励培养敏锐的觉察力，从观察中学以致用。"
+  },
+  "hexagram.explanation.41": {
+    "en": "需(Xu) teaches the art of patient waiting. Like clouds gathering before rain, some things cannot be rushed. It symbolizes the need for patience, trust in timing, and preparation during a period of delay. Use the waiting time to gather strength and clarity; when the moment comes, you will be ready.",
+    "zh-Hans": "需卦教人耐心等待的智慧。如云聚而雨未至，有些事情急不得。它象征时机未到时需要的耐心、信任与准备。用等待的时间积蓄力量、理清思路，时机一到，即可从容应对。"
+  },
+  "hexagram.explanation.42": {
+    "en": "节(Jie) represents limitation and moderation — the healthy boundaries that prevent excess and chaos. Like the banks of a river that channel water without stifling its flow, it symbolizes the wisdom of restraint. The hexagram teaches that true freedom is found within structure, not in limitless indulgence. Set clear boundaries and live within them gracefully.",
+    "zh-Hans": "节卦代表节制与界限——防止过度与混乱的健康边界。如河道约束水流而不窒息它，它象征克制的智慧。此卦教人：真正的自由存在于框架之内，而非无度的放纵。设立清晰的界限，优雅地生活在其中。"
+  },
+  "hexagram.explanation.43": {
+    "en": "既济(Ji Ji) represents after completion — the moment when a task is finished and order is achieved. It symbolizes the satisfaction of accomplishment, but also the hidden danger of complacency. The hexagram warns that completion is not the end: entropy and disorder will reassert themselves if vigilance relaxes. Celebrate the achievement, then maintain it carefully.",
+    "zh-Hans": "既济卦代表事已成——任务完成、秩序达成的时刻。它象征成就的喜悦，也暗含麻痹松懈的危险。此卦警戒：完成并非终点；一旦放松警惕，混乱将卷土重来。庆祝成果，然后精心维护。"
+  },
+  "hexagram.explanation.44": {
+    "en": "屯(Zhun) depicts the struggle of new beginnings — like a sprout pushing through soil. It symbolizes the chaos and difficulty of starting something new. The counsel is to persevere through initial obstacles, seek helpers and allies, and not rush. Every great undertaking begins with a period of struggle and uncertainty.",
+    "zh-Hans": "屯卦描绘万物初生时的艰难，如幼芽破土而出。它象征创业之初的混乱与挑战。此卦教人坚定信念、寻求助力、不可冒进。一切伟大事业都始于一段艰难而充满不确定的时期。"
+  },
+  "hexagram.explanation.45": {
+    "en": "井(Jing) represents the well — a source of nourishment that sustains the community. It symbolizes the deep, unchanging resources within each person and within society. The hexagram reminds that a well must be kept clean and accessible for it to serve its purpose. Cultivate your inner wellspring; share its water freely.",
+    "zh-Hans": "井卦代表水井——滋养众人的源泉。它象征每个人和社会底层那深厚而不变的资源。此卦提醒：井须常清、常通，方能滋养。修好你内心的泉源，慷慨分享井水。"
+  },
+  "hexagram.explanation.46": {
+    "en": "坎(Kan) represents the abyss and danger — water that engulfs and overwhelms. It symbolizes situations of repeated difficulty where one feels trapped. The hexagram teaches that in the face of danger, the wise person remains calm, goes with the flow rather than fighting the current, and keeps faith that the abyss can be crossed.",
+    "zh-Hans": "坎卦代表重重险陷——水势汹涌，令人深陷其中。它象征接连不断的困境与无助感。此卦教人在危险面前保持冷静、顺势而为而非强行对抗，坚信深渊亦可渡过。"
+  },
+  "hexagram.explanation.47": {
+    "en": "蹇(Jian) represents obstruction and hardship — the mountain before you and the water below make progress difficult. It symbolizes times when every path seems blocked. The hexagram advises that when you cannot advance, the wisest course is to pause, reflect, and seek inner clarity rather than forcing a way through.",
+    "zh-Hans": "蹇卦代表艰难险阻——山在前，水在下，前行维艰。它象征诸事不顺、处处碰壁的时刻。此卦劝人：当前路难行时，与其硬闯，不如停下反思、向内求索，以智慧化解而非以力强渡。"
+  },
+  "hexagram.explanation.48": {
+    "en": "比(Bi) represents unity and harmonious association. It symbolizes people coming together around a shared center — a community, a vision, or a leader. The hexagram encourages finding your tribe, building trust-based relationships, and recognizing that belonging requires both giving and receiving support.",
+    "zh-Hans": "比卦代表团结与亲附和合。它象征众人围绕共同中心聚拢——如社群、愿景或领袖。此卦鼓励寻找志同道合之人，建立基于信任的关系，同时明白归属感需要彼此付出与接纳。"
+  },
+  "hexagram.explanation.49": {
+    "en": "大畜(Da Xu) represents great accumulation — the storing of vast knowledge, virtue, and strength for significant future use. Unlike its smaller counterpart, this hexagram symbolizes the power of deep cultivation over a long period. A great person stores wisdom like a reservoir; when the time comes, the release is powerful and purposeful.",
+    "zh-Hans": "大畜卦代表深厚积蓄——广储学识、德行与力量以备大用。与小畜不同，此卦象征长期深耕的累积之力。大人蓄德如水库；待到用时，释放必有力量与方向。"
+  },
+  "hexagram.explanation.50": {
+    "en": "损(Sun) represents decrease and reduction — sometimes less is more. It symbolizes the wisdom of letting go, simplifying, and reducing excess. The hexagram teaches that genuine growth often requires first shedding what is unnecessary. Decrease at one level enables increase at a deeper one; sacrifice for a higher purpose yields lasting gain.",
+    "zh-Hans": "损卦代表减损——有时少即是多。它象征放手、简化与去除冗余的智慧。此卦教人：真正的成长往往需要先舍弃不必要的负担。此处的减损，成就彼处的增益；为更高的意义而牺牲，终得实在的收获。"
+  },
+  "hexagram.explanation.51": {
+    "en": "贲(Bi) represents grace and adornment — the beauty that enhances but does not overpower substance. It symbolizes art, culture, and the refinement of form. The hexagram reminds us that ornament should serve the essential, not replace it. True elegance is simplicity that reveals inner quality, not decoration that conceals emptiness.",
+    "zh-Hans": "贲卦代表文饰与美化——锦上添花而不喧宾夺主。它象征艺术、文化与形式的精炼。此卦提醒：装饰应为本质服务，而非取而代之。真正的优雅是质朴中见本质，而非浮华遮空虚。"
+  },
+  "hexagram.explanation.52": {
+    "en": "颐(Yi) represents nourishment — both physical sustenance and spiritual cultivation. It symbolizes how we feed ourselves and others: what we consume with our mouths and our minds. The hexagram advises mindful intake: choose wholesome food, good words, and elevating thoughts. How you nourish yourself shapes who you become.",
+    "zh-Hans": "颐卦代表颐养——既指饮食养生，也指精神修养。它象征我们如何滋养自己与他人：口之所食，心之所纳。此卦提醒慎重选择所摄入的——良食、善言、正念。你如何滋养自己，便成为怎样的人。"
+  },
+  "hexagram.explanation.53": {
+    "en": "蛊(Gu) represents decay and corruption — what happens when problems are neglected too long. It symbolizes the rot that sets in when traditions become empty, relationships stagnate, or systems break down. The hexagram calls for honest diagnosis and courageous reform. What has been spoiled can be restored through diligent work.",
+    "zh-Hans": "蛊卦代表积弊与腐败——问题长期被忽视的后果。它象征传统空心化、关系停滞、制度崩坏时的败坏之象。此卦呼唤直面问题、勇于革新。已被败坏的，可以通过勤勉修复。"
+  },
+  "hexagram.explanation.54": {
+    "en": "蒙(Meng) represents youthful ignorance and the process of learning. It symbolizes the student-teacher relationship, the thirst for knowledge, and the importance of proper guidance. The hexagram suggests that genuine learning requires humility — the willingness to ask questions and be corrected. A good teacher enlightens without forcing.",
+    "zh-Hans": "蒙卦代表蒙昧与求学之道。它象征师生关系、求知欲与正确引导的重要。此卦强调真正的学习需要谦逊——愿意提问、接受纠正。良师启发而不强迫，学生诚心方能开悟。"
+  },
+  "hexagram.explanation.55": {
+    "en": "艮(Gen) represents stillness and stopping — the mountain that stands unmoved. It symbolizes the power of knowing when to halt, when to rest, and when to set boundaries. The hexagram teaches that stillness is not emptiness but the ground of all action. Learn to quiet your mind; from stillness, clarity and right action arise.",
+    "zh-Hans": "艮卦代表静止与停下来——山一样巍然不动。它象征知止、知足、知界的智慧。此卦教人：静不是空，乃一切行动之本。学会让心止静，从止中生出清明与正确的行动。"
+  },
+  "hexagram.explanation.56": {
+    "en": "剥(Bo) represents splitting apart and decay — when the foundation crumbles and only the surface remains. It symbolizes the inevitable decline that follows long neglect. The hexagram advises recognizing when a situation has run its course and letting go gracefully. In dissolution lies the seed of renewal.",
+    "zh-Hans": "剥卦代表剥落与崩解——根基已坏，徒留表象。它象征长期败坏后的必然衰退。此卦提醒认清已然走到尽头的事物，体面放手。剥尽之处，正是重生之始。"
+  },
+  "hexagram.explanation.57": {
+    "en": "泰(Tai) represents peace and prosperity — the harmonious interplay of Heaven and Earth. It symbolizes a time when everything flows smoothly, communication is open, and all forces are in balance. Enjoy this fortunate period, but remember that peace requires active maintenance; complacency invites decline.",
+    "zh-Hans": "泰卦代表通泰与繁荣——天地交而万物通。它象征一切顺遂、沟通畅达、力量均衡的时期。享受这段好运，但切记通泰需要主动维护；安逸懈怠便会走向衰退。"
+  },
+  "hexagram.explanation.58": {
+    "en": "临(Lin) represents approach and oversight — the leader who draws near to those they guide. It symbolizes the waxing of positive energy, the moment of stepping forward to engage. The hexagram counsels leading with both warmth and clarity, overseeing with care but also firmness. Great leadership is personal and present.",
+    "zh-Hans": "临卦代表亲临与督导，领导者走近被引导者。它象征阳长阴消、挺身而出的时刻。此卦教人以温暖与清明去引领，以关怀与坚定去监督。伟大的领导在于亲临现场、以身作则。"
+  },
+  "hexagram.explanation.59": {
+    "en": "明夷(Ming Yi) represents the darkening of light — when wisdom and virtue are suppressed by circumstance. It symbolizes periods when speaking truth is dangerous and the wise must hide their brilliance. The hexagram counsels protecting your inner light during dark times: stay true inwardly while being cautious outwardly. Dawn follows the darkest hour.",
+    "zh-Hans": "明夷卦代表光明受伤——智慧与美德被环境压制。它象征正道难行、不得不韬光养晦的时期。此卦教人在黑暗时守护内心光芒：外表谨慎，内心坚守。最暗的时刻之后就是黎明。"
+  },
+  "hexagram.explanation.60": {
+    "en": "复(Fu) represents return and renewal — the turning point where light begins to grow again after darkness. Like the winter solstice when yang energy rekindles, it symbolizes recovery, second chances, and the natural cycle of return. When you have strayed, this hexagram says: turn back now. The path home is open.",
+    "zh-Hans": "复卦代表回归与复兴——阴极阳生的转折点。如冬至一阳来复，它象征复苏、重新开始与自然循环的回归之力。当你偏离正途时，此卦说：现在回头还来得及，归路仍在。"
+  },
+  "hexagram.explanation.61": {
+    "en": "升(Sheng) represents rising and advancement — gradual, organic growth upward like a tree growing toward the light. It symbolizes career promotion, spiritual elevation, and the natural unfolding of potential. The hexagram encourages steady, rooted growth: climb step by step, nourish your foundation, and trust the process of natural ascent.",
+    "zh-Hans": "升卦代表上升与进取——如树木向阳，循序渐进地向上生长。它象征升迁、精神升华与潜力的自然展现。此卦鼓励稳步扎根、逐阶登高，信守自然向上的过程。"
+  },
+  "hexagram.explanation.62": {
+    "en": "师(Shi) represents the army — organized collective action under strong leadership. It symbolizes discipline, strategy, and the necessity of a just cause. In personal life, it suggests that when you must take a stand or mobilize resources, do so with clear purpose, strong organization, and moral justification.",
+    "zh-Hans": "师卦象征军队与有组织的集体行动。它代表纪律、战略与师出有名的必要性。在个人生活中，此卦提醒：当你需要挺身而出或集结力量时，务必目标明确、组织有力、义正辞顺。"
+  },
+  "hexagram.explanation.63": {
+    "en": "谦(Qian) represents modesty and humility — the virtue of the mountain bowing beneath the earth. It symbolizes genuine humility that comes from true strength, not weakness. In any position, high or low, the modest person earns respect and avoids envy. Humility is the foundation of lasting success.",
+    "zh-Hans": "谦卦代表谦虚之美德——山在地下，高而能下。它象征源于真正实力而非软弱的谦逊。无论身处高低，谦虚之人赢得尊敬、远离嫉妒。谦逊是长久成功的基石。"
+  },
+  "hexagram.explanation.64": {
+    "en": "坤(Kun) represents the receptive, nurturing power of Earth. It symbolizes devotion, patience, flexibility, and the capacity to support and sustain. Unlike Qian's proactive energy, Kun counsels receptivity — knowing when to follow, when to yield, and how to bring things to fruition through steady dedication rather than forceful action.",
+    "zh-Hans": "坤卦象征大地的承载与滋养之力。它代表柔顺、耐心、包容与厚德载物。与乾卦的进取不同，坤卦教人懂得顺应与配合——何时跟随、何时退让，以持久的奉献而非强力推动来成就事物。"
   }
 }
