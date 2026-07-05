@@ -410,7 +410,8 @@ async def test_interpret_reopen_no_double_charge(billing_client, db_conn):
 async def test_subscriber_no_credit_deduction(billing_client, db_conn):
     """Test subscribers don't get credits deducted."""
     settings = _billing_settings()
-    user_id, _ = get_or_create_user(db_conn, "apple-api-test-subscriber")
+    user_id, _ = get_or_create_user(db_conn, "apple-api-test-subscriber",
+                                     free_credits=settings.free_monthly_credits)
 
     activate_subscription(db_conn, user_id, "ai.etic.app.subscription.monthly", "tx-sub")
     token = issue_session_jwt(user_id, settings)

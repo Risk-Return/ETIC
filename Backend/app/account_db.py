@@ -120,6 +120,7 @@ def get_or_create_user(
     apple_sub: str,
     email: Optional[str] = None,
     name: Optional[str] = None,
+    free_credits: int = 0,
 ) -> tuple[uuid.UUID, bool]:
     """Return (user_id, created). On first create, initializes credit balance."""
     with conn.cursor() as cur:
@@ -148,8 +149,8 @@ def get_or_create_user(
         )
         cur.execute(
             "INSERT INTO credit_balances (user_id, free_credits, free_reset_at) "
-            "VALUES (%s, 0, %s)",
-            (user_id, _current_month_start()),
+            "VALUES (%s, %s, %s)",
+            (user_id, free_credits, _current_month_start()),
         )
         conn.commit()
         return user_id, True

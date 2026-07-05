@@ -145,4 +145,6 @@ def get_or_create_user_from_apple(
     with connect(settings) as conn:
         from . import account_db
         account_db.ensure_schema(conn)
-        return account_db.get_or_create_user(conn, apple_sub, email, name)
+        return account_db.get_or_create_user(
+            conn, apple_sub, email, name, settings.free_monthly_credits
+        )
