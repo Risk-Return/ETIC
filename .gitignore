@@ -29,3 +29,4 @@ __pycache__/
 
 # Backend secrets
 Backend/.env
+Backend/keys/

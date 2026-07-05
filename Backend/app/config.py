@@ -62,6 +62,16 @@ class Settings(BaseSettings):
         "ai.etic.app.credits.25:25"
     )
 
+    # ---- Apple 密钥（Sign in with Apple / App Store Server Notifications）----
+    # Apple Developer Team ID（Membership → 右上角可查）。
+    apple_team_id: str = ""
+    # Sign in with Apple 私钥（用于生成 client_secret 调用 Apple 服务端 API）。
+    apple_siwa_key_id: str = "L42755A2C3"
+    apple_siwa_key_path: str = "keys/logo-in/AuthKey_L42755A2C3.p8"
+    # App Store Server Notifications 验签密钥（验证 Apple 签名）。
+    apple_notification_prod_key_path: str = "keys/notification/production/AuthKey_KRAL2SFAXJ.p8"
+    apple_notification_sandbox_key_path: str = "keys/notification/sandbox/AuthKey_SQKM8TVF57.p8"
+
     @property
     def topup_product_map(self) -> dict[str, int]:
         result: dict[str, int] = {}
