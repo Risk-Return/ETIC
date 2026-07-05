@@ -41,14 +41,33 @@ final class StoreKitService: ObservableObject {
 
     // MARK: - Purchase
 
-    /// Purchase a product by ID. Returns true on success.
-    func purchase(productID: String) async -> Bool {
-        guard let product = products.first(where: { $0.id == productID }) else {
-            errorMessage = "Product not found."
+    /// Purchase a product by ID. Loads the product from StoreKit on-demand
+    /// if not already cached, so the UI can display static info without preloading.
+    func purchaseByProductID(_ productID: String) async -> Bool {
+        var product = products.first(where: { $0.id == productID })
+        if product == nil {
+            do {
+                let fetched = try await Product.products(for: [productID])
+                if let first = fetched.first {
+                    products.append(first)
+                    product = first
+                }
+            } catch {
+                errorMessage = error.localizedDescription
+                return false
+            }
+        }
+        guard let product else {
+            errorMessage = "Product not available on the App Store."
             return false
         }
+        return await purchase(product: product)
+    }
 
-        purchaseInProgress = productID
+    /// Purchase a loaded Product. Returns true on success.
+    func purchase(product: Product) async -> Bool {
+
+        purchaseInProgress = product.id
         defer { purchaseInProgress = nil }
 
         do {

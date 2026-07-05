@@ -4,7 +4,7 @@ import StoreKit
 /// 账号管理页：显示额度、订阅状态，支持订阅和充值。
 ///
 /// - 一个订阅选项（月度订阅 $9.99，每月 30 次解读）
-/// - 三个充值选项（5 次 $9.99 / 10 次 $19.99 / 25 次 $39.99）
+/// - 三个充值选项（20 次 $9.99 / 50 次 $19.99 / 120 次 $39.99）
 /// - 每月 3 次免费额度，每次解读最多 3 个追问
 struct AccountView: View {
     @StateObject private var auth = AuthService.shared
@@ -217,7 +217,7 @@ struct AccountView: View {
             Spacer()
             Button {
                 Task {
-                    if await store.purchase(productID: product.id) {
+                    if await store.purchaseByProductID(product.id) {
                         await auth.refreshAccountStatus()
                     }
                 }
@@ -265,7 +265,7 @@ struct AccountView: View {
             Spacer()
             Button {
                 Task {
-                    if await store.purchase(productID: product.id) {
+                    if await store.purchaseByProductID(product.id) {
                         await auth.refreshAccountStatus()
                     }
                 }
