@@ -47,7 +47,14 @@ async def _stream_openai_compatible(
     }
     url = settings.llm_base_url.rstrip("/") + "/chat/completions"
 
-    async with httpx.AsyncClient(timeout=settings.llm_timeout_seconds) as client:
+    async with httpx.AsyncClient(
+        timeout=httpx.Timeout(
+            connect=10.0,
+            read=settings.llm_timeout_seconds,
+            write=30.0,
+            pool=10.0,
+        ),
+    ) as client:
         async with client.stream("POST", url, json=payload, headers=headers) as resp:
             if resp.status_code >= 400:
                 body = (await resp.aread()).decode("utf-8", "replace")

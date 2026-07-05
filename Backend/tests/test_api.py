@@ -13,6 +13,7 @@ def force_mock(monkeypatch):
     get_settings.cache_clear()
     monkeypatch.setenv("ETIC_MOCK_LLM", "true")
     monkeypatch.setenv("ETIC_RAG_ENABLED", "false")
+    monkeypatch.setenv("ETIC_BILLING_ENABLED", "false")
     yield
     get_settings.cache_clear()
 

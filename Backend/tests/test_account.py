@@ -74,12 +74,11 @@ def db_conn():
         conn = psycopg.connect(settings.database_url)
         ensure_schema(conn)
         yield conn
-        # Cleanup: drop test data.
-        conn.execute("DELETE FROM readings")
-        conn.execute("DELETE FROM transactions")
-        conn.execute("DELETE FROM subscriptions")
-        conn.execute("DELETE FROM credit_balances")
-        conn.execute("DELETE FROM users")
+        # Cleanup: only delete test-created users (ON DELETE CASCADE handles child tables).
+        conn.execute(
+            "DELETE FROM users WHERE apple_user_identifier LIKE 'apple-test-%' "
+            "OR apple_user_identifier LIKE 'apple-api-test-%'"
+        )
         conn.commit()
         conn.close()
     except psycopg.OperationalError as exc:
