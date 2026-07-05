@@ -8,6 +8,12 @@ options:
 packages:
   DivinationEngine:
     path: ../Packages/DivinationEngine
+  MarkdownUI:
+    path: ../Packages/swift-markdown-ui
+  NetworkImage:
+    path: ../Packages/NetworkImage
+  swift-cmark:
+    path: ../Packages/swift-cmark
 targets:
   ETIC:
     type: application
@@ -20,6 +26,8 @@ targets:
     dependencies:
       - package: DivinationEngine
         product: DivinationEngine
+      - package: MarkdownUI
+        product: MarkdownUI
     info:
       path: ETIC/Info.plist
       properties:

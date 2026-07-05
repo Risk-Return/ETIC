@@ -43,6 +43,7 @@
 		AF402923D6AD97C36A95302E /* DivinationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB75B11A5056A0F461D9F577 /* DivinationRecord.swift */; };
 		B3B7D9C16F625ABBAD0FA333 /* ETICApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */; };
 		B7E5DF13608E2C440BEFF2AE /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8840B4BF1EEA2AA6D67D063 /* CompassView.swift */; };
+		B8F36F77B0A47159DE043273 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 637F6970D9FEF0C250561728 /* MarkdownUI */; };
 		BDC6FD5AB52B48DC02B2D0FE /* EncyclopediaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018603C64D25C09AB0985D53 /* EncyclopediaListView.swift */; };
 		C0FF02FB415B1321533762D7 /* DivinationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2559F53C05D75EBC8510C6FC /* DivinationServiceTests.swift */; };
 		C2D36E1ABC420616E798FE78 /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334AE05301780E621C23879 /* ShakeDetector.swift */; };
@@ -84,6 +85,8 @@
 		2559F53C05D75EBC8510C6FC /* DivinationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationServiceTests.swift; sourceTree = "<group>"; };
 		2C9F0503F57BEC4B5B06D892 /* ETIC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ETIC.entitlements; sourceTree = "<group>"; };
 		2E7C20211DE2BA73872DB382 /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
+		2F2BFB6AB645F2BE8B9E01C7 /* swift-cmark */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "swift-cmark"; path = "../Packages/swift-cmark"; sourceTree = SOURCE_ROOT; };
+		3E4444BCC3F43D18AA294638 /* NetworkImage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NetworkImage; path = ../Packages/NetworkImage; sourceTree = SOURCE_ROOT; };
 		4255642E77E3E3385E56CF53 /* ETIC.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ETIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4334AE05301780E621C23879 /* ShakeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetector.swift; sourceTree = "<group>"; };
 		45CD523BE4C5AAB6DB03308C /* WorldCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCity.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 		D99875F0074F4F5853558FE0 /* UseGodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseGodView.swift; sourceTree = "<group>"; };
 		DA01B20A13A40A81EA8637CE /* DivinationEngine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DivinationEngine; path = ../Packages/DivinationEngine; sourceTree = SOURCE_ROOT; };
 		DA315C6426ABE9AC135AF106 /* ETICTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ETICTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB30572AA00A419AA7394976 /* swift-markdown-ui */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "swift-markdown-ui"; path = "../Packages/swift-markdown-ui"; sourceTree = SOURCE_ROOT; };
 		DB75B11A5056A0F461D9F577 /* DivinationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationRecord.swift; sourceTree = "<group>"; };
 		E46D91A1EFE8FA78AB0FD6E8 /* RitualSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualSettings.swift; sourceTree = "<group>"; };
 		E4F6D0DDEB38C05E627F04F6 /* LocalizationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationStore.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6F4274DC4C5F6EBE1480796 /* DivinationEngine in Frameworks */,
+				B8F36F77B0A47159DE043273 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +292,9 @@
 			isa = PBXGroup;
 			children = (
 				DA01B20A13A40A81EA8637CE /* DivinationEngine */,
+				3E4444BCC3F43D18AA294638 /* NetworkImage */,
+				2F2BFB6AB645F2BE8B9E01C7 /* swift-cmark */,
+				DB30572AA00A419AA7394976 /* swift-markdown-ui */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -368,6 +376,7 @@
 			name = ETIC;
 			packageProductDependencies = (
 				2B041FAE79185B09B25FDB67 /* DivinationEngine */,
+				637F6970D9FEF0C250561728 /* MarkdownUI */,
 			);
 			productName = ETIC;
 			productReference = 4255642E77E3E3385E56CF53 /* ETIC.app */;
@@ -396,6 +405,9 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				8228243200F66ED5F953E43D /* XCLocalSwiftPackageReference "../Packages/DivinationEngine" */,
+				CF4EC358483305C0956F638C /* XCLocalSwiftPackageReference "../Packages/swift-markdown-ui" */,
+				469DC712A140C3486B82CCE5 /* XCLocalSwiftPackageReference "../Packages/NetworkImage" */,
+				FFEA4A58891DBA778C2CB317 /* XCLocalSwiftPackageReference "../Packages/swift-cmark" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EE0B5235D6F950807595FA15 /* Products */;
@@ -728,9 +740,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		469DC712A140C3486B82CCE5 /* XCLocalSwiftPackageReference "../Packages/NetworkImage" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/NetworkImage;
+		};
 		8228243200F66ED5F953E43D /* XCLocalSwiftPackageReference "../Packages/DivinationEngine" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/DivinationEngine;
+		};
+		CF4EC358483305C0956F638C /* XCLocalSwiftPackageReference "../Packages/swift-markdown-ui" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../Packages/swift-markdown-ui";
+		};
+		FFEA4A58891DBA778C2CB317 /* XCLocalSwiftPackageReference "../Packages/swift-cmark" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../Packages/swift-cmark";
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -742,6 +766,10 @@
 		49D3A140F99B2C2293B9BFD4 /* DivinationEngine */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DivinationEngine;
+		};
+		637F6970D9FEF0C250561728 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

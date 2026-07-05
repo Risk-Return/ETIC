@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import DivinationEngine
+import MarkdownUI
 
 /// 历史卦例详情：盘面快照 + 已保存的解读对话；可继续追问（回写同一记录）。
 struct HistoryDetailView: View {
@@ -56,7 +57,7 @@ struct HistoryDetailView: View {
             }
             HStack(spacing: 10) {
                 if !record.categoryRaw.isEmpty {
-                    Text(record.categoryRaw).font(.caption).foregroundStyle(InkTheme.azure)
+                    Text(QuestionCategory(rawValue: record.categoryRaw)?.displayName ?? record.categoryRaw).font(.caption).foregroundStyle(InkTheme.azure)
                 }
                 Text("\(record.method)\(L10n.Board.methodSuffix)").font(.caption).foregroundStyle(InkTheme.inkSoft)
             }
@@ -95,11 +96,22 @@ struct HistoryDetailView: View {
                 Text(isUser ? "Q" : L10n.Interpret.masterLabel)
                     .font(.caption2)
                     .foregroundStyle(InkTheme.inkSoft)
-                Text(turn.text)
-                    .font(InkTheme.serifBody(15))
-                    .foregroundStyle(InkTheme.ink)
-                    .textSelection(.enabled)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                if isUser {
+                    Text(turn.text)
+                        .font(InkTheme.serifBody(15))
+                        .foregroundStyle(InkTheme.ink)
+                        .textSelection(.enabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    Markdown(turn.text)
+                        .markdownSoftBreakMode(.lineBreak)
+                        .markdownTextStyle(\.text) {
+                            FontFamily(.system(.serif))
+                            ForegroundColor(InkTheme.ink)
+                        }
+                        .textSelection(.enabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
             .padding(12)
             .background(isUser ? InkTheme.azure.opacity(0.12) : InkTheme.card,

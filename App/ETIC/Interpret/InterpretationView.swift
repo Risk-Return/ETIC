@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import DivinationEngine
+import MarkdownUI
 
 /// 解读对话页：首轮流式断语 + 多轮追问。盘面只读传入，不重新起卦。
 struct InterpretationView: View {
@@ -232,8 +233,6 @@ private struct TurnBubble: View {
                         .foregroundStyle(InkTheme.inkSoft)
                 }
                 MarkdownText(text: turn.text, streaming: streaming)
-                    .font(InkTheme.serifBody(16))
-                    .foregroundStyle(InkTheme.ink)
                     .textSelection(.enabled)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -247,7 +246,7 @@ private struct TurnBubble: View {
     }
 }
 
-/// 支持 Markdown 渲染的文本组件。
+/// Markdown 渲染组件。使用 MarkdownUI 支持换行、段落、标题等 GFM 语法。
 private struct MarkdownText: View {
     let text: String
     let streaming: Bool
@@ -255,13 +254,12 @@ private struct MarkdownText: View {
     private var displayText: String { text + (streaming ? "▍" : "") }
 
     var body: some View {
-        if streaming {
-            Text(displayText)
-        } else if let attributed = try? AttributedString(markdown: displayText) {
-            Text(attributed)
-        } else {
-            Text(displayText)
-        }
+        Markdown(displayText)
+            .markdownSoftBreakMode(.lineBreak)
+            .markdownTextStyle(\.text) {
+                FontFamily(.system(.serif))
+                ForegroundColor(InkTheme.ink)
+            }
     }
 }
 

@@ -53,7 +53,7 @@ struct HistoryListView: View {
                 Divider().frame(height: 18)
                 chip(L10n.History.allFilter, selected: category == nil) { category = nil }
                 ForEach(categories, id: \.self) { cat in
-                    chip(cat, selected: category == cat) {
+                    chip(QuestionCategory(rawValue: cat)?.displayName ?? cat, selected: category == cat) {
                         category = (category == cat) ? nil : cat
                     }
                 }
@@ -146,7 +146,7 @@ private struct HistoryRow: View {
                     .lineLimit(1)
                 HStack(spacing: 8) {
                     if !record.categoryRaw.isEmpty {
-                        Text(record.categoryRaw)
+                        Text(QuestionCategory(rawValue: record.categoryRaw)?.displayName ?? record.categoryRaw)
                             .font(.caption2)
                             .foregroundStyle(InkTheme.azure)
                     }

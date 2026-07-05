@@ -29,3 +29,6 @@ __pycache__/
 
 # Backend secrets
 Backend/.env
+
+# Vendored packages - SPM workspace state (contains absolute paths)
+Packages/workspace-state.json
