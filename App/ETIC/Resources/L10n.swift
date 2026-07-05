@@ -184,5 +184,18 @@ enum L10n {
         static var topUpDesc: String { LocalizationStore.string("account.topUpDesc") }
         static var buy: String { LocalizationStore.string("account.buy") }
         static var readings: String { LocalizationStore.string("account.readings") }
+        static var paymentTitle: String { LocalizationStore.string("account.paymentTitle") }
+        static var paymentSubtitle: String { LocalizationStore.string("account.paymentSubtitle") }
+        static var restorePurchases: String { LocalizationStore.string("account.restorePurchases") }
+        static var termsOfService: String { LocalizationStore.string("account.termsOfService") }
+        static var privacyPolicy: String { LocalizationStore.string("account.privacyPolicy") }
+        static var subscriptionPerMonth: String { LocalizationStore.string("account.subscriptionPerMonth") }
+        static var subscriptionFeature1: String { LocalizationStore.string("account.subscriptionFeature1") }
+        static var subscriptionFeature2: String { LocalizationStore.string("account.subscriptionFeature2") }
+        static var subscriptionFeature3: String { LocalizationStore.string("account.subscriptionFeature3") }
+        static var topUpOneTime: String { LocalizationStore.string("account.topUpOneTime") }
+        static var topUpPerReading: String { LocalizationStore.string("account.topUpPerReading") }
+        static var manageSubscription: String { LocalizationStore.string("account.manageSubscription") }
+        static var viewPlans: String { LocalizationStore.string("account.viewPlans") }
     }
 }

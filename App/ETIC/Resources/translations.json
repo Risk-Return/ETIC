@@ -532,12 +532,12 @@
     "zh-Hans": "已购"
   },
   "account.subscriptionTitle": {
-    "en": "Subscription",
-    "zh-Hans": "订阅"
+    "en": "Monthly Subscription",
+    "zh-Hans": "月度订阅"
   },
   "account.subscriptionDesc": {
-    "en": "Monthly subscription includes unlimited readings.",
-    "zh-Hans": "月度订阅，畅享无限解读。"
+    "en": "$9.99/month — 30 hexagram readings per month.",
+    "zh-Hans": "$9.99/月 — 每月 30 次卦象解读。"
   },
   "account.subscribed": {
     "en": "Subscribed",
@@ -552,12 +552,12 @@
     "zh-Hans": "订阅"
   },
   "account.topUpTitle": {
-    "en": "Top Up",
-    "zh-Hans": "充值"
+    "en": "Credit Packs",
+    "zh-Hans": "充值额度包"
   },
   "account.topUpDesc": {
-    "en": "Purchase additional reading credits.",
-    "zh-Hans": "购买额外解读额度。"
+    "en": "One-time purchase of additional reading credits.",
+    "zh-Hans": "一次性购买额外卦象解读次数。"
   },
   "account.buy": {
     "en": "Buy",
@@ -566,5 +566,57 @@
   "account.readings": {
     "en": "Readings",
     "zh-Hans": "次解读"
+  },
+  "account.paymentTitle": {
+    "en": "Plans & Credits",
+    "zh-Hans": "套餐与充值"
+  },
+  "account.paymentSubtitle": {
+    "en": "Choose a plan or buy credits for hexagram readings.",
+    "zh-Hans": "选择订阅套餐或购买卦象解读次数。"
+  },
+  "account.restorePurchases": {
+    "en": "Restore Purchases",
+    "zh-Hans": "恢复购买"
+  },
+  "account.termsOfService": {
+    "en": "Terms of Service",
+    "zh-Hans": "服务条款"
+  },
+  "account.privacyPolicy": {
+    "en": "Privacy Policy",
+    "zh-Hans": "隐私政策"
+  },
+  "account.subscriptionPerMonth": {
+    "en": "/month",
+    "zh-Hans": "/月"
+  },
+  "account.subscriptionFeature1": {
+    "en": "30 hexagram readings per month",
+    "zh-Hans": "每月 30 次卦象解读"
+  },
+  "account.subscriptionFeature2": {
+    "en": "Up to 3 follow-up questions per reading",
+    "zh-Hans": "每次解读最多 3 个追问"
+  },
+  "account.subscriptionFeature3": {
+    "en": "Auto-renews monthly, cancel anytime",
+    "zh-Hans": "按月自动续订，可随时取消"
+  },
+  "account.topUpOneTime": {
+    "en": "One-time purchase",
+    "zh-Hans": "一次性购买"
+  },
+  "account.topUpPerReading": {
+    "en": "per reading",
+    "zh-Hans": "每次解读"
+  },
+  "account.manageSubscription": {
+    "en": "Manage Subscription",
+    "zh-Hans": "管理订阅"
+  },
+  "account.viewPlans": {
+    "en": "View Plans & Buy",
+    "zh-Hans": "查看套餐与购买"
   }
 }

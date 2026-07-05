@@ -38,6 +38,7 @@
 		9C51C21DBADF4DF9A011A8B1 /* RitualSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */; };
 		9D56B2780EF9F30BB97D7D93 /* DivinationRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */; };
 		A203FF3391CD0933B0B5BC4D /* CastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27DBA099213EE9E914A03A7 /* CastingView.swift */; };
+		A9BE8E59D291D66FDE3EE666 /* Products.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5C86711106C35BE7EEA69D1F /* Products.storekit */; };
 		ADFBD194B26B5E0C19437382 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0729BFB66776AEA8D598CBC /* AuthService.swift */; };
 		AF402923D6AD97C36A95302E /* DivinationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB75B11A5056A0F461D9F577 /* DivinationRecord.swift */; };
 		B3B7D9C16F625ABBAD0FA333 /* ETICApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */; };
@@ -56,6 +57,7 @@
 		DAD866D9F992305F9EB90E54 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AC398045A35658CDB20D9 /* LanguageManager.swift */; };
 		E7E420294930D0293AD3FF66 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E03031EE142AA464472DCD /* BoardView.swift */; };
 		EA89DA2D7EDBE325EC1488FC /* InkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B85AF4ADB3277575C284D79 /* InkTheme.swift */; };
+		EB48F4793F8B97D32B56B4F6 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93E4DF5FBC9253716BC1BEC /* PaymentView.swift */; };
 		ED1DC172CC900ACDC4D0A8D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7897E683968E11B12CC12 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,7 @@
 		5573ED399C3188C2B5702AF6 /* translations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = translations.json; sourceTree = "<group>"; };
 		57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualSettingsView.swift; sourceTree = "<group>"; };
 		5B85AF4ADB3277575C284D79 /* InkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkTheme.swift; sourceTree = "<group>"; };
+		5C86711106C35BE7EEA69D1F /* Products.storekit */ = {isa = PBXFileReference; path = Products.storekit; sourceTree = "<group>"; };
 		615AA3FD0B442ED2CE66039B /* EncyclopediaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncyclopediaDetailView.swift; sourceTree = "<group>"; };
 		61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationRecordTests.swift; sourceTree = "<group>"; };
 		669ACA4E40E4606941F99F23 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 		E4F6D0DDEB38C05E627F04F6 /* LocalizationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationStore.swift; sourceTree = "<group>"; };
 		E529319AE69908767DC454B4 /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
 		E8840B4BF1EEA2AA6D67D063 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
+		E93E4DF5FBC9253716BC1BEC /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		EC0DCA89909AF044A8F2380B /* InterpretationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpretationView.swift; sourceTree = "<group>"; };
 		F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETICApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,6 +258,7 @@
 				F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */,
 				4F4C02A35E23F55AC8B03423 /* Info.plist */,
 				7FAF8F763E74A60466A4C2BD /* MainTabView.swift */,
+				5C86711106C35BE7EEA69D1F /* Products.storekit */,
 				BCCD3DD6856C607105F2B9D7 /* Account */,
 				79BE2D2AF74DAC6851DD105D /* Board */,
 				F355DC772880EBC72806B33E /* Casting */,
@@ -273,6 +278,7 @@
 			children = (
 				11159E32375477C167A667AB /* AccountView.swift */,
 				CCE7897E683968E11B12CC12 /* LoginView.swift */,
+				E93E4DF5FBC9253716BC1BEC /* PaymentView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */,
+				A9BE8E59D291D66FDE3EE666 /* Products.storekit in Resources */,
 				4205D2D1DDBDD14B0411A32B /* translations.json in Resources */,
 				D5BF3364A2DAB38092525C4E /* zhouyi.json in Resources */,
 			);
@@ -461,6 +468,7 @@
 				D885659F081A98BA8E9B4498 /* LocationPickerView.swift in Sources */,
 				ED1DC172CC900ACDC4D0A8D8 /* LoginView.swift in Sources */,
 				5017E9A1B981C460F6FD1BA5 /* MainTabView.swift in Sources */,
+				EB48F4793F8B97D32B56B4F6 /* PaymentView.swift in Sources */,
 				3A1D55AAF12C5BD0567FF3AA /* PreviewData.swift in Sources */,
 				96A978E5B16A2CB9FE02BB87 /* RitualSettings.swift in Sources */,
 				9C51C21DBADF4DF9A011A8B1 /* RitualSettingsView.swift in Sources */,

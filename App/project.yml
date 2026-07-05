@@ -15,6 +15,8 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - ETIC
+    scheme:
+      storeKitConfiguration: Products.storekit
     dependencies:
       - package: DivinationEngine
         product: DivinationEngine

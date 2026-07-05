@@ -14,7 +14,7 @@ enum StoreConfig {
     // MARK: - Top-up (Credit Packs)
 
     /// 充值商品列表（商品 ID → 额度数）。
-    /// 三个选项：5 次、10 次、25 次。
+    /// 三个选项：5 次（$9.99）、10 次（$19.99）、25 次（$39.99）。
     static let topUpProducts: [(productID: String, credits: Int, displayKey: String)] = [
         ("ai.etic.app.credits.5",  5,  "topup.5"),
         ("ai.etic.app.credits.10", 10, "topup.10"),

@@ -60,8 +60,8 @@ struct InterpretationView: View {
                 }
                 .padding(20)
             }
-            .onChange(of: model.turns) { _ in scrollToBottom(proxy) }
-            .onChange(of: model.isStreaming) { _ in scrollToBottom(proxy) }
+            .onChange(of: model.turns) { _, _ in scrollToBottom(proxy) }
+            .onChange(of: model.isStreaming) { _, _ in scrollToBottom(proxy) }
         }
     }
 

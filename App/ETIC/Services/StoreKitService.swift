@@ -78,6 +78,30 @@ final class StoreKitService: ObservableObject {
         }
     }
 
+    // MARK: - Restore purchases
+
+    /// Restore previous purchases (required by App Store review).
+    /// Iterates all transactions, verifies with backend, and refreshes account.
+    func restorePurchases() async {
+        errorMessage = nil
+        var restored = false
+        for await result in Transaction.currentEntitlements {
+            do {
+                let transaction = try checkVerified(result)
+                await verifyWithBackend(transaction: transaction)
+                await transaction.finish()
+                restored = true
+            } catch {
+                // Skip unverified transactions.
+            }
+        }
+        if restored {
+            await AuthService.shared.refreshAccountStatus()
+        } else {
+            errorMessage = "No purchases to restore."
+        }
+    }
+
     // MARK: - Transaction listener
 
     /// Listen for transactions that happen outside the app (renewals, family sharing, etc.).
