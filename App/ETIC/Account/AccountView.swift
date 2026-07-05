@@ -3,8 +3,8 @@ import StoreKit
 
 /// 账号管理页：显示额度、订阅状态，支持订阅和充值。
 ///
-/// - 一个订阅选项（月度订阅）
-/// - 三个充值选项（5/10/25 次解读额度）
+/// - 一个订阅选项（月度订阅 $9.99，每月 30 次解读）
+/// - 三个充值选项（5 次 $9.99 / 10 次 $19.99 / 25 次 $39.99）
 /// - 每月 3 次免费额度，每次解读最多 3 个追问
 struct AccountView: View {
     @StateObject private var auth = AuthService.shared
@@ -17,8 +17,7 @@ struct AccountView: View {
                 VStack(spacing: 20) {
                     if let status = auth.accountStatus {
                         statusCard(status)
-                        subscriptionSection(status)
-                        topUpSection(status)
+                        paymentLink
                         signOutButton
                     } else {
                         ProgressView()
@@ -97,7 +96,34 @@ struct AccountView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    // MARK: - Subscription
+    // MARK: - Payment link
+
+    private var paymentLink: some View {
+        NavigationLink {
+            PaymentView()
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.Account.paymentTitle)
+                        .font(InkTheme.serifTitle(18))
+                        .foregroundStyle(InkTheme.ink)
+                    Text(L10n.Account.paymentSubtitle)
+                        .font(InkTheme.serifBody(14))
+                        .foregroundStyle(InkTheme.inkSoft)
+                        .lineLimit(2)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(InkTheme.inkSoft)
+            }
+            .padding(16)
+            .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 14))
+            .overlay(RoundedRectangle(cornerRadius: 14)
+                .stroke(InkTheme.inkSoft.opacity(0.2), lineWidth: 1))
+        }
+    }
+
+    // MARK: - Subscription (legacy, replaced by PaymentView)
 
     private func subscriptionSection(_ status: AccountStatus) -> some View {
         VStack(alignment: .leading, spacing: 12) {
