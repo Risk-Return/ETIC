@@ -30,6 +30,7 @@
 		724EBB8C6D104242BFF75CC0 /* RitualViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B18DA0C3B2265ADE90F3044 /* RitualViewModel.swift */; };
 		78BF2191CF047A6643444D13 /* UseGodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99875F0074F4F5853558FE0 /* UseGodView.swift */; };
 		7D3AF20776FDFE60AFC7A096 /* DivinationEngine in Frameworks */ = {isa = PBXBuildFile; productRef = 49D3A140F99B2C2293B9BFD4 /* DivinationEngine */; };
+		808CCC6999ADB922C2BCF755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6771B2A159EC4A3F74644F9F /* Assets.xcassets */; };
 		89FF11D4786750297810A686 /* YaoSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A569E43E0EC99B6856F1FBC /* YaoSymbolView.swift */; };
 		8B4A35FB4CACD9A69AD6E0EC /* LocalizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F6D0DDEB38C05E627F04F6 /* LocalizationStore.swift */; };
 		8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 669ACA4E40E4606941F99F23 /* Localizable.xcstrings */; };
@@ -100,6 +101,7 @@
 		61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationRecordTests.swift; sourceTree = "<group>"; };
 		669ACA4E40E4606941F99F23 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		67191570BEDEE77AFB4055A7 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
+		6771B2A159EC4A3F74644F9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DFCC6FABF02692F573A7BCC /* EngineDisplayNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineDisplayNames.swift; sourceTree = "<group>"; };
 		7152423D04295CECCC8E1C21 /* CastingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingViewModel.swift; sourceTree = "<group>"; };
 		71A272BDFA54713EE7D60BD1 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		A1A274A3F88278A3AE69942C /* ETIC */ = {
 			isa = PBXGroup;
 			children = (
+				6771B2A159EC4A3F74644F9F /* Assets.xcassets */,
 				2C9F0503F57BEC4B5B06D892 /* ETIC.entitlements */,
 				F5D7BBFC2DC7613DDBB8B96A /* ETICApp.swift */,
 				4F4C02A35E23F55AC8B03423 /* Info.plist */,
@@ -425,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				808CCC6999ADB922C2BCF755 /* Assets.xcassets in Resources */,
 				8CECE1968AF9999D10F71AD4 /* Localizable.xcstrings in Resources */,
 				A9BE8E59D291D66FDE3EE666 /* Products.storekit in Resources */,
 				4205D2D1DDBDD14B0411A32B /* translations.json in Resources */,
