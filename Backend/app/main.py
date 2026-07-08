@@ -19,6 +19,7 @@ from .auth import get_current_user_id, require_user_id
 from .config import Settings, get_settings
 from .iap import router as iap_router
 from .llm import LLMError, stream_completion
+from .moderation import ModerationResult, moderate
 from .models import (
     ChatRequest,
     GroundingItem,
@@ -49,11 +50,37 @@ async def healthz() -> dict:
             "mock" if settings.use_mock_embeddings else settings.embed_model
         ),
         "billing": settings.billing_enabled,
+        "moderation": settings.moderation_enabled,
     }
 
 
 def _sse_event(data: dict) -> str:
     return "data: " + json.dumps(data, ensure_ascii=False) + "\n\n"
+
+
+def _check_moderation(settings: Settings, text: str | None, locale: str | None) -> ModerationResult:
+    """审核用户文本。关闭审核时一律放行。"""
+
+    if not settings.moderation_enabled:
+        return ModerationResult(action="allow")
+    return moderate(text, locale)
+
+
+async def _refusal_stream(result: ModerationResult) -> AsyncIterator[str]:
+    """高危内容被拦截：不调用 LLM，直接以 SSE 流回本地化安全提示，客户端照常渲染。"""
+
+    yield _sse_event({"blocked": True, "category": result.category})
+    if result.message:
+        yield _sse_event({"delta": result.message})
+    yield "data: [DONE]\n\n"
+
+
+def _refusal_response(result: ModerationResult) -> StreamingResponse:
+    return StreamingResponse(
+        _refusal_stream(result),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
 
 
 async def _sse_stream(settings: Settings, messages: list[dict]) -> AsyncIterator[str]:
@@ -89,6 +116,11 @@ async def interpret(
     billing_enabled 时需鉴权并扣减额度；关闭时兼容旧流程（不鉴权）。
     """
 
+    # 内容审核先行：高危问题直接拒绝，不鉴权、不扣费、不调用 LLM。
+    mod = _check_moderation(settings, req.board.question, req.locale)
+    if mod.blocked:
+        return _refusal_response(mod)
+
     if settings.billing_enabled:
         if user_id is None:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -98,7 +130,9 @@ async def interpret(
             raise HTTPException(status_code=402, detail=error)
 
     grounding = await _grounding_text(settings, req.board)
-    messages = build_interpret_messages(req.board, grounding)
+    messages = build_interpret_messages(
+        req.board, grounding, locale=req.locale, caution_note=mod.caution_note
+    )
     return _sse_response(settings, messages)
 
 
@@ -141,6 +175,13 @@ async def chat(
     if req.messages[-1].role != "user":
         raise HTTPException(status_code=422, detail="最后一条消息必须是用户提问")
 
+    # 审核本轮追问文本（同时参考盘面所问，以覆盖高危上下文）。
+    mod = _check_moderation(
+        settings, req.messages[-1].content or req.board.question, req.locale
+    )
+    if mod.blocked:
+        return _refusal_response(mod)
+
     if settings.billing_enabled:
         if user_id is None:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -151,5 +192,7 @@ async def chat(
 
     history = [m.model_dump() for m in req.messages[-settings.max_history_messages:]]
     grounding = await _grounding_text(settings, req.board)
-    messages = build_chat_messages(req.board, history, grounding)
+    messages = build_chat_messages(
+        req.board, history, grounding, locale=req.locale, caution_note=mod.caution_note
+    )
     return _sse_response(settings, messages)

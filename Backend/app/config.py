@@ -21,6 +21,11 @@ class Settings(BaseSettings):
     # 多轮对话最多携带的历史消息条数（不含 system / 盘面）。
     max_history_messages: int = 20
 
+    # ---- 内容安全审核（M6）----
+    # 开启后，起卦问题 / 追问文本先过确定性审核：高危类直接拒绝（不调 LLM），
+    # 敏感类放行但向提示词注入更强的去绝对化 / 免责约束。关闭时兼容旧流程。
+    moderation_enabled: bool = True
+
     # ---- RAG（卦爻辞检索 grounding，M5）----
     # 开启后，解读前会按本卦/变卦/动爻检索周易经文拼入 Prompt。需先灌库。
     rag_enabled: bool = False

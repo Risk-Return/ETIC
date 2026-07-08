@@ -64,3 +64,31 @@ def test_chat_messages_inject_grounding(board_json):
     grounding = "【经文参考】\n- 《火山旅》卦辞：小亨，旅贞吉。"
     msgs = build_chat_messages(board, [{"role": "user", "content": "问"}], grounding)
     assert "经文参考" in msgs[1]["content"]
+
+
+def test_system_prompt_has_safety_soft_constraints():
+    # 软性约束：安全合规 + 语言指令始终写入 system。
+    assert "安全与合规" in SYSTEM_PROMPT
+    assert "作答语言" in SYSTEM_PROMPT
+
+
+def test_interpret_injects_caution_and_language(board_json):
+    board = DivinationBoard.model_validate(board_json)
+    msgs = build_interpret_messages(
+        board, locale="en", caution_note="[Safety note] medical caution"
+    )
+    content = msgs[-1]["content"]
+    assert "[Safety note] medical caution" in content
+    assert "respond entirely in English" in content
+
+
+def test_chat_injects_caution_and_language(board_json):
+    board = DivinationBoard.model_validate(board_json)
+    msgs = build_chat_messages(
+        board,
+        [{"role": "user", "content": "问"}],
+        locale="zh-Hans",
+        caution_note="【安全提示】就医",
+    )
+    assert "【安全提示】就医" in msgs[1]["content"]
+    assert "简体中文" in msgs[1]["content"]

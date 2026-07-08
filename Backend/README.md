@@ -18,18 +18,21 @@ uvicorn app.main:app --reload --port 18000
 
 ## 接口
 
-所有解读接口返回 **SSE 流**（`text/event-stream`），每个事件 `data: {"delta":"..."}`，错误为 `data: {"error":"..."}`，结束为 `data: [DONE]`。
+所有解读接口返回 **SSE 流**（`text/event-stream`），每个事件 `data: {"delta":"..."}`，错误为 `data: {"error":"..."}`，结束为 `data: [DONE]`。被内容审核拦截时首个事件为 `data: {"blocked":true,"category":"..."}`，随后是本地化安全提示的 `delta`（不调用 LLM）。
+
+`interpret` / `chat` 均可选传 `"locale"`（如 `"zh-Hans"` / `"en"`），用于内容审核拒绝文案与解读作答语言；缺省时按文本是否含中日韩文字自动判定。
 
 ### `POST /v1/interpret` — 首轮解读
 请求体：
 ```json
-{ "board": { /* DivinationEngine 的 DivinationBoard 契约 JSON */ } }
+{ "board": { /* DivinationEngine 的 DivinationBoard 契约 JSON */ }, "locale": "zh-Hans" }
 ```
 
 ### `POST /v1/chat` — 多轮追问（同一盘面上下文）
 ```json
 {
   "board": { /* 同上 */ },
+  "locale": "zh-Hans",
   "messages": [
     { "role": "user", "content": "大概什么时候应？" },
     { "role": "assistant", "content": "……" },
@@ -38,6 +41,14 @@ uvicorn app.main:app --reload --port 18000
 }
 ```
 约束：`messages` 非空且最后一条须为 `user`。
+
+### 内容安全审核（M6）
+起卦问题 / 追问文本在进入 LLM 前先过确定性审核（`app/moderation.py`，中英双语），分三级：
+- **拦截（block）**：自伤轻生、伤害他人 / 暴力、违法制毒制爆、涉未成年不当内容 → 直接拒绝、不鉴权不扣费不调用 LLM，回本地化安全提示（自伤类附危机求助信息）。
+- **敏感（caution）**：重病绝症 / 诉讼判决 / 投资必涨等 → 放行，但向 Prompt 注入更强的"去绝对化 + 免责 + 建议咨询专业人士"约束。
+- **放行（allow）**：其余正常解读。
+
+由 `ETIC_MODERATION_ENABLED`（默认 `true`）控制；关闭时回退旧流程。此为**硬性管理**，与 `SYSTEM_PROMPT` 中的安全**软性约束**互补。
 
 ### `POST /v1/grounding` — 经文检索（非流式，供客户端展示「经文参考」）
 请求体 `{ "board": { /* 同上 */ } }`，返回按本卦/动爻/变卦检索到的周易原文：

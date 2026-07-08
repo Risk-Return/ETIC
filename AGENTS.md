@@ -114,7 +114,7 @@ uvicorn app.main:app --port 8000         # 本地起服务；无 key 时自动 m
 - **术数规则改动**：须附经典卦例或权威出处，并补充/更新引擎测试。
 - **密钥安全**：LLM key 等机密**只经后端、走 `.env`（参考 `Backend/.env.example`），绝不写入前端代码或提交进 git**。`Backend/.env` 已在 `.gitignore`。
 - **注释/风格**：跟随既有代码风格，倾向简洁；中文文案与枚举值需与现有代码核对一致。
-- **里程碑**：已完成 M0–M5（引擎 / 起卦排盘 UI / 动画 / LLM 解读 / 多轮追问 + RAG 周易经文 grounding）。M6（历史 / 账号 / 计费 / 合规）进行中：已完成**本地历史/收藏**（SwiftData，iOS 17+）；账号 / StoreKit 计费 / 内容审核 / 卦象百科待做。详见 `docs/DESIGN.md` 开发计划。
+- **里程碑**：已完成 M0–M5（引擎 / 起卦排盘 UI / 动画 / LLM 解读 / 多轮追问 + RAG 周易经文 grounding）。M6（历史 / 账号 / 计费 / 合规）进行中：已完成**本地历史/收藏**（SwiftData，iOS 17+）、**卦象百科**、**账号 + StoreKit 计费**、**内容安全审核**（后端 `app/moderation.py` 双语硬拦截 + 敏感分级，配合 `SYSTEM_PROMPT` 软性约束）。详见 `docs/DESIGN.md` 开发计划。
 
 ---
 
