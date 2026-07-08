@@ -74,6 +74,9 @@ class InterpretRequest(BaseModel):
     """首轮解读：仅盘面（+ 盘面里自带的问题/类别）。"""
 
     board: DivinationBoard
+    # 客户端界面语言（如 zh-Hans / en）。用于内容审核拒绝文案与解读作答语言；
+    # 缺省时后端按文本是否含中日韩文字自动判定。
+    locale: Optional[str] = None
 
 
 class ChatRequest(BaseModel):
@@ -81,6 +84,8 @@ class ChatRequest(BaseModel):
 
     board: DivinationBoard
     messages: list[ChatMessage] = Field(default_factory=list)
+    # 同 InterpretRequest.locale。
+    locale: Optional[str] = None
 
 
 class GroundingRequest(BaseModel):
