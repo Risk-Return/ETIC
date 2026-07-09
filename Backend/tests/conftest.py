@@ -16,6 +16,12 @@ def board_json() -> dict:
     return json.loads((FIXTURES / "board.json").read_text(encoding="utf-8"))
 
 
+@pytest.fixture
+def board_meihua_json() -> dict:
+    """梅花起卦盘面（schema 1.1.0，含 meihua 体用视图），由引擎真实排盘生成。"""
+    return json.loads((FIXTURES / "board_meihua.json").read_text(encoding="utf-8"))
+
+
 @pytest.fixture(scope="session")
 def rag_settings() -> Settings:
     return Settings(

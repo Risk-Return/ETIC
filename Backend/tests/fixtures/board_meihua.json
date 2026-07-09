@@ -1,0 +1,296 @@
+{
+  "castTime" : {
+    "dayPillar" : "癸未",
+    "gregorian" : "2024-03-20 10:00 (UTC+8)",
+    "hourPillar" : "丁巳",
+    "monthPillar" : "丁卯",
+    "voidBranches" : [
+      "申",
+      "酉"
+    ],
+    "yearPillar" : "甲辰"
+  },
+  "category" : "事业",
+  "changed" : {
+    "code" : 56,
+    "lines" : [
+      {
+        "branch" : "未",
+        "element" : "土",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 1,
+        "sixRelative" : "父母",
+        "stem" : "乙",
+        "strength" : "死",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "巳",
+        "element" : "火",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 2,
+        "sixRelative" : "官鬼",
+        "stem" : "乙",
+        "strength" : "相",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "卯",
+        "element" : "木",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : true,
+        "moving" : false,
+        "position" : 3,
+        "sixRelative" : "妻财",
+        "stem" : "乙",
+        "strength" : "旺",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "午",
+        "element" : "火",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 4,
+        "sixRelative" : "官鬼",
+        "stem" : "壬",
+        "strength" : "相",
+        "yinYang" : "阳"
+      },
+      {
+        "branch" : "申",
+        "element" : "金",
+        "isResponse" : false,
+        "isVoid" : true,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 5,
+        "sixRelative" : "兄弟",
+        "stem" : "壬",
+        "strength" : "囚",
+        "yinYang" : "阳"
+      },
+      {
+        "branch" : "戌",
+        "element" : "土",
+        "isResponse" : true,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 6,
+        "sixRelative" : "父母",
+        "stem" : "壬",
+        "strength" : "死",
+        "yinYang" : "阳"
+      }
+    ],
+    "lowerTrigram" : "坤",
+    "name" : "天地否",
+    "palace" : "乾宫",
+    "palaceElement" : "金",
+    "responsePosition" : 6,
+    "upperTrigram" : "乾",
+    "worldPosition" : 3
+  },
+  "meihua" : {
+    "bianName" : "天地否",
+    "bianYong" : {
+      "element" : "金",
+      "name" : "乾",
+      "nature" : "天",
+      "position" : "上卦",
+      "symbol" : "☰"
+    },
+    "huLower" : {
+      "element" : "土",
+      "name" : "艮",
+      "nature" : "山",
+      "position" : "下卦",
+      "symbol" : "☶"
+    },
+    "huName" : "水山蹇",
+    "huUpper" : {
+      "element" : "水",
+      "name" : "坎",
+      "nature" : "水",
+      "position" : "上卦",
+      "symbol" : "☵"
+    },
+    "movingPosition" : 5,
+    "relations" : [
+      {
+        "element" : "火",
+        "favorable" : "吉",
+        "note" : "用卦离（火）生体，得其生扶助益。",
+        "relation" : "生体",
+        "subject" : "用卦",
+        "trigram" : "离"
+      },
+      {
+        "element" : "土",
+        "favorable" : "吉",
+        "note" : "体互艮（土）与体比和，同气相助，较为有利。",
+        "relation" : "比和",
+        "subject" : "体互",
+        "trigram" : "艮"
+      },
+      {
+        "element" : "水",
+        "favorable" : "平",
+        "note" : "体克用互坎（水），体能制之，尚可掌控但耗力。",
+        "relation" : "体克",
+        "subject" : "用互",
+        "trigram" : "坎"
+      },
+      {
+        "element" : "金",
+        "favorable" : "平",
+        "note" : "体生变卦乾（金），为体卦耗泄之象，主付出。",
+        "relation" : "体生",
+        "subject" : "变卦",
+        "trigram" : "乾"
+      }
+    ],
+    "summary" : "体卦坤（土）为求测者自身，用卦离（火）为所占之事，二者生体。综观用、互、变对体：生扶2、克泄0，生扶多于克泄，体卦得助，事多趋顺。（梅花以体用生克论倾向，仅供参考，非绝对结论。）",
+    "ti" : {
+      "element" : "土",
+      "name" : "坤",
+      "nature" : "地",
+      "position" : "下卦",
+      "symbol" : "☷"
+    },
+    "yong" : {
+      "element" : "火",
+      "name" : "离",
+      "nature" : "火",
+      "position" : "上卦",
+      "symbol" : "☲"
+    }
+  },
+  "method" : "梅花",
+  "movingPositions" : [
+    5
+  ],
+  "primary" : {
+    "code" : 40,
+    "lines" : [
+      {
+        "branch" : "未",
+        "element" : "土",
+        "isResponse" : true,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 1,
+        "sixGod" : "玄武",
+        "sixRelative" : "父母",
+        "stem" : "乙",
+        "strength" : "死",
+        "value" : "少阴",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "巳",
+        "element" : "火",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 2,
+        "sixGod" : "青龙",
+        "sixRelative" : "官鬼",
+        "stem" : "乙",
+        "strength" : "相",
+        "value" : "少阴",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "卯",
+        "element" : "木",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 3,
+        "sixGod" : "朱雀",
+        "sixRelative" : "妻财",
+        "stem" : "乙",
+        "strength" : "旺",
+        "value" : "少阴",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "酉",
+        "element" : "金",
+        "isResponse" : false,
+        "isVoid" : true,
+        "isWorld" : true,
+        "moving" : false,
+        "position" : 4,
+        "sixGod" : "勾陈",
+        "sixRelative" : "兄弟",
+        "stem" : "己",
+        "strength" : "囚",
+        "value" : "少阳",
+        "yinYang" : "阳"
+      },
+      {
+        "branch" : "未",
+        "element" : "土",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : true,
+        "position" : 5,
+        "sixGod" : "螣蛇",
+        "sixRelative" : "父母",
+        "stem" : "己",
+        "strength" : "死",
+        "value" : "老阴",
+        "yinYang" : "阴"
+      },
+      {
+        "branch" : "巳",
+        "element" : "火",
+        "isResponse" : false,
+        "isVoid" : false,
+        "isWorld" : false,
+        "moving" : false,
+        "position" : 6,
+        "sixGod" : "白虎",
+        "sixRelative" : "官鬼",
+        "stem" : "己",
+        "strength" : "相",
+        "value" : "少阳",
+        "yinYang" : "阳"
+      }
+    ],
+    "lowerTrigram" : "坤",
+    "name" : "火地晋",
+    "palace" : "乾宫",
+    "palaceElement" : "金",
+    "responsePosition" : 1,
+    "upperTrigram" : "离",
+    "worldPosition" : 4
+  },
+  "question" : "近期事业发展如何？",
+  "useGod" : {
+    "category" : "事业",
+    "positions" : [
+      2,
+      6
+    ],
+    "rationale" : "事业功名以官鬼为用神。",
+    "relative" : "官鬼"
+  },
+  "version" : "1.1.0"
+}

@@ -52,6 +52,12 @@ public enum LiuyaoEngine {
             useGod = useGodSuggestion(category: category, primary: primaryHex, pillars: pillars)
         }
 
+        // 梅花起卦（单一动爻）附带体用生克视图；六爻字段不变。
+        var meihua: MeihuaView?
+        if cast.method == .meihua, movingPositions.count == 1 {
+            meihua = MeihuaEngine.analyze(primary: primaryHex, movingPosition: movingPositions[0])
+        }
+
         return DivinationBoard(
             version: DivinationBoard.schemaVersion,
             method: cast.method.rawValue,
@@ -61,7 +67,8 @@ public enum LiuyaoEngine {
             movingPositions: movingPositions,
             primary: primaryView,
             changed: changedView,
-            useGod: useGod
+            useGod: useGod,
+            meihua: meihua
         )
     }
 
