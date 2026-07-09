@@ -12,6 +12,7 @@ extension CastMethod {
         case .time: return L10n.Method.time
         case .random: return L10n.Method.random
         case .manual: return L10n.Method.manual
+        case .meihua: return L10n.Method.meihua
         }
     }
 }

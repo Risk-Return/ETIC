@@ -510,6 +510,23 @@
         }
       }
     },
+    "casting.hint.meihua" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plum Blossom (numbers): the upper number sets the outer trigram, the lower the inner; their sum determines the single moving line. The board still uses the Liuyao Najia layout."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "梅花易数（报数）：上数取外卦、下数取内卦，两数之和定单一动爻。排盘仍以六爻纳甲呈现。"
+          }
+        }
+      }
+    },
     "casting.hint.number" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -608,6 +625,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "手动"
+          }
+        }
+      }
+    },
+    "casting.method.meihua" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plum Blossom"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "梅花易数"
           }
         }
       }

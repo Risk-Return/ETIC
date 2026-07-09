@@ -148,12 +148,12 @@ struct CastingView: View {
         switch model.method {
         case .coins:
             hint(L10n.Casting.hintCoins)
-        case .number:
+        case .number, .meihua:
             HStack(spacing: 12) {
                 numberField(L10n.Casting.upperNum, text: $model.upperNumber)
                 numberField(L10n.Casting.lowerNum, text: $model.lowerNumber)
             }
-            hint(L10n.Casting.hintNumber)
+            hint(model.method == .meihua ? L10n.Casting.hintMeihua : L10n.Casting.hintNumber)
         case .time:
             hint(L10n.Casting.hintTime)
         case .random:
