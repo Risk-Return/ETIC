@@ -53,8 +53,39 @@ class UseGodSuggestion(BaseModel):
     positions: list[int] = Field(default_factory=list)
 
 
+# 梅花易数（体用生克）—— schema 1.1.0 新增，仅 method == "梅花" 时非空。
+class MeihuaTrigramView(BaseModel):
+    name: str = ""
+    symbol: str = ""
+    nature: str = ""
+    element: str = ""
+    position: str = ""
+
+
+class MeihuaRelationView(BaseModel):
+    subject: str = ""       # 用卦 / 体互 / 用互 / 变卦
+    trigram: str = ""
+    element: str = ""
+    relation: str = ""      # 生体 / 比和 / 克体 / 体生 / 体克
+    favorable: str = ""     # 吉 / 平 / 凶
+    note: str = ""
+
+
+class MeihuaView(BaseModel):
+    movingPosition: int = 0
+    ti: MeihuaTrigramView = Field(default_factory=MeihuaTrigramView)
+    yong: MeihuaTrigramView = Field(default_factory=MeihuaTrigramView)
+    huLower: MeihuaTrigramView = Field(default_factory=MeihuaTrigramView)
+    huUpper: MeihuaTrigramView = Field(default_factory=MeihuaTrigramView)
+    huName: str = ""
+    bianName: str = ""
+    bianYong: MeihuaTrigramView = Field(default_factory=MeihuaTrigramView)
+    relations: list[MeihuaRelationView] = Field(default_factory=list)
+    summary: str = ""
+
+
 class DivinationBoard(BaseModel):
-    version: str = "1.0.0"
+    version: str = "1.1.0"
     method: str = ""
     question: Optional[str] = None
     category: Optional[str] = None
@@ -63,6 +94,8 @@ class DivinationBoard(BaseModel):
     primary: HexagramView
     changed: Optional[HexagramView] = None
     useGod: Optional[UseGodSuggestion] = None
+    # 梅花体用生克视图；仅梅花起卦时非空，其余起卦法为 None。
+    meihua: Optional[MeihuaView] = None
 
 
 class ChatMessage(BaseModel):

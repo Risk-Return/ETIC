@@ -24,6 +24,10 @@ struct BoardView: View {
                 VStack(alignment: .leading, spacing: 18) {
                     questionHeader.modifier(RevealStep(index: 0, active: animateReveal, revealed: revealed))
                     hexagramTitle.modifier(RevealStep(index: 1, active: animateReveal, revealed: revealed))
+                    if let meihua = board.meihua {
+                        MeihuaBoardView(meihua: meihua)
+                            .modifier(RevealStep(index: 2, active: animateReveal, revealed: revealed))
+                    }
                     if hasChanged {
                         primaryChangedToggle.modifier(RevealStep(index: 2, active: animateReveal, revealed: revealed))
                     }

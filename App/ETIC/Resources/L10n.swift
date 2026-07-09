@@ -95,6 +95,18 @@ enum L10n {
         static var void: String { LocalizationStore.string("board.void") }
     }
 
+    enum Meihua {
+        static var title: String { LocalizationStore.string("meihua.title") }
+        static var moving: String { LocalizationStore.string("meihua.moving") }
+        static var ti: String { LocalizationStore.string("meihua.ti") }
+        static var yong: String { LocalizationStore.string("meihua.yong") }
+        static var hu: String { LocalizationStore.string("meihua.hu") }
+        static var huLower: String { LocalizationStore.string("meihua.huLower") }
+        static var huUpper: String { LocalizationStore.string("meihua.huUpper") }
+        static var bian: String { LocalizationStore.string("meihua.bian") }
+        static var relations: String { LocalizationStore.string("meihua.relations") }
+    }
+
     enum Ritual {
         static var preparePrompt: String { LocalizationStore.string("ritual.preparePrompt") }
         static var beginCasting: String { LocalizationStore.string("ritual.beginCasting") }

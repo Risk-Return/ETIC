@@ -179,6 +179,42 @@
     "en": "V",
     "zh-Hans": "空"
   },
+  "meihua.title": {
+    "en": "Plum Blossom (Body–Use)",
+    "zh-Hans": "梅花体用"
+  },
+  "meihua.moving": {
+    "en": "Moving line",
+    "zh-Hans": "动爻"
+  },
+  "meihua.ti": {
+    "en": "Body (self)",
+    "zh-Hans": "体卦（自身）"
+  },
+  "meihua.yong": {
+    "en": "Use (matter)",
+    "zh-Hans": "用卦（所占之事）"
+  },
+  "meihua.hu": {
+    "en": "Mutual",
+    "zh-Hans": "互卦"
+  },
+  "meihua.huLower": {
+    "en": "Lower mutual",
+    "zh-Hans": "下互"
+  },
+  "meihua.huUpper": {
+    "en": "Upper mutual",
+    "zh-Hans": "上互"
+  },
+  "meihua.bian": {
+    "en": "Changed",
+    "zh-Hans": "变卦"
+  },
+  "meihua.relations": {
+    "en": "Body–Use engendering/overcoming",
+    "zh-Hans": "体用生克"
+  },
   "ritual.preparePrompt": {
     "en": "Quiet your mind and focus on your question",
     "zh-Hans": "静心凝神，专注于您的问题"
