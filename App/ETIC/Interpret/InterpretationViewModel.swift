@@ -13,6 +13,8 @@ final class InterpretationViewModel: ObservableObject {
         let id = UUID()
         let role: Role
         var text: String
+        /// 推理模型的思考过程（正文前流式到达）；正文开始后仍保留，供折叠查看。
+        var reasoning: String = ""
     }
 
     let board: DivinationBoard
@@ -122,15 +124,19 @@ final class InterpretationViewModel: ObservableObject {
         return messages
     }
 
-    private func run(stream: AsyncThrowingStream<String, Error>, into id: UUID) {
+    private func run(stream: AsyncThrowingStream<LLMService.StreamEvent, Error>, into id: UUID) {
         errorMessage = nil
         isStreaming = true
         streamTask = Task { [weak self] in
             do {
-                for try await delta in stream {
+                for try await event in stream {
                     guard let self else { return }
-                    if let idx = self.turns.firstIndex(where: { $0.id == id }) {
-                        self.turns[idx].text += delta
+                    guard let idx = self.turns.firstIndex(where: { $0.id == id }) else { continue }
+                    switch event {
+                    case .reasoning(let chunk):
+                        self.turns[idx].reasoning += chunk
+                    case .delta(let chunk):
+                        self.turns[idx].text += chunk
                     }
                 }
             } catch is CancellationError {

@@ -85,8 +85,9 @@ def _refusal_response(result: ModerationResult) -> StreamingResponse:
 
 async def _sse_stream(settings: Settings, messages: list[dict]) -> AsyncIterator[str]:
     try:
-        async for delta in stream_completion(settings, messages):
-            yield _sse_event({"delta": delta})
+        async for kind, text in stream_completion(settings, messages):
+            # reasoning = 思考过程（客户端可折叠/展示「思考中」）；content = 正文解读。
+            yield _sse_event({"reasoning": text} if kind == "reasoning" else {"delta": text})
     except LLMError as exc:
         yield _sse_event({"error": str(exc)})
     yield "data: [DONE]\n\n"

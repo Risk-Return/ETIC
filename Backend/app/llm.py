@@ -4,11 +4,14 @@
 """
 
 import json
-from typing import AsyncIterator
+from typing import AsyncIterator, Literal
 
 import httpx
 
 from .config import Settings
+
+# 流式产出的分片类型：reasoning = 模型思考过程；content = 正式解读正文。
+Chunk = tuple[Literal["reasoning", "content"], str]
 
 MOCK_REPLY = (
     "【整体断语】\n"
@@ -26,15 +29,15 @@ class LLMError(Exception):
     """上游 LLM 调用失败。"""
 
 
-async def _stream_mock(messages: list[dict]) -> AsyncIterator[str]:
+async def _stream_mock(messages: list[dict]) -> AsyncIterator[Chunk]:
     # 按句切片模拟流式 token。
     for chunk in MOCK_REPLY.splitlines(keepends=True):
-        yield chunk
+        yield ("content", chunk)
 
 
 async def _stream_openai_compatible(
     settings: Settings, messages: list[dict]
-) -> AsyncIterator[str]:
+) -> AsyncIterator[Chunk]:
     payload = {
         "model": settings.llm_model,
         "messages": messages,
@@ -74,15 +77,20 @@ async def _stream_openai_compatible(
                 if not choices:
                     continue
                 delta = choices[0].get("delta") or {}
+                # 推理模型（如 deepseek-v4-pro）先产出 reasoning_content，
+                # 单独转发以便客户端即时显示「思考中」，避免正文前长时间静默触发超时。
+                reasoning = delta.get("reasoning_content")
+                if reasoning:
+                    yield ("reasoning", reasoning)
                 content = delta.get("content")
                 if content:
-                    yield content
+                    yield ("content", content)
 
 
 async def stream_completion(
     settings: Settings, messages: list[dict]
-) -> AsyncIterator[str]:
-    """流式产出解读文本增量（delta）。"""
+) -> AsyncIterator[Chunk]:
+    """流式产出解读分片：("reasoning", ...) 为思考过程，("content", ...) 为正文。"""
 
     if settings.use_mock:
         async for chunk in _stream_mock(messages):

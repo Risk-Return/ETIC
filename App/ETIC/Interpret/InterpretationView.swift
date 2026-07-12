@@ -70,10 +70,10 @@ struct InterpretationView: View {
         model.isStreaming && turn.id == model.turns.last?.id && turn.role == .master
     }
 
-    /// 最后一条大师气泡尚无文本且正在流式时，显示「凝神推演…」。
+    /// 最后一条大师气泡尚无任何输出（正文与思考皆空）且正在流式时，显示「凝神推演…」。
     private var showThinking: Bool {
         guard model.isStreaming, let last = model.turns.last else { return false }
-        return last.role == .master && last.text.isEmpty
+        return last.role == .master && last.text.isEmpty && last.reasoning.isEmpty
     }
 
     private func scrollToBottom(_ proxy: ScrollViewProxy) {
@@ -231,6 +231,9 @@ private struct TurnBubble: View {
                         .font(.caption2)
                         .foregroundStyle(InkTheme.inkSoft)
                 }
+                if !isUser && !turn.reasoning.isEmpty {
+                    ReasoningView(text: turn.reasoning, streaming: streaming && turn.text.isEmpty)
+                }
                 MarkdownText(text: turn.text, streaming: streaming)
                     .font(InkTheme.serifBody(16))
                     .foregroundStyle(InkTheme.ink)
@@ -262,6 +265,46 @@ private struct MarkdownText: View {
         } else {
             Text(displayText)
         }
+    }
+}
+
+/// 推理模型的思考过程：流式时展开随文滚动，正文开始后自动折叠，可手动展开回看。
+private struct ReasoningView: View {
+    let text: String
+    /// 仍在输出思考过程（正文尚未开始）时保持展开。
+    let streaming: Bool
+    @State private var manuallyExpanded: Bool?
+
+    private var expanded: Bool { manuallyExpanded ?? streaming }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { manuallyExpanded = !expanded }
+            } label: {
+                HStack(spacing: 5) {
+                    Image(systemName: "brain")
+                        .font(.system(size: 11))
+                    Text(L10n.Interpret.thinking)
+                        .font(.caption2)
+                    Image(systemName: expanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 9))
+                }
+                .foregroundStyle(InkTheme.inkSoft)
+            }
+            .buttonStyle(.plain)
+
+            if expanded {
+                Text(text)
+                    .font(InkTheme.serifBody(13))
+                    .foregroundStyle(InkTheme.inkSoft)
+                    .textSelection(.enabled)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .padding(8)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(InkTheme.paper.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
     }
 }
 

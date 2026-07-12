@@ -7,6 +7,23 @@ import DivinationEngine
 /// SSE 解析，不做任何术数计算。
 struct LLMService {
 
+    /// 流式事件：推理模型（如 deepseek-v4-pro）先产出思考过程，再产出正文。
+    /// 客户端据此在正文前显示「思考中」，避免长时间静默被误判为超时。
+    enum StreamEvent {
+        case reasoning(String)
+        case delta(String)
+    }
+
+    /// 解读为流式长连接：默认 60s 请求超时对推理模型偏短，放宽到 120s。
+    /// 超时按「两次数据到达的间隔」计，流式持续有数据即不会触发。
+    private static let session: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 120
+        config.timeoutIntervalForResource = 600
+        config.waitsForConnectivity = true
+        return URLSession(configuration: config)
+    }()
+
     enum ServiceError: LocalizedError {
         case badURL
         case http(Int)
@@ -47,14 +64,14 @@ struct LLMService {
         UserDefaults.standard.string(forKey: "app.language") ?? "en"
     }
 
-    /// 首轮解读：盘面 → 流式断语。
-    func interpret(board: DivinationBoard) -> AsyncThrowingStream<String, Error> {
+    /// 首轮解读：盘面 → 流式断语（含推理过程事件）。
+    func interpret(board: DivinationBoard) -> AsyncThrowingStream<StreamEvent, Error> {
         let body = InterpretBody(board: board, locale: currentLocale)
         return stream(path: "/v1/interpret", body: body)
     }
 
-    /// 多轮追问：盘面 + 历史对话 → 流式回复。
-    func chat(board: DivinationBoard, messages: [ChatMessage]) -> AsyncThrowingStream<String, Error> {
+    /// 多轮追问：盘面 + 历史对话 → 流式回复（含推理过程事件）。
+    func chat(board: DivinationBoard, messages: [ChatMessage]) -> AsyncThrowingStream<StreamEvent, Error> {
         let body = ChatBody(board: board, messages: messages, locale: currentLocale)
         return stream(path: "/v1/chat", body: body)
     }
@@ -71,7 +88,7 @@ struct LLMService {
         }
         request.httpBody = try JSONEncoder().encode(GroundingBody(board: board))
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await Self.session.data(for: request)
         if let http = response as? HTTPURLResponse, http.statusCode >= 400 {
             throw ServiceError.http(http.statusCode)
         }
@@ -121,12 +138,13 @@ struct LLMService {
 
     private struct SSEPayload: Decodable {
         let delta: String?
+        let reasoning: String?
         let error: String?
     }
 
     // MARK: - SSE
 
-    private func stream<Body: Encodable>(path: String, body: Body) -> AsyncThrowingStream<String, Error> {
+    private func stream<Body: Encodable>(path: String, body: Body) -> AsyncThrowingStream<StreamEvent, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
@@ -139,7 +157,7 @@ struct LLMService {
                     }
                     request.httpBody = try JSONEncoder().encode(body)
 
-                    let (bytes, response) = try await URLSession.shared.bytes(for: request)
+                    let (bytes, response) = try await Self.session.bytes(for: request)
                     if let http = response as? HTTPURLResponse, http.statusCode >= 400 {
                         if http.statusCode == 402 {
                             throw ServiceError.insufficientCredits
@@ -159,8 +177,11 @@ struct LLMService {
                         if let error = payload.error {
                             throw ServiceError.upstream(error)
                         }
+                        if let reasoning = payload.reasoning, !reasoning.isEmpty {
+                            continuation.yield(.reasoning(reasoning))
+                        }
                         if let delta = payload.delta, !delta.isEmpty {
-                            continuation.yield(delta)
+                            continuation.yield(.delta(delta))
                         }
                     }
                     continuation.finish()
