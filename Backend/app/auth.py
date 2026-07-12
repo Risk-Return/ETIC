@@ -161,9 +161,18 @@ async def get_current_user_id(
         return None
     token = auth_header[7:]
     try:
-        return verify_session_jwt(token, settings)
+        user_id = verify_session_jwt(token, settings)
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid or expired session token")
+
+    # 会话 JWT 有效，但对应用户可能已被删除（如库重置）。此时视为无效鉴权，
+    # 返回 401 让客户端重新登录，避免后续 FK 约束导致 500。
+    from . import account_db
+
+    with connect(settings) as conn:
+        if account_db.get_user_by_id(conn, user_id) is None:
+            raise HTTPException(status_code=401, detail="Session user no longer exists")
+    return user_id
 
 
 async def require_user_id(
