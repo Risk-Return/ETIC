@@ -88,7 +88,7 @@
 		2E7C20211DE2BA73872DB382 /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
 		2F2BFB6AB645F2BE8B9E01C7 /* swift-cmark */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "swift-cmark"; path = "../Packages/swift-cmark"; sourceTree = SOURCE_ROOT; };
 		3E4444BCC3F43D18AA294638 /* NetworkImage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NetworkImage; path = ../Packages/NetworkImage; sourceTree = SOURCE_ROOT; };
-		4255642E77E3E3385E56CF53 /* ETIC.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ETIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4255642E77E3E3385E56CF53 /* ETIC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ETIC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4334AE05301780E621C23879 /* ShakeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetector.swift; sourceTree = "<group>"; };
 		45CD523BE4C5AAB6DB03308C /* WorldCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCity.swift; sourceTree = "<group>"; };
 		4B18DA0C3B2265ADE90F3044 /* RitualViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualViewModel.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		5573ED399C3188C2B5702AF6 /* translations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = translations.json; sourceTree = "<group>"; };
 		57D6660DDDA6DC2320D44625 /* RitualSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitualSettingsView.swift; sourceTree = "<group>"; };
 		5B85AF4ADB3277575C284D79 /* InkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkTheme.swift; sourceTree = "<group>"; };
-		5C86711106C35BE7EEA69D1F /* Products.storekit */ = {isa = PBXFileReference; path = Products.storekit; sourceTree = "<group>"; };
+		5C86711106C35BE7EEA69D1F /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		615AA3FD0B442ED2CE66039B /* EncyclopediaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncyclopediaDetailView.swift; sourceTree = "<group>"; };
 		61DF26FFC964E834CA961405 /* DivinationRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationRecordTests.swift; sourceTree = "<group>"; };
 		669ACA4E40E4606941F99F23 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -393,8 +393,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 69BBC4F357161AF1A7692CBC /* Build configuration list for PBXProject "ETIC" */;
 			developmentRegion = en;
@@ -517,6 +515,7 @@
 				CODE_SIGN_ENTITLEMENTS = ETIC/ETIC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HGVZ5F7B68;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = ETIC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -677,6 +676,7 @@
 				CODE_SIGN_ENTITLEMENTS = ETIC/ETIC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HGVZ5F7B68;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = ETIC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

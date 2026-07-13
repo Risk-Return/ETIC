@@ -62,20 +62,20 @@ struct LLMService {
     /// 首轮解读：盘面 → 流式断语（含推理过程事件）。
     func interpret(board: DivinationBoard) -> AsyncThrowingStream<StreamEvent, Error> {
         let body = InterpretBody(board: board)
-        return stream(path: "/v1/interpret", body: body)
+        return stream(path: "v1/interpret", body: body)
     }
 
     /// 多轮追问：盘面 + 历史对话 → 流式回复（含推理过程事件）。
     func chat(board: DivinationBoard, messages: [ChatMessage]) -> AsyncThrowingStream<StreamEvent, Error> {
         let body = ChatBody(board: board, messages: messages)
-        return stream(path: "/v1/chat", body: body)
+        return stream(path: "v1/chat", body: body)
     }
 
     /// 经文检索：盘面 → 本卦/动爻/变卦相关周易经文（供展示「经文参考」）。
     ///
     /// 与解读流分离，一次性返回；后端关闭 RAG 或库不可达时返回空列表（不影响解读）。
     func grounding(board: DivinationBoard) async throws -> GroundingResult {
-        var request = URLRequest(url: baseURL.appendingPathComponent("/v1/grounding"))
+        var request = URLRequest(url: baseURL.appendingPathComponent("v1/grounding"))
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         if let header = await AuthService.shared.authHeader {

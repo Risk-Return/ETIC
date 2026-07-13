@@ -86,15 +86,25 @@ final class AuthService: ObservableObject {
             )
             let data = try JSONEncoder().encode(body)
 
-            var request = URLRequest(url: baseURL.appendingPathComponent("/v1/auth/apple"))
+            let url = baseURL.appendingPathComponent("v1/auth/apple")
+            var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.timeoutInterval = 30
             request.httpBody = data
 
             let (responseData, response) = try await URLSession.shared.data(for: request)
-            guard let http = response as? HTTPURLResponse, http.statusCode == 200 else {
-                let code = (response as? HTTPURLResponse)?.statusCode ?? -1
-                errorMessage = "Sign in failed (HTTP \(code))."
+            guard let http = response as? HTTPURLResponse else {
+                errorMessage = "No HTTP response from server."
+                return
+            }
+            if http.statusCode == 401 {
+                errorMessage = "Apple ID verification failed. Please try again."
+                return
+            }
+            guard http.statusCode == 200 else {
+                let body = String(data: responseData, encoding: .utf8) ?? ""
+                errorMessage = "Server error (HTTP \(http.statusCode)). \(body.prefix(120))"
                 return
             }
 
@@ -103,6 +113,8 @@ final class AuthService: ObservableObject {
             accountStatus = authResponse.account
             isAuthenticated = true
             saveSessionToken(authResponse.sessionToken)
+        } catch let error as URLError {
+            errorMessage = "Network error: \(error.localizedDescription) (code: \(error.code.rawValue))"
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -114,7 +126,7 @@ final class AuthService: ObservableObject {
     func refreshAccountStatus() async {
         guard let header = authHeader else { return }
         do {
-            var request = URLRequest(url: baseURL.appendingPathComponent("/v1/account/me"))
+            var request = URLRequest(url: baseURL.appendingPathComponent("v1/account/me"))
             request.httpMethod = "GET"
             request.setValue(header, forHTTPHeaderField: "Authorization")
 
@@ -138,7 +150,7 @@ final class AuthService: ObservableObject {
     func testLogin() async {
         errorMessage = nil
         do {
-            var request = URLRequest(url: baseURL.appendingPathComponent("/v1/auth/test"))
+            var request = URLRequest(url: baseURL.appendingPathComponent("v1/auth/test"))
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
