@@ -53,6 +53,8 @@ class Settings(BaseSettings):
     free_monthly_credits: int = 3
     # 每次解读最多追问次数。
     max_questions_per_reading: int = 3
+    # 订阅每月赠送额度（解读时正常抵扣，非无限畅读）。
+    subscription_monthly_credits: int = 30
     # 计费系统是否启用（关闭时 interpret/chat 不鉴权、不扣费，兼容旧流程）。
     billing_enabled: bool = False
     # 开发模式：启用测试登录端点（POST /v1/auth/test），跳过 Apple 验签。

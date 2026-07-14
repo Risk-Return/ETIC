@@ -22,7 +22,7 @@ from .account_db import (
     get_account_status,
     get_or_create_reading,
     get_or_create_user,
-    has_active_subscription,
+    get_subscription,
     increment_reading_questions,
 )
 from .account_models import (
@@ -178,13 +178,29 @@ async def verify_iap(
             expires_at = datetime.now(timezone.utc) + timedelta(days=30)
 
         with connect(settings) as conn:
+            ensure_schema(conn)
+            existing_sub = get_subscription(conn, user_id)
+            is_new_purchase = (
+                existing_sub is None
+                or existing_sub.get("original_transaction_id") != original_tx_id
+            )
             activate_subscription(
                 conn, user_id, product_id, original_tx_id, expires_at, environment,
             )
-        logger.info(
-            "Subscription activated | user=%s product=%s environment=%s",
-            user_id, product_id, environment,
-        )
+            if is_new_purchase:
+                credits = settings.subscription_monthly_credits
+                add_paid_credits(
+                    conn, user_id, credits, product_id, original_tx_id, environment=environment,
+                )
+                logger.info(
+                    "Subscription activated + %d credits | user=%s environment=%s",
+                    credits, user_id, environment,
+                )
+            else:
+                logger.info(
+                    "Subscription restored (no credits) | user=%s environment=%s",
+                    user_id, environment,
+                )
         return IAPVerifyResponse(
             success=True,
             subscriptionActivated=True,
@@ -233,8 +249,7 @@ def check_and_deduct_reading_credit(
 ) -> str | None:
     """Ensure user has credits for a new reading. Returns error message or None.
 
-    - Subscribers: unlimited, no deduction.
-    - Free/Paid credits: deduct 1 (free first).
+    - All readings deduct 1 credit (free first, then paid).
     - Re-opening an existing reading (same board_key): no deduction.
     """
     _ensure_db(settings)
@@ -245,10 +260,6 @@ def check_and_deduct_reading_credit(
         _, created = get_or_create_reading(conn, user_id, board_key)
         if not created:
             return None  # Already paid for this reading.
-
-        # New reading — check subscription first.
-        if has_active_subscription(conn, user_id):
-            return None  # Subscribers read for free.
 
         # Deduct a credit.
         if not deduct_credit(conn, user_id, settings):
@@ -262,8 +273,7 @@ def check_and_increment_question(
 ) -> str | None:
     """Ensure user can ask a follow-up question. Returns error message or None.
 
-    - Subscribers: still subject to max questions per reading.
-    - Non-subscribers: same limit.
+    All users subject to max questions per reading limit.
     """
     _ensure_db(settings)
     board_key = board_key_from_dict(board)
@@ -273,9 +283,8 @@ def check_and_increment_question(
         _, created = get_or_create_reading(conn, user_id, board_key)
         if created:
             # Reading wasn't created by interpret — deduct credit now.
-            if not has_active_subscription(conn, user_id):
-                if not deduct_credit(conn, user_id, settings):
-                    return "Insufficient credits."
+            if not deduct_credit(conn, user_id, settings):
+                return "Insufficient credits."
 
         if not increment_reading_questions(conn, user_id, board_key, settings):
             limit = settings.max_questions_per_reading

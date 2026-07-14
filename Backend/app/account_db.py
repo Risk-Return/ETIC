@@ -294,6 +294,27 @@ def add_paid_credits(
     conn.commit()
 
 
+def get_subscription(
+    conn: psycopg.Connection, user_id: uuid.UUID
+) -> Optional[dict]:
+    """Return subscription row for a user, or None."""
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT product_id, status, original_transaction_id, expires_at "
+            "FROM subscriptions WHERE user_id = %s",
+            (user_id,),
+        )
+        row = cur.fetchone()
+        if row is None:
+            return None
+        return {
+            "product_id": row[0],
+            "status": row[1],
+            "original_transaction_id": row[2],
+            "expires_at": row[3],
+        }
+
+
 def activate_subscription(
     conn: psycopg.Connection,
     user_id: uuid.UUID,

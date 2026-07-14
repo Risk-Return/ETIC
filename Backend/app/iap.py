@@ -221,6 +221,17 @@ def _apply_db_update(
             if expires_ms:
                 expires_at = datetime.fromtimestamp(expires_ms / 1000, tz=timezone.utc)
             activate_subscription(conn, user_id, product_id, original_tx_id, expires_at, environment)
+            if notif_type == "DID_RENEW":
+                # Grant monthly credits on renewal.
+                from .account_db import add_paid_credits
+                add_paid_credits(
+                    conn, user_id, settings.subscription_monthly_credits,
+                    product_id, original_tx_id, environment=environment,
+                )
+                logger.info(
+                    "IAP renewal credits granted | user=%s credits=%d",
+                    user_id, settings.subscription_monthly_credits,
+                )
 
         elif notif_type in ("EXPIRED", "REVOKE", "REFUND"):
             from .account_db import has_active_subscription
