@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 import DivinationEngine
 
 /// 占卜动画容器：罗盘入场 → 摇卦 → 成卦 → 动爻变卦 → 盘面。引擎已算好，仅"演出"。
@@ -9,6 +10,7 @@ struct RitualView: View {
     @StateObject private var model: RitualViewModel
     @StateObject private var shake = ShakeDetector()
     @EnvironmentObject private var settings: RitualSettings
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
 
     init(board: DivinationBoard) {
@@ -52,6 +54,9 @@ struct RitualView: View {
         .onDisappear {
             shake.stop()
             model.onDisappear()
+        }
+        .onChange(of: model.stage) { _, newStage in
+            if newStage == .board { HistoryStore.recordCast(modelContext, board: board) }
         }
     }
 

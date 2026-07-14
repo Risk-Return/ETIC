@@ -86,9 +86,7 @@ struct CastingView: View {
         .navigationDestination(item: $model.board) { board in
             RitualView(board: board)
         }
-        .onChange(of: model.board) { _, newBoard in
-            if let newBoard { HistoryStore.recordCast(context, board: newBoard) }
-        }
+
     }
 
     private var header: some View {
