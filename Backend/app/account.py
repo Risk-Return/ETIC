@@ -182,6 +182,7 @@ async def verify_iap(
             existing_sub = get_subscription(conn, user_id)
             is_new_purchase = (
                 existing_sub is None
+                or existing_sub.get("status") == "expired"
                 or existing_sub.get("original_transaction_id") != original_tx_id
             )
             activate_subscription(
