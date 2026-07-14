@@ -52,7 +52,12 @@ final class StoreKitService: ObservableObject {
         defer { purchaseInProgress = nil }
 
         do {
-            let result = try await product.purchase()
+            var options: [Product.PurchaseOption] = []
+            if let userId = AuthService.shared.accountStatus?.userId,
+               let token = UUID(uuidString: userId) {
+                options.append(.appAccountToken(token))
+            }
+            let result = try await product.purchase(options: options)
 
             switch result {
             case .success(let verification):
