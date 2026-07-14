@@ -176,6 +176,9 @@ def _handle_notification(
     product_id = tx_data.get("productId", "unknown")
     original_tx_id = tx_data.get("originalTransactionId", "unknown")
     expires_ms = tx_data.get("expiresDate")
+    environment = tx_data.get("environment", "Unknown")
+    if isinstance(environment, str):
+        environment = environment.capitalize()
     user_id_str = None
 
     if app_account_token and isinstance(app_account_token, str):
@@ -186,13 +189,13 @@ def _handle_notification(
             pass
 
     logger.info(
-        "IAP notification | type=%s (%s) subtype=%s product=%s tx=%s user=%s test=%s",
-        notif_type, type_cn, subtype, product_id, original_tx_id, user_id_str, test_mode,
+        "IAP notification | type=%s (%s) subtype=%s product=%s tx=%s user=%s environment=%s test_param=%s",
+        notif_type, type_cn, subtype, product_id, original_tx_id, user_id_str, environment, test_mode,
     )
 
     # Only update DB for lifecycle events if we have a user_id.
     if notif_type in _SUB_LIFECYCLE_EVENTS and user_id_str:
-        _apply_db_update(settings, notif_type, user_id_str, product_id, original_tx_id, expires_ms)
+        _apply_db_update(settings, notif_type, user_id_str, product_id, original_tx_id, expires_ms, environment)
 
 
 def _apply_db_update(
@@ -202,6 +205,7 @@ def _apply_db_update(
     product_id: str,
     original_tx_id: str,
     expires_ms: int | None,
+    environment: str | None = None,
 ) -> None:
     """Apply notification-triggered DB changes."""
     from uuid import UUID
@@ -218,7 +222,7 @@ def _apply_db_update(
             expires_at = None
             if expires_ms:
                 expires_at = datetime.fromtimestamp(expires_ms / 1000, tz=timezone.utc)
-            activate_subscription(conn, user_id, product_id, original_tx_id, expires_at)
+            activate_subscription(conn, user_id, product_id, original_tx_id, expires_at, environment)
 
         elif notif_type in ("EXPIRED", "REVOKE", "REFUND"):
             from .account_db import has_active_subscription
@@ -243,9 +247,9 @@ def _apply_db_update(
                     )
                     # Log refund transaction.
                     cur.execute(
-                        "INSERT INTO transactions (user_id, type, product_id, original_transaction_id) "
-                        "VALUES (%s, 'refund', %s, %s)",
-                        (user_id, product_id, original_tx_id),
+                        "INSERT INTO transactions (user_id, type, product_id, original_transaction_id, environment) "
+                        "VALUES (%s, 'refund', %s, %s, %s)",
+                        (user_id, product_id, original_tx_id, environment),
                     )
             conn.commit()
             logger.info("IAP DB updated | type=%s user=%s tx=%s", notif_type, user_id, original_tx_id)

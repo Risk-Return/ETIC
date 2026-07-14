@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
 import uuid
@@ -138,13 +139,31 @@ async def verify_iap(
     try:
         unverified = pyjwt.decode(req.jwsRepresentation, options={"verify_signature": False})
     except Exception:
-        # Some StoreKit JWS tokens are nested (signedTransactionInfo).
-        # Fall back to trusting the client-provided productId.
+        # JWT decode failed — client may be sending base64(jsonRepresentation)
+        # instead of jwsRepresentation. Attempt to parse as base64-encoded JSON.
         unverified = {}
+        try:
+            raw = base64.b64decode(req.jwsRepresentation)
+            unverified = json.loads(raw.decode("utf-8"))
+            logger.warning(
+                "IAP verify | JWT decode failed, fell back to base64 JSON parse | user=%s",
+                user_id,
+            )
+        except Exception:
+            pass
 
     product_id = req.productId
     original_tx_id = req.originalTransactionId or str(
         unverified.get("originalTransactionId", "")
+    )
+    environment = unverified.get("environment", "Unknown")
+    # Normalize Apple's values: "Sandbox" or "Production"
+    if isinstance(environment, str):
+        environment = environment.capitalize()
+
+    logger.info(
+        "IAP verify | user=%s product=%s environment=%s originalTx=%s",
+        user_id, product_id, environment, original_tx_id,
     )
 
     # Check if it's a subscription or top-up.
@@ -160,9 +179,12 @@ async def verify_iap(
 
         with connect(settings) as conn:
             activate_subscription(
-                conn, user_id, product_id, original_tx_id, expires_at
+                conn, user_id, product_id, original_tx_id, expires_at, environment,
             )
-        logger.info("Subscription activated | user=%s product=%s", user_id, product_id)
+        logger.info(
+            "Subscription activated | user=%s product=%s environment=%s",
+            user_id, product_id, environment,
+        )
         return IAPVerifyResponse(
             success=True,
             subscriptionActivated=True,
@@ -173,8 +195,13 @@ async def verify_iap(
     if product_id in topup_map:
         credits = topup_map[product_id]
         with connect(settings) as conn:
-            add_paid_credits(conn, user_id, credits, product_id, original_tx_id)
-        logger.info("Credits granted | user=%s product=%s credits=%d", user_id, product_id, credits)
+            add_paid_credits(
+                conn, user_id, credits, product_id, original_tx_id, environment=environment,
+            )
+        logger.info(
+            "Credits granted | user=%s product=%s credits=%d environment=%s",
+            user_id, product_id, credits, environment,
+        )
         return IAPVerifyResponse(
             success=True,
             creditsGranted=credits,

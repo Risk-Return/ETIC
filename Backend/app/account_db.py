@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     credits              INT  NOT NULL DEFAULT 0,
     amount_cents         INT,
     original_transaction_id TEXT,
+    environment          TEXT,
     created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
@@ -277,6 +278,7 @@ def add_paid_credits(
     product_id: str,
     original_transaction_id: Optional[str] = None,
     amount_cents: Optional[int] = None,
+    environment: Optional[str] = None,
 ) -> None:
     with conn.cursor() as cur:
         cur.execute(
@@ -285,9 +287,9 @@ def add_paid_credits(
             (credits, user_id),
         )
         cur.execute(
-            "INSERT INTO transactions (user_id, type, product_id, credits, amount_cents, original_transaction_id) "
-            "VALUES (%s, 'topup', %s, %s, %s, %s)",
-            (user_id, product_id, credits, amount_cents, original_transaction_id),
+            "INSERT INTO transactions (user_id, type, product_id, credits, amount_cents, original_transaction_id, environment) "
+            "VALUES (%s, 'topup', %s, %s, %s, %s, %s)",
+            (user_id, product_id, credits, amount_cents, original_transaction_id, environment),
         )
     conn.commit()
 
@@ -298,6 +300,7 @@ def activate_subscription(
     product_id: str,
     original_transaction_id: Optional[str] = None,
     expires_at: Optional[datetime] = None,
+    environment: Optional[str] = None,
 ) -> None:
     with conn.cursor() as cur:
         cur.execute(
@@ -310,9 +313,9 @@ def activate_subscription(
             (user_id, product_id, original_transaction_id, expires_at),
         )
         cur.execute(
-            "INSERT INTO transactions (user_id, type, product_id, original_transaction_id) "
-            "VALUES (%s, 'subscription', %s, %s)",
-            (user_id, product_id, original_transaction_id),
+            "INSERT INTO transactions (user_id, type, product_id, original_transaction_id, environment) "
+            "VALUES (%s, 'subscription', %s, %s, %s)",
+            (user_id, product_id, original_transaction_id, environment),
         )
     conn.commit()
 
