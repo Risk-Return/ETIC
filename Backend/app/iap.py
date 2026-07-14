@@ -11,6 +11,7 @@ notificationType + subtype + signedTransactionInfo 等字段。
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
 from datetime import datetime, timezone
@@ -88,12 +89,9 @@ def _verify_and_decode_signed_payload(
         return None
 
     try:
-        leaf_cert = x509.load_der_x509_certificate(
-            bytes(x5c[0], "ascii").encode() if isinstance(x5c[0], str) else x5c[0]
-        )
-        intermediate_cert = x509.load_der_x509_certificate(
-            bytes(x5c[1], "ascii").encode() if isinstance(x5c[1], str) else x5c[1]
-        )
+        # x5c entries are base64-encoded DER certificates (per RFC 7517).
+        leaf_cert = x509.load_der_x509_certificate(base64.b64decode(x5c[0]))
+        intermediate_cert = x509.load_der_x509_certificate(base64.b64decode(x5c[1]))
     except Exception as exc:
         logger.warning("IAP: failed to parse x5c certs: %s", exc)
         return None
