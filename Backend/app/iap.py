@@ -221,6 +221,14 @@ def _apply_db_update(
             if expires_ms:
                 expires_at = datetime.fromtimestamp(expires_ms / 1000, tz=timezone.utc)
             activate_subscription(conn, user_id, product_id, original_tx_id, expires_at, environment)
+            # Record the lifecycle event as a transaction.
+            with conn.cursor() as cur:
+                cur.execute(
+                    "INSERT INTO transactions (user_id, type, product_id, original_transaction_id, environment) "
+                    "VALUES (%s, %s, %s, %s, %s)",
+                    (user_id, notif_type, product_id, original_tx_id, environment),
+                )
+            conn.commit()
             if notif_type == "DID_RENEW":
                 # Grant monthly credits on renewal.
                 from .account_db import add_paid_credits

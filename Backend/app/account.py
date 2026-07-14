@@ -192,6 +192,14 @@ async def verify_iap(
                 add_paid_credits(
                     conn, user_id, credits, product_id, original_tx_id, environment=environment,
                 )
+                # Record the subscription activation itself as a transaction.
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "INSERT INTO transactions (user_id, type, product_id, original_transaction_id, environment) "
+                        "VALUES (%s, 'subscription', %s, %s, %s)",
+                        (user_id, product_id, original_tx_id, environment),
+                    )
+                conn.commit()
                 logger.info(
                     "Subscription activated + %d credits | user=%s environment=%s",
                     credits, user_id, environment,

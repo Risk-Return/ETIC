@@ -333,11 +333,6 @@ def activate_subscription(
             "expires_at = EXCLUDED.expires_at, updated_at = NOW()",
             (user_id, product_id, original_transaction_id, expires_at),
         )
-        cur.execute(
-            "INSERT INTO transactions (user_id, type, product_id, original_transaction_id, environment) "
-            "VALUES (%s, 'subscription', %s, %s, %s)",
-            (user_id, product_id, original_transaction_id, environment),
-        )
     conn.commit()
 
 
