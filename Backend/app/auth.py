@@ -1,4 +1,4 @@
-"""Apple Sign In 验签 + 会话 JWT 签发/校验。
+"""Apple Sign In 验签 + 会话 JWT 签发/校验 + client_secret 生成。
 
 流程：
 1. iOS 端 Sign in with Apple 获取 `identityToken`（Apple 签名的 JWT）。
@@ -6,6 +6,8 @@
 3. 后端用 Apple 公钥验签，取出 `sub`（Apple 稳定用户标识）。
 4. 后端创建/检索用户，签发会话 JWT（HS256）返回给客户端。
 5. 客户端后续请求携带 `Authorization: Bearer <session_jwt>`。
+
+client_secret 用于服务端调用 Apple API（如验证 authorization_code、刷新 token）。
 """
 
 from __future__ import annotations
@@ -13,6 +15,7 @@ from __future__ import annotations
 import logging
 import time
 import uuid
+from pathlib import Path
 from typing import Optional
 
 import httpx
@@ -26,6 +29,43 @@ logger = logging.getLogger("etic.auth")
 
 APPLE_KEYS_URL = "https://appleid.apple.com/auth/keys"
 APPLE_ISSUER = "https://appleid.apple.com"
+
+# Cache Apple public keys (fetched on first use, refreshed on key rotation).
+_apple_jwks: dict | None = None
+_apple_jwks_fetched_at: float = 0
+
+
+def _load_private_key(path: str) -> str:
+    raw = (Path(path).read_text(encoding="ascii")).strip()
+    if not raw.startswith("-----BEGIN"):
+        # Prepend header if the key was stored as raw base64.
+        raw = "-----BEGIN PRIVATE KEY-----\n" + raw + "\n-----END PRIVATE KEY-----"
+    return raw
+
+
+def generate_client_secret(settings: Settings) -> str:
+    """Generate a client_secret JWT for server-to-server Apple API calls.
+
+    Uses the Sign in with Apple private key (ES256).
+    Returns a JWT valid for up to 6 months (Apple max).
+    """
+    if not settings.apple_team_id:
+        raise ValueError("apple_team_id is required for client_secret generation")
+
+    private_key = _load_private_key(settings.apple_siwa_key_path)
+    now = int(time.time())
+    payload = {
+        "iss": settings.apple_team_id,
+        "iat": now,
+        "exp": now + 180 * 86400,  # 6 months
+        "aud": APPLE_ISSUER,
+        "sub": settings.apple_bundle_id,
+    }
+    headers = {
+        "kid": settings.apple_siwa_key_id,
+        "alg": "ES256",
+    }
+    return jwt.encode(payload, private_key, algorithm="ES256", headers=headers)
 
 # Cache Apple public keys (fetched on first use, refreshed on key rotation).
 _apple_jwks: dict | None = None
@@ -121,9 +161,18 @@ async def get_current_user_id(
         return None
     token = auth_header[7:]
     try:
-        return verify_session_jwt(token, settings)
+        user_id = verify_session_jwt(token, settings)
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid or expired session token")
+
+    # 会话 JWT 有效，但对应用户可能已被删除（如库重置）。此时视为无效鉴权，
+    # 返回 401 让客户端重新登录，避免后续 FK 约束导致 500。
+    from . import account_db
+
+    with connect(settings) as conn:
+        if account_db.get_user_by_id(conn, user_id) is None:
+            raise HTTPException(status_code=401, detail="Session user no longer exists")
+    return user_id
 
 
 async def require_user_id(
@@ -145,4 +194,6 @@ def get_or_create_user_from_apple(
     with connect(settings) as conn:
         from . import account_db
         account_db.ensure_schema(conn)
-        return account_db.get_or_create_user(conn, apple_sub, email, name)
+        return account_db.get_or_create_user(
+            conn, apple_sub, email, name, settings.free_monthly_credits
+        )

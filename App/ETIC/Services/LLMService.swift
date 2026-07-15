@@ -59,15 +59,20 @@ struct LLMService {
         }
     }
 
+    /// 当前界面语言（如 `zh-Hans` / `en`），随请求下发，用于后端内容审核拒绝文案与解读作答语言。
+    private var currentLocale: String {
+        UserDefaults.standard.string(forKey: "app.language") ?? "en"
+    }
+
     /// 首轮解读：盘面 → 流式断语（含推理过程事件）。
     func interpret(board: DivinationBoard) -> AsyncThrowingStream<StreamEvent, Error> {
-        let body = InterpretBody(board: board)
+        let body = InterpretBody(board: board, locale: currentLocale)
         return stream(path: "v1/interpret", body: body)
     }
 
     /// 多轮追问：盘面 + 历史对话 → 流式回复（含推理过程事件）。
     func chat(board: DivinationBoard, messages: [ChatMessage]) -> AsyncThrowingStream<StreamEvent, Error> {
-        let body = ChatBody(board: board, messages: messages)
+        let body = ChatBody(board: board, messages: messages, locale: currentLocale)
         return stream(path: "v1/chat", body: body)
     }
 
@@ -81,7 +86,7 @@ struct LLMService {
         if let header = await AuthService.shared.authHeader {
             request.setValue(header, forHTTPHeaderField: "Authorization")
         }
-        request.httpBody = try JSONEncoder().encode(InterpretBody(board: board))
+        request.httpBody = try JSONEncoder().encode(GroundingBody(board: board))
 
         let (data, response) = try await Self.session.data(for: request)
         if let http = response as? HTTPURLResponse, http.statusCode >= 400 {
@@ -118,11 +123,17 @@ struct LLMService {
 
     private struct InterpretBody: Encodable {
         let board: DivinationBoard
+        let locale: String
     }
 
     private struct ChatBody: Encodable {
         let board: DivinationBoard
         let messages: [ChatMessage]
+        let locale: String
+    }
+
+    private struct GroundingBody: Encodable {
+        let board: DivinationBoard
     }
 
     private struct SSEPayload: Decodable {

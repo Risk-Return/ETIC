@@ -1,10 +1,11 @@
-"""账号 & 计费路由：Apple Sign In、账号状态、IAP 验证。
+"""账号 & 计费路由：Apple Sign In、邮箱验证码登录、账号状态、IAP 验证。
 
 所有端点前缀 `/v1`，与解读端点同级。
 """
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
 import uuid
@@ -16,18 +17,25 @@ from fastapi import APIRouter, Depends, HTTPException
 from .account_db import (
     activate_subscription,
     add_paid_credits,
+    create_email_code,
     deduct_credit,
     ensure_schema,
     get_account_status,
     get_or_create_reading,
     get_or_create_user,
-    has_active_subscription,
+    get_or_create_user_by_email,
+    get_subscription,
     increment_reading_questions,
+    latest_email_code_created_at,
+    verify_and_consume_email_code,
 )
 from .account_models import (
     AccountStatus,
     AppleAuthRequest,
     AuthResponse,
+    EmailCodeRequest,
+    EmailCodeResponse,
+    EmailVerifyRequest,
     IAPVerifyRequest,
     IAPVerifyResponse,
 )
@@ -39,6 +47,12 @@ from .auth import (
 )
 from .config import Settings, get_settings
 from .db import connect
+from .email_auth import (
+    generate_code,
+    hash_code,
+    is_valid_email,
+    send_verification_email,
+)
 
 logger = logging.getLogger("etic.account")
 
@@ -82,6 +96,80 @@ async def apple_sign_in(
     account = _account_status(settings, user_id)
 
     logger.info("Apple Sign In | user=%s created=%s", user_id, created)
+    return AuthResponse(sessionToken=session_token, account=account)
+
+
+@router.post("/auth/email/code", response_model=EmailCodeResponse)
+async def request_email_code(
+    req: EmailCodeRequest,
+    settings: Settings = Depends(get_settings),
+) -> EmailCodeResponse:
+    """发送邮箱登录验证码：校验邮箱 → 冷却检查 → 生成并哈希入库 → SMTP 发信。
+
+    为防枚举，不区分邮箱是否已注册，一律发送验证码。
+    """
+
+    email = req.email.strip().lower()
+    if not is_valid_email(email):
+        raise HTTPException(status_code=400, detail="Invalid email address")
+
+    _ensure_db(settings)
+    cooldown = settings.email_code_cooldown_seconds
+    with connect(settings) as conn:
+        last = latest_email_code_created_at(conn, email)
+        if last is not None:
+            elapsed = (datetime.now(timezone.utc) - last).total_seconds()
+            if elapsed < cooldown:
+                raise HTTPException(
+                    status_code=429,
+                    detail=f"Please wait {int(cooldown - elapsed)}s before requesting a new code",
+                )
+
+    code = generate_code()
+    try:
+        await send_verification_email(email, code, settings)
+    except Exception as exc:
+        logger.error("Failed to send verification email to %s: %s", email, exc)
+        raise HTTPException(status_code=502, detail="Failed to send verification email")
+
+    with connect(settings) as conn:
+        create_email_code(
+            conn, email, hash_code(email, code, settings), settings.email_code_ttl_minutes
+        )
+
+    logger.info("Email code issued | email=%s", email)
+    return EmailCodeResponse(
+        success=True, cooldownSeconds=cooldown, message="Verification code sent"
+    )
+
+
+@router.post("/auth/email/verify", response_model=AuthResponse)
+async def email_sign_in(
+    req: EmailVerifyRequest,
+    settings: Settings = Depends(get_settings),
+) -> AuthResponse:
+    """邮箱验证码登录：校验验证码 → 创建/检索用户 → 签发会话 JWT。"""
+
+    email = req.email.strip().lower()
+    code = req.code.strip()
+    if not is_valid_email(email) or not code:
+        raise HTTPException(status_code=400, detail="Invalid email or code")
+
+    _ensure_db(settings)
+    with connect(settings) as conn:
+        ok = verify_and_consume_email_code(
+            conn, email, hash_code(email, code, settings), settings.email_code_max_attempts
+        )
+        if not ok:
+            raise HTTPException(status_code=401, detail="Invalid or expired verification code")
+        user_id, created = get_or_create_user_by_email(
+            conn, email, settings.free_monthly_credits
+        )
+
+    session_token = issue_session_jwt(user_id, settings)
+    account = _account_status(settings, user_id)
+
+    logger.info("Email Sign In | user=%s created=%s", user_id, created)
     return AuthResponse(sessionToken=session_token, account=account)
 
 
@@ -138,13 +226,31 @@ async def verify_iap(
     try:
         unverified = pyjwt.decode(req.jwsRepresentation, options={"verify_signature": False})
     except Exception:
-        # Some StoreKit JWS tokens are nested (signedTransactionInfo).
-        # Fall back to trusting the client-provided productId.
+        # JWT decode failed — client may be sending base64(jsonRepresentation)
+        # instead of jwsRepresentation. Attempt to parse as base64-encoded JSON.
         unverified = {}
+        try:
+            raw = base64.b64decode(req.jwsRepresentation)
+            unverified = json.loads(raw.decode("utf-8"))
+            logger.warning(
+                "IAP verify | JWT decode failed, fell back to base64 JSON parse | user=%s",
+                user_id,
+            )
+        except Exception:
+            pass
 
     product_id = req.productId
     original_tx_id = req.originalTransactionId or str(
         unverified.get("originalTransactionId", "")
+    )
+    environment = unverified.get("environment", "Unknown")
+    # Normalize Apple's values: "Sandbox" or "Production"
+    if isinstance(environment, str):
+        environment = environment.capitalize()
+
+    logger.info(
+        "IAP verify | user=%s product=%s environment=%s originalTx=%s",
+        user_id, product_id, environment, original_tx_id,
     )
 
     # Check if it's a subscription or top-up.
@@ -159,10 +265,38 @@ async def verify_iap(
             expires_at = datetime.now(timezone.utc) + timedelta(days=30)
 
         with connect(settings) as conn:
-            activate_subscription(
-                conn, user_id, product_id, original_tx_id, expires_at
+            ensure_schema(conn)
+            existing_sub = get_subscription(conn, user_id)
+            is_new_purchase = (
+                existing_sub is None
+                or existing_sub.get("status") == "expired"
+                or existing_sub.get("original_transaction_id") != original_tx_id
             )
-        logger.info("Subscription activated | user=%s product=%s", user_id, product_id)
+            activate_subscription(
+                conn, user_id, product_id, original_tx_id, expires_at, environment,
+            )
+            if is_new_purchase:
+                credits = settings.subscription_monthly_credits
+                add_paid_credits(
+                    conn, user_id, credits, product_id, original_tx_id, environment=environment,
+                )
+                # Record the subscription activation itself as a transaction.
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "INSERT INTO transactions (user_id, type, product_id, original_transaction_id, environment) "
+                        "VALUES (%s, 'subscription', %s, %s, %s)",
+                        (user_id, product_id, original_tx_id, environment),
+                    )
+                conn.commit()
+                logger.info(
+                    "Subscription activated + %d credits | user=%s environment=%s",
+                    credits, user_id, environment,
+                )
+            else:
+                logger.info(
+                    "Subscription restored (no credits) | user=%s environment=%s",
+                    user_id, environment,
+                )
         return IAPVerifyResponse(
             success=True,
             subscriptionActivated=True,
@@ -173,8 +307,13 @@ async def verify_iap(
     if product_id in topup_map:
         credits = topup_map[product_id]
         with connect(settings) as conn:
-            add_paid_credits(conn, user_id, credits, product_id, original_tx_id)
-        logger.info("Credits granted | user=%s product=%s credits=%d", user_id, product_id, credits)
+            add_paid_credits(
+                conn, user_id, credits, product_id, original_tx_id, environment=environment,
+            )
+        logger.info(
+            "Credits granted | user=%s product=%s credits=%d environment=%s",
+            user_id, product_id, credits, environment,
+        )
         return IAPVerifyResponse(
             success=True,
             creditsGranted=credits,
@@ -206,8 +345,7 @@ def check_and_deduct_reading_credit(
 ) -> str | None:
     """Ensure user has credits for a new reading. Returns error message or None.
 
-    - Subscribers: unlimited, no deduction.
-    - Free/Paid credits: deduct 1 (free first).
+    - All readings deduct 1 credit (free first, then paid).
     - Re-opening an existing reading (same board_key): no deduction.
     """
     _ensure_db(settings)
@@ -218,10 +356,6 @@ def check_and_deduct_reading_credit(
         _, created = get_or_create_reading(conn, user_id, board_key)
         if not created:
             return None  # Already paid for this reading.
-
-        # New reading — check subscription first.
-        if has_active_subscription(conn, user_id):
-            return None  # Subscribers read for free.
 
         # Deduct a credit.
         if not deduct_credit(conn, user_id, settings):
@@ -235,8 +369,7 @@ def check_and_increment_question(
 ) -> str | None:
     """Ensure user can ask a follow-up question. Returns error message or None.
 
-    - Subscribers: still subject to max questions per reading.
-    - Non-subscribers: same limit.
+    All users subject to max questions per reading limit.
     """
     _ensure_db(settings)
     board_key = board_key_from_dict(board)
@@ -246,9 +379,8 @@ def check_and_increment_question(
         _, created = get_or_create_reading(conn, user_id, board_key)
         if created:
             # Reading wasn't created by interpret — deduct credit now.
-            if not has_active_subscription(conn, user_id):
-                if not deduct_credit(conn, user_id, settings):
-                    return "Insufficient credits."
+            if not deduct_credit(conn, user_id, settings):
+                return "Insufficient credits."
 
         if not increment_reading_questions(conn, user_id, board_key, settings):
             limit = settings.max_questions_per_reading

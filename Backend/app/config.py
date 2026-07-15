@@ -21,6 +21,11 @@ class Settings(BaseSettings):
     # 多轮对话最多携带的历史消息条数（不含 system / 盘面）。
     max_history_messages: int = 20
 
+    # ---- 内容安全审核（M6）----
+    # 开启后，起卦问题 / 追问文本先过确定性审核：高危类直接拒绝（不调 LLM），
+    # 敏感类放行但向提示词注入更强的去绝对化 / 免责约束。关闭时兼容旧流程。
+    moderation_enabled: bool = True
+
     # ---- RAG（卦爻辞检索 grounding，M5）----
     # 开启后，解读前会按本卦/变卦/动爻检索周易经文拼入 Prompt。需先灌库。
     rag_enabled: bool = False
@@ -48,10 +53,24 @@ class Settings(BaseSettings):
     free_monthly_credits: int = 3
     # 每次解读最多追问次数。
     max_questions_per_reading: int = 3
+    # 订阅每月赠送额度（解读时正常抵扣，非无限畅读）。
+    subscription_monthly_credits: int = 30
     # 计费系统是否启用（关闭时 interpret/chat 不鉴权、不扣费，兼容旧流程）。
     billing_enabled: bool = False
     # 开发模式：启用测试登录端点（POST /v1/auth/test），跳过 Apple 验签。
     dev_mode: bool = False
+
+    # ---- 邮箱验证码登录（腾讯企业邮 SMTP）----
+    # SMTP 发信配置；smtp_password 为空时自动 mock（验证码打日志，不真实发信）。
+    smtp_host: str = "smtp.exmail.qq.com"
+    smtp_port: int = 465
+    smtp_user: str = ""
+    smtp_password: str = ""
+    smtp_from_name: str = "ETIC"
+    # 验证码有效期（分钟）、重发冷却（秒）、单码最大尝试次数。
+    email_code_ttl_minutes: int = 10
+    email_code_cooldown_seconds: int = 60
+    email_code_max_attempts: int = 5
 
     # StoreKit 商品 ID（需与 App Store Connect 中配置一致）。
     subscription_product_id: str = "ai.etic.app.subscription.monthly"
@@ -61,6 +80,16 @@ class Settings(BaseSettings):
         "ai.etic.app.credits.10:10,"
         "ai.etic.app.credits.25:25"
     )
+
+    # ---- Apple 密钥（Sign in with Apple / App Store Server Notifications）----
+    # Apple Developer Team ID（Membership → 右上角可查）。
+    apple_team_id: str = ""
+    # Sign in with Apple 私钥（用于生成 client_secret 调用 Apple 服务端 API）。
+    apple_siwa_key_id: str = "L42755A2C3"
+    apple_siwa_key_path: str = "keys/logo-in/AuthKey_L42755A2C3.p8"
+    # App Store Server Notifications 验签密钥（验证 Apple 签名）。
+    apple_notification_prod_key_path: str = "keys/notification/production/AuthKey_KRAL2SFAXJ.p8"
+    apple_notification_sandbox_key_path: str = "keys/notification/sandbox/AuthKey_SQKM8TVF57.p8"
 
     @property
     def topup_product_map(self) -> dict[str, int]:
@@ -72,6 +101,10 @@ class Settings(BaseSettings):
             pid, credits = pair.rsplit(":", 1)
             result[pid.strip()] = int(credits)
         return result
+
+    @property
+    def use_mock_smtp(self) -> bool:
+        return not (self.smtp_user and self.smtp_password)
 
     @property
     def use_mock(self) -> bool:

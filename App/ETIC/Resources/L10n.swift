@@ -198,5 +198,15 @@ enum L10n {
         static var topUpPerReading: String { LocalizationStore.string("account.topUpPerReading") }
         static var manageSubscription: String { LocalizationStore.string("account.manageSubscription") }
         static var viewPlans: String { LocalizationStore.string("account.viewPlans") }
+        static var emailLoginTitle: String { LocalizationStore.string("account.emailLoginTitle") }
+        static var emailPlaceholder: String { LocalizationStore.string("account.emailPlaceholder") }
+        static var codePlaceholder: String { LocalizationStore.string("account.codePlaceholder") }
+        static var sendCode: String { LocalizationStore.string("account.sendCode") }
+        static var resend: String { LocalizationStore.string("account.resend") }
+        static var codeSent: String { LocalizationStore.string("account.codeSent") }
+        static var invalidEmail: String { LocalizationStore.string("account.invalidEmail") }
+        static var invalidCode: String { LocalizationStore.string("account.invalidCode") }
+        static var codeCooldown: String { LocalizationStore.string("account.codeCooldown") }
+        static var sendCodeFailed: String { LocalizationStore.string("account.sendCodeFailed") }
     }
 }

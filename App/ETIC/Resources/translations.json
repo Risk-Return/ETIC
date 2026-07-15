@@ -500,8 +500,8 @@
     "zh-Hans": "登录"
   },
   "account.loginDesc": {
-    "en": "Sign in with your Apple ID to request readings and manage your subscription.",
-    "zh-Hans": "使用 Apple ID 登录以请求解读和管理订阅。"
+    "en": "Sign in with Apple or your email to request readings and manage your subscription.",
+    "zh-Hans": "使用 Apple ID 或邮箱登录以请求解读和管理订阅。"
   },
   "account.loginNavTitle": {
     "en": "Sign In",
@@ -878,5 +878,45 @@
   "hexagram.explanation.64": {
     "en": "坤(Kun) represents the receptive, nurturing power of Earth. It symbolizes devotion, patience, flexibility, and the capacity to support and sustain. Unlike Qian's proactive energy, Kun counsels receptivity — knowing when to follow, when to yield, and how to bring things to fruition through steady dedication rather than forceful action.",
     "zh-Hans": "坤卦象征大地的承载与滋养之力。它代表柔顺、耐心、包容与厚德载物。与乾卦的进取不同，坤卦教人懂得顺应与配合——何时跟随、何时退让，以持久的奉献而非强力推动来成就事物。"
+  },
+  "account.emailLoginTitle": {
+    "en": "or sign in with email",
+    "zh-Hans": "或使用邮箱登录"
+  },
+  "account.emailPlaceholder": {
+    "en": "Email address",
+    "zh-Hans": "邮箱地址"
+  },
+  "account.codePlaceholder": {
+    "en": "Verification code",
+    "zh-Hans": "验证码"
+  },
+  "account.sendCode": {
+    "en": "Send Verification Code",
+    "zh-Hans": "发送验证码"
+  },
+  "account.resend": {
+    "en": "Resend",
+    "zh-Hans": "重新发送"
+  },
+  "account.codeSent": {
+    "en": "Verification code sent. Please check your inbox (and spam folder).",
+    "zh-Hans": "验证码已发送，请查收邮箱（含垃圾邮件）。"
+  },
+  "account.invalidEmail": {
+    "en": "Please enter a valid email address.",
+    "zh-Hans": "请输入有效的邮箱地址。"
+  },
+  "account.invalidCode": {
+    "en": "Invalid or expired verification code.",
+    "zh-Hans": "验证码错误或已过期。"
+  },
+  "account.codeCooldown": {
+    "en": "Please wait a moment before requesting a new code.",
+    "zh-Hans": "请稍候再重新获取验证码。"
+  },
+  "account.sendCodeFailed": {
+    "en": "Failed to send verification code. Please try again later.",
+    "zh-Hans": "验证码发送失败，请稍后重试。"
   }
 }

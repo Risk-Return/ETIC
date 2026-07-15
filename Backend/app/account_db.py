@@ -1,11 +1,12 @@
 """账号 & 计费数据库：建表与 CRUD。
 
 表结构：
-- users               — Apple Sign In 用户
+- users               — Apple Sign In / 邮箱验证码 用户
 - credit_balances     — 免费/付费解读额度
 - transactions        — 充值/订阅/消费流水
 - subscriptions       — 订阅状态
 - readings            — 每次解读的追问计数
+- email_verification_codes — 邮箱登录验证码（哈希存储）
 
 所有写入操作在调用方管理的事务内完成。
 """
@@ -25,7 +26,7 @@ from .config import Settings
 _SCHEMA_SQL = """
 CREATE TABLE IF NOT EXISTS users (
     id                   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    apple_user_identifier TEXT NOT NULL UNIQUE,
+    apple_user_identifier TEXT UNIQUE,
     email                TEXT,
     name                 TEXT,
     created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -49,6 +50,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     credits              INT  NOT NULL DEFAULT 0,
     amount_cents         INT,
     original_transaction_id TEXT,
+    environment          TEXT,
     created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
@@ -72,14 +74,37 @@ CREATE TABLE IF NOT EXISTS readings (
     UNIQUE (user_id, board_key)
 );
 
+CREATE TABLE IF NOT EXISTS email_verification_codes (
+    id                   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email                TEXT NOT NULL,
+    code_hash            TEXT NOT NULL,
+    expires_at           TIMESTAMPTZ NOT NULL,
+    attempts             INT  NOT NULL DEFAULT 0,
+    consumed_at          TIMESTAMPTZ,
+    created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 CREATE INDEX IF NOT EXISTS transactions_user_idx ON transactions (user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS email_codes_email_idx ON email_verification_codes (email, created_at DESC);
 """
+
+# 兼容既有生产库的增量迁移（逐条执行、失败忽略，保证幂等）。
+_MIGRATION_SQL = [
+    "ALTER TABLE users ALTER COLUMN apple_user_identifier DROP NOT NULL",
+]
 
 
 def ensure_schema(conn: psycopg.Connection) -> None:
     with conn.cursor() as cur:
         cur.execute(_SCHEMA_SQL)
     conn.commit()
+    for stmt in _MIGRATION_SQL:
+        try:
+            with conn.cursor() as cur:
+                cur.execute(stmt)
+            conn.commit()
+        except psycopg.Error:
+            conn.rollback()
 
 
 # ---- Helpers ----
@@ -120,6 +145,7 @@ def get_or_create_user(
     apple_sub: str,
     email: Optional[str] = None,
     name: Optional[str] = None,
+    free_credits: int = 0,
 ) -> tuple[uuid.UUID, bool]:
     """Return (user_id, created). On first create, initializes credit balance."""
     with conn.cursor() as cur:
@@ -140,6 +166,25 @@ def get_or_create_user(
             conn.commit()
             return user_id, False
 
+        # 若已有同邮箱的"仅邮箱"账号（无 apple_sub），将 Apple 身份绑定到该账号，
+        # 避免同一用户经邮箱与 Apple 两条路径产生两个账号。
+        if email:
+            cur.execute(
+                "SELECT id FROM users WHERE apple_user_identifier IS NULL "
+                "AND LOWER(email) = LOWER(%s) ORDER BY created_at LIMIT 1",
+                (email,),
+            )
+            row = cur.fetchone()
+            if row is not None:
+                user_id = row[0]
+                cur.execute(
+                    "UPDATE users SET apple_user_identifier = %s, "
+                    "name = COALESCE(%s, name), updated_at = NOW() WHERE id = %s",
+                    (apple_sub, name, user_id),
+                )
+                conn.commit()
+                return user_id, False
+
         user_id = uuid.uuid4()
         cur.execute(
             "INSERT INTO users (id, apple_user_identifier, email, name) "
@@ -148,8 +193,43 @@ def get_or_create_user(
         )
         cur.execute(
             "INSERT INTO credit_balances (user_id, free_credits, free_reset_at) "
-            "VALUES (%s, 0, %s)",
-            (user_id, _current_month_start()),
+            "VALUES (%s, %s, %s)",
+            (user_id, free_credits, _current_month_start()),
+        )
+        conn.commit()
+        return user_id, True
+
+
+def get_or_create_user_by_email(
+    conn: psycopg.Connection,
+    email: str,
+    free_credits: int = 0,
+) -> tuple[uuid.UUID, bool]:
+    """邮箱验证码登录：按邮箱（不区分大小写）检索或创建用户。
+
+    优先复用已有账号（含 Apple 登录时留下邮箱的账号），保证同一邮箱只有一个账号，
+    额度与订阅在两种登录方式间共享。
+    """
+    email_norm = email.strip().lower()
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT id FROM users WHERE LOWER(email) = %s ORDER BY created_at LIMIT 1",
+            (email_norm,),
+        )
+        row = cur.fetchone()
+        if row is not None:
+            conn.commit()
+            return row[0], False
+
+        user_id = uuid.uuid4()
+        cur.execute(
+            "INSERT INTO users (id, email) VALUES (%s, %s)",
+            (user_id, email_norm),
+        )
+        cur.execute(
+            "INSERT INTO credit_balances (user_id, free_credits, free_reset_at) "
+            "VALUES (%s, %s, %s)",
+            (user_id, free_credits, _current_month_start()),
         )
         conn.commit()
         return user_id, True
@@ -172,6 +252,83 @@ def get_user_by_id(conn: psycopg.Connection, user_id: uuid.UUID) -> Optional[dic
             "name": row[3],
             "created_at": row[4],
         }
+
+
+# ---- Email verification code operations ----
+
+
+def latest_email_code_created_at(
+    conn: psycopg.Connection, email: str
+) -> Optional[datetime]:
+    """Return created_at of the most recent code for this email (for cooldown)."""
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT created_at FROM email_verification_codes "
+            "WHERE email = %s ORDER BY created_at DESC LIMIT 1",
+            (email.strip().lower(),),
+        )
+        row = cur.fetchone()
+        return row[0] if row else None
+
+
+def create_email_code(
+    conn: psycopg.Connection, email: str, code_hash: str, ttl_minutes: int
+) -> None:
+    """Store a new verification code (hashed); invalidates prior unconsumed codes."""
+    email_norm = email.strip().lower()
+    with conn.cursor() as cur:
+        cur.execute(
+            "UPDATE email_verification_codes SET consumed_at = NOW() "
+            "WHERE email = %s AND consumed_at IS NULL",
+            (email_norm,),
+        )
+        cur.execute(
+            "INSERT INTO email_verification_codes (email, code_hash, expires_at) "
+            "VALUES (%s, %s, NOW() + %s * INTERVAL '1 minute')",
+            (email_norm, code_hash, ttl_minutes),
+        )
+        cur.execute(
+            "DELETE FROM email_verification_codes WHERE created_at < NOW() - INTERVAL '1 day'"
+        )
+    conn.commit()
+
+
+def verify_and_consume_email_code(
+    conn: psycopg.Connection, email: str, code_hash: str, max_attempts: int
+) -> bool:
+    """Check the latest active code for this email. Consumes it on success.
+
+    Wrong attempts are counted; the code is dead after max_attempts failures.
+    """
+    email_norm = email.strip().lower()
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT id, code_hash, attempts FROM email_verification_codes "
+            "WHERE email = %s AND consumed_at IS NULL AND expires_at > NOW() "
+            "ORDER BY created_at DESC LIMIT 1 FOR UPDATE",
+            (email_norm,),
+        )
+        row = cur.fetchone()
+        if row is None:
+            conn.commit()
+            return False
+        code_id, stored_hash, attempts = row
+        if attempts >= max_attempts:
+            conn.commit()
+            return False
+        if stored_hash != code_hash:
+            cur.execute(
+                "UPDATE email_verification_codes SET attempts = attempts + 1 WHERE id = %s",
+                (code_id,),
+            )
+            conn.commit()
+            return False
+        cur.execute(
+            "UPDATE email_verification_codes SET consumed_at = NOW() WHERE id = %s",
+            (code_id,),
+        )
+    conn.commit()
+    return True
 
 
 # ---- Credit operations ----
@@ -276,6 +433,7 @@ def add_paid_credits(
     product_id: str,
     original_transaction_id: Optional[str] = None,
     amount_cents: Optional[int] = None,
+    environment: Optional[str] = None,
 ) -> None:
     with conn.cursor() as cur:
         cur.execute(
@@ -284,11 +442,45 @@ def add_paid_credits(
             (credits, user_id),
         )
         cur.execute(
-            "INSERT INTO transactions (user_id, type, product_id, credits, amount_cents, original_transaction_id) "
-            "VALUES (%s, 'topup', %s, %s, %s, %s)",
-            (user_id, product_id, credits, amount_cents, original_transaction_id),
+            "INSERT INTO transactions (user_id, type, product_id, credits, amount_cents, original_transaction_id, environment) "
+            "VALUES (%s, 'topup', %s, %s, %s, %s, %s)",
+            (user_id, product_id, credits, amount_cents, original_transaction_id, environment),
         )
     conn.commit()
+
+
+def get_subscription_by_tx(
+    conn: psycopg.Connection, original_transaction_id: str
+) -> Optional[str]:
+    """Return user_id (as string) for a given original transaction ID, or None."""
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT user_id FROM subscriptions WHERE original_transaction_id = %s",
+            (original_transaction_id,),
+        )
+        row = cur.fetchone()
+        return str(row[0]) if row else None
+
+
+def get_subscription(
+    conn: psycopg.Connection, user_id: uuid.UUID
+) -> Optional[dict]:
+    """Return subscription row for a user, or None."""
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT product_id, status, original_transaction_id, expires_at "
+            "FROM subscriptions WHERE user_id = %s",
+            (user_id,),
+        )
+        row = cur.fetchone()
+        if row is None:
+            return None
+        return {
+            "product_id": row[0],
+            "status": row[1],
+            "original_transaction_id": row[2],
+            "expires_at": row[3],
+        }
 
 
 def activate_subscription(
@@ -297,6 +489,7 @@ def activate_subscription(
     product_id: str,
     original_transaction_id: Optional[str] = None,
     expires_at: Optional[datetime] = None,
+    environment: Optional[str] = None,
 ) -> None:
     with conn.cursor() as cur:
         cur.execute(
@@ -307,11 +500,6 @@ def activate_subscription(
             "original_transaction_id = EXCLUDED.original_transaction_id, "
             "expires_at = EXCLUDED.expires_at, updated_at = NOW()",
             (user_id, product_id, original_transaction_id, expires_at),
-        )
-        cur.execute(
-            "INSERT INTO transactions (user_id, type, product_id, original_transaction_id) "
-            "VALUES (%s, 'subscription', %s, %s)",
-            (user_id, product_id, original_transaction_id),
         )
     conn.commit()
 

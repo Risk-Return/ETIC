@@ -71,11 +71,16 @@ final class StoreKitService: ObservableObject {
         defer { purchaseInProgress = nil }
 
         do {
-            let result = try await product.purchase()
+            var options: Set<Product.PurchaseOption> = []
+            if let userId = AuthService.shared.accountStatus?.userId,
+               let token = UUID(uuidString: userId) {
+                options.insert(.appAccountToken(token))
+            }
+            let result = try await product.purchase(options: options)
 
             switch result {
             case .success(let verification):
-                let transaction = try checkVerified(verification)
+                let transaction = try checkVerified(verification) as Transaction
                 await verifyWithBackend(transaction: transaction)
                 await transaction.finish()
                 return true

@@ -120,6 +120,77 @@ final class AuthService: ObservableObject {
         }
     }
 
+    // MARK: - Email code sign in
+
+    /// Request a verification code sent to the email. Returns cooldown seconds on success, nil on failure.
+    func requestEmailCode(email: String) async -> Int? {
+        errorMessage = nil
+        do {
+            let data = try JSONEncoder().encode(EmailCodeBody(email: email))
+            var request = URLRequest(url: baseURL.appendingPathComponent("/v1/auth/email/code"))
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = data
+
+            let (responseData, response) = try await URLSession.shared.data(for: request)
+            guard let http = response as? HTTPURLResponse else {
+                errorMessage = L10n.Account.sendCodeFailed
+                return nil
+            }
+            switch http.statusCode {
+            case 200:
+                let body = try JSONDecoder().decode(EmailCodeResponse.self, from: responseData)
+                return body.cooldownSeconds
+            case 400:
+                errorMessage = L10n.Account.invalidEmail
+                return nil
+            case 429:
+                errorMessage = L10n.Account.codeCooldown
+                return nil
+            default:
+                errorMessage = L10n.Account.sendCodeFailed
+                return nil
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+            return nil
+        }
+    }
+
+    /// Verify the email code with the backend and sign in. Returns true on success.
+    func signInWithEmail(email: String, code: String) async -> Bool {
+        errorMessage = nil
+        do {
+            let data = try JSONEncoder().encode(EmailVerifyBody(email: email, code: code))
+            var request = URLRequest(url: baseURL.appendingPathComponent("/v1/auth/email/verify"))
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = data
+
+            let (responseData, response) = try await URLSession.shared.data(for: request)
+            guard let http = response as? HTTPURLResponse else {
+                errorMessage = L10n.Account.invalidCode
+                return false
+            }
+            guard http.statusCode == 200 else {
+                errorMessage = http.statusCode == 401
+                    ? L10n.Account.invalidCode
+                    : "Sign in failed (HTTP \(http.statusCode))."
+                return false
+            }
+
+            let authResponse = try JSONDecoder().decode(AuthResponse.self, from: responseData)
+            sessionToken = authResponse.sessionToken
+            accountStatus = authResponse.account
+            isAuthenticated = true
+            saveSessionToken(authResponse.sessionToken)
+            return true
+        } catch {
+            errorMessage = error.localizedDescription
+            return false
+        }
+    }
+
     // MARK: - Fetch account status
 
     /// Refresh account status from backend.
@@ -228,6 +299,20 @@ final class AuthService: ObservableObject {
         let identityToken: String
         let email: String?
         let fullName: String?
+    }
+
+    private struct EmailCodeBody: Encodable {
+        let email: String
+    }
+
+    private struct EmailVerifyBody: Encodable {
+        let email: String
+        let code: String
+    }
+
+    private struct EmailCodeResponse: Decodable {
+        let success: Bool
+        let cooldownSeconds: Int
     }
 }
 

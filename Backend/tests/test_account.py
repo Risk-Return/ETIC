@@ -74,12 +74,11 @@ def db_conn():
         conn = psycopg.connect(settings.database_url)
         ensure_schema(conn)
         yield conn
-        # Cleanup: drop test data.
-        conn.execute("DELETE FROM readings")
-        conn.execute("DELETE FROM transactions")
-        conn.execute("DELETE FROM subscriptions")
-        conn.execute("DELETE FROM credit_balances")
-        conn.execute("DELETE FROM users")
+        # Cleanup: only delete test-created users (ON DELETE CASCADE handles child tables).
+        conn.execute(
+            "DELETE FROM users WHERE apple_user_identifier LIKE 'apple-test-%' "
+            "OR apple_user_identifier LIKE 'apple-api-test-%'"
+        )
         conn.commit()
         conn.close()
     except psycopg.OperationalError as exc:
@@ -407,20 +406,30 @@ async def test_interpret_reopen_no_double_charge(billing_client, db_conn):
 
 
 @pytest.mark.asyncio
-async def test_subscriber_no_credit_deduction(billing_client, db_conn):
-    """Test subscribers don't get credits deducted."""
+async def test_subscriber_credit_deduction(billing_client, db_conn):
+    """Test subscribers also get credits deducted (credit-based, not unlimited)."""
     settings = _billing_settings()
-    user_id, _ = get_or_create_user(db_conn, "apple-api-test-subscriber")
+    user_id, _ = get_or_create_user(db_conn, "apple-api-test-subscriber",
+                                     free_credits=settings.free_monthly_credits)
 
     activate_subscription(db_conn, user_id, "ai.etic.app.subscription.monthly", "tx-sub")
+    # Simulate the credits granted on subscription purchase.
+    add_paid_credits(db_conn, user_id, settings.subscription_monthly_credits,
+                     "ai.etic.app.subscription.monthly", "tx-sub", environment="Sandbox")
     token = issue_session_jwt(user_id, settings)
+
+    # Verify initial credit state: free credits + subscription credits.
+    with connect(settings) as conn:
+        status = get_account_status(conn, user_id, settings)
+    assert status["freeCredits"] == settings.free_monthly_credits
+    assert status["paidCredits"] == settings.subscription_monthly_credits
 
     resp = await billing_client.post("/v1/interpret", json={"board": TEST_BOARD}, headers={
         "Authorization": f"Bearer {token}",
     })
     assert resp.status_code == 200
 
-    # Subscriber should have 0 credits used (free credits stay).
+    # Subscriber should have 1 free credit deducted (free first).
     with connect(settings) as conn:
         status = get_account_status(conn, user_id, settings)
-    assert status["freeCredits"] == settings.free_monthly_credits  # Not deducted.
+    assert status["freeCredits"] == settings.free_monthly_credits - 1
