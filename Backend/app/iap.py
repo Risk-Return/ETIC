@@ -170,7 +170,9 @@ def _handle_notification(
         except Exception:
             pass
 
-    app_account_token = tx_data.get("appAccountToken")
+    # appAccountToken is in the outer notification payload, not inside signedTransactionInfo.
+    data = payload.get("data", {})
+    app_account_token = data.get("appAccountToken")
     product_id = tx_data.get("productId", "unknown")
     original_tx_id = tx_data.get("originalTransactionId", "unknown")
     expires_ms = tx_data.get("expiresDate")
@@ -185,6 +187,13 @@ def _handle_notification(
             user_id_str = uuid.UUID(app_account_token)
         except ValueError:
             pass
+
+    # Fallback: look up user by originalTransactionId from subscriptions table.
+    if user_id_str is None and tx_data:
+        from .db import connect as db_connect
+        with db_connect(settings) as db_conn:
+            from .account_db import get_subscription_by_tx
+            user_id_str = get_subscription_by_tx(db_conn, original_tx_id)
 
     logger.info(
         "IAP notification | type=%s (%s) subtype=%s product=%s tx=%s user=%s environment=%s test_param=%s",

@@ -294,6 +294,19 @@ def add_paid_credits(
     conn.commit()
 
 
+def get_subscription_by_tx(
+    conn: psycopg.Connection, original_transaction_id: str
+) -> Optional[str]:
+    """Return user_id (as string) for a given original transaction ID, or None."""
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT user_id FROM subscriptions WHERE original_transaction_id = %s",
+            (original_transaction_id,),
+        )
+        row = cur.fetchone()
+        return str(row[0]) if row else None
+
+
 def get_subscription(
     conn: psycopg.Connection, user_id: uuid.UUID
 ) -> Optional[dict]:
