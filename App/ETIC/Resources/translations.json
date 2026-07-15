@@ -500,8 +500,8 @@
     "zh-Hans": "登录"
   },
   "account.loginDesc": {
-    "en": "Sign in with your Apple ID to request readings and manage your subscription.",
-    "zh-Hans": "使用 Apple ID 登录以请求解读和管理订阅。"
+    "en": "Sign in with Apple or your email to request readings and manage your subscription.",
+    "zh-Hans": "使用 Apple ID 或邮箱登录以请求解读和管理订阅。"
   },
   "account.loginNavTitle": {
     "en": "Sign In",
@@ -618,5 +618,45 @@
   "account.viewPlans": {
     "en": "View Plans & Buy",
     "zh-Hans": "查看套餐与购买"
+  },
+  "account.emailLoginTitle": {
+    "en": "or sign in with email",
+    "zh-Hans": "或使用邮箱登录"
+  },
+  "account.emailPlaceholder": {
+    "en": "Email address",
+    "zh-Hans": "邮箱地址"
+  },
+  "account.codePlaceholder": {
+    "en": "Verification code",
+    "zh-Hans": "验证码"
+  },
+  "account.sendCode": {
+    "en": "Send Verification Code",
+    "zh-Hans": "发送验证码"
+  },
+  "account.resend": {
+    "en": "Resend",
+    "zh-Hans": "重新发送"
+  },
+  "account.codeSent": {
+    "en": "Verification code sent. Please check your inbox (and spam folder).",
+    "zh-Hans": "验证码已发送，请查收邮箱（含垃圾邮件）。"
+  },
+  "account.invalidEmail": {
+    "en": "Please enter a valid email address.",
+    "zh-Hans": "请输入有效的邮箱地址。"
+  },
+  "account.invalidCode": {
+    "en": "Invalid or expired verification code.",
+    "zh-Hans": "验证码错误或已过期。"
+  },
+  "account.codeCooldown": {
+    "en": "Please wait a moment before requesting a new code.",
+    "zh-Hans": "请稍候再重新获取验证码。"
+  },
+  "account.sendCodeFailed": {
+    "en": "Failed to send verification code. Please try again later.",
+    "zh-Hans": "验证码发送失败，请稍后重试。"
   }
 }

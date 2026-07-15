@@ -14,6 +14,27 @@ class AppleAuthRequest(BaseModel):
     fullName: Optional[str] = None
 
 
+class EmailCodeRequest(BaseModel):
+    """请求发送邮箱验证码。"""
+
+    email: str
+
+
+class EmailCodeResponse(BaseModel):
+    """验证码发送结果 + 重发冷却秒数。"""
+
+    success: bool
+    cooldownSeconds: int
+    message: str = ""
+
+
+class EmailVerifyRequest(BaseModel):
+    """提交邮箱 + 验证码换取会话令牌。"""
+
+    email: str
+    code: str
+
+
 class AccountStatus(BaseModel):
     """账号状态：额度、订阅、限额。"""
 
@@ -27,7 +48,7 @@ class AccountStatus(BaseModel):
 
 
 class AuthResponse(BaseModel):
-    """Apple Sign In 成功后返回的会话令牌 + 账号状态。"""
+    """登录成功后返回的会话令牌 + 账号状态（Apple / 邮箱验证码通用）。"""
 
     sessionToken: str
     account: AccountStatus

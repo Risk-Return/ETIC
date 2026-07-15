@@ -63,6 +63,12 @@ uvicorn app.main:app --reload --port 18000
 ```
 与解读流分离，便于客户端单独渲染引用原文；`ETIC_RAG_ENABLED=false` 或库不可达时 `enabled=false`、`items=[]`（优雅退化，不影响解读）。
 
+### 邮箱验证码登录
+
+- `POST /v1/auth/email/code`：请求体 `{ "email": "user@example.com" }`。生成 6 位验证码经腾讯企业邮 SMTP 发送，返回 `{ "success": true, "cooldownSeconds": 60, "message": "..." }`。同邮箱冷却期内重复请求返回 `429`；未配置 SMTP 时自动 mock（验证码只打日志）。
+- `POST /v1/auth/email/verify`：请求体 `{ "email": "...", "code": "123456" }`。验证通过后按邮箱创建/检索用户，返回与 Apple 登录相同的 `{ "sessionToken": "...", "account": { ... } }`。验证码 10 分钟有效、最多试错 5 次、验证后一次性消费。
+- 账号统一：同一邮箱在 Apple 登录（Apple 返回了邮箱）与邮箱验证码登录之间共享同一账号，额度、订阅与 IAP 归属一致（IAP 通过会话 JWT 的 user_id 绑定，购买时 App 侧同时携带 `appAccountToken=userId`）。
+
 ### 示例
 ```bash
 curl -N -X POST localhost:18000/v1/interpret \
@@ -88,6 +94,14 @@ curl -N -X POST localhost:18000/v1/interpret \
 | `ETIC_EMBED_DIM` | `256` | 向量维度（mock 与真实须一致） |
 | `ETIC_RAG_TOP_K` | `4` | 向量召回条数 |
 | `ETIC_RAG_INCLUDE_TUAN` | `false` | 是否附带彖辞 |
+| `ETIC_SMTP_HOST` | `smtp.exmail.qq.com` | 腾讯企业邮 SMTP 主机 |
+| `ETIC_SMTP_PORT` | `465` | SMTP SSL 端口 |
+| `ETIC_SMTP_USER` | 空 | 发信邮箱地址（留空 → mock 发信） |
+| `ETIC_SMTP_PASSWORD` | 空 | 企业邮客户端专用密码（留空 → mock 发信） |
+| `ETIC_SMTP_FROM_NAME` | `ETIC` | 发件人显示名 |
+| `ETIC_EMAIL_CODE_TTL_MINUTES` | `10` | 验证码有效期（分钟） |
+| `ETIC_EMAIL_CODE_COOLDOWN_SECONDS` | `60` | 重发冷却（秒） |
+| `ETIC_EMAIL_CODE_MAX_ATTEMPTS` | `5` | 单码最大试错次数 |
 
 Provider 切换只需改 `base_url`/`model`/`key`（DeepSeek / 通义 / OpenAI 等 OpenAI 兼容端点均可）。
 

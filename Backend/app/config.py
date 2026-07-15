@@ -60,6 +60,18 @@ class Settings(BaseSettings):
     # 开发模式：启用测试登录端点（POST /v1/auth/test），跳过 Apple 验签。
     dev_mode: bool = False
 
+    # ---- 邮箱验证码登录（腾讯企业邮 SMTP）----
+    # SMTP 发信配置；smtp_password 为空时自动 mock（验证码打日志，不真实发信）。
+    smtp_host: str = "smtp.exmail.qq.com"
+    smtp_port: int = 465
+    smtp_user: str = ""
+    smtp_password: str = ""
+    smtp_from_name: str = "ETIC"
+    # 验证码有效期（分钟）、重发冷却（秒）、单码最大尝试次数。
+    email_code_ttl_minutes: int = 10
+    email_code_cooldown_seconds: int = 60
+    email_code_max_attempts: int = 5
+
     # StoreKit 商品 ID（需与 App Store Connect 中配置一致）。
     subscription_product_id: str = "ai.etic.app.subscription.monthly"
     # 充值商品 ID → 额度数映射，格式 "product_id:credits,..."
@@ -89,6 +101,10 @@ class Settings(BaseSettings):
             pid, credits = pair.rsplit(":", 1)
             result[pid.strip()] = int(credits)
         return result
+
+    @property
+    def use_mock_smtp(self) -> bool:
+        return not (self.smtp_user and self.smtp_password)
 
     @property
     def use_mock(self) -> bool:

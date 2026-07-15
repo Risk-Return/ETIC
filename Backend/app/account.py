@@ -1,4 +1,4 @@
-"""账号 & 计费路由：Apple Sign In、账号状态、IAP 验证。
+"""账号 & 计费路由：Apple Sign In、邮箱验证码登录、账号状态、IAP 验证。
 
 所有端点前缀 `/v1`，与解读端点同级。
 """
@@ -17,18 +17,25 @@ from fastapi import APIRouter, Depends, HTTPException
 from .account_db import (
     activate_subscription,
     add_paid_credits,
+    create_email_code,
     deduct_credit,
     ensure_schema,
     get_account_status,
     get_or_create_reading,
     get_or_create_user,
+    get_or_create_user_by_email,
     get_subscription,
     increment_reading_questions,
+    latest_email_code_created_at,
+    verify_and_consume_email_code,
 )
 from .account_models import (
     AccountStatus,
     AppleAuthRequest,
     AuthResponse,
+    EmailCodeRequest,
+    EmailCodeResponse,
+    EmailVerifyRequest,
     IAPVerifyRequest,
     IAPVerifyResponse,
 )
@@ -40,6 +47,12 @@ from .auth import (
 )
 from .config import Settings, get_settings
 from .db import connect
+from .email_auth import (
+    generate_code,
+    hash_code,
+    is_valid_email,
+    send_verification_email,
+)
 
 logger = logging.getLogger("etic.account")
 
@@ -83,6 +96,80 @@ async def apple_sign_in(
     account = _account_status(settings, user_id)
 
     logger.info("Apple Sign In | user=%s created=%s", user_id, created)
+    return AuthResponse(sessionToken=session_token, account=account)
+
+
+@router.post("/auth/email/code", response_model=EmailCodeResponse)
+async def request_email_code(
+    req: EmailCodeRequest,
+    settings: Settings = Depends(get_settings),
+) -> EmailCodeResponse:
+    """发送邮箱登录验证码：校验邮箱 → 冷却检查 → 生成并哈希入库 → SMTP 发信。
+
+    为防枚举，不区分邮箱是否已注册，一律发送验证码。
+    """
+
+    email = req.email.strip().lower()
+    if not is_valid_email(email):
+        raise HTTPException(status_code=400, detail="Invalid email address")
+
+    _ensure_db(settings)
+    cooldown = settings.email_code_cooldown_seconds
+    with connect(settings) as conn:
+        last = latest_email_code_created_at(conn, email)
+        if last is not None:
+            elapsed = (datetime.now(timezone.utc) - last).total_seconds()
+            if elapsed < cooldown:
+                raise HTTPException(
+                    status_code=429,
+                    detail=f"Please wait {int(cooldown - elapsed)}s before requesting a new code",
+                )
+
+    code = generate_code()
+    try:
+        await send_verification_email(email, code, settings)
+    except Exception as exc:
+        logger.error("Failed to send verification email to %s: %s", email, exc)
+        raise HTTPException(status_code=502, detail="Failed to send verification email")
+
+    with connect(settings) as conn:
+        create_email_code(
+            conn, email, hash_code(email, code, settings), settings.email_code_ttl_minutes
+        )
+
+    logger.info("Email code issued | email=%s", email)
+    return EmailCodeResponse(
+        success=True, cooldownSeconds=cooldown, message="Verification code sent"
+    )
+
+
+@router.post("/auth/email/verify", response_model=AuthResponse)
+async def email_sign_in(
+    req: EmailVerifyRequest,
+    settings: Settings = Depends(get_settings),
+) -> AuthResponse:
+    """邮箱验证码登录：校验验证码 → 创建/检索用户 → 签发会话 JWT。"""
+
+    email = req.email.strip().lower()
+    code = req.code.strip()
+    if not is_valid_email(email) or not code:
+        raise HTTPException(status_code=400, detail="Invalid email or code")
+
+    _ensure_db(settings)
+    with connect(settings) as conn:
+        ok = verify_and_consume_email_code(
+            conn, email, hash_code(email, code, settings), settings.email_code_max_attempts
+        )
+        if not ok:
+            raise HTTPException(status_code=401, detail="Invalid or expired verification code")
+        user_id, created = get_or_create_user_by_email(
+            conn, email, settings.free_monthly_credits
+        )
+
+    session_token = issue_session_jwt(user_id, settings)
+    account = _account_status(settings, user_id)
+
+    logger.info("Email Sign In | user=%s created=%s", user_id, created)
     return AuthResponse(sessionToken=session_token, account=account)
 
 
