@@ -10,17 +10,20 @@ struct ETICApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if auth.isAuthenticated {
-                MainTabView()
-                    .environmentObject(settings)
-                    .environmentObject(language)
-                    .environment(\.locale, language.locale)
-            } else {
-                LoginView()
-                    .environmentObject(settings)
-                    .environmentObject(language)
-                    .environment(\.locale, language.locale)
+            Group {
+                if auth.isAuthenticated {
+                    MainTabView()
+                        .environmentObject(settings)
+                        .environmentObject(language)
+                        .environment(\.locale, language.locale)
+                } else {
+                    LoginView()
+                        .environmentObject(settings)
+                        .environmentObject(language)
+                        .environment(\.locale, language.locale)
+                }
             }
+            .preferredColorScheme(.light)
         }
         .modelContainer(for: DivinationRecord.self)
     }

@@ -21,6 +21,7 @@ struct CastingView: View {
                         TextField(L10n.Casting.questionPlaceholder, text: $model.question, axis: .vertical)
                             .lineLimit(2...4)
                             .font(InkTheme.serifBody(17))
+                            .foregroundStyle(InkTheme.ink)
                             .padding(12)
                             .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 10))
                     }
@@ -168,6 +169,7 @@ struct CastingView: View {
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.center)
                 .font(InkTheme.serifBody(18))
+                .foregroundStyle(InkTheme.ink)
                 .padding(10)
                 .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 8))
         }

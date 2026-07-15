@@ -126,6 +126,7 @@ struct InterpretationView: View {
         HStack(spacing: 10) {
             TextField(L10n.Interpret.placeholder, text: $model.draft, axis: .vertical)
                 .font(InkTheme.serifBody(15))
+                .foregroundStyle(InkTheme.ink)
                 .lineLimit(1...4)
                 .padding(10)
                 .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 12))

@@ -37,6 +37,7 @@ struct LocationPickerView: View {
                     HStack {
                         TextField(L10n.Location.customPlaceholder, text: $customText)
                             .keyboardType(.numbersAndPunctuation)
+                            .foregroundStyle(InkTheme.ink)
                         Button(L10n.Location.apply) {
                             if let v = Double(customText.trimmingCharacters(in: .whitespaces)),
                                (-180...180).contains(v) {
