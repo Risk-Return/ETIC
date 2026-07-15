@@ -33,3 +33,4 @@ Backend/.env
 # Vendored packages - SPM workspace state (contains absolute paths)
 Packages/workspace-state.json
 test_account/*
+keys/*
