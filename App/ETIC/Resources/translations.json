@@ -880,8 +880,8 @@
     "zh-Hans": "坤卦象征大地的承载与滋养之力。它代表柔顺、耐心、包容与厚德载物。与乾卦的进取不同，坤卦教人懂得顺应与配合——何时跟随、何时退让，以持久的奉献而非强力推动来成就事物。"
   },
   "account.emailLoginTitle": {
-    "en": "or sign in with email",
-    "zh-Hans": "或使用邮箱登录"
+    "en": "or sign up / sign in with email",
+    "zh-Hans": "或使用邮箱注册/登录"
   },
   "account.emailPlaceholder": {
     "en": "Email address",
