@@ -31,7 +31,7 @@ targets:
     info:
       path: ETIC/Info.plist
       properties:
-        CFBundleDisplayName: 易卦
+        CFBundleDisplayName: I Ching Oracle
         CFBundleDevelopmentRegion: en
         UILaunchScreen: {}
         UIApplicationSceneManifest:
