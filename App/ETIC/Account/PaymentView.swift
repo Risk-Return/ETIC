@@ -223,10 +223,10 @@ struct PaymentView: View {
 
             // Legal links
             HStack(spacing: 24) {
-                Link(L10n.Account.termsOfService, destination: URL(string: "https://deepwitai.cn/terms")!)
+                Link(L10n.Account.termsOfService, destination: URL(string: "https://deepwitai.cn/etic/terms")!)
                     .font(.caption)
                     .foregroundStyle(InkTheme.inkSoft)
-                Link(L10n.Account.privacyPolicy, destination: URL(string: "https://deepwitai.cn/privacy")!)
+                Link(L10n.Account.privacyPolicy, destination: URL(string: "https://deepwitai.cn/etic/privacy")!)
                     .font(.caption)
                     .foregroundStyle(InkTheme.inkSoft)
             }
