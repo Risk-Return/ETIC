@@ -8,8 +8,14 @@ import AuthenticationServices
 struct LoginView: View {
     @StateObject private var auth = AuthService.shared
 
+    private enum EmailLoginMode {
+        case code, password
+    }
+
+    @State private var mode: EmailLoginMode = .code
     @State private var email = ""
     @State private var code = ""
+    @State private var password = ""
     @State private var codeSent = false
     @State private var isSendingCode = false
     @State private var isVerifying = false
@@ -104,6 +110,12 @@ struct LoginView: View {
 
     private var emailSection: some View {
         VStack(spacing: 12) {
+            Picker("", selection: $mode) {
+                Text(L10n.Account.codeLogin).tag(EmailLoginMode.code)
+                Text(L10n.Account.passwordLogin).tag(EmailLoginMode.password)
+            }
+            .pickerStyle(.segmented)
+
             TextField(L10n.Account.emailPlaceholder, text: $email)
                 .keyboardType(.emailAddress)
                 .textContentType(.emailAddress)
@@ -115,7 +127,9 @@ struct LoginView: View {
                 .overlay(RoundedRectangle(cornerRadius: 12)
                     .stroke(InkTheme.inkSoft.opacity(0.2), lineWidth: 1))
 
-            if codeSent {
+            if mode == .password {
+                passwordFields
+            } else if codeSent {
                 HStack(spacing: 12) {
                     TextField(L10n.Account.codePlaceholder, text: $code)
                         .keyboardType(.numberPad)
@@ -190,6 +204,44 @@ struct LoginView: View {
         .padding(.horizontal, 24)
     }
 
+    private var passwordFields: some View {
+        VStack(spacing: 12) {
+            SecureField(L10n.Account.passwordPlaceholder, text: $password)
+                .textContentType(.password)
+                .font(InkTheme.serifBody(16))
+                .padding(14)
+                .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 12))
+                .overlay(RoundedRectangle(cornerRadius: 12)
+                    .stroke(InkTheme.inkSoft.opacity(0.2), lineWidth: 1))
+
+            Button {
+                Task { await signInWithPassword() }
+            } label: {
+                Group {
+                    if isVerifying {
+                        ProgressView().tint(.white)
+                    } else {
+                        Text(L10n.Account.signIn)
+                            .font(InkTheme.serifBody(16))
+                    }
+                }
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .frame(height: 50)
+                .background(
+                    (isEmailValid && !password.isEmpty) ? InkTheme.cinnabar : InkTheme.inkSoft,
+                    in: RoundedRectangle(cornerRadius: 12)
+                )
+            }
+            .disabled(!isEmailValid || password.isEmpty || isVerifying)
+
+            Text(L10n.Account.passwordLoginHint)
+                .font(InkTheme.serifBody(12))
+                .foregroundStyle(InkTheme.inkSoft)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
     private var isEmailValid: Bool {
         let trimmed = email.trimmingCharacters(in: .whitespaces)
         return trimmed.contains("@") && trimmed.contains(".") && trimmed.count >= 5
@@ -212,6 +264,13 @@ struct LoginView: View {
         let trimmedEmail = email.trimmingCharacters(in: .whitespaces)
         let trimmedCode = code.trimmingCharacters(in: .whitespaces)
         _ = await auth.signInWithEmail(email: trimmedEmail, code: trimmedCode)
+    }
+
+    private func signInWithPassword() async {
+        isVerifying = true
+        defer { isVerifying = false }
+        let trimmedEmail = email.trimmingCharacters(in: .whitespaces)
+        _ = await auth.signInWithPassword(email: trimmedEmail, password: password)
     }
 
     private func startCountdown(_ seconds: Int) {

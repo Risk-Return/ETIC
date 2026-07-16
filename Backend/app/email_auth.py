@@ -1,8 +1,9 @@
-"""邮箱验证码登录：验证码生成/哈希 + 腾讯企业邮 SMTP 发信。
+"""邮箱验证码/密码登录：验证码生成/哈希、密码哈希 + 腾讯企业邮 SMTP 发信。
 
 流程：
 1. `POST /v1/auth/email/code`：生成 6 位数字验证码，HMAC 哈希后入库，SMTP 发送原文。
 2. `POST /v1/auth/email/verify`：校验验证码 → 按邮箱创建/检索用户 → 签发会话 JWT。
+3. `POST /v1/auth/email/password`：已设密码的用户可直接邮箱 + 密码登录（注册仍走验证码）。
 
 无 SMTP 配置时自动 mock：验证码打日志、不真实发信，便于本地联调。
 """
@@ -42,6 +43,40 @@ def hash_code(email: str, code: str, settings: Settings) -> str:
     return hmac.new(
         settings.jwt_secret.encode("utf-8"), message, hashlib.sha256
     ).hexdigest()
+
+
+# ---- Password hashing (PBKDF2-HMAC-SHA256, stdlib, no extra deps) ----
+
+_PBKDF2_ITERATIONS = 600_000
+
+PASSWORD_MIN_LENGTH = 8
+PASSWORD_MAX_LENGTH = 128
+
+
+def is_valid_password(password: str) -> bool:
+    return PASSWORD_MIN_LENGTH <= len(password) <= PASSWORD_MAX_LENGTH
+
+
+def hash_password(password: str) -> str:
+    """随机盐 PBKDF2；格式 `pbkdf2_sha256$iterations$salt_hex$hash_hex`。"""
+    salt = secrets.token_hex(16)
+    dk = hashlib.pbkdf2_hmac(
+        "sha256", password.encode("utf-8"), bytes.fromhex(salt), _PBKDF2_ITERATIONS
+    )
+    return f"pbkdf2_sha256${_PBKDF2_ITERATIONS}${salt}${dk.hex()}"
+
+
+def verify_password(password: str, stored: str) -> bool:
+    try:
+        algo, iterations, salt, hex_hash = stored.split("$")
+        if algo != "pbkdf2_sha256":
+            return False
+        dk = hashlib.pbkdf2_hmac(
+            "sha256", password.encode("utf-8"), bytes.fromhex(salt), int(iterations)
+        )
+        return hmac.compare_digest(dk.hex(), hex_hash)
+    except Exception:
+        return False
 
 
 def _build_message(to_email: str, code: str, settings: Settings) -> MIMEText:

@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS users (
     apple_user_identifier TEXT UNIQUE,
     email                TEXT,
     name                 TEXT,
+    password_hash        TEXT,
     created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at           TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -91,6 +92,7 @@ CREATE INDEX IF NOT EXISTS email_codes_email_idx ON email_verification_codes (em
 # 兼容既有生产库的增量迁移（逐条执行、失败忽略，保证幂等）。
 _MIGRATION_SQL = [
     "ALTER TABLE users ALTER COLUMN apple_user_identifier DROP NOT NULL",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash TEXT",
 ]
 
 
@@ -254,6 +256,31 @@ def get_user_by_id(conn: psycopg.Connection, user_id: uuid.UUID) -> Optional[dic
         }
 
 
+def get_user_auth_by_email(conn: psycopg.Connection, email: str) -> Optional[dict]:
+    """密码登录用：按邮箱（不区分大小写）取用户 id 与密码哈希。"""
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT id, password_hash FROM users WHERE LOWER(email) = %s "
+            "ORDER BY created_at LIMIT 1",
+            (email.strip().lower(),),
+        )
+        row = cur.fetchone()
+        if row is None:
+            return None
+        return {"id": row[0], "password_hash": row[1]}
+
+
+def set_password_hash(
+    conn: psycopg.Connection, user_id: uuid.UUID, password_hash: str
+) -> None:
+    with conn.cursor() as cur:
+        cur.execute(
+            "UPDATE users SET password_hash = %s, updated_at = NOW() WHERE id = %s",
+            (password_hash, user_id),
+        )
+    conn.commit()
+
+
 # ---- Email verification code operations ----
 
 
@@ -362,6 +389,13 @@ def get_account_status(
                 "expiresAt": sub[2].isoformat() if sub[2] else None,
             }
 
+        cur.execute(
+            "SELECT password_hash IS NOT NULL FROM users WHERE id = %s",
+            (user_id,),
+        )
+        row = cur.fetchone()
+        has_password = bool(row and row[0])
+
     return {
         "userId": str(user_id),
         "freeCredits": free_credits,
@@ -370,6 +404,7 @@ def get_account_status(
         "freeMonthlyCredits": settings.free_monthly_credits,
         "maxQuestionsPerReading": settings.max_questions_per_reading,
         "subscription": subscription,
+        "hasPassword": has_password,
     }
 
 

@@ -191,6 +191,64 @@ final class AuthService: ObservableObject {
         }
     }
 
+    // MARK: - Password sign in
+
+    /// Sign in with email + password (users who set a password). Returns true on success.
+    func signInWithPassword(email: String, password: String) async -> Bool {
+        errorMessage = nil
+        do {
+            let data = try JSONEncoder().encode(PasswordLoginBody(email: email, password: password))
+            var request = URLRequest(url: baseURL.appendingPathComponent("/v1/auth/email/password"))
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = data
+
+            let (responseData, response) = try await URLSession.shared.data(for: request)
+            guard let http = response as? HTTPURLResponse else {
+                errorMessage = L10n.Account.wrongPassword
+                return false
+            }
+            guard http.statusCode == 200 else {
+                errorMessage = (http.statusCode == 401 || http.statusCode == 400)
+                    ? L10n.Account.wrongPassword
+                    : "Sign in failed (HTTP \(http.statusCode))."
+                return false
+            }
+
+            let authResponse = try JSONDecoder().decode(AuthResponse.self, from: responseData)
+            sessionToken = authResponse.sessionToken
+            accountStatus = authResponse.account
+            isAuthenticated = true
+            saveSessionToken(authResponse.sessionToken)
+            return true
+        } catch {
+            errorMessage = error.localizedDescription
+            return false
+        }
+    }
+
+    /// Set or change the current user's password. Returns true on success.
+    func setPassword(_ newPassword: String) async -> Bool {
+        guard let header = authHeader else { return false }
+        do {
+            let data = try JSONEncoder().encode(SetPasswordBody(newPassword: newPassword))
+            var request = URLRequest(url: baseURL.appendingPathComponent("/v1/account/password"))
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(header, forHTTPHeaderField: "Authorization")
+            request.httpBody = data
+
+            let (_, response) = try await URLSession.shared.data(for: request)
+            guard let http = response as? HTTPURLResponse, http.statusCode == 200 else {
+                return false
+            }
+            await refreshAccountStatus()
+            return true
+        } catch {
+            return false
+        }
+    }
+
     // MARK: - Fetch account status
 
     /// Refresh account status from backend.
@@ -310,6 +368,15 @@ final class AuthService: ObservableObject {
         let code: String
     }
 
+    private struct PasswordLoginBody: Encodable {
+        let email: String
+        let password: String
+    }
+
+    private struct SetPasswordBody: Encodable {
+        let newPassword: String
+    }
+
     private struct EmailCodeResponse: Decodable {
         let success: Bool
         let cooldownSeconds: Int
@@ -327,6 +394,7 @@ struct AccountStatus: Codable, Hashable {
     let freeMonthlyCredits: Int
     let maxQuestionsPerReading: Int
     let subscription: SubscriptionInfo?
+    let hasPassword: Bool?
 
     struct SubscriptionInfo: Codable, Hashable {
         let productId: String

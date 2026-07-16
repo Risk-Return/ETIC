@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import base64
 import json
 import logging
@@ -25,8 +26,10 @@ from .account_db import (
     get_or_create_user,
     get_or_create_user_by_email,
     get_subscription,
+    get_user_auth_by_email,
     increment_reading_questions,
     latest_email_code_created_at,
+    set_password_hash,
     verify_and_consume_email_code,
 )
 from .account_models import (
@@ -38,6 +41,9 @@ from .account_models import (
     EmailVerifyRequest,
     IAPVerifyRequest,
     IAPVerifyResponse,
+    PasswordAuthRequest,
+    SetPasswordRequest,
+    SetPasswordResponse,
 )
 from .auth import (
     get_or_create_user_from_apple,
@@ -50,8 +56,11 @@ from .db import connect
 from .email_auth import (
     generate_code,
     hash_code,
+    hash_password,
     is_valid_email,
+    is_valid_password,
     send_verification_email,
+    verify_password,
 )
 
 logger = logging.getLogger("etic.account")
@@ -171,6 +180,64 @@ async def email_sign_in(
 
     logger.info("Email Sign In | user=%s created=%s", user_id, created)
     return AuthResponse(sessionToken=session_token, account=account)
+
+
+@router.post("/auth/email/password", response_model=AuthResponse)
+async def password_sign_in(
+    req: PasswordAuthRequest,
+    settings: Settings = Depends(get_settings),
+) -> AuthResponse:
+    """邮箱 + 密码登录（仅限已设置密码的用户；注册仍走验证码）。"""
+
+    email = req.email.strip().lower()
+    if not is_valid_email(email) or not req.password:
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+
+    _ensure_db(settings)
+    with connect(settings) as conn:
+        user = get_user_auth_by_email(conn, email)
+
+    stored_hash = (user or {}).get("password_hash")
+    ok = bool(stored_hash) and await asyncio.to_thread(
+        verify_password, req.password, stored_hash
+    )
+    if not ok:
+        # 统一失败响应并小幅延时，避免账号枚举与快速爆破。
+        await asyncio.sleep(0.5)
+        raise HTTPException(status_code=401, detail="Incorrect email or password")
+
+    user_id = user["id"]
+    session_token = issue_session_jwt(user_id, settings)
+    account = _account_status(settings, user_id)
+
+    logger.info("Password Sign In | user=%s", user_id)
+    return AuthResponse(sessionToken=session_token, account=account)
+
+
+@router.post("/account/password", response_model=SetPasswordResponse)
+async def set_password(
+    req: SetPasswordRequest,
+    user_id: uuid.UUID = Depends(require_user_id),
+    settings: Settings = Depends(get_settings),
+) -> SetPasswordResponse:
+    """设置/修改当前登录用户的密码。
+
+    会话令牌即身份凭证（验证码或密码登录均可获得）；忘记密码时
+    先用验证码登录，再在此处重设。
+    """
+
+    if not is_valid_password(req.newPassword):
+        raise HTTPException(
+            status_code=400, detail="Password must be 8-128 characters"
+        )
+
+    _ensure_db(settings)
+    password_hash = await asyncio.to_thread(hash_password, req.newPassword)
+    with connect(settings) as conn:
+        set_password_hash(conn, user_id, password_hash)
+
+    logger.info("Password updated | user=%s", user_id)
+    return SetPasswordResponse(success=True, message="Password updated")
 
 
 @router.post("/auth/test", response_model=AuthResponse)

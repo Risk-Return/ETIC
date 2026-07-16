@@ -208,5 +208,19 @@ enum L10n {
         static var invalidCode: String { LocalizationStore.string("account.invalidCode") }
         static var codeCooldown: String { LocalizationStore.string("account.codeCooldown") }
         static var sendCodeFailed: String { LocalizationStore.string("account.sendCodeFailed") }
+        static var codeLogin: String { LocalizationStore.string("account.codeLogin") }
+        static var passwordLogin: String { LocalizationStore.string("account.passwordLogin") }
+        static var passwordPlaceholder: String { LocalizationStore.string("account.passwordPlaceholder") }
+        static var passwordLoginHint: String { LocalizationStore.string("account.passwordLoginHint") }
+        static var wrongPassword: String { LocalizationStore.string("account.wrongPassword") }
+        static var setPassword: String { LocalizationStore.string("account.setPassword") }
+        static var changePassword: String { LocalizationStore.string("account.changePassword") }
+        static var passwordDesc: String { LocalizationStore.string("account.passwordDesc") }
+        static var newPasswordPlaceholder: String { LocalizationStore.string("account.newPasswordPlaceholder") }
+        static var confirmPasswordPlaceholder: String { LocalizationStore.string("account.confirmPasswordPlaceholder") }
+        static var passwordMismatch: String { LocalizationStore.string("account.passwordMismatch") }
+        static var passwordTooShort: String { LocalizationStore.string("account.passwordTooShort") }
+        static var passwordSetSuccess: String { LocalizationStore.string("account.passwordSetSuccess") }
+        static var passwordSetFailed: String { LocalizationStore.string("account.passwordSetFailed") }
     }
 }
