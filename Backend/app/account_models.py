@@ -35,6 +35,26 @@ class EmailVerifyRequest(BaseModel):
     code: str
 
 
+class PasswordAuthRequest(BaseModel):
+    """邮箱 + 密码登录（仅限已设置密码的用户；注册走验证码）。"""
+
+    email: str
+    password: str
+
+
+class SetPasswordRequest(BaseModel):
+    """设置/修改密码（需会话令牌；忘记密码可先验证码登录再重设）。"""
+
+    newPassword: str
+
+
+class SetPasswordResponse(BaseModel):
+    """设置密码结果。"""
+
+    success: bool
+    message: str = ""
+
+
 class AccountStatus(BaseModel):
     """账号状态：额度、订阅、限额。"""
 
@@ -45,6 +65,7 @@ class AccountStatus(BaseModel):
     freeMonthlyCredits: int
     maxQuestionsPerReading: int
     subscription: Optional[dict] = None
+    hasPassword: bool = False
 
 
 class AuthResponse(BaseModel):

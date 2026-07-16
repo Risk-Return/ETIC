@@ -69,6 +69,12 @@ uvicorn app.main:app --reload --port 18000
 - `POST /v1/auth/email/verify`：请求体 `{ "email": "...", "code": "123456" }`。验证通过后按邮箱创建/检索用户，返回与 Apple 登录相同的 `{ "sessionToken": "...", "account": { ... } }`。验证码 10 分钟有效、最多试错 5 次、验证后一次性消费。
 - 账号统一：同一邮箱在 Apple 登录（Apple 返回了邮箱）与邮箱验证码登录之间共享同一账号，额度、订阅与 IAP 归属一致（IAP 通过会话 JWT 的 user_id 绑定，购买时 App 侧同时携带 `appAccountToken=userId`）。
 
+### 邮箱密码登录
+
+- `POST /v1/auth/email/password`：请求体 `{ "email": "...", "password": "..." }`。仅限已设置密码的用户；成功返回同上 `AuthResponse`，失败统一 `401`（含 0.5s 延时防爆破）。**注册仍走验证码**。
+- `POST /v1/account/password`：请求体 `{ "newPassword": "..." }`（8–128 位），需 `Authorization: Bearer` 会话令牌，设置/修改当前用户密码。忘记密码 = 验证码登录后在此重设。
+- 密码以 PBKDF2-HMAC-SHA256（60 万次迭代、随机盐）哈希存储；`/v1/account/me` 返回 `hasPassword` 供客户端区分"设置密码/修改密码"。
+
 ### 示例
 ```bash
 curl -N -X POST localhost:18000/v1/interpret \

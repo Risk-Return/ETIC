@@ -18,6 +18,7 @@ struct AccountView: View {
                     if let status = auth.accountStatus {
                         statusCard(status)
                         paymentLink
+                        passwordLink(status)
                         signOutButton
                     } else {
                         ProgressView()
@@ -108,6 +109,35 @@ struct AccountView: View {
                         .font(InkTheme.serifTitle(18))
                         .foregroundStyle(InkTheme.ink)
                     Text(L10n.Account.paymentSubtitle)
+                        .font(InkTheme.serifBody(14))
+                        .foregroundStyle(InkTheme.inkSoft)
+                        .lineLimit(2)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(InkTheme.inkSoft)
+            }
+            .padding(16)
+            .background(InkTheme.card, in: RoundedRectangle(cornerRadius: 14))
+            .overlay(RoundedRectangle(cornerRadius: 14)
+                .stroke(InkTheme.inkSoft.opacity(0.2), lineWidth: 1))
+        }
+    }
+
+    // MARK: - Password link
+
+    private func passwordLink(_ status: AccountStatus) -> some View {
+        NavigationLink {
+            ChangePasswordView()
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text((status.hasPassword ?? false)
+                         ? L10n.Account.changePassword
+                         : L10n.Account.setPassword)
+                        .font(InkTheme.serifTitle(18))
+                        .foregroundStyle(InkTheme.ink)
+                    Text(L10n.Account.passwordDesc)
                         .font(InkTheme.serifBody(14))
                         .foregroundStyle(InkTheme.inkSoft)
                         .lineLimit(2)
