@@ -7,6 +7,9 @@ public enum CastMethod: String, Codable, Sendable {
     case time = "时间"
     case random = "随机"
     case manual = "手动"
+    /// 梅花易数（报数起卦）。取单一动爻，是梅花易数的典型特征；
+    /// 排盘仍复用六爻纳甲流水线（体用 / 互卦 / 五行生克解读见 DESIGN 后续里程碑）。
+    case meihua = "梅花"
 }
 
 /// 起卦结果：六爻老少阴阳（自下而上，index 0 = 初爻）。
@@ -61,11 +64,22 @@ public enum Caster {
     /// 数字起卦（梅花易数）：上卦数、下卦数、动爻数。
     /// 上卦 = upper 先天数取八卦；下卦 = lower；动爻 = (upper+lower) 余 6。
     public static func fromNumbers(upper: Int, lower: Int) -> CastResult {
+        numbersCast(upper: upper, lower: lower, method: .number)
+    }
+
+    /// 梅花易数·报数起卦：与 `fromNumbers` 同一套先天数取卦规则，但以 `.meihua` 标记方法。
+    /// 起卦得单一动爻；排盘复用六爻纳甲流水线，验证新起卦法与冻结盘面契约的兼容性。
+    public static func meihua(upper: Int, lower: Int) -> CastResult {
+        numbersCast(upper: upper, lower: lower, method: .meihua)
+    }
+
+    /// 报数取卦共用逻辑：上卦 = upper 先天数；下卦 = lower 先天数；动爻 = (upper+lower) 余 6。
+    private static func numbersCast(upper: Int, lower: Int, method: CastMethod) -> CastResult {
         let upperTrigram = Trigram.from(innateNumber: upper)
         let lowerTrigram = Trigram.from(innateNumber: lower)
         let movingRaw = (upper + lower) % 6
         let movingPos = movingRaw == 0 ? 6 : movingRaw
-        return assemble(lower: lowerTrigram, upper: upperTrigram, movingPosition: movingPos, method: .number)
+        return assemble(lower: lowerTrigram, upper: upperTrigram, movingPosition: movingPos, method: method)
     }
 
     /// 时间起卦（梅花，阳历简化版）：以四柱地支序与公历月日参与计算。

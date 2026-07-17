@@ -79,6 +79,10 @@
     "en": "The system simulates a coin toss randomly for a quick experience.",
     "zh-Hans": "系统随机模拟铜钱起卦，快速体验。"
   },
+  "casting.hint.meihua": {
+    "en": "Plum Blossom (numbers): the upper number sets the outer trigram, the lower the inner; their sum determines the single moving line. The board still uses the Liuyao Najia layout.",
+    "zh-Hans": "梅花易数（报数）：上数取外卦、下数取内卦，两数之和定单一动爻。排盘仍以六爻纳甲呈现。"
+  },
   "casting.upperNum": {
     "en": "Upper",
     "zh-Hans": "上数"
@@ -398,6 +402,10 @@
   "casting.method.manual": {
     "en": "Manual",
     "zh-Hans": "手动"
+  },
+  "casting.method.meihua": {
+    "en": "Plum Blossom",
+    "zh-Hans": "梅花易数"
   },
   "location.section": {
     "en": "Location (True Solar Time)",

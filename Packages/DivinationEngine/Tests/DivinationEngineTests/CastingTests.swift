@@ -50,6 +50,56 @@ final class CastingTests: XCTestCase {
         XCTAssertEqual(r2.movingPositions, [5])
     }
 
+    // MARK: - 梅花易数·报数起卦
+
+    /// 梅花起卦与报数（fromNumbers）同一套先天数取卦规则，仅方法标记不同。
+    func testMeihuaMatchesNumbersRuleButMethod() {
+        let m = Caster.meihua(upper: 1, lower: 1)
+        let n = Caster.fromNumbers(upper: 1, lower: 1)
+        XCTAssertEqual(m.lines, n.lines, "取卦规则应与 fromNumbers 一致")
+        XCTAssertEqual(m.method, .meihua)
+        XCTAssertEqual(m.method.rawValue, "梅花")
+        XCTAssertEqual(n.method, .number)
+        // 上 1（乾）下 1（乾），动爻 = (1+1)%6 = 2
+        XCTAssertEqual(m.primary.name, "乾为天")
+        XCTAssertEqual(m.movingPositions, [2])
+        XCTAssertEqual(m.lines[1], .oldYang)
+    }
+
+    /// 梅花起卦是「取单一动爻」——无论上下数如何，动爻恒为 1 个。
+    func testMeihuaAlwaysSingleMovingLine() {
+        for upper in 1...9 {
+            for lower in 1...9 {
+                let r = Caster.meihua(upper: upper, lower: lower)
+                XCTAssertEqual(r.movingPositions.count, 1, "上\(upper)下\(lower) 应恰有一个动爻")
+            }
+        }
+    }
+
+    /// 兼容性：梅花起卦结果走六爻纳甲流水线，产出结构完整的盘面（方法记为「梅花」）。
+    func testMeihuaFlowsToFullLiuyaoBoard() {
+        let pillars = GanzhiCalendar.FourPillars(
+            year: Ganzhi(name: "甲子")!,
+            month: Ganzhi(name: "丙寅")!,
+            day: Ganzhi(name: "甲子")!,
+            hour: Ganzhi(name: "甲子")!
+        )
+        // 上 3（离）下 8（坤）→ 火地晋，动爻 (3+8)%6 = 5
+        let cast = Caster.meihua(upper: 3, lower: 8)
+        let board = LiuyaoEngine.cast(cast, pillars: pillars, category: .general)
+
+        XCTAssertEqual(board.method, "梅花")
+        XCTAssertEqual(board.primary.name, "火地晋")
+        XCTAssertEqual(board.movingPositions, [5])
+        XCTAssertNotNil(board.changed, "单一动爻应产出变卦")
+        // 冻结契约字段齐备：六爻纳甲 / 六亲 / 世应
+        XCTAssertEqual(board.primary.lines.count, 6)
+        XCTAssertTrue(board.primary.lines.allSatisfy { !$0.stem.isEmpty && !$0.branch.isEmpty })
+        XCTAssertTrue(board.primary.lines.allSatisfy { !$0.sixRelative.isEmpty })
+        XCTAssertTrue(board.primary.lines.contains { $0.isWorld })
+        XCTAssertTrue(board.primary.lines.contains { $0.isResponse })
+    }
+
     // MARK: - 起卦概率分布
 
     func testCoinDistribution() {

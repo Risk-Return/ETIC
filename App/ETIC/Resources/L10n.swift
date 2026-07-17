@@ -29,6 +29,7 @@ enum L10n {
         static var hintNumber: String { LocalizationStore.string("casting.hint.number") }
         static var hintTime: String { LocalizationStore.string("casting.hint.time") }
         static var hintRandom: String { LocalizationStore.string("casting.hint.random") }
+        static var hintMeihua: String { LocalizationStore.string("casting.hint.meihua") }
         static var upperNum: String { LocalizationStore.string("casting.upperNum") }
         static var lowerNum: String { LocalizationStore.string("casting.lowerNum") }
     }
@@ -39,6 +40,7 @@ enum L10n {
         static var time: String { LocalizationStore.string("casting.method.time") }
         static var random: String { LocalizationStore.string("casting.method.random") }
         static var manual: String { LocalizationStore.string("casting.method.manual") }
+        static var meihua: String { LocalizationStore.string("casting.method.meihua") }
     }
 
     enum Category {
