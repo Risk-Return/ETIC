@@ -72,6 +72,8 @@ CREATE TABLE IF NOT EXISTS readings (
     board_key            TEXT NOT NULL,
     created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     questions_asked      INT  NOT NULL DEFAULT 0,
+    prompt_tokens        INT  NOT NULL DEFAULT 0,
+    completion_tokens    INT  NOT NULL DEFAULT 0,
     UNIQUE (user_id, board_key)
 );
 
@@ -93,6 +95,8 @@ CREATE INDEX IF NOT EXISTS email_codes_email_idx ON email_verification_codes (em
 _MIGRATION_SQL = [
     "ALTER TABLE users ALTER COLUMN apple_user_identifier DROP NOT NULL",
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash TEXT",
+    "ALTER TABLE readings ADD COLUMN IF NOT EXISTS prompt_tokens INT NOT NULL DEFAULT 0",
+    "ALTER TABLE readings ADD COLUMN IF NOT EXISTS completion_tokens INT NOT NULL DEFAULT 0",
 ]
 
 
@@ -587,6 +591,23 @@ def increment_reading_questions(
         )
     conn.commit()
     return True
+
+
+def update_reading_tokens(
+    conn: psycopg.Connection,
+    user_id: uuid.UUID,
+    board_key: str,
+    prompt_tokens: int,
+    completion_tokens: int,
+) -> None:
+    with conn.cursor() as cur:
+        cur.execute(
+            "UPDATE readings SET prompt_tokens = prompt_tokens + %s, "
+            "completion_tokens = completion_tokens + %s "
+            "WHERE user_id = %s AND board_key = %s",
+            (prompt_tokens, completion_tokens, user_id, board_key),
+        )
+    conn.commit()
 
 
 def get_reading_questions_asked(

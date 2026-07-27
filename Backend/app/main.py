@@ -16,6 +16,7 @@ from fastapi.responses import StreamingResponse
 logging.basicConfig(level=logging.INFO, format="%(levelname)s [%(name)s] %(message)s")
 
 from .account import (
+    board_key_from_dict,
     check_and_deduct_reading_credit,
     check_and_increment_question,
 )
@@ -87,19 +88,44 @@ def _refusal_response(result: ModerationResult) -> StreamingResponse:
     )
 
 
-async def _sse_stream(settings: Settings, messages: list[dict]) -> AsyncIterator[str]:
+async def _sse_stream(
+    settings: Settings,
+    messages: list[dict],
+    user_id: uuid.UUID | None = None,
+    board_key: str | None = None,
+) -> AsyncIterator[str]:
+    usage: dict | None = None
     try:
         async for kind, text in stream_completion(settings, messages):
-            # reasoning = 思考过程（客户端可折叠/展示「思考中」）；content = 正文解读。
-            yield _sse_event({"reasoning": text} if kind == "reasoning" else {"delta": text})
+            if kind == "usage":
+                usage = text
+                yield _sse_event({"usage": usage})
+            else:
+                yield _sse_event(
+                    {"reasoning": text} if kind == "reasoning" else {"delta": text}
+                )
     except LLMError as exc:
         yield _sse_event({"error": str(exc)})
     yield "data: [DONE]\n\n"
 
+    if usage and user_id and board_key:
+        from .account_db import update_reading_tokens
+        from .db import connect
 
-def _sse_response(settings: Settings, messages: list[dict]) -> StreamingResponse:
+        prompt = usage.get("prompt_tokens", 0)
+        completion = usage.get("completion_tokens", 0)
+        with connect(settings) as conn:
+            update_reading_tokens(conn, user_id, board_key, prompt, completion)
+
+
+def _sse_response(
+    settings: Settings,
+    messages: list[dict],
+    user_id: uuid.UUID | None = None,
+    board_key: str | None = None,
+) -> StreamingResponse:
     return StreamingResponse(
-        _sse_stream(settings, messages),
+        _sse_stream(settings, messages, user_id=user_id, board_key=board_key),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
@@ -126,6 +152,7 @@ async def interpret(
     if mod.blocked:
         return _refusal_response(mod)
 
+    board_key: str | None = None
     if settings.billing_enabled:
         if user_id is None:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -133,12 +160,13 @@ async def interpret(
         error = check_and_deduct_reading_credit(settings, user_id, board_dict)
         if error:
             raise HTTPException(status_code=402, detail=error)
+        board_key = board_key_from_dict(board_dict)
 
     grounding = await _grounding_text(settings, req.board)
     messages = build_interpret_messages(
         req.board, grounding, locale=req.locale, caution_note=mod.caution_note
     )
-    return _sse_response(settings, messages)
+    return _sse_response(settings, messages, user_id=user_id, board_key=board_key)
 
 
 @app.post("/v1/grounding")
@@ -187,6 +215,7 @@ async def chat(
     if mod.blocked:
         return _refusal_response(mod)
 
+    board_key: str | None = None
     if settings.billing_enabled:
         if user_id is None:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -194,10 +223,11 @@ async def chat(
         error = check_and_increment_question(settings, user_id, board_dict)
         if error:
             raise HTTPException(status_code=429, detail=error)
+        board_key = board_key_from_dict(board_dict)
 
     history = [m.model_dump() for m in req.messages[-settings.max_history_messages:]]
     grounding = await _grounding_text(settings, req.board)
     messages = build_chat_messages(
         req.board, history, grounding, locale=req.locale, caution_note=mod.caution_note
     )
-    return _sse_response(settings, messages)
+    return _sse_response(settings, messages, user_id=user_id, board_key=board_key)

@@ -10,8 +10,9 @@ import httpx
 
 from .config import Settings
 
-# 流式产出的分片类型：reasoning = 模型思考过程；content = 正式解读正文。
-Chunk = tuple[Literal["reasoning", "content"], str]
+# 流式产出的分片类型：reasoning = 模型思考过程；content = 正式解读正文；
+# usage = token 用量（流结束前产出一次，含 prompt_tokens / completion_tokens）。
+Chunk = tuple[Literal["reasoning", "content", "usage"], str | dict]
 
 MOCK_REPLY = (
     "【整体断语】\n"
@@ -33,6 +34,7 @@ async def _stream_mock(messages: list[dict]) -> AsyncIterator[Chunk]:
     # 按句切片模拟流式 token。
     for chunk in MOCK_REPLY.splitlines(keepends=True):
         yield ("content", chunk)
+    yield ("usage", {"prompt_tokens": 0, "completion_tokens": 0})
 
 
 async def _stream_openai_compatible(
@@ -49,6 +51,8 @@ async def _stream_openai_compatible(
         "Content-Type": "application/json",
     }
     url = settings.llm_base_url.rstrip("/") + "/chat/completions"
+
+    usage_accumulator: dict = {}
 
     async with httpx.AsyncClient(
         timeout=httpx.Timeout(
@@ -68,23 +72,26 @@ async def _stream_openai_compatible(
                     continue
                 data = line[len("data:"):].strip()
                 if data == "[DONE]":
-                    return
+                    break
                 try:
                     obj = json.loads(data)
                 except json.JSONDecodeError:
                     continue
+                if "usage" in obj and obj["usage"] is not None:
+                    usage_accumulator = obj["usage"]
                 choices = obj.get("choices") or []
                 if not choices:
                     continue
                 delta = choices[0].get("delta") or {}
-                # 推理模型（如 deepseek-v4-pro）先产出 reasoning_content，
-                # 单独转发以便客户端即时显示「思考中」，避免正文前长时间静默触发超时。
                 reasoning = delta.get("reasoning_content")
                 if reasoning:
                     yield ("reasoning", reasoning)
                 content = delta.get("content")
                 if content:
                     yield ("content", content)
+
+    if usage_accumulator:
+        yield ("usage", usage_accumulator)
 
 
 async def stream_completion(
