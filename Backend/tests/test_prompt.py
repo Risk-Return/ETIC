@@ -3,6 +3,8 @@ from app.prompt import (
     build_chat_messages,
     build_interpret_messages,
     render_board,
+    system_prompt_for,
+    MEIHUA_SYSTEM_PROMPT,
     SYSTEM_PROMPT,
 )
 
@@ -92,3 +94,42 @@ def test_chat_injects_caution_and_language(board_json):
     )
     assert "【安全提示】就医" in msgs[1]["content"]
     assert "简体中文" in msgs[1]["content"]
+
+
+# --- 梅花易数（体用生克）---
+
+def test_meihua_board_parses_and_carries_view(board_meihua_json):
+    board = DivinationBoard.model_validate(board_meihua_json)
+    assert board.version == "1.1.0"
+    assert board.method == "梅花"
+    assert board.meihua is not None
+    assert len(board.meihua.relations) == 4
+    # 六爻字段仍照常存在（兼容）。
+    assert board.primary.lines and board.primary.lines[0].sixRelative
+
+
+def test_render_board_includes_meihua_section(board_meihua_json):
+    board = DivinationBoard.model_validate(board_meihua_json)
+    text = render_board(board)
+    assert "【梅花体用】" in text
+    assert "体卦" in text and "用卦" in text
+    assert "互卦" in text
+    # 生克关系逐条渲染。
+    assert "生体" in text or "克体" in text or "比和" in text
+
+
+def test_meihua_switches_system_prompt(board_meihua_json, board_json):
+    meihua = DivinationBoard.model_validate(board_meihua_json)
+    liuyao = DivinationBoard.model_validate(board_json)
+    assert system_prompt_for(meihua) == MEIHUA_SYSTEM_PROMPT
+    assert system_prompt_for(liuyao) == SYSTEM_PROMPT
+    # 首轮解读消息按 method 选择体用口径。
+    msgs = build_interpret_messages(meihua)
+    assert msgs[0]["content"] == MEIHUA_SYSTEM_PROMPT
+    assert "体用" in msgs[0]["content"]
+    assert "梅花盘面" in msgs[-1]["content"]
+
+
+def test_meihua_system_prompt_has_safety():
+    assert "安全与合规" in MEIHUA_SYSTEM_PROMPT
+    assert "作答语言" in MEIHUA_SYSTEM_PROMPT

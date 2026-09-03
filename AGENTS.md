@@ -71,7 +71,8 @@ ETIC/
 
 ### 唯一数据契约
 
-`DivinationBoard`（`Packages/DivinationEngine/Sources/DivinationEngine/Engine/Board.swift`，schema **v1.0.0**）是引擎 ↔ UI ↔ LLM 之间的**唯一接口，已冻结**。后端 `Backend/app/models.py` 的 Pydantic 模型须与之保持一致。改动契约需同步引擎、客户端、后端、fixture 并更新 schema 版本。
+`DivinationBoard`（`Packages/DivinationEngine/Sources/DivinationEngine/Engine/Board.swift`，schema **v1.1.0**）是引擎 ↔ UI ↔ LLM 之间的**唯一接口**。后端 `Backend/app/models.py` 的 Pydantic 模型须与之保持一致。改动契约需同步引擎、客户端、后端、fixture 并更新 schema 版本。
+> v1.1.0（向后兼容）新增**可选** `meihua: MeihuaView?`——仅梅花起卦（`method == "梅花"`）时非空，承载体用/互卦/变卦与五行生克；其余起卦法为 `nil`，六爻纳甲字段一律照常产出。
 
 ---
 
