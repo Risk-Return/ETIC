@@ -29,6 +29,7 @@ enum L10n {
         static var hintNumber: String { LocalizationStore.string("casting.hint.number") }
         static var hintTime: String { LocalizationStore.string("casting.hint.time") }
         static var hintRandom: String { LocalizationStore.string("casting.hint.random") }
+        static var hintMeihua: String { LocalizationStore.string("casting.hint.meihua") }
         static var upperNum: String { LocalizationStore.string("casting.upperNum") }
         static var lowerNum: String { LocalizationStore.string("casting.lowerNum") }
     }
@@ -39,6 +40,7 @@ enum L10n {
         static var time: String { LocalizationStore.string("casting.method.time") }
         static var random: String { LocalizationStore.string("casting.method.random") }
         static var manual: String { LocalizationStore.string("casting.method.manual") }
+        static var meihua: String { LocalizationStore.string("casting.method.meihua") }
     }
 
     enum Category {
@@ -91,6 +93,18 @@ enum L10n {
         static var world: String { LocalizationStore.string("board.world") }
         static var response: String { LocalizationStore.string("board.response") }
         static var void: String { LocalizationStore.string("board.void") }
+    }
+
+    enum Meihua {
+        static var title: String { LocalizationStore.string("meihua.title") }
+        static var moving: String { LocalizationStore.string("meihua.moving") }
+        static var ti: String { LocalizationStore.string("meihua.ti") }
+        static var yong: String { LocalizationStore.string("meihua.yong") }
+        static var hu: String { LocalizationStore.string("meihua.hu") }
+        static var huLower: String { LocalizationStore.string("meihua.huLower") }
+        static var huUpper: String { LocalizationStore.string("meihua.huUpper") }
+        static var bian: String { LocalizationStore.string("meihua.bian") }
+        static var relations: String { LocalizationStore.string("meihua.relations") }
     }
 
     enum Ritual {

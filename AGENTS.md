@@ -41,7 +41,7 @@ ETIC/
 │   │   ├── Model/                 # 五行/阴阳/干支/八卦/64卦/六亲/六神/旺衰/爻 领域模型
 │   │   ├── Data/                  # 纳甲表、64卦名、八宫世应、二十四节气表（预设静态数据）
 │   │   ├── Calendar/              # 公历 → 干支历换算（立春换岁/节换月/五虎遁/五鼠遁）
-│   │   ├── Casting/               # 起卦：铜钱/数字/时间/随机（随机源可注入以复现）
+│   │   ├── Casting/               # 起卦：铜钱/数字/时间/随机/梅花（随机源可注入以复现）
 │   │   └── Engine/                # 盘面数据契约 Board.swift + 排盘九步流水线
 │   └── Tests/                     # 静态表快照 + 经典卦例端到端 + 历法基准 + 概率分布
 ├── App/ETIC/                      # ② iOS 客户端（SwiftUI，iOS 17+）
@@ -71,7 +71,8 @@ ETIC/
 
 ### 唯一数据契约
 
-`DivinationBoard`（`Packages/DivinationEngine/Sources/DivinationEngine/Engine/Board.swift`，schema **v1.0.0**）是引擎 ↔ UI ↔ LLM 之间的**唯一接口，已冻结**。后端 `Backend/app/models.py` 的 Pydantic 模型须与之保持一致。改动契约需同步引擎、客户端、后端、fixture 并更新 schema 版本。
+`DivinationBoard`（`Packages/DivinationEngine/Sources/DivinationEngine/Engine/Board.swift`，schema **v1.1.0**）是引擎 ↔ UI ↔ LLM 之间的**唯一接口**。后端 `Backend/app/models.py` 的 Pydantic 模型须与之保持一致。改动契约需同步引擎、客户端、后端、fixture 并更新 schema 版本。
+> v1.1.0（向后兼容）新增**可选** `meihua: MeihuaView?`——仅梅花起卦（`method == "梅花"`）时非空，承载体用/互卦/变卦与五行生克；其余起卦法为 `nil`，六爻纳甲字段一律照常产出。
 
 ---
 

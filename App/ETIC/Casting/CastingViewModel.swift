@@ -34,8 +34,8 @@ final class CastingViewModel: ObservableObject {
         locationName = nil
     }
 
-    /// M2 起卦方法范围（手动起卦留到后续）。
-    let methods: [CastMethod] = [.coins, .number, .time, .random]
+    /// 起卦方法范围（手动起卦留到后续）。梅花易数以「报数」呈现为独立方法。
+    let methods: [CastMethod] = [.coins, .meihua, .time, .random]
 
     func cast() {
         errorMessage = nil

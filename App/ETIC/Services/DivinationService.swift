@@ -58,6 +58,9 @@ enum DivinationService {
         case .number:
             guard input.upperNumber > 0, input.lowerNumber > 0 else { throw ServiceError.invalidNumbers }
             cast = Caster.fromNumbers(upper: input.upperNumber, lower: input.lowerNumber)
+        case .meihua:
+            guard input.upperNumber > 0, input.lowerNumber > 0 else { throw ServiceError.invalidNumbers }
+            cast = Caster.meihua(upper: input.upperNumber, lower: input.lowerNumber)
         case .time:
             cast = Caster.fromTime(pillars, month: comps.month, day: comps.day)
         case .random:
